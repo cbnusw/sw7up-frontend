@@ -19,4 +19,9 @@ export class HeaderComponent {
   openSideMenu(): void {
     this.sideNavService.hidden = false;
   }
+
+  logout(): void {
+    this.auth.logout();
+    this.sideNavService.hidden = true;
+  }
 }

@@ -63,8 +63,8 @@ export class StaffDetailPageComponent implements OnInit, OnDestroy {
       finalize(() => this.loading = false)
     ).subscribe(
       () => {
-        alert('운영자로 변경되었습니다.\n운영자 관리 페이지로 이동합니다.');
-        this.router.navigate(['/operator/detail', this.staff._id]);
+        alert('운영자로 변경되었습니다.');
+        this.router.navigateByUrl('/staff/list');
       },
       err => console.error(err)
     );

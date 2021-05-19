@@ -21,6 +21,6 @@
     <a routerLink="/my-page">{{ auth.me?.info.name }}</a>님 로그인 중
   </span>
   <a class="account cursor pointer"
-     (click)="auth.logout()"
+     (click)="logout()"
      *ngIf="auth.loggedIn && (layout.desktop$ | async)">로그아웃</a>
 </mat-toolbar>

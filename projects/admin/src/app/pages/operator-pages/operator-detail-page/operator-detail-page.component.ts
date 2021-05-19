@@ -63,11 +63,8 @@ export class OperatorDetailPageComponent implements OnInit, OnDestroy {
       finalize(() => this.loading = false)
     ).subscribe(
       () => {
-        const [role, viewValue] = /^\d{6}$/.test(this.operator.no) ?
-          ['staff', '교직원'] :
-          (/^\d{10}$/.test(this.operator.no) ? ['student', '학생'] : ['member', '일반회원']);
-        alert(`운영자 권한을 제거하였습니다.\n${viewValue} 관리 페이지로 이동합니다.`);
-        this.router.navigate([`/${role}/detail`, this.operator._id]);
+        alert('운영자 권한을 제거하였습니다.');
+        this.router.navigateByUrl('/operator/list');
       },
       err => console.error(err)
     );
