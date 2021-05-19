@@ -1,0 +1,64 @@
+@import "tools";
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-row {
+  display: flex;
+  height: 50%;
+
+  @include mobile {
+    height: 184px;
+  }
+
+  .grid-button {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+
+    &:hover {
+      .name, .description {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .name, .description {
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .name {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  .description {
+    font-size: 0.8em;
+  }
+
+  &:nth-child(1) {
+    .grid-button:nth-child(1) {
+      background-color: #78c947;
+    }
+
+    .grid-button:nth-child(2) {
+      background-color: #fa7f1f;
+    }
+  }
+
+  &:nth-child(2) {
+    .grid-button:nth-child(1) {
+      background-color: #007fcc;
+    }
+
+    .grid-button:nth-child(2) {
+      background-color: #00b4f6;
+    }
+  }
+}
+

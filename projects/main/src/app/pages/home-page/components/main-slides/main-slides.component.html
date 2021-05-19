@@ -1,0 +1,17 @@
+<swiper *ngIf="platform.isBrowser" [config]="config">
+  <ng-template swiperSlide *ngFor="let slide of slides">
+    <div class="slide"
+         [swBackgroundImage]="slide.image"
+         swBackgroundPosition="center"
+         swBackgroundSize="cover">
+    </div>
+  </ng-template>
+</swiper>
+<div class="navigation-wrapper">
+  <button type="button" class="slide-nav-btn cursor pointer" (click)="prev()">
+    <i class="las la-angle-left"></i>
+  </button>
+  <button type="button" class="slide-nav-btn cursor pointer" (click)="next()">
+    <i class="las la-angle-right"></i>
+  </button>
+</div>

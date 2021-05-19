@@ -1,0 +1,16 @@
+<ng-container *ngFor="let item of items">
+  <a class="banner-item" *ngIf="item.link" [routerLink]="item.link">
+    <ng-container *ngTemplateOutlet="itemTemplate; context: {item: item}"></ng-container>
+  </a>
+  <a class="banner-item" *ngIf="item.url" [href]="item.url" target="_blank">
+    <ng-container *ngTemplateOutlet="itemTemplate; context: {item: item}"></ng-container>
+  </a>
+</ng-container>
+
+<ng-template #itemTemplate let-item="item">
+  <div class="image-wrapper">
+    <img class="image-icon" [src]="item.activeImage"/>
+    <img class="image-icon" [src]="item.baseImage"/>
+  </div>
+  <div class="banner-name">{{item.name}}</div>
+</ng-template>

@@ -1,0 +1,6 @@
+@import "article";
+@import "reply";
+
+.question-container {
+  min-height: max(20vh, 80px);
+}

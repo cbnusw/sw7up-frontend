@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import "_gcustom-ckeditor.scss";
+
+html, body, * {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cursor {
+  &.pointer {
+    cursor: pointer;
+  }
+
+  &.grab {
+    cursor: grab;
+  }
+
+  &.grabbing {
+    cursor: grabbing;
+  }
+}
+
+.select-none {
+  user-select: none;
+}
+
+.error {
+  font-size: 0.8rem;
+}
+
+.pre-wrap {
+  font-family: 'Noto Sans KR', sans-serif;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.no-outline {
+  &:focus, &:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+.invisible {
+  visibility: hidden;
+}

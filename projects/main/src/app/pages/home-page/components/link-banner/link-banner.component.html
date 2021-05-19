@@ -1,0 +1,8 @@
+<swiper *ngIf="platform.isBrowser" [config]="config">
+  <ng-template swiperSlide *ngFor="let slide of slides">
+    <a class="slide-wrapper" [href]="slide.url" target="_blank">
+      <img class="logo-image" [src]="slide.logo"/>
+      <span class="title">{{slide.title}}</span>
+    </a>
+  </ng-template>
+</swiper>

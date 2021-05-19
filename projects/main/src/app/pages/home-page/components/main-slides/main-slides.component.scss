@@ -1,0 +1,34 @@
+@import "projects/main/src/styles/tools";
+
+:host {
+  position: relative;
+  display: block;
+}
+
+.slide {
+  width: 100%;
+  height: 55vw;
+
+  @include desktop {
+    height: 400px;
+  }
+}
+
+.navigation-wrapper {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  z-index: 1;
+}
+
+.slide-nav-btn {
+  $btn-size: 33px;
+  box-sizing: border-box;
+  width: $btn-size;
+  height: $btn-size;
+  line-height: $btn-size;
+  text-align: center;
+  color: grey;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+}

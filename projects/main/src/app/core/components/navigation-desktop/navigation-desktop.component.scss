@@ -1,0 +1,39 @@
+@import "tools";
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  height: 58px;
+  padding: 0 1rem;
+
+  ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+
+    li {
+      width: 134px;
+      text-align: center;
+    }
+  }
+}
+
+.brand-image {
+  height: 45px;
+}
+
+.btn {
+  border: 1px solid $sw-color;
+  color: $sw-color;
+
+  &:hover {
+    color: white;
+    background-color: $sw-color;
+  }
+}

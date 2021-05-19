@@ -1,0 +1,13 @@
+<div class="responsive-tabs d-block d-lg-none mt-3">
+  <ul class="nav nav-tabs mb-4">
+    <li class="nav-item" *ngFor="let tab of tabs">
+      <a class="nav-link cursor pointer"
+         routerLinkActive="active"
+         [routerLink]="tab.link">{{tab.viewValue}}</a>
+    </li>
+  </ul>
+</div>
+
+<sw-page-header headerTitle="마이페이지" [menus]="menus" [breadcrumbs]="breadcrumbs">
+  <router-outlet></router-outlet>
+</sw-page-header>

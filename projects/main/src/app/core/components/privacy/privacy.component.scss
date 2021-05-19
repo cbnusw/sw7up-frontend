@@ -1,0 +1,53 @@
+@import "body";
+
+.title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #1071AE;
+}
+
+.contents-container {
+  .label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: rgba(0, 0, 0, 0.8);
+    margin-left: 0.6em;
+    text-indent: -0.6em;
+  }
+
+  .content {
+    font-size: 0.9rem;
+  }
+
+  .row {
+    margin: 0;
+
+    .collapse-label {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #dee2e6;
+      text-align: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: rgba(0, 0, 0, 0.8);
+    }
+
+    .collapse-content {
+      font-size: 0.8rem;
+    }
+
+    .col-md-6, .col-lg-6, .col-lg-12 {
+      padding: 0;
+    }
+  }
+}
+
+@include mobile {
+  .col-md-6 {
+    &:last-child {
+      .collapse-label {
+        border-top: 1px solid #dee2e6;
+      }
+    }
+  }
+}

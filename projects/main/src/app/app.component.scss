@@ -1,0 +1,17 @@
+@import "tools";
+
+sw-navigation-desktop, sw-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: white;
+}
+
+main {
+  @include desktop {
+    min-height: max(calc(100vh - 100px - 134px), 600px);
+  }
+  @include mobile {
+    min-height: max(calc(100vh - 60px - 210px), 600px);
+  }
+}

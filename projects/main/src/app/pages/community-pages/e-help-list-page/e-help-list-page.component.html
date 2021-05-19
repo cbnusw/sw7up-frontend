@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h5 class="mb-0 text-danger small" [class.invisible]="emptyDocuments">
+    {{total | number}} 건<small class="text-body">의 질문이 있습니다.</small>
+  </h5>
+  <button type="button" class="btn btn-sm btn-outline-danger px-3 py-1" [routerLink]="[E_HELP_URL, 'register']">
+    질문등록
+  </button>
+</div>
+
+<div class="py-3 px-4 d-none d-lg-block bg-light">
+  <div class="row align-items-sm-center text-center text-dark">
+    <span class="table-header col-sm-1">번호</span>
+    <span class="table-header col-sm-5">제목</span>
+    <span class="table-header col-sm-2">분류</span>
+    <span class="table-header col-sm-2">작성자</span>
+    <span class="table-header col-sm-2">작성일</span>
+  </div>
+</div>
+
+<div *ngIf="total === 0">
+  <div class="text-center text-dark py-2">
+    {{emptyDocuments ? '등록된 질문이 없습니다.' : '검색된 질문이 없습니다.'}}
+  </div>
+</div>
+
+<a class="card card-frame py-3 px-3 px-sm-4 cursor pointer"
+   *ngFor="let doc of documents; let i = index;"
+   (click)="moveDetail(doc)">
+  <div class="row align-items-sm-center">
+    <span class="table-body col-lg-1 text-sm-center d-none d-lg-block">
+      {{getNo(i)}}
+    </span>
+    <span class="table-body col-lg-5 align-items-center title-container">
+      <i class="las la-lock text-warning me-2" *ngIf="!doc.confirm"></i>
+      <span class="mb-0">{{doc.title}}</span>
+    </span>
+    <span class="table-body col-8 col-lg-2 text-left text-lg-center">
+      <small>{{doc.category}}</small>
+    </span>
+    <span class="table-body col-8 col-lg-2 text-left text-lg-center">
+      <small>{{doc | qnaWriterName}}</small>
+    </span>
+    <span class="table-body col-4 col-lg-2 text-right text-lg-center">
+      <small>{{doc.createdAt | date: 'yy.MM.dd.'}}</small>
+    </span>
+  </div>
+</a>
+
+<div class="d-flex justify-content-start my-3">
+  <select class="form-select no-outline me-2" #category (change)="changeCategory(category.value)">
+    <option [value]="null">전체</option>
+    <option *ngFor="let option of categoryOptions" [value]="option">{{option}}</option>
+  </select>
+  <div class="input-group">
+    <input type="search"
+           class="form-control no-outline border-end-0"
+           [formControl]="keywordControl"
+           placeholder="제목, 작성자로 검색"
+           aria-describedby="searchApp">
+    <span class="input-group-text border-start-0"><i class="las la-search"></i></span>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center mt-5" *ngIf="total > limit">
+  <sw-pagination [total]="total" [params]="params"></sw-pagination>
+</div>

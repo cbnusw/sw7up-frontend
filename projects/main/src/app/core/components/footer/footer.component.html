@@ -1,0 +1,38 @@
+<div class="main-container py-4 px-3">
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <ul class="d-flex">
+        <li><a [routerLink]="PRIVACY_URL">개인정보처리방침</a></li>
+        <li class="mx-1 mx-lg-3">&#9475;</li>
+        <li><a [routerLink]="SITEMAP_URL">사이트맵</a></li>
+        <li class="mx-1 mx-lg-3">&#9475;</li>
+        <li><a [routerLink]="CLEAN_URL">클린신고센터</a></li>
+      </ul>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="d-flex justify-content-end">
+        <div class="btn-group mb-3">
+          <button class="btn btn-sm dropdown-toggle no-outline"
+                  data-bs-toggle="dropdown"
+                  type="button"
+                  aria-expanded="false">
+            <span>관련 사이트</span>
+          </button>
+          <ul id="site-list" class="dropdown-menu" aria-labelledby="site-dropdown">
+            <li><a class="dropdown-item" href="https://www.cbnu.ac.kr" target="_blank">충북대학교</a></li>
+            <li><a class="dropdown-item" href="http://fole.chungbuk.ac.kr" target="_blank">창의융합본부</a></li>
+            <li><a class="dropdown-item" href="http://www.swuniv.kr" target="_blank">SW중심대학</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-column flex-lg-row align-items-lg-center mb-4">
+    <span class="my-2 my-lg-0">{{address}}</span>
+    <span class="d-none d-lg-inline mx-2">&#9475;</span>
+    <a href="tel:{{tel}}"><i class="las la-phone"></i> {{tel}}</a>
+  </div>
+  <div class="small copyright text-center text-lg-start d-flex flex-column flex-lg-row">
+    <span>&copy; 2020 충북대학교 SW중심대학사업단.</span><span class="ms-lg-1">All rights reserved.</span>
+  </div>
+</div>

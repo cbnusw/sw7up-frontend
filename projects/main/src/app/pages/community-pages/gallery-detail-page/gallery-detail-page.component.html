@@ -1,0 +1,24 @@
+<div class="detail-header border-bottom pb-2">
+  <div class="title">{{gallery?.title}}</div>
+  <div class="my-2 d-flex justify-content-between align-items-center">
+    <span class="writer">{{gallery?.writer?.name}}</span>
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="hits">조회수 {{gallery?.hits | number}}</span>
+      <span class="between-divider">/</span>
+      <span class="date">작성일 {{gallery?.createdAt | date: 'yyyy.MM.dd.'}}</span>
+    </div>
+  </div>
+</div>
+
+<div class="pictures" *ngFor="let picture of gallery?.pictures;">
+  <img class="picture-img" [src]="picture?.url" alt="gallery-picture"/>
+  <div class="picture-caption"><i>{{picture?.caption}}</i></div>
+</div>
+
+<div class="d-flex justify-content-end">
+  <button type="button" class="btn btn-sm btn-dark py-2 px-3" [routerLink]="GALLERY_LIST_URL">
+    <i class="las la-list me-2"></i>목록
+  </button>
+</div>
+
+

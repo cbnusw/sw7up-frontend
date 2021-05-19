@@ -1,0 +1,42 @@
+@import "tools";
+
+$font-size: 0.875rem;
+
+* {
+  font-size: $font-size;
+}
+
+img:not(.source-size) {
+  width: 100%;
+}
+
+img.source-size {
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.content {
+  margin-left: 0.6em;
+  text-indent: -0.6em;
+  margin-bottom: 0.5rem;
+}
+
+.sub-content {
+  margin-left: 1em;
+}
+
+.responsive-tabs {
+  overflow-x: auto;
+  .nav-tabs {
+    flex-wrap: nowrap;
+
+    .nav-link {
+      white-space: nowrap;
+
+      &:not(.active) {
+        border-bottom: 1px solid $border-color;
+      }
+    }
+  }
+}

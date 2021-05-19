@@ -1,0 +1,9 @@
+<sw-header></sw-header>
+<sw-navigation-mobile class="d-lg-none" *ngIf="open"></sw-navigation-mobile>
+<sw-navigation-desktop class="d-none d-lg-block border-bottom shadow-sm"></sw-navigation-desktop>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<footer class="w-100 mt-5">
+  <sw-footer></sw-footer>
+</footer>

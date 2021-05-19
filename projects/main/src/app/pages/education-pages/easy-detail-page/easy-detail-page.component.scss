@@ -1,0 +1,73 @@
+@import "body";
+
+$border: 1px solid #dee2e6;
+
+.title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #1071AE;
+}
+
+.contents-container {
+
+  .label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .content {
+    font-size: 0.9rem;
+  }
+
+  .row {
+    margin: 0;
+
+    .collapse-label {
+      padding: 0.5rem 0;
+      text-align: center;
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: rgba(0, 0, 0, 0.8);
+    }
+
+    .collapse-content {
+      font-size: 0.8rem;
+    }
+
+    .collapse-label + .collapse-content {
+      border-top: $border;
+    }
+
+    .col-md-6, .col-lg-6, .col-lg-12 {
+      padding: 0;
+    }
+  }
+}
+
+.course-content {
+  border-right: $border;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  @include mobile {
+    &:nth-child(2) {
+      .collapse-label {
+        border-top: $border;
+      }
+    }
+  }
+}
+
+@include mobile {
+  .course-content:nth-child(2) {
+    &:last-child {
+      .collapse-label {
+        border-top: 1px solid #dee2e6;
+      }
+    }
+  }
+}

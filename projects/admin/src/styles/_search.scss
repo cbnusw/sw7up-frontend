@@ -1,0 +1,36 @@
+@import "gmixin";
+@import "variables";
+
+.actions {
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+  width: 100%;
+  background-color: white;
+  padding: 1rem 2rem;
+  margin-bottom: 0.5rem;
+
+  @include mobile {
+    padding: 0.5rem;
+    flex-direction: column;
+  }
+
+  mat-form-field {
+    width: 50%;
+    margin-bottom: 1rem;
+    @include mobile {
+      width: 100%;
+    }
+  }
+}
+
+.las {
+  font-size: 1.2em;
+}
+
+.warn-color {
+  td {
+    color: mat-color($admin-warn);
+  }
+}

@@ -1,0 +1,22 @@
+<div class="main-container">
+  <section>
+    <sw-main-slides></sw-main-slides>
+  </section>
+  <section>
+    <sw-banner></sw-banner>
+  </section>
+  <section class="d-flex justify-content-between">
+    <sw-article-list title="공지사항"
+                     [articles$]="notices$"
+                     moreLink="/community/notice"
+                     basePath="/community/notice"></sw-article-list>
+    <sw-article-list title="보도자료"
+                     [articles$]="pressReleases$"
+                     moreLink="/community/press"
+                     basePath="/community/press"></sw-article-list>
+    <sw-grid-buttons></sw-grid-buttons>
+  </section>
+  <section>
+    <sw-link-banner></sw-link-banner>
+  </section>
+</div>

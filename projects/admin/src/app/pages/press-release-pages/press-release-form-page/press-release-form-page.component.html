@@ -1,0 +1,56 @@
+<h2 class="page-title">보도자료 {{modifying ? '수정' : '등록'}}</h2>
+
+<form class="mat-elevation-z1" [formGroup]="formGroup" (ngSubmit)="submit()">
+  <button *ngIf="model"
+          mat-mini-fab
+          class="remove-btn absolute raise"
+          type="button"
+          color="warn"
+          (click)="removePressRelease()">
+    <i class="las la-trash-alt"></i>
+  </button>
+
+  <mat-form-field class="w-100">
+    <mat-label>제목</mat-label>
+    <input matInput
+           formControlName="title"
+           [errorStateMatcher]="errorMatcher"
+           autocomplete="off"
+           placeholder="제목 입력"
+           required/>
+    <mat-hint>제목을 입력하세요.</mat-hint>
+    <mat-error *ngIf="hasError('required', 'title')">제목은 필수 입력 항목입니다.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="w-100">
+    <mat-label>원문링크</mat-label>
+    <input matInput
+           formControlName="link"
+           [errorStateMatcher]="errorMatcher"
+           autocomplete="off"
+           placeholder="기사 원문링크 입력"
+           required/>
+    <mat-hint>기사 원문 링크를 입력하세요.</mat-hint>
+    <mat-error *ngIf="hasError('required', 'link')">원문링크는 필수 입력 항목입니다.</mat-error>
+    <mat-error *ngIf="hasError('pattern', 'link')">올바른 형식의 링크가 아닙니다.</mat-error>
+  </mat-form-field>
+
+  <div class="editor-wrapper">
+    <ckeditor *ngIf="editor"
+              formControlName="content"
+              [editor]="editor"
+              [config]="config"
+              (ready)="onReady($event)"></ckeditor>
+    <div class="error" *ngIf="hasError('required', 'content')">내용은 필수 입력 항목입니다.</div>
+  </div>
+
+  <div class="flex justify-end">
+    <button type="button"
+            class="me"
+            mat-raised-button color="accent"
+            routerLink="/press-release/list">취소</button>
+    <button class="ms"
+            mat-raised-button
+            color="primary">{{modifying ? '수정' : '등록'}}</button>
+  </div>
+</form>

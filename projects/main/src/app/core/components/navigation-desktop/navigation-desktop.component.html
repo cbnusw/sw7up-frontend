@@ -1,0 +1,15 @@
+<nav class="main-container">
+  <a class="me-auto" [routerLink]="HOME_URL">
+    <img class="brand-image" src="assets/images/logo-h.png" alt="사업단 로고"/>
+  </a>
+  <ul>
+    <li class="cursor pointer"
+        *ngFor="let menu of menus"
+        [routerLink]="menu.link">
+      {{menu.name}}
+    </li>
+    <li class="cursor pointer">
+      <a class="btn btn-sm no-outline" [href]="CODE_URL">프로젝트관리</a>
+    </li>
+  </ul>
+</nav>

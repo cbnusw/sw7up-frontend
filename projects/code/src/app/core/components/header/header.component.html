@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" class="mat-elevation-z2">
+  <button mat-icon-button
+          class="example-icon"
+          (click)="openSideMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a class="brand"
+     routerLink="/dashboard">
+    <img class="brand-image" src="assets/images/logo.png"/>
+    <span class="brand-name">프로젝트관리 시스템</span>
+  </a>
+  <span class="account"
+        *ngIf="auth.loggedIn">
+    <a routerLink="/my-page">{{ auth.me?.info.name }}</a>님 로그인 중
+  </span>
+  <a class="account cursor pointer"
+     (click)="auth.logout()"
+     *ngIf="auth.loggedIn">로그아웃</a>
+
+  <a class="account cursor pointer"
+     (click)="moveLoginPage()"
+     *ngIf="!auth.loggedIn">로그인</a>
+</mat-toolbar>

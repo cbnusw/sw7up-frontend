@@ -1,0 +1,17 @@
+<div class="header d-flex justify-content-between align-items-center">
+  <div class="title">{{title}}</div>
+  <button type="button" class="btn btn-link text-black-50" [routerLink]="moreLink || '/'">
+    <i class="las la-plus"></i>
+  </button>
+</div>
+<div class="body">
+  <div class="list-group">
+    <a class="list-group-item" *ngFor="let article of articles$ | async" [routerLink]="[basePath, article._id]">
+      <div class="article-title">{{article.title}}</div>
+      <div class="created-at">{{article.createdAt | date: 'yyyy-MM-dd'}}</div>
+    </a>
+    <span class="list-group-item" *ngIf="!articles$ || (articles$ | async)?.length === 0">
+      등록된 글이 없습니다.
+    </span>
+  </div>
+</div>

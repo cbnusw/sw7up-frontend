@@ -1,0 +1,12 @@
+@import "body";
+
+img.e-book {
+  @include desktop {
+    width: auto;
+    height: 350px;
+  }
+
+  @include mobile {
+    width: 100%;
+  }
+}

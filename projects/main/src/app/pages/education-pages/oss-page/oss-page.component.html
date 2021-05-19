@@ -1,0 +1,142 @@
+<div class="responsive-tabs">
+  <ul class="nav nav-tabs mb-4">
+    <li class="nav-item" *ngFor="let tab of tabs">
+      <a class="nav-link cursor pointer"
+         [class.active]="selectedTab === tab"
+         (click)="changeType(tab)">{{tab}}</a>
+    </li>
+  </ul>
+</div>
+
+<ng-container [ngSwitch]="selectedTab">
+  <ng-container *ngSwitchCase="tabs[0]">
+    <iframe width="560"
+            height="315"
+            src="https://www.youtube.com/embed/4qpd6saEIRs"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+    </iframe>
+    <div class="contents-container mt-4">
+      <div class="label">오픈소스SW에 대한 이해와 활용 역량 강화</div>
+      <div class="content">- 오픈소스SW의 활용에 대한 올바른 이해</div>
+      <div class="content">- 현장에 바로 활용할 수 있는 오픈소스SW에 대한 지식</div>
+    </div>
+    <div class="contents-container mt-4">
+      <div class="label">오픈소스SW 기반 SW 개발 역량 향상</div>
+      <div class="content">- 현장에서 바로 활용할 수 있는 SW 개발 능력</div>
+      <div class="content">- 기본이 탄탄한 SW 개발 능력을 키울 프로그램 경진대회 운영과 참여 지원</div>
+    </div>
+    <div class="contents-container mt-4">
+      <div class="label">오픈소스SW 기반 SW 개발 역량 향상</div>
+      <div class="content">- 현장에서 바로 활용할 수 있는 SW 개발 능력</div>
+      <div class="content">- 기본이 탄탄한 SW 개발 능력을 키울 프로그램 경진대회 운영과 참여 지원</div>
+    </div>
+    <div class="contents-container mt-4">
+      <div class="label">오픈소스SW센터 운영 프로그램</div>
+      <div class="content">- 가상화 기반의 다양한 서비스 구축</div>
+      <div class="content">- 오픈소스SW 운영보조원(매년 10명)</div>
+      <div class="content">- 오픈소스SW 동아리 지원(매년 5팀)</div>
+      <div class="content">- 오픈소스SW 관련 특강</div>
+      <div class="content">- 오픈소스SW 튜토리얼 제작 및 배포</div>
+      <div class="content">- 도내 학생들을 위한 오픈소스SW 커뮤니티 프로그램</div>
+      <div class="content">- 오픈소스SW 관련 개발자 대회 참가 지원</div>
+      <div class="content">- 오픈소스SW 전용 실습실 운영 및 지원</div>
+      <div class="content">- E-HELP DESK 운영</div>
+    </div>
+
+  </ng-container>
+
+  <ng-container *ngSwitchCase="tabs[1]">
+    <div class="contents-container mt-4">
+      <div class="label">운영보조원 개요</div>
+      <div class="content">- 모집: 운영 전년 12월 중</div>
+      <div class="content">- 운영: 1월 ~ 11월(11개월)</div>
+      <div class="content">- 인원: 10명</div>
+      <div class="content">- 혜택: 매월 20만원 특별 장학금</div>
+    </div>
+    <div class="contents-container mt-4">
+      <div class="label">운영보조원 역할</div>
+      <div class="content">- Online-Judge 시스템 개발 및 운영</div>
+      <div class="content">- 사업단 홈페이지, CBNU Git, Indico 시스템 관리</div>
+      <div class="content">- 오픈소스SW 관련 튜토리얼 개발 및 배포</div>
+      <div class="content">- 오픈소스SW센터 행사 및 운영 보조</div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="tabs[2]">
+    <div class="contents-container mt-4">
+      <div class="label">동아리 선발과 지원</div>
+      <div class="content">- 모집: 매년 3월</div>
+      <div class="content">- 기간: 4월 ~ 11월(8개월)</div>
+      <div class="content">- 선발: 심사를 통해 5개 동아리 선발</div>
+      <div class="content">- 혜택: 팀별 약 200만원 지원 및 우수 동아리 시상</div>
+    </div>
+    <div class="contents-container mt-4">
+      <div class="label">동아리 활동</div>
+      <div class="content">- 오픈소스SW를 활용한 프로젝트 진행</div>
+      <div class="content">- 실무능력과 문제해결 능력 향상</div>
+      <div class="content">- 지속 가능한 프로젝트로 발전</div>
+      <div class="content">- 중간 및 최종 결과 발표</div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="tabs[3]">
+    <div class="contents-container mt-4">
+      <div class="label">공개SW 특강</div>
+      <div class="content">- 공개SW 특강 프로그램: 기초 오픈소스SW 관련 특강</div>
+      <div class="content">- 공개SW 전문교육: 심화 오픈소스SW 관련 특강</div>
+    </div>
+    <div class="contents-container mt-4">
+      <div class="label">AI-HPC 스쿨</div>
+      <div class="content">- 학과 교육에서 다루기 힘든 슈퍼컴퓨터를 접할 수 있는 기회</div>
+      <div class="content">- 슈퍼컴퓨터를 활용한 AI 응용</div>
+    </div>
+    <div class="contents-container mt-4">
+      <div class="label">프로그래밍 경진 대회</div>
+      <div class="content">- Online-Judge 시스템 기반의 프로그래밍 경진대회</div>
+      <div class="content">- 본선 진출자 대상으로 ACM-ICPC를 위한 프로그래밍 심화 교육 프로그램 제공</div>
+    </div>
+    <div class="contents-container mt-4">
+      <div class="label">오픈소스SW 커뮤니티 프로그램</div>
+      <div class="content">- 충청권 대학생들과 함께 오픈소스SW 기반의 협업 활동 프로그램</div>
+      <div class="content">- What 보다는 HOW, Product보다는 PROCESS에 중심을 둔 프로그램</div>
+      <div class="content">- 현업에서 활동하는 전문가 특강 및 멘토링</div>
+    </div>
+    <div class="contents-container mt-4">
+      <div class="label">오픈소스SW 라이선스 교육</div>
+      <div class="content">- 오픈소스SW 저작권 이해를 위한 프로그램</div>
+      <div class="content">- 올바른 오픈소스SW 사용 방법 이해</div>
+      <div class="content">- 저작권 위원회와 공동 주관</div>
+
+    </div>
+    <div class="contents-container mt-4">
+      <div class="label">Git/GitHub 특강 지원</div>
+      <div class="content">- 개발자의 필수 기초 역량 중의 하나인 Git/GitHub 관련 기초 특강 지원</div>
+      <div class="content">- 현업에서 활동 중인 전문가를 통한 실전적 Git/GitHub 활용 특강</div>
+      <div class="content">- 사업 참여 학과(부)의 SW 관련 교과목 특강 지원 및 전체 특강으로 운영</div>
+      <div class="content">- 매년 학기별로 운영</div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="tabs[4]">
+    <div class="contents-container mt-4">
+      <div class="label">Git/GitHub 튜토리일 동영상</div>
+      <video controls width="560">
+        <source src="assets/videos/oss/tutorial_git_github.mp4" type="video/mp4">
+        브라우저에서 지원하지 않는 형식의 비디오입니다.
+      </video>
+    </div>
+    <div class="contents-container mt-4">
+      <div class="label">AWS(Amazon Web Service) 튜토리얼</div>
+      <div class="content">- 링크: <a class="text-primary" href="assets/pdfs/oss/tutorial_aws.pdf" target="_blank">aws.pdf</a></div>
+    </div>
+    <div class="contents-container mt-4">
+      <div class="label">Docker 튜토리얼</div>
+      <div class="content">- 링크: <a class="text-primary" href="assets/pdfs/oss/tutorial_docker.pdf" target="_blank">docker.pdf</a></div>
+    </div>
+    <div class="contents-container mt-4 class=text-primary">
+      <div class="label">Apache Http 튜토리얼</div>
+      <div class="content">- 링크: <a class="text-primary" href="assets/pdfs/oss/tutorial_apache_http.pdf" target="_blank">apache_http.pdf</a></div>
+    </div>
+  </ng-container>
+</ng-container>

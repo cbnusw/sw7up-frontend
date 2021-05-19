@@ -1,0 +1,134 @@
+<div class="map-wrapper mb-4">
+  <div id="map"></div>
+  <a class="campus-btn btn btn-sm btn-outline-primary px-3 py-1"
+     href="https://www.chungbuk.ac.kr/resource/site/www/campus_map.jsp"
+     target="_blank">
+    캠퍼스맵
+  </a>
+</div>
+
+<div class="row mb-4">
+  <div class="col-12 col-lg-8">
+    <div class="mb-3">
+      <h5 class="d-block mb-1">주소</h5>
+      <small class="text-black">{{organization?.address.basic}}
+        <span *ngIf="organization?.address.detail">, {{organization?.address.detail}}</span>
+      </small>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-4">
+    <div class="mb-3">
+      <h5 class="d-block mb-1">전화번호</h5>
+      <small class="text-black">
+        <a href="tel:{{organization?.tel}}"><i class="las la-phone me-2"></i>{{organization?.tel}}</a>
+      </small>
+    </div>
+  </div>
+</div>
+
+<ul class="nav nav-tabs mb-4">
+  <li class="nav-item">
+    <a class="nav-link cursor pointer"
+       [class.active]="type === 'private'"
+       (click)="changeType('private')">자가차량</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link cursor pointer"
+       [class.active]="type === 'public'"
+       (click)="changeType('public')">대중교통</a>
+  </li>
+</ul>
+
+<ng-container [ngSwitch]="type">
+  <ng-container *ngSwitchCase="'private'">
+    <div class="mb-3">
+      <small class="d-block mb-1"><strong>경부고속도로 이용 시</strong></small>
+      <span class="d-block text-body text-indent">
+        <i class="las la-caret-right me-1"></i>
+        청주IC 나와서 왼쪽 청주방향 6.5km 이동 → 산업단지육거리 → 충북대학교 방면 우측도로 500m 이동 → 충북대 정문 도착
+      </span>
+    </div>
+    <div class="mb-3">
+      <small class="d-block mb-1"><strong>중부고속도로 이용 시</strong></small>
+      <span class="d-block text-body text-indent">
+        <i class="las la-caret-right me-1"></i>
+        서청주IC 나와서 좌회전(청주방향) 1.5km 이동 → 솔밭공원 사거리 → 시청 방면으로 우회전 200m 이동 후 좌회전 → 1.5km 이동 → 산업단지육거리 → 충북대학교 방면 우측도로 500m 이동 → 충북대 정문 도착
+      </span>
+    </div>
+    <div class="mb-3">
+      <small class="d-block mb-1"><strong>청주-상주간 고속도로 이용 시</strong></small>
+      <span class="d-block text-body text-indent mb-2">
+        <i class="las la-caret-right me-1"></i>
+        청주JC → 경부고속도로 → 남이JC에서 오른쪽 중부고속도로 → 서청주IC 나와서 좌회전(청주방향) 1.5km 이동 → 솔밭공원 사거리 → 시청 방면으로 우회전 200m 이동 후 좌회전 → 1.5km 이동 → 산업단지육거리 → 충북대학교 방면 우측도로 500m 이동 → 충북대 정문 도착
+      </span>
+      <span class="d-block text-body text-indent">
+        <i class="las la-caret-right me-1"></i>
+        문의IC 나와서 우회전 청주방향 5km 이동 → 고은사거리 → 청주방향으로 좌회전 → 4.9 km 이동 → 방서사거리 청주방면으로 좌회전 4km 이동 → 고가도로 오른쪽 이용 → 개신오거리에서 충북대병원방면으로 좌회전 → 충북대학교 동문 도착
+      </span>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <div class="mb-3">
+      <small class="d-block mb-1"><strong>철도 이용시</strong></small>
+      <div class="mb-2">
+        <span class="d-block text-body text-indent mb-1">
+          <i class="las la-caret-right me-1"></i>KTX 오송역
+        </span>
+        <span class="d-block text-body text-indent ms-2">
+          &nbsp;&nbsp;- 오송역 앞에서 청주행(일반511, 517, 520번) 버스 이용
+        </span>
+      </div>
+      <div class="mb-2">
+        <span class="d-block text-body text-indent mb-1">
+          <i class="las la-caret-right me-1"></i>일반철도 : 경부선, 호남선 조치원역
+        </span>
+        <span class="d-block text-body text-indent ms-2">
+          &nbsp;&nbsp;- 조치원 역 앞에서 청주행(좌석 502번, 일반 511번) 버스 이용
+        </span>
+      </div>
+    </div>
+    <div class="mb-3">
+      <small class="d-block mb-1"><strong>고속버스 이용 시</strong></small>
+      <span class="d-block text-body text-indent mb-2">
+        <i class="las la-caret-right me-1"></i>출발지 : 서울, 동서울, 상봉, 대구, 부산, 광주 고속버스 터미널
+      </span>
+      <span class="d-block text-body text-indent mb-2">
+        <i class="las la-caret-right me-1"></i>도착지 : 청주고속버스터미널(가경동)
+      </span>
+      <span class="d-block text-body text-indent mb-2">
+        <i class="las la-caret-right me-1"></i>
+        시외버스터미널앞 정류장에서 시내버스승차, 충북대학교 입구 정류장 하차 후 도보 이동
+      </span>
+      <span class="d-block text-body text-indent">
+        <i class="las la-caret-right me-1"></i>택시 이용 시 약 4,000 ~ 5,000원
+      </span>
+    </div>
+    <div class="mb-3">
+      <small class="d-block mb-1"><strong>시외버스 이용 시</strong></small>
+      <span class="d-block text-body text-indent mb-2">
+        <i class="las la-caret-right me-1"></i>출발지 : 각 도시 시외버스 터미널
+      </span>
+      <span class="d-block text-body text-indent mb-2">
+        <i class="las la-caret-right me-1"></i>도착지 : 청주시외버스터미널(가경동)
+      </span>
+      <span class="d-block text-body text-indent mb-2">
+        <i class="las la-caret-right me-1"></i>
+        터미널앞 정류장에서 시내버스 승차, 충북대학교 입구 정류장 하차 후 도보 이동
+      </span>
+      <span class="d-block text-body text-indent">
+        <i class="las la-caret-right me-1"></i>택시 이용 시 약 4,000 ~ 5,000원
+      </span>
+    </div>
+
+    <strong class="text-danger">
+      <small>
+        ★ 청주시 버스정보시스템 참조 (청주시내버스 제공)<br/>
+        &nbsp;&nbsp;
+        <a href="http://dcbis.go.kr" target="_blank">
+          홈페이지 바로가기<i class="las la-chevron-circle-right ms-1"></i>
+        </a>
+      </small>
+    </strong>
+  </ng-container>
+</ng-container>

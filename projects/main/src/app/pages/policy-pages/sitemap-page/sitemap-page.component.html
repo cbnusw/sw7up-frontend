@@ -1,0 +1,14 @@
+<div class="card p-5 my-3" *ngFor="let menu of menus;">
+  <div class="title">{{menu?.name}}</div>
+
+  <div class="row">
+    <div class="col-sm-3" *ngFor="let subMenu of menu?.subMenus;">
+      <div class="media font-size-1 text-body mb-2">
+        <a class="nav-link" [routerLink]="subMenu.link">
+          <i class="las la-angle-right text-dark me-1"></i>
+          {{subMenu.name}}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

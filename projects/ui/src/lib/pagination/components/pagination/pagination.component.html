@@ -1,0 +1,39 @@
+<ul class="pagination pagination-sm">
+
+  <!--1st page-->
+  <li class="page-item" *ngIf="range[0] > 1">
+    <a class="page-link"
+       aria-label="First page"
+       [routerLink]="url"
+       [queryParams]="getQueryParams(page)">1</a>
+  </li>
+
+  <!--previous page-->
+  <li class="page-item" *ngIf="range[0] > 2">
+    <a class="page-link"
+       [routerLink]="url"
+       [queryParams]="getQueryParams(range[0] - 1)">...</a>
+  </li>
+
+  <!--middle pages-->
+  <li class="page-item"
+      [class.active]="page === p"
+      *ngFor="let p of range">
+    <a class="page-link"
+       [routerLink]="url"
+       [queryParams]="getQueryParams(p)">{{p}}</a>
+  </li>
+
+  <!--next page-->
+  <li class="page-item" *ngIf="range[range.length - 1] < lastPage - 1">
+    <a class="page-link"
+       [routerLink]="url"
+       [queryParams]="getQueryParams(range[range.length - 1])">...</a>
+  </li>
+
+  <!--last page-->
+  <li class="page-item" *ngIf="range[range.length - 1] < lastPage">
+    <a class="page-link" aria-label="Next" [routerLink]="url"
+       [queryParams]="getQueryParams(lastPage)">{{lastPage}}</a>
+  </li>
+</ul>

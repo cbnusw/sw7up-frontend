@@ -1,0 +1,22 @@
+<mat-drawer-container class="container" autosize>
+  <mat-drawer [mode]="mode$ | async"
+              class="mat-elevation-z2" [position]="position$ | async">
+    <div class="nav-header mat-elevation-z1">
+      <button type="button"
+              mat-icon-button
+              (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <ul class="nav">
+      <li class="nav-item cursor pointer select-none"
+          *ngFor="let menu of menuGroup"
+          (click)="closeWhenMobile()"
+          [routerLink]="menu.link"
+          routerLinkActive="active">
+        {{ menu.name }}
+      </li>
+    </ul>
+  </mat-drawer>
+  <ng-content></ng-content>
+</mat-drawer-container>

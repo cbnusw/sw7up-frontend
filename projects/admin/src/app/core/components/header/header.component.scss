@@ -1,0 +1,39 @@
+@import "variables";
+
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+}
+
+mat-toolbar {
+  height: $header-height;
+  min-width: $desktop-width;
+}
+
+button {
+  &.left {
+    margin-right: 1rem;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+
+  .brand-image {
+    margin-right: 1rem;
+    height: 20px;
+  }
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.account {
+  margin: 0 0.5em;
+  font-size: 0.6em;
+}

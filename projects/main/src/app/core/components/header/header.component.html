@@ -1,0 +1,31 @@
+<header class="main-container d-none d-lg-block">
+  <div class="top-menu">
+    <ul class="d-flex justify-content-end">
+      <ng-container *ngIf="!auth.loggedIn; else loggedInTemplate">
+        <li>
+          <a class="cursor pointer" [routerLink]="LOGIN_URL">로그인</a>
+        </li>
+        <li>
+          <a [routerLink]="JOIN_URL">회원가입</a>
+        </li>
+      </ng-container>
+      <ng-template #loggedInTemplate>
+        <li>
+          <a class="my-name" [routerLink]="MY_PAGE_URL">{{auth.me?.info.name}}</a>님 로그인 중 -
+        </li>
+        <li>
+          <a class="cursor pointer" (click)="logout()">로그아웃</a>
+        </li>
+      </ng-template>
+    </ul>
+  </div>
+</header>
+<header class="main-container align-items-center d-flex d-lg-none border-bottom shadow-sm">
+  <a class="brand-link" [routerLink]="HOME_URL"><img class="brand-image" src="../../../../assets/images/logo-h.png"/></a>
+  <div class="position-top px-0 py-1">
+    <button class="btn btn-sm no-outline"
+            *ngIf="navigation.hidden"
+            (click)="navigation.hidden = false"><i class="las la-bars"></i>
+    </button>
+  </div>
+</header>

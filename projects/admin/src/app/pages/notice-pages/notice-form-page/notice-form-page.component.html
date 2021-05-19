@@ -1,0 +1,89 @@
+<h2 class="page-title">공지사항 {{modifying ? '수정' : '등록'}}</h2>
+
+<form class="mat-elevation-z1" [formGroup]="formGroup" (ngSubmit)="submit()">
+  <button *ngIf="model"
+          mat-mini-fab
+          class="remove-btn absolute raise"
+          type="button"
+          color="warn"
+          (click)="removeNotice()">
+    <i class="las la-trash-alt"></i>
+  </button>
+
+  <mat-form-field class="w-100">
+    <mat-label>제목</mat-label>
+    <input matInput
+           formControlName="title"
+           [errorStateMatcher]="errorMatcher"
+           autocomplete="off"
+           placeholder="제목 입력"
+           required/>
+    <mat-hint>공지사항의 제목을 입력하세요.</mat-hint>
+    <mat-error *ngIf="hasError('required', 'title')">제목은 필수 입력 항목입니다.</mat-error>
+  </mat-form-field>
+
+  <div class="inline-controls">
+    <mat-form-field class="w-100">
+      <mat-label>카테고리</mat-label>
+      <mat-select formControlName="category"
+                  [errorStateMatcher]="errorMatcher"
+                  required>
+        <mat-option *ngFor="let option of categories" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+      <mat-hint>공지사항 카테고리를 선택해주세요.</mat-hint>
+      <mat-error *ngIf="hasError('required', 'category')">
+        카테고리는 필수 입력 항목입니다.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>공개범위</mat-label>
+      <mat-select formControlName="access" multiple [errorStateMatcher]="errorMatcher" required>
+        <mat-option *ngFor="let option of access" [value]="option">{{option | noticeAccess}}</mat-option>
+      </mat-select>
+      <mat-hint>공개범위를 선택해주세요.</mat-hint>
+      <mat-error *ngIf="hasError('emptyAccess', 'access')">
+        하나 이상은 선택해야 합니다.
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="inline-controls">
+    <mat-form-field class="w-50">
+      <mat-label>기간</mat-label>
+      <input matInput
+             [matDatepicker]="picker"
+             [errorStateMatcher]="periodErrorMatcher"
+             formControlName="period" [required]="important">
+      <mat-hint>중요 공지는 필수 입력</mat-hint>
+      <mat-error *ngIf="hasError('requiredPeriod')">
+        중요 공지는 기간 입력이 필수입니다.
+      </mat-error>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-checkbox class="ms-auto" formControlName="important" color="primary">중요공지</mat-checkbox>
+  </div>
+
+  <div class="editor-wrapper">
+    <ckeditor *ngIf="editor"
+              formControlName="content"
+              [editor]="editor"
+              [config]="config"
+              (ready)="onReady($event)"></ckeditor>
+    <div class="error" *ngIf="hasError('required', 'content')">내용은 필수 입력 항목입니다.</div>
+  </div>
+
+  <sw-file-selector formControlName="attachments" [multiple]="true"></sw-file-selector>
+
+  <div class="flex justify-end">
+    <button type="button"
+            class="me"
+            mat-raised-button color="accent"
+            routerLink="/notice/list">취소</button>
+    <button class="ms"
+            mat-raised-button
+            color="primary">{{modifying ? '수정' : '등록'}}</button>
+  </div>
+</form>

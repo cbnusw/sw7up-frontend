@@ -1,0 +1,67 @@
+<form class="mb-5"
+      *ngIf="!result; else resultTemplate"
+      [formGroup]="formGroup"
+      (ngSubmit)="submit()">
+  <ul class="nav nav-tabs mb-4">
+    <li class="nav-item" *ngFor="let type of types">
+      <a class="nav-link cursor pointer"
+         [class.active]="typeValue === type.value" (click)="changeType(type.value)">{{type.viewValue}}</a>
+    </li>
+  </ul>
+
+  <div class="form-group mb-4">
+    <label for="name" class="w-100 mb-2 required">이름</label>
+    <input type="text"
+           id="name"
+           class="form-control no-outline"
+           placeholder="가입 시 등록한 이름 입력"
+           autocomplete="off"
+           [class.is-invalid]="invalid('name')"
+           formControlName="name"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('required', 'name')">이름은 필수 입력 항목입니다.</span>
+    </div>
+  </div>
+
+  <div class="form-group mb-4" *ngIf="typeValue === 'email'">
+    <label for="email" class="w-100 mb-2 required">이메일</label>
+    <input type="email"
+           id="email"
+           class="form-control no-outline"
+           placeholder="가입 시 등록한 이메일 입력"
+           autocomplete="off"
+           [class.is-invalid]="invalid('email') || hasError('requiredEmailOrPhone')"
+           formControlName="email"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('pattern', 'email')">올바른 형식의 이메일이 아닙니다.</span>
+      <span *ngIf="hasError('requiredEmailOrPhone')">이메일은 필수 입력 항목입니다.</span>
+    </div>
+    <div class="error" *ngIf="hasSubmissionError()">{{submissionErrorMessage}}</div>
+  </div>
+
+  <div class="form-group mb-4" *ngIf="typeValue === 'phone'">
+    <label for="phone" class="w-100 mb-2 required">휴대폰번호</label>
+    <input type="tel"
+           id="phone"
+           class="form-control no-outline"
+           placeholder="가입 시 등록한 휴대폰번호 입력"
+           autocomplete="off"
+           [class.is-invalid]="invalid('phone') || hasError('requiredEmailOrPhone')"
+           formControlName="phone"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('pattern', 'phone')">올바른 형식의 휴대폰번호가 아닙니다.</span>
+      <span *ngIf="hasError('requiredEmailOrPhone')">휴대폰번호는 필수 입력 항목입니다.</span>
+    </div>
+    <div class="error" *ngIf="hasSubmissionError()">{{submissionErrorMessage}}</div>
+  </div>
+
+  <button class="btn d-block w-100">계정 찾기</button>
+</form>
+
+<ng-template #resultTemplate>
+  <div class="alert alert-primary">입력한 정보로 찾은 학번/교번 또는 아이디입니다.</div>
+  <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center bg-light p-4 border mb-5">
+    <div class="result mb-4 mb-lg-0">계정(학번/교번/아이디): <span class="text-primary">{{result}}</span></div>
+    <span><a [routerLink]="LOGIN_URL">로그인</a>하기</span>
+  </div>
+</ng-template>

@@ -1,0 +1,14 @@
+@import "form";
+@import "half-container";
+
+.otp-btn {
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.otp-btn-wrapper {
+  @include desktop {
+    height: 50px;
+  }
+}

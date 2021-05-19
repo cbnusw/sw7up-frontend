@@ -1,0 +1,47 @@
+<form class="mb-5" [formGroup]="formGroup" (ngSubmit)="submit()">
+  <div class="form-group mb-4">
+    <label for="no" class="w-100 mb-2">
+      <span class="d-flex justify-content-between align-items-center">
+        학번/교번 또는 아이디
+        <a tabindex="4" [routerLink]="FIND_ACCOUNT_URL">아이디 찾기</a>
+      </span>
+    </label>
+    <input type="text"
+           id="no"
+           tabindex="1"
+           class="form-control no-outline"
+           placeholder="충북대 소속의 경우 학번/교번 입력, 그외 아이디 입력"
+           autocomplete="off"
+           [class.is-invalid]="invalid('no')"
+           formControlName="no"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('required', 'no')">학번/교번 또는 아이디는 필수 입력 항목입니다.</span>
+      <span *ngIf="hasSubmissionError('no')">{{submissionErrorMessage}}</span>
+    </div>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="password" class="w-100 mb-2">
+      <span class="d-flex justify-content-between align-items-center">
+        비밀번호
+        <a tabindex="5" [routerLink]="INIT_PASSWORD_URL">비밀번호 찾기</a>
+      </span>
+    </label>
+    <input type="password"
+           id="password"
+           tabindex="2"
+           class="form-control no-outline"
+           placeholder="비밀번호 입력"
+           [class.is-invalid]="invalid('password')"
+           formControlName="password"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('required', 'no')">비밀번호는 필수 입력 항목입니다.</span>
+      <span *ngIf="hasSubmissionError('password')">{{submissionErrorMessage}}</span>
+    </div>
+  </div>
+  
+  <div class="d-flex flex-column justify-content-between align-items-center flex-lg-row">
+    <span class="mb-4 mb-lg-0">아직도 계정이 없으신가요? <a tabindex="6" class="ms-3" [routerLink]="JOIN_URL">회원가입</a></span>
+    <button tabindex="3" class="btn btn-sw">로그인</button>
+  </div>
+</form>

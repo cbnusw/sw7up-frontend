@@ -1,0 +1,58 @@
+@import "tools";
+
+:host {
+  display: block;
+  background-color: #555;
+  color: white;
+  font-size: 0.875rem;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: white;
+}
+
+.copyright {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dropdown-item {
+  color: $default-color;
+}
+
+.btn.dropdown-toggle {
+  background-color: rgba(247,250,255,.1);
+  color: white;
+
+  margin-left: auto;
+
+  &:hover, &.show {
+    background-color: white;
+    color: $default-color;
+  }
+}
+
+.btn-group {
+  padding: 0.5rem 1rem;
+}
+
+.dropdown-menu {
+  padding: 1rem 0;
+  margin: 0.5rem 0;
+  width: 160px;
+}
+
+.dropdown-item {
+  font-size: 0.875rem;
+  font-weight: 400;
+  padding: .375rem 1.5rem;
+
+  &:hover {
+    font-weight: 700;
+    background-color: transparent;
+  }
+}

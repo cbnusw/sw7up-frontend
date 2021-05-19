@@ -1,0 +1,26 @@
+<mat-toolbar color="primary" class="mat-elevation-z4">
+  <button mat-icon-button
+          *ngIf="auth.loggedIn && (layout.desktop$ | async) && (sideNavService.hidden$ | async) === true"
+          class="left"
+          (click)="openSideMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a class="brand"
+     routerLink="/dashboard">
+    <img class="brand-image" src="assets/images/logo.png"/>
+    <span class="brand-name">{{(layout.desktop$ | async) ? '충북대학교 SW중심대학사업단 ' : ''}}관리자</span>
+  </a>
+  <button mat-icon-button
+          *ngIf="auth.loggedIn && (layout.mobile$ | async)"
+          class="right"
+          (click)="openSideMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="account"
+        *ngIf="auth.loggedIn && (layout.desktop$ | async)">
+    <a routerLink="/my-page">{{ auth.me?.info.name }}</a>님 로그인 중
+  </span>
+  <a class="account cursor pointer"
+     (click)="auth.logout()"
+     *ngIf="auth.loggedIn && (layout.desktop$ | async)">로그아웃</a>
+</mat-toolbar>

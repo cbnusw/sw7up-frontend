@@ -1,0 +1,16 @@
+@import "body";
+
+.card .title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #58615C;
+  margin-bottom: 1rem;
+}
+
+a.nav-link {
+  color: black;
+
+  &:hover {
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,28 @@
+<header class="d-none d-lg-block mb-4"
+        [swBackgroundImage]="background"
+        swBackgroundSize="cover"
+        swBackgroundPosition="center center">
+  <div class="main-container navigator-wrapper">
+    <div class="navigator d-none d-lg-block">
+      <div class="navigator-header">
+        <h2 class="page-title">{{headerTitle}}</h2>
+      </div>
+      <ul class="navigator-menus">
+        <li *ngFor="let menu of menus"
+            class="navigator-menu cursor pointer"
+            [routerLink]="menu.link"
+            routerLinkActive="active">
+          <span class="name me-auto">{{menu.name}}</span>
+          <span class="arrow"><i class="las la-angle-right"></i></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="main-container mb-5">
+  <div class="content pt-lg-4">
+    <h2>{{pageTitle}}</h2>
+    <sw-breadcrumb class="border-bottom mb-4" [items]="breadcrumbItems"></sw-breadcrumb>
+    <ng-content></ng-content>
+  </div>
+</div>

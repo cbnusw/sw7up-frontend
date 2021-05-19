@@ -1,0 +1,48 @@
+<div class="nav-header d-flex justify-content-between">
+  <a [routerLink]="HOME_URL" (click)="close()">
+    <img class="brand-image" src="assets/images/logo-h.png"/>
+  </a>
+  <button type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="close()"></button>
+</div>
+<div class="nav-body" #navBody>
+  <div class="account d-flex justify-content-center">
+    <a class="account-btn border" (click)="close()" *ngIf="!auth.loggedIn" [routerLink]="JOIN_URL">회원가입</a>
+    <a class="account-btn border" (click)="close()" *ngIf="!auth.loggedIn" [routerLink]="LOGIN_URL">로그인</a>
+    <a class="account-btn border" (click)="close()" *ngIf="auth.loggedIn" [routerLink]="MY_PAGE_URL">마이페이지</a>
+    <a class="account-btn border" *ngIf="auth.loggedIn" (click)="logout()">로그아웃</a>
+  </div>
+  <div class="sw-code d-flex justify-content-center">
+    <a class="code-btn border" [href]="CODE_URL">프로젝트관리</a>
+  </div>
+  <div class="menus mb-4">
+    <div class="accordion" id="navigation-menus">
+      <div class="accordion-item" *ngFor="let menu of menus; let i = index;">
+        <h2 class="accordion-header" id="navigation-menu-{{i}}">
+          <button class="accordion-button collapsed no-outline"
+                  [class.border-top]="i === 0"
+                  [class.border-bottom]="menu.subMenus?.length > 0"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  [attr.data-bs-target]="'#navigation-menu-collapse-' + i"
+                  aria-expanded="false"
+                  [attr.aria-controls]="'navigation-menu-collapse-' + i"
+                  (click)="movePage(menu.link)">
+            {{menu.name}}
+          </button>
+        </h2>
+        <div *ngIf="menu.subMenus?.length > 0" id="navigation-menu-collapse-{{i}}"
+             class="accordion-collapse collapse border-bottom"
+             aria-labelledby="navigation-menu-{{i}}"
+             data-bs-parent="#navigation-menus">
+          <ul class="accordion-body">
+            <li class="sub-menu cursor pointer" *ngFor="let sub of menu.subMenus"><a
+                (click)="movePage(sub.link)">{{sub.name}}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

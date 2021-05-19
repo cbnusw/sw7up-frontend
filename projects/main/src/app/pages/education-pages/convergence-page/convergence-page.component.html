@@ -1,0 +1,320 @@
+<div class="responsive-tabs">
+  <ul class="nav nav-tabs mb-4">
+    <li class="nav-item" *ngFor="let tab of tabs">
+      <a class="nav-link cursor pointer"
+         [class.active]="selectedTab === tab"
+         (click)="changeType(tab)">{{tab}}</a>
+    </li>
+  </ul>
+</div>
+
+<ng-container [ngSwitch]="selectedTab">
+  <ng-container *ngSwitchCase="tabs[0]">
+    <div class="contents-container mt-4">
+      <div class="label">SW융합전공이란</div>
+      <div class="content">- 2개 이상의 학과(부)의 교과과정을 융합한 SW기반 복수전공으로 제1전공과 함께 복수학위 취득 기회 제공</div>
+    </div>
+
+    <div class="contents-container pt-4 mt-4">
+      <div class="label">SW융합전공과정 신설 및 운영</div>
+      <div class="content">- 융합전공과정 운영 지원 (총 9개)</div>
+      <div class="content">- 융합전공 전공이수학점: 36학점</div>
+      <div class="content">- 융합전공 이수 편의를 위해 야간에 개설되는 EASY 코스 운영</div>
+    </div>
+
+    <div class="contents-container pt-4 mt-4">
+      <div class="label">SW융합전공과정</div>
+      <div class="content mb-1">- 공공데이터사이언스전공<a href="assets/pdfs/convergence/course01_public-data-science.pdf" target="_blank" class="text-primary ms-2">상세소개 <i class="las la-chevron-circle-right ms-1"></i></a></div>
+      <div class="content mb-1">- 뇌인지공학전공<a href="assets/pdfs/convergence/course02_brain-cognitive-engineering.pdf" target="_blank" class="text-primary ms-2">상세소개 <i class="las la-chevron-circle-right ms-1"></i></a></div>
+      <div class="content mb-1">- 보안컨설팅전공<a href="assets/pdfs/convergence/course03_security-consulting.pdf" target="_blank" class="text-primary ms-2">상세소개 <i class="las la-chevron-circle-right ms-1"></i></a></div>
+      <div class="content mb-1">- 빅데이터전공<a href="assets/pdfs/convergence/course04_bigdata.pdf" target="_blank" class="text-primary ms-2">상세소개 <i class="las la-chevron-circle-right ms-1"></i></a></div>
+      <div class="content mb-1">- 스마트자동차전공<a href="assets/pdfs/convergence/course05_smart-car.pdf" target="_blank" class="text-primary ms-2">상세소개 <i class="las la-chevron-circle-right ms-1"></i></a></div>
+      <div class="content mb-1">- 스마트팩토리전공<a href="assets/pdfs/convergence/course06_smart-factory.pdf" target="_blank" class="text-primary ms-2">상세소개 <i class="las la-chevron-circle-right ms-1"></i></a></div>
+      <div class="content mb-1">- 스마트전력IT전공<a href="assets/pdfs/convergence/course07_smart-power-it.pdf" target="_blank" class="text-primary ms-2">상세소개 <i class="las la-chevron-circle-right ms-1"></i></a></div>
+      <div class="content mb-1">- 스마트도시전공<a href="assets/pdfs/convergence/course08_smart-city.pdf" target="_blank" class="text-primary ms-2">상세소개 <i class="las la-chevron-circle-right ms-1"></i></a></div>
+      <div class="content mb-1">- 스마트디자인전공<a href="assets/pdfs/convergence/course09_smart-design.pdf" target="_blank" class="text-primary ms-2">상세소개 <i class="las la-chevron-circle-right ms-1"></i></a></div>
+      <div class="content mb-1">- IoT융합전공<a href="assets/pdfs/convergence/course10_iot-convergence.pdf" target="_blank" class="text-primary ms-2">상세소개 <i class="las la-chevron-circle-right ms-1"></i></a></div>
+      <div class="content mb-1">- SW융합부전공<a href="assets/pdfs/convergence/course11_sw-convergence-minor.pdf" target="_blank" class="text-primary ms-2">상세소개 <i class="las la-chevron-circle-right ms-1"></i></a></div>
+    </div>
+
+    <div class="contents-container pt-4 mt-4">
+      <div class="label">SW 융합전공 장학금 혜택</div>
+      <div class="content">- 융합전공 참여학생 특별장학금 지원</div>
+      <div class="content">- SW융합전공 이수학점 및 SW교과목 이수학점에 따라 매학기 학년별 마일리지 순으로 선발</div>
+      <div class="content">- 2021년 1, 2학기 각각 3000만원 지원 예정</div>
+    </div>
+
+    <div class="contents-container pt-4 mt-4">
+      <div class="label">[참고] 부전공, 복수전공, 융합전공, 학생설계전공의 비교</div>
+
+      <div class="row mt-4">
+        <div class="col-12 col-lg-6 mb-4">
+          <div class="edu-card">
+            <div class="edu-card-header">부전공</div>
+            <div class="edu-card-description">
+              <div class="mt-2">
+                <dl class="row">
+                  <dt class="col-2">전공소개</dt>
+                  <dd class="col-10">
+                    본인의 전공 이수와 동시에 다른 전공을 추가로 이수하는 제도<br>
+                    2학기 이상 이수자<br>
+                    1월7월(같은 기간 취소 가능)
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">이수조건</dt>
+                  <dd class="col-10">
+                    제1전공: 최소 전공 인정 학점 + 심화과정<br>
+                    부전공: 21학점 이상
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">학위취득</dt>
+                  <dd class="col-10">
+                    졸업증서에 부전공 표기
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">비고</dt>
+                  <dd class="col-10">
+                    융합 개념 미도입
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6 mb-4">
+          <div class="edu-card">
+            <div class="edu-card-header">복수전공</div>
+            <div class="edu-card-description">
+              <div class="mt-2">
+                <dl class="row">
+                  <dt class="col-2">전공소개</dt>
+                  <dd class="col-10">
+                    2개 학과의 전공을 이수하는 제도
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">이수조건</dt>
+                  <dd class="col-10">
+                    제1전공: 최소 전공 인정 학점<br>
+                    복수전공: 최소 전공 인정 학점
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">학위취득</dt>
+                  <dd class="col-10">
+                    본전공과 별도의 학위 수여
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">비고</dt>
+                  <dd class="col-10">
+                    융합 개념 미도입
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6 mb-4">
+          <div class="edu-card">
+            <div class="edu-card-header">융합전공</div>
+            <div class="edu-card-description">
+              <div class="mt-2">
+                <dl class="row">
+                  <dt class="col-2">전공소개</dt>
+                  <dd class="col-10">
+                    융합적 사고형 인재를 양성하기 위하여, 2개 이상의 학과가 학문적 영역을 유기적으로 융합한 새로운 교육과정
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">이수조건</dt>
+                  <dd class="col-10">
+                    제1전공: 최소 전공 인정 학점<br>
+                    융합전공: 융합 전공 최소 전공 인정 학점(36~54학점)
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">학위취득</dt>
+                  <dd class="col-10">
+                    본전공과 별도의 학위 수여
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">비고</dt>
+                  <dd class="col-10">
+                    여러 학문간 융합
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6 mb-4">
+          <div class="edu-card">
+            <div class="edu-card-header">학생설계전공</div>
+            <div class="edu-card-description">
+              <div class="mt-2">
+                <dl class="row">
+                  <dt class="col-2">전공소개</dt>
+                  <dd class="col-10">
+                    대학에 개설된 교과목 중에서 학생이 교육과정을 구성하여 총장의 승인을 받은 전공<br>
+                    교육과정 개편 계획 조사기간 모집
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">이수조건</dt>
+                  <dd class="col-10">
+                    제1전공: 최소 전공 인정 학점<br>
+                    학생설계전공: 36학점 이상
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">학위취득</dt>
+                  <dd class="col-10">
+                    본전공과 별도의 학위 수여
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">비고</dt>
+                  <dd class="col-10">
+                    여러 학문간 융합
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contents-container pt-4 mt-4">
+      <div class="label">융합전공 신청 및 접수 안내</div>
+      <div class="row mt-4">
+        <div class="col-12 col-lg-6 mb-4">
+          <div class="edu-card">
+            <div class="edu-card-description mt-0">
+              <div class="mt-2">
+                <dl class="row">
+                  <dt class="col-2">허용인원</dt>
+                  <dd class="col-10">
+                    신청자 모두 이수 가능
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">신청대상</dt>
+                  <dd class="col-10">
+                    2학기 이상 수료자 및 수료예정자
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">신청기간</dt>
+                  <dd class="col-10">
+                    1월 중 / 7월 중 다전공 신청기간(충북대학교 홈페이지 및 학과 홈페이지 공지)
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">이수기준</dt>
+                  <dd class="col-10">
+                    융합전공별로 최소전공인정학점(36~54학점) 이상 이수<br>
+                    제1전공과의 중복과목은 12학점까지 중복 인정(SW중심대학사업 참여 9개 융합전공 기준)
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">신청방법</dt>
+                  <dd class="col-10">
+                    다전공 이수 신청서 작성 → 소속학과 경유 → 융합전공 주관학과 제출
+                  </dd>
+                </dl>
+                <dl class="row">
+                  <dt class="col-2">담당부서</dt>
+                  <dd class="col-10">
+                    충북대학교 창의융합본부 및 융합전공별 주관학과<br>
+                    <a href="http://fole.chungbuk.ac.kr/" target="_blank">http://fole.chungbuk.ac.kr/</a><br>
+                    <a href="tel:043-261-3977">043-261-3977</a>
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="tabs[1]">
+    <div class="contents-container mt-4">
+      <div class="label">SW융합부전공이란</div>
+      <div class="content">- SW 비전공자를 대상으로 SW 핵심 역량을 교육하기 위해 개설하는 학과</div>
+      <div class="content">- SW부전공은 소프트웨어에 대한 이해와 소프트웨어의 활용을 위한 핵심 개발역량을 갖추기 위한 교육과정을 제공</div>
+      <div class="content">- SW비전공자의 눈높이에 맞춘 교육과정을 제공하고 야간시간에 모든 교과목을 개설하여 전체 학생들이 수강할 수 있게 함</div>
+      <div class="content">- 대부분의 교과목을 실습과 함꼐 진행함으로써 실무역량을 강화한 교육 제공</div>
+    </div>
+
+    <div class="contents-container pt-4 mt-4">
+      <div class="label">SW융합부전공과정 신설 및 운영 (최소 전공이수학점: 24학점)</div>
+      <div class="content">- 전교생에게 SW융합전공 기회를 100% 보장하기 위해 신설(2020년)</div>
+    </div>
+
+    <div class="contents-container pt-4 mt-4">
+      <div class="label">SW융합 부전공의 전체 교과목을 EASY 코스로 운영</div>
+      <div class="content">- EASY : 'Evening Altogether SW study in Yard'</div>
+      <div class="content">- '저녁 때는 다같이 모여 SW 공부하기'의 의미와 '수준이 어렵지 않다'는 중의적 의미 내포</div>
+      <div class="content">- 전체 교과목을 야간에 모두 개설하여 수강 편의성 제공</div>
+      <div class="content">- 실습이 가능한 강의실에서 운영하여 실습을 함께 하는 강의로 운영함</div>
+    </div>
+
+    <div class="contents-container pt-4 mt-4">
+      <div class="label">EASY 코스 교과목</div>
+
+      <div class="content font-weight-bold">- 정보기술의 이해</div>
+      <div class="sub-content mb-4">컴퓨터 및 정보기술 개론</div>
+
+      <div class="content font-weight-bold">- 파이썬 프로그래밍</div>
+      <div class="sub-content mb-4">파이썬 언어 학습 및 프로그래밍 실습</div>
+
+      <div class="content font-weight-bold">- 자료구조와 문제해결기법</div>
+      <div class="sub-content mb-4">파이썬 기반 자료구조 학습, 알고리즘 기반의 문제해결 기법</div>
+
+      <div class="content font-weight-bold">- Java 프로그래밍 기초</div>
+      <div class="sub-content mb-4">Java 기본 문법, 작품 제작</div>
+
+      <div class="content font-weight-bold">- 웹 응용 프로그래밍</div>
+      <div class="sub-content mb-4">HTML5/CSS, JavaScript, JSP</div>
+
+      <div class="content font-weight-bold">- 운영체제의 이해</div>
+      <div class="sub-content mb-4">운영체제 기초 이론 및 Linux 사용법</div>
+
+      <div class="content font-weight-bold">- IoT 기술과 프로그래밍</div>
+      <div class="sub-content mb-4">아두이노 플랫폼 학습, 정보센싱 기법, 장치 조작</div>
+
+      <div class="content font-weight-bold">- 빅데이터 이해와 분석</div>
+      <div class="sub-content mb-4">데이터 처리 및 분석 실습, 시각화</div>
+
+      <div class="content font-weight-bold">- 인공지능과 기계학습</div>
+      <div class="sub-content mb-4">지식표현, 추론, 기계학습, 신경망, 자연어처리, 영상/음성인식</div>
+
+      <div class="content font-weight-bold">- 모바일 프로그래밍</div>
+      <div class="sub-content mb-4">안드로이드 앱 개발 과정</div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="tabs[2]">
+    <div class="contents-container mt-4">
+      <div class="label">목적</div>
+      <div class="content">- 학생이 개인역량을 최적화할 수 있는 개인의 개성과 창의성에 기반한 자기맞춤형 전공을 구성 및 학업할 수 있도록 학생이 직접 융합전공 설계</div>
+    </div>
+
+    <div class="contents-container pt-4 mt-4">
+      <div class="label">학생설계SW융합전공과정</div>
+      <div class="content">- 학생이 스스로 설계하여 수강하는 SW융합전공</div>
+      <div class="content">- 학생 설계전공 전공이수학점: 36학점</div>
+      <div class="content">- 설계전공 코디네이터를 통한 SW융합전공 설계 지원</div>
+    </div>
+  </ng-container>
+</ng-container>

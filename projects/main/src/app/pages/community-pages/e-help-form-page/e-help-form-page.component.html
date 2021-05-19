@@ -1,0 +1,103 @@
+<form [formGroup]="formGroup" (ngSubmit)="submit()" *ngIf="formGroup">
+  <div class="row">
+    <div class="col-md-4 mb-2 mb-md-3">
+      <label class="input-label mb-2 required" for="category">질문 유형</label>
+      <select id="category" class="form-select no-outline" [class.is-invalid]="invalid('category')"
+              formControlName="category">
+        <option [value]="null" selected *ngIf="!formGroup.get('category').value">선택</option>
+        <option *ngFor="let option of categoryOptions" [value]="option">{{option}}</option>
+      </select>
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', 'category')">질문 유형을 선택해주세요.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-2 mb-md-3">
+    <label class="input-label mb-2 required" for="title">제목</label>
+    <div class="input-group">
+      <input type="text" id="title" class="form-control no-outline" [class.is-invalid]="invalid('title')"
+             placeholder="제목 입력" formControlName="title" autocomplete="off">
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', 'title')">제목을 입력해주세요.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-2 mb-md-3">
+    <label class="input-label mb-2 required">질문 내용</label>
+    <div class="input-group">
+      <textarea class="form-control no-outline"
+                id="content"
+                swAutoHeight="300px"
+                formControlName="content"
+                placeholder="질문 내용 입력"
+                [class.is-invalid]="invalid('content')"></textarea>
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', 'content')">질문 내용을 입력해주세요.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!auth.loggedIn">
+    <div class="col-md-6 mb-2 mb-md-3" formGroupName="writerInfo">
+      <label class="input-label mb-2 required" for="department">소속 학과(부)</label>
+      <div class="input-group">
+        <input type="text" id="department" class="form-control"
+               [class.is-invalid]="invalid(['writerInfo', 'department'])"
+               placeholder="학과(부) 입력" formControlName="department" autocomplete="off">
+        <div class="invalid-feedback">
+          <span *ngIf="hasError('required', ['writerInfo', 'department'])">학과(부)를 입력해주세요.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-2 mb-md-3" formGroupName="writerInfo">
+      <label class="input-label mb-2 required" for="name">이름</label>
+      <div class="input-group">
+        <input type="text" id="name" class="form-control" [class.is-invalid]="invalid(['writerInfo', 'name'])"
+               placeholder="이름 입력" formControlName="name" autocomplete="off">
+        <div class="invalid-feedback">
+          <span *ngIf="hasError('required', ['writerInfo', 'name'])">
+            이름은 필수 입력항목입니다.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-2 mb-md-3" formGroupName="writerInfo">
+      <label class="input-label mb-2 required" for="email">이메일</label>
+      <input type="email"
+             id="email"
+             class="form-control"
+             [class.is-invalid]="invalid(['writerInfo', 'email'])"
+             placeholder="답변이 이메일로 전송됩니다."
+             formControlName="email"
+             autocomplete="off">
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', ['writerInfo', 'email'])">
+          이메일 주소는 필수 입력 항목입니다.
+        </span>
+        <span *ngIf="hasError('pattern', ['writerInfo', 'email'])">
+          잘못된 형식의 이메일 주소입니다.
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-2 mb-md-3">
+      <label class="input-label mb-2 required" for="password">비밀번호</label>
+      <input type="password" id="password" class="form-control" [class.is-invalid]="invalid('password')"
+             placeholder="비밀번호 입력" formControlName="password" autocomplete="new-password">
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', 'password')">
+          비밀번호는 필수 입력 항목입니다.
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-container d-flex justify-content-end align-items-center">
+    <button type="button" class="btn btn-sm btn-secondary py-2 px-3 me-2" [routerLink]="[E_HELP_URL]">취소</button>
+    <button type="submit" class="btn btn-sm btn-sw py-2 px-3">{{modifying ? '수정' : '등록'}}</button>
+  </div>
+</form>

@@ -1,0 +1,21 @@
+@import "body";
+
+table {
+  position: relative;
+}
+
+th, td {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+th {
+  background-color: #f8fafd;
+}
+
+thead {
+  th {
+    position: sticky;
+    top: 0;
+  }
+}

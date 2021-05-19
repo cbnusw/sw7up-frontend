@@ -1,0 +1,143 @@
+<form class="mb-5" [formGroup]="formGroup" (ngSubmit)="submit()">
+  <ul class="nav nav-tabs mb-4">
+    <li class="nav-item" *ngFor="let role of roles">
+      <a class="nav-link cursor pointer"
+         [class.active]="roleValue === role.value" (click)="changeRole(role.value)">{{role.viewValue}}</a>
+    </li>
+  </ul>
+  <div class="form-group mb-4">
+    <label for="no" class="w-100 mb-2 required">{{idLabel}}</label>
+    <input type="text"
+           id="no"
+           class="form-control no-outline"
+           [placeholder]="idPlaceholder"
+           autocomplete="off"
+           [class.is-invalid]="invalid('no') || hasError(['invalidId', 'invalidNo'])"
+           formControlName="no"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('required', 'no')">{{idLabel}}은 필수 입력 항목입니다.</span>
+      <span *ngIf="hasError('invalidNo')">올바르지 않은 학번/교번입니다.</span>
+      <span *ngIf="hasError('invalidId')">잘못된 형식의 아이디입니다.</span>
+      <span *ngIf="hasSubmissionError('no')">{{submissionErrorMessage}}</span>
+    </div>
+  </div>
+  <div class="form-group mb-4">
+    <label for="password" class="w-100 mb-2 required">비밀번호</label>
+    <input type="password"
+           id="password"
+           class="form-control no-outline"
+           placeholder="비밀번호 입력"
+           [class.is-invalid]="invalid('password')"
+           formControlName="password"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('required', 'password')">비밀번호는 필수 입력 항목입니다.</span>
+      <span *ngIf="hasError('min', 'password')">비밀번호는 8자 이상이어야 합니다.</span>
+      <span *ngIf="hasError('pattern', 'password')">
+        비밀번호는 영문/숫자/공백문자를 제외한 특수문자 조합이어야 합니다.
+      </span>
+    </div>
+  </div>
+  <div class="form-group mb-4">
+    <label for="confirm-password" class="w-100 mb-2 required">비밀번호 확인</label>
+    <input type="password"
+           id="confirm-password"
+           class="form-control no-outline"
+           placeholder="비밀번호 한 번 더 입력"
+           [class.is-invalid]="hasError('confirmPassword')"
+           formControlName="confirmPassword"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('requiredConfirmPassword')">비밀번호를 한 번 더 입력해 주세요.</span>
+      <span *ngIf="hasError('confirmPassword')">비밀번호가 일치하지 않습니다.</span>
+    </div>
+  </div>
+  <div class="form-group mb-4" formGroupName="info">
+    <label for="name" class="w-100 mb-2 required">이름</label>
+    <input type="text"
+           id="name"
+           class="form-control no-outline"
+           placeholder="본인 이름 입력"
+           autocomplete="off"
+           [class.is-invalid]="invalid(['info', 'name'])"
+           formControlName="name"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('required', ['info', 'name'])">이름은 필수 입력 항목입니다.</span>
+    </div>
+  </div>
+  <div class="form-group mb-4" formGroupName="info">
+    <label for="email" class="w-100 mb-2 required">이메일</label>
+    <input type="email"
+           id="email"
+           class="form-control no-outline"
+           placeholder="이메일 입력(비밀번호 찾기에 이용)"
+           autocomplete="off"
+           [class.is-invalid]="invalid(['info', 'email'])"
+           formControlName="email"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('required', ['info', 'email'])">이메일은 필수 입력 항목입니다.</span>
+      <span *ngIf="hasError('pattern', ['info', 'email'])">올바르지 않은 이메일 형식입니다.</span>
+      <span *ngIf="hasSubmissionError(['info', 'email'])">{{submissionErrorMessage}}</span>
+    </div>
+  </div>
+
+  <div class="form-group mb-4" formGroupName="info">
+    <label for="phone" class="w-100 mb-2 required">휴대폰번호</label>
+    <input type="tel"
+           id="phone"
+           class="form-control no-outline"
+           placeholder="휴대폰번호 입력"
+           autocomplete="off"
+           [class.is-invalid]="invalid(['info', 'phone'])"
+           formControlName="phone"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('required', ['info', 'phone'])">휴대폰번호는 필수 입력 항목입니다.</span>
+      <span *ngIf="hasError('pattern', ['info', 'phone'])">올바르지 않은 휴대폰 번호입니다.</span>
+      <span *ngIf="hasSubmissionError(['info', 'phone'])">{{submissionErrorMessage}}</span>
+    </div>
+  </div>
+
+  <div class="form-group mb-4" formGroupName="info" *ngIf="roleValue !== 'member'">
+    <label for="department" class="w-100 mb-2 required">소속</label>
+    <input type="text"
+           id="department"
+           class="form-control no-outline"
+           placeholder="소속(학과 및 학부 또는 부서)"
+           autocomplete="off"
+           [class.is-invalid]="hasError('requiredDepartment')"
+           formControlName="department"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('requiredDepartment')">소속은 필수 입력 항목입니다.</span>
+    </div>
+  </div>
+
+  <div class="form-group mb-4" formGroupName="info" *ngIf="roleValue === 'staff'">
+    <label for="position" class="w-100 mb-2">직책</label>
+    <input type="text"
+           id="position"
+           class="form-control no-outline"
+           placeholder="직책 입력"
+           autocomplete="off"
+           formControlName="position"/>
+  </div>
+
+  <div class="agreement-wrapper mb-4">
+    <div class="d-flex align-items-center text-muted">
+      <input type="checkbox"
+             class="custom-control-input"
+             id="terms"
+             name="terms"
+             formControlName="agreement">
+      <label class="custom-control-label ms-2" for="terms">
+        <small>
+          <a class="cursor pointer"
+             (click)="openTerms($event)">개인정보처리방침</a>에 동의합니다.
+        </small>
+      </label>
+    </div>
+    <div class="error mt-1" *ngIf="invalid('agreement')">개인정보처리방침에 동의해야 합니다.</div>
+  </div>
+
+  <div class="d-flex flex-column justify-content-between align-items-center flex-lg-row">
+    <span class="mb-4 mb-lg-0">이미 가입하셨나요? <a class="ms-3" [routerLink]="LOGIN_URL">로그인</a></span>
+    <button class="btn btn-sw">가입하기</button>
+  </div>
+</form>

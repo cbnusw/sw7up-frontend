@@ -1,0 +1,39 @@
+<mat-grid-list cdkDropListGroup [cols]="cols" rowHeight="1:1.2" *ngIf="value.length > 0">
+  <mat-grid-tile cdkDropList
+                 [cdkDropListData]="i"
+                 *ngFor="let picture of value; let i = index">
+    <div cdkDrag
+         class="cursor picture-wrapper"
+         (mousedown)="dragIndex = i"
+         (mouseup)="dragIndex = -1"
+         (mouseleave)="dragIndex = -1"
+         [class.grabbing]="dragIndex === i"
+         [class.grab]="dragIndex !== i"
+         [cdkDragData]="i"
+         (cdkDragEntered)="entered($event)">
+      <button type="button"
+              class="remove-btn"
+              (click)="removePicture(i)">&times;</button>
+      <div class="uploaded-image"
+           [swBackgroundImage]="picture.url"
+           swBackgroundSize="cover"
+           swBackgroundPosition="center"></div>
+      <textarea class="no-outline"
+                swAutoHeight
+                placeholder="사진에 대한 설명을 써주세요."
+                (ngModelChange)="changeCaption(i, $event)"
+                [ngModel]="picture.caption"></textarea>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<div class="picture-button-wrapper">
+  <button type="button"
+          class="add-picture-button cursor pointer"
+          swFileChooser
+          accept="image/*"
+          [multiple]="true" (filesChange)="addImages($event)">
+    <img src="assets/images/no-image.png" alt="button image"/>
+    여기를 클릭하여 사진 추가
+  </button>
+</div>

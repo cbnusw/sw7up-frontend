@@ -1,0 +1,29 @@
+mat-toolbar {
+  position: sticky;
+  top: 0;
+}
+
+button {
+  margin-right: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+
+  .brand-image {
+    margin-right: 1rem;
+    height: 20px;
+  }
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.account {
+  margin: 0 0.5em;
+  font-size: 0.6em;
+}

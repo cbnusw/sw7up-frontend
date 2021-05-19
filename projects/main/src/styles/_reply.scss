@@ -1,0 +1,51 @@
+.answer-title {
+  font-size: 0.875em;
+  font-weight: bold;
+  color: #1071AE;
+}
+
+.reply-content {
+  font-size: 0.8em;
+  margin-bottom: 0.5em;
+}
+
+.reply-writer {
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.reply-date {
+  font-size: 0.75em;
+}
+
+
+.textarea-container {
+  position: relative;
+
+  .reply-title {
+    position: absolute;
+    top: -1.5em;
+    left: 1em;
+    padding: 0.5em;
+    background: white;
+    font-size: 0.7em;
+    font-weight: bold;
+    color: #1071AE;
+  }
+
+  textarea {
+    resize: none;
+    border-radius: 0;
+    border: 1px solid #1071AE;
+    font-size: 0.8em;
+    overflow: hidden;
+    margin-top: 1em;
+  }
+  button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #1071AE;
+    font-size: small;
+  }
+}

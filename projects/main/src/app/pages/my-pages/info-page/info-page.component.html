@@ -1,0 +1,128 @@
+<div class="done-container bg-light" *ngIf="done; else formTamplte">
+  <h5 class="mb-5 text-dark">정보 수정을 완료하였습니다.</h5>
+  <button type="button" class="btn w-100" (click)="done = false">다시 수정하기</button>
+</div>
+
+<ng-template #formTamplte>
+  <form class="mb-5" [formGroup]="formGroup" (ngSubmit)="submit()" *ngIf="formGroup">
+    <!--학번/교번/아이디-->
+    <div class="form-group mb-4">
+      <label for="no" class="w-100 mb-2 required">{{idLabel}}</label>
+      <input type="text"
+             id="no"
+             class="form-control no-outline"
+             [placeholder]="idPlaceholder"
+             autocomplete="off"
+             [class.is-invalid]="invalid('no') || hasError(['invalidId', 'invalidNo'], 'no')"
+             formControlName="no"/>
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', 'no')">{{idLabel}}은 필수 입력 항목입니다.</span>
+        <span *ngIf="hasError('invalidNo', 'no') && auth.isStudent">올바르지 않은 학번입니다.</span>
+        <span *ngIf="hasError('invalidNo', 'no') && !auth.isStudent">올바르지 않은 교번입니다.</span>
+        <span *ngIf="hasError('invalidId', 'no')">잘못된 형식의 아이디입니다.</span>
+        <span *ngIf="hasSubmissionError('no')">{{submissionErrorMessage}}</span>
+      </div>
+    </div>
+
+    <!--이름-->
+    <div class="form-group mb-4">
+      <label for="name" class="w-100 mb-2 required">이름</label>
+      <input type="text"
+             id="name"
+             class="form-control no-outline"
+             placeholder="본인 이름 입력"
+             autocomplete="off"
+             [class.is-invalid]="invalid('name')"
+             formControlName="name"/>
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', 'name')">이름은 필수 입력 항목입니다.</span>
+      </div>
+    </div>
+
+    <!--이메일-->
+    <div class="form-group mb-4">
+      <label for="email" class="w-100 mb-2 required">이메일</label>
+      <input type="email"
+             id="email"
+             class="form-control no-outline"
+             placeholder="이메일 주소 입력"
+             autocomplete="off"
+             [class.is-invalid]="invalid('email')"
+             formControlName="email"/>
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', 'email')">이메일은 필수 입력 항목입니다.</span>
+        <span *ngIf="hasError('pattern', 'email')">올바르지 않은 이메일 형식입니다.</span>
+        <span *ngIf="hasSubmissionError('email')">{{submissionErrorMessage}}</span>
+      </div>
+    </div>
+
+    <!--휴대폰 번호-->
+    <div class="form-group mb-4">
+      <label for="phone" class="w-100 mb-2 required">휴대폰 번호</label>
+      <input type="tel"
+             id="phone"
+             class="form-control no-outline"
+             placeholder="휴대폰 번호 입력"
+             autocomplete="off"
+             [class.is-invalid]="invalid('phone')"
+             formControlName="phone"/>
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', 'phone')">휴대폰 번호는 필수 입력 항목입니다.</span>
+        <span *ngIf="hasError('pattern', 'phone')">올바르지 않은 휴대폰 번호 형식입니다.</span>
+        <span *ngIf="hasSubmissionError('phone')">{{submissionErrorMessage}}</span>
+      </div>
+    </div>
+
+    <!--소속 학과(부)/부서-->
+    <div class="form-group mb-4" *ngIf="auth.isStaff || auth.isOperator">
+      <label for="department" class="w-100 mb-2 required">소속 학과(부)/부서</label>
+      <input type="text"
+             id="department"
+             class="form-control no-outline"
+             placeholder="소속 학과(부)/부서 입력"
+             autocomplete="off"
+             [class.is-invalid]="invalid('department')"
+             formControlName="department"/>
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', 'department')">
+          소속 학과(부)/부서는 필수 입력 항목입니다.
+        </span>
+      </div>
+    </div>
+
+    <!--소속센터-->
+    <div class="form-group mb-4" *ngIf="auth.isOperator">
+      <label for="center" class="w-100 mb-2 required">소속센터</label>
+      <select id="center"
+              class="form-select no-outline"
+              [class.is-invalid]="hasError('required', 'center')"
+              formControlName="center">
+        <option *ngFor="let option of centers" [value]="option">{{option}}</option>
+      </select>
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', 'center')">
+          소속 센터는 필수 입력 항목입니다.
+        </span>
+      </div>
+    </div>
+
+    <!--직책-->
+    <div class="form-group mb-4" *ngIf="auth.isStaff || auth.isOperator">
+      <label for="position" class="w-100 mb-2">직책</label>
+      <input type="text"
+             id="position"
+             class="form-control no-outline"
+             placeholder="직위"
+             autocomplete="off"
+             [class.is-invalid]="invalid('position')"
+             formControlName="position"/>
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', 'department')">
+          소속 학과(부)/부서는 필수 입력 항목입니다.
+        </span>
+      </div>
+    </div>
+
+    <button class="btn btn-sw w-100">수정</button>
+  </form>
+</ng-template>

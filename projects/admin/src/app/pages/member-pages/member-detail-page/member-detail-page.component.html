@@ -1,0 +1,62 @@
+<h2 class="page-title">일반 회원 정보</h2>
+
+<div class="container mat-elevation-z1">
+  <div class="loading" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="responsive-row w-100 v-start h-start mb">
+    <div class="user-image mat-elevation-z1"
+         [class.me]="layout.desktop$ | async"
+         [class.mb]="layout.mobile$ | async"
+         [class.m-auto]="layout.mobile$ | async"
+         swBackgroundSize="cover"
+         swBackgroundPosition="center"
+         [swBackgroundImage]="member?.image || 'assets/images/empty-user-image.jpg'"></div>
+    <div class="pad w-100">
+      <div class="item">
+        <span class="label">아이디</span>
+        <span class="content">{{member?.no}}</span>
+      </div>
+      <div class="item">
+        <span class="label">이름</span>
+        <span class="content">{{member?.name}}</span>
+      </div>
+      <div class="item">
+        <span class="label">이메일</span>
+        <span class="content"><a href="mailto:{{member?.email}}">{{member?.email}}</a></span>
+      </div>
+      <div class="item">
+        <span class="label">연락처</span>
+        <span class="content"><a href="tel:{{member?.phone}}">{{member?.phone}}</a></span>
+      </div>
+      <div class="item mb">
+        <span class="label">가입일</span>
+        <span class="content">{{member?.joinedAt | date: 'yyyy.MM.dd.'}}</span>
+      </div>
+      <div class="item">
+        <button type="button"
+                mat-raised-button color="warn"
+                (click)="remove()"
+                *ngIf="member?.user; else deletedUserTemplate">계정삭제
+        </button>
+        <ng-template #deletedUserTemplate>
+          <button type="button"
+                  class="me"
+                  mat-raised-button
+                  (click)="restore()">계정복구
+          </button>
+          <button type="button"
+                  mat-raised-button
+                  color="warn"
+                  (click)="clear()">사용자삭제
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-end">
+    <a mat-raised-button color="primary" routerLink="/member/list">
+      <i class="las la-th-list"></i><span class="ms">목 록</span>
+    </a>
+  </div>
+</div>

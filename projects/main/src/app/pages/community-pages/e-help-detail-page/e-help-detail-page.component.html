@@ -1,0 +1,59 @@
+<ng-container *ngIf="qna">
+  <div class="detail-header border-bottom pb-2">
+    <div class="d-flex flex-column flex-lg-row">
+      <div class="category mb-2 mb-lg-0 me-0 me-lg-2">[{{qna?.category}}]</div>
+      <div class="title">
+        {{qna?.title}}
+      </div>
+    </div>
+    <div class="my-2 d-flex justify-content-between align-items-center">
+      <span class="writer">{{qna | qnaWriterDepartment}} {{qna | qnaWriterName}}</span>
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="date">작성일 {{qna?.createdAt | date: 'yyyy.MM.dd. HH:mm'}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end py-2 border-bottom" *ngIf="auth.hasSomePermissions$('qna') | async">
+    <button type="button" class="btn btn-sm btn-danger" (click)="removeQnA()">
+      <i class="las la-trash-alt me-1"></i>질문삭제
+    </button>
+    <button type="button" class="ms-2 btn btn-sm"
+            [class.btn-sw]="!qna?.confirm"
+            [class.btn-warning]="qna?.confirm"
+            (click)="confirmQnA()">
+      <span *ngIf="!qna?.confirm; else cancelConfirmTemplage"><i class="las la-check-double me-1"></i>확인처리</span>
+      <ng-template #cancelConfirmTemplage>
+        <span class="text-white"><i class="las la-lock me-1"></i>확인취소</span>
+      </ng-template>
+    </button>
+  </div>
+
+  <div class="question-container my-2 py-2 border-bottom">
+    <pre class="pre-wrap">{{qna?.content}}</pre>
+  </div>
+
+  <div class="answer-title mb-2">답변내용({{qna?.replies?.length | number}}개)</div>
+  <div class="replies-container mb-5">
+    <div class="replies-content border mb-4 p-2" *ngFor="let reply of qna?.replies">
+      <div class="d-flex align-items-center border-bottom py-1">
+        <div class="reply-department me-1">소속: {{reply | qnaWriterDepartment}},</div>
+        <div class="reply-writer me-auto">작성자: {{reply | qnaWriterName}}</div>
+        <div class="reply-date">작성일: {{reply?.createdAt | date: 'yyyy.MM.dd. HH:mm'}}</div>
+      </div>
+      <pre class="pre-wrap py-2 mb-0">{{reply?.content}}</pre>
+    </div>
+  </div>
+
+  <div class="textarea-container my-5" *ngIf="qna?.permission">
+    <div class="reply-title">답변하기</div>
+    <textarea class="form-control no-outline p-2" swAutoHeight="60px" [(ngModel)]="content"></textarea>
+    <button type="button" class="btn btn-sm btn-primary py-2 px-3 no-outline" (click)="writeReply()">등록</button>
+  </div>
+
+  <div class="d-flex justify-content-end mt-4">
+    <button type="button" class="btn btn-sm btn-dark py-2 px-3" [routerLink]="E_HELP_URL">
+      <i class="las la-list me-2"></i>목록
+    </button>
+  </div>
+</ng-container>

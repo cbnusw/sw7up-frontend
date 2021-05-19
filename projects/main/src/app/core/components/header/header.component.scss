@@ -1,0 +1,58 @@
+@import "tools";
+
+:host {
+  display: block;
+
+  //@include mobile {
+  //  position: sticky;
+  //  top: 0;
+  //  z-index: 10;
+  //}
+}
+
+.main-container {
+  @include mobile {
+    height: $mobile-header-height;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+  }
+}
+
+.brand-link {
+  margin-right: auto;
+
+  .brand-image {
+    height: 38px;
+  }
+}
+
+.btn {
+  font-size: 20px;
+}
+
+.top-menu {
+  padding: 0.5em 1em;
+
+  ul {
+    list-style: none;
+    margin: 0;
+
+    li {
+      padding: 0 1em;
+      font-size: 0.8em;
+
+      a {
+        text-decoration: none;
+
+        &:hover {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.my-name {
+  border-bottom: 1px dashed $border-color;
+}

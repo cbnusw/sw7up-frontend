@@ -1,0 +1,81 @@
+@import "tools";
+
+$host-height: 250px;
+$navigator-top: 50%;
+$navigator-width: 210px;
+$navigator-header-height: 150px;
+$content-margin: 0 0 0 $navigator-width + 60px;
+$navigator-bg: rgba(61, 97, 168, 0.9);
+
+:host {
+  display: block;
+}
+
+header, .main-container {
+  height: 100%;
+}
+
+.navigator-wrapper {
+  position: relative;
+  height: $host-height;
+}
+
+.navigator {
+  box-sizing: border-box;
+  position: absolute;
+  top: $navigator-top;
+  left: 0;
+  width: $navigator-width;
+  color: white;
+
+  .navigator-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $navigator-bg;
+    height: $navigator-header-height;
+  }
+
+  .navigator-menus {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .navigator-menu {
+    box-sizing: border-box;
+    display: flex;
+    padding: 12px 20px;
+    height: 46px;
+    font-size: 0.85em;
+    color: $default-color;
+    font-weight: 500;
+
+    border-bottom: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+    border-left: 1px solid $border-color;
+
+    &.active, &:hover {
+      color: white;
+      background-color: $navigator-bg;
+      border: none;
+    }
+  }
+
+  .page-title {
+    font-size: 1.3em;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+}
+
+.content {
+  @include desktop {
+    margin: $content-margin;
+  }
+
+  @include mobile {
+    padding: 1rem;
+  }
+}

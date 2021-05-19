@@ -1,0 +1,55 @@
+@import "projects/main/src/styles/tools";
+
+:host {
+  display: block;
+}
+
+.header {
+  margin-bottom: 0.2rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  //font-weight: bold;
+  color: $default-color;
+}
+
+.las {
+  font-size: 1.4em;
+  font-weight: bolder;
+}
+
+.list-group-item {
+  padding: 0.7rem 0;
+  border: 0;
+  border-bottom: 1px solid $border-color;
+
+  @include mobile {
+    font-size: 0.9rem;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    .article-title {
+      font-weight: bold;
+    }
+  }
+}
+
+.article-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: $default-color;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+}
+
+.created-at {
+  min-width: 66px;
+  font-size: 0.75rem;
+  color: $default-color;
+}

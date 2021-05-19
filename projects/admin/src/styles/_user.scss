@@ -1,0 +1,9 @@
+@import "gmixin";
+
+.user-image {
+  $size: 200px;
+  border-radius: 50%;
+  width: $size;
+  height: $size;
+  flex: 0 0 $size;
+}

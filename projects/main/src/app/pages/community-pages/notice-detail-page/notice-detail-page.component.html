@@ -1,0 +1,29 @@
+<div class="detail-header border-bottom pb-2">
+  <div class="title">
+    <span class="badge bg-info me-2" *ngIf="important">중요</span>{{notice?.title}}
+  </div>
+  <div class="my-2 d-flex justify-content-between align-items-center">
+    <span class="writer">{{notice?.category}}, 작성자: {{notice?.writer?.name}}</span>
+    <div class="d-flex justify-content-between align-items-center">
+      <span class="hits">조회수 {{notice?.hits | number}}</span>
+      <span class="between-divider">/</span>
+      <span class="date">작성일 {{notice?.createdAt | date: 'yyyy.MM.dd.'}}</span>
+    </div>
+  </div>
+</div>
+
+<div class="my-4" [swInnerHtml]="notice?.content"></div>
+
+<div class="border-top py-2">
+  <div class="attachment-title">
+    첨부파일<i class="las la-link la-sm ms-2"></i>
+  </div>
+  <span class="download-link empty" *ngIf="notice?.attachments.length === 0">첨부 파일이 없습니다.</span>
+  <a class="download-link mb-2" [href]="attatchment | downloadUrl" *ngFor="let attatchment of notice?.attachments">
+    <span class="me-2"><i class="las la-download"></i></span>{{attatchment.filename}}
+  </a>
+</div>
+
+<div class="d-flex justify-content-end mt-4">
+  <button type="button" class="btn btn-sm btn-dark py-2 px-3" [routerLink]="NOTICE_LIST_URL"><i class="las la-list la-sm me-2"></i>목록</button>
+</div>

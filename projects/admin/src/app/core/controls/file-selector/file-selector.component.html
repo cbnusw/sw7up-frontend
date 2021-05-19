@@ -1,0 +1,25 @@
+<div class="loading" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="file-selector cursor pointer"
+     swFileChooser
+     [multiple]="multiple"
+     [accept]="accept"
+     (filesChange)="uploadFiles($event)">
+  <span>클릭 하여 파일 선택</span>
+</div>
+
+<ul class="selected-files" cdkDropList (cdkDropListDropped)="drop($event)">
+  <li *ngFor="let file of files; let i = index"
+      cdkDrag
+      class="file-item cursor"
+      (mousedown)="dragIndex = i"
+      (mouseup)="dragIndex = -1"
+      (mouseleave)="dragIndex = -1"
+      [class.grabbing]="dragIndex === i"
+      [class.grab]="dragIndex !== i">
+    <span class="filename text-ellipsis">{{file.filename}}</span>
+    <button type="button" mat-icon-button (click)="removeFile(i)"><i class="las la-times"></i></button>
+  </li>
+</ul>

@@ -1,0 +1,29 @@
+@import "tools";
+
+:host {
+  display: block;
+  padding: 0.5rem;
+}
+
+.slide-wrapper {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  padding: 0.5rem;
+  //z-index: 1;
+
+  @include mobile {
+    width: 45vw;
+  }
+}
+
+.logo-image {
+  height: 50px;
+  margin-right: 1rem;
+}
+
+.title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

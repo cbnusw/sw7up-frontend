@@ -1,0 +1,43 @@
+<h2 class="page-title">E-Help Desk 질문</h2>
+
+<div class="container mat-elevation-z1">
+  <div class="header">
+    <div class="title">{{qna?.title}}</div>
+    <div class="info">
+      <span class="department me">소속: {{qna | qnaWriterDepartment}}</span>
+      <span class="writer me-auto">작성자: {{qna | qnaWriterName}}</span>
+      <span class="date">{{qna?.createdAt | date: 'yyyy.MM.dd.'}}</span>
+    </div>
+  </div>
+
+  <div class="body">
+    <pre class="pre-wrap">{{qna?.content}}</pre>
+  </div>
+
+  <div class="replies-container">
+    <h5 class="reply-title">답변 내용({{qna?.replies.length}})</h5>
+    <div class="reply-wrapper" *ngFor="let reply of qna?.replies">
+      <div class="reply-header">
+        <span class="department me">소속: {{reply | qnaWriterDepartment}}</span>
+        <span class="writer me-auto">작성자: {{reply | qnaWriterName}}</span>
+        <span class="date">작성일: {{reply.createdAt | date: 'yyyy.MM.dd.'}}</span>
+      </div>
+      <div class="reply-body">
+        <pre class="pre-wrap">{{reply.content}}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="reply-input-wrapper mb">
+    <label for="reply-content">답변하기</label>
+    <textarea id="reply-content" class="no-outline" swAutoHeight="60px" [(ngModel)]="content"></textarea>
+    <button type="button" class="py-2 px-3 no-outline" (click)="writeReply()">등록</button>
+  </div>
+
+  <div class="flex justify-end">
+
+    <a mat-raised-button
+       routerLink="/e-help/list"
+       color="primary"><i class="las la-th-list"></i><span class="ms">목 록</span></a>
+  </div>
+</div>

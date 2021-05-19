@@ -1,0 +1,20 @@
+@import "form";
+
+.file-chooser-wrapper {
+  margin-bottom: 2rem;
+
+  .guide {
+    font-size: 75%;
+    color: rgba(0, 0, 0, 0.54);
+  }
+}
+
+.file-chooser {
+  padding: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.06);
+  .inner-wrapper {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 1rem;
+    color: rgba(0, 0, 0, 0.54);
+  }
+}

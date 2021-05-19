@@ -1,0 +1,40 @@
+<div class="container mat-elevation-z1">
+  <h2>관리자 로그인</h2>
+
+  <form [formGroup]="formGroup" (ngSubmit)="submit()">
+    <mat-form-field>
+      <mat-label>교번</mat-label>
+      <input type="text"
+             placeholder="Ex. 12345"
+             autocomplete="off"
+             matInput
+             [errorStateMatcher]="errorMatcher"
+             formControlName="no"/>
+      <mat-hint>교번을 입력해주세요.</mat-hint>
+      <mat-error *ngIf="hasError('required', 'no')">
+        교번은 필수 입력 항목입니다.
+      </mat-error>
+      <mat-error *ngIf="hasSubmissionError('no')">
+        {{submissionErrorMessage}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>비밀번호</mat-label>
+      <input type="password"
+             placeholder="Ex. 로그인 비밀번호"
+             matInput
+             [errorStateMatcher]="errorMatcher"
+             formControlName="password"/>
+      <mat-hint>비밀번호를 입력해주세요.</mat-hint>
+      <mat-error *ngIf="hasError('required', 'password')">
+        비밀번호는 필수 입력 항목입니다.
+      </mat-error>
+      <mat-error *ngIf="hasSubmissionError('password')">
+        {{submissionErrorMessage}}
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-flat-button color="primary">로그인</button>
+  </form>
+</div>

@@ -1,0 +1,112 @@
+.organization-container {
+  .header-container {
+    border-radius: 10px 10px 0 0;
+    padding: 0.5rem 1rem;
+    color: white;
+    .group-name {
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+
+  .body-container {
+    border-radius: 0 0 10px 10px;
+    border: 1px solid #dee2e6;
+    .description-container {
+      padding: 0.5rem 1rem;
+      .description {
+        font-size: 0.8rem;
+        color: rgba(0, 0, 0, 0.8);
+      }
+    }
+    .member-container {
+      border-top: 1px solid #dee2e6;
+      padding: 0.5rem 1rem;
+      .member {
+        font-size: 0.8rem;
+        color: rgba(0, 0, 0, 0.9);
+      }
+    }
+  }
+}
+
+.organization-container.primary {
+  min-width: 200px;
+  max-width: 300px;
+  .header-container {
+    background-color: #3043C4;
+  }
+}
+
+.organization-container.secondary {
+  min-width: 220px;
+  max-width: 300px;
+  .header-container {
+    background-color: #3043C4;
+  }
+}
+
+.organization-container.tertiary {
+  padding: 0 0.5rem;
+  width: 230px;
+  .header-container {
+    background-color: #155187;
+  }
+  .body-container {
+    height: 100%;
+    .description-container {
+      min-height: 56px;
+    }
+    .member-container {
+      min-height: 97px;
+    }
+  }
+}
+
+.vertical-line {
+  height: 2.5rem;
+  width: 2px;
+  background-color: #dee2e6;
+}
+
+.empty-line {
+  height: 1rem;
+}
+
+.center-container {
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.card-frame {
+  &:hover {
+    border-color: #e7eaf3;
+  }
+
+  a {
+    color: black;
+
+    &:hover {
+      color: #00AEEF;
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .organization-container {
+    min-width: 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .organization-container.tertiary {
+    padding: 0;
+  }
+
+  .center-container {
+    border: none;
+    padding: 0;
+  }
+}

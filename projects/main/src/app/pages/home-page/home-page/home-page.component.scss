@@ -1,0 +1,53 @@
+@import "projects/main/src/styles/tools";
+
+$section-margin: 1.5rem 1rem;
+$border: 1px solid $border-color;
+
+section {
+  margin: $section-margin;
+
+  @include desktop {
+    &:nth-child(1), &:nth-child(2), &:nth-child(4) {
+      border: $border;
+    }
+  }
+
+  @include mobile {
+    margin: 0;
+
+    &:nth-child(2) {
+      border-bottom: $border;
+    }
+  }
+
+  &:nth-child(3) {
+    display: flex;
+    @include mobile {
+      flex-direction: column;
+    }
+  }
+}
+
+sw-article-list, sw-grid-buttons {
+  width: 33.3%;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+sw-article-list {
+  padding: 1.5rem;
+
+  @include desktop {
+    margin-right: 1.5rem;
+    border: $border;
+  }
+
+  @include mobile {
+    &:first-child {
+      border-bottom: $border;
+    }
+  }
+}
+

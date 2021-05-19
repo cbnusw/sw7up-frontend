@@ -1,0 +1,38 @@
+<h2 class="page-title">갤러리 {{modifying ? '수정' : '등록'}}</h2>
+
+<form class="mat-elevation-z1" [formGroup]="formGroup" (ngSubmit)="submit()">
+  <button *ngIf="model"
+          mat-mini-fab
+          class="remove-btn absolute raise"
+          type="button"
+          color="warn"
+          (click)="removeGallery()">
+    <i class="las la-trash-alt"></i>
+  </button>
+
+  <mat-form-field class="w-100">
+    <mat-label>제목</mat-label>
+    <input matInput
+           formControlName="title"
+           [errorStateMatcher]="errorMatcher"
+           autocomplete="off"
+           placeholder="제목 입력"
+           required/>
+    <mat-hint>제목을 입력하세요.</mat-hint>
+    <mat-error *ngIf="hasError('required', 'title')">제목은 필수 입력 항목입니다.</mat-error>
+  </mat-form-field>
+
+  <sw-pictures-control formControlName="pictures"></sw-pictures-control>
+  <div class="error" *ngIf="hasError('required', 'pictures')">사진을 추가해주세요..</div>
+
+  <div class="flex justify-end mt">
+    <button type="button"
+            class="me"
+            mat-raised-button color="accent"
+            routerLink="/gallery/list">취소</button>
+    <button class="ms"
+            mat-raised-button
+            color="primary">{{modifying ? '수정' : '등록'}}</button>
+  </div>
+
+</form>

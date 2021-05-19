@@ -1,0 +1,34 @@
+<div class="detail-header border-bottom pb-2">
+  <div class="title">
+    {{report?.title}}
+  </div>
+  <div class="my-2">
+    <span class="date">작성일 {{report?.createdAt | date: 'yyyy.MM.dd. HH:mm'}}</span>
+  </div>
+</div>
+
+<pre class="pre-wrap py-4 border-bottom">{{report?.content}}</pre>
+
+
+<div class="answer-title mb-2">답변내용({{report?.replies?.length | number}}개)</div>
+<div class="replies-container mb-5">
+  <div class="replies-content border mb-4 p-2" *ngFor="let reply of report?.replies">
+    <div class="d-flex justify-content-between align-items-center border-bottom py-1">
+      <div class="reply-writer">작성자: {{reply?.writer?.name}}</div>
+      <div class="reply-date">작성일: {{reply?.createdAt | date: 'yyyy.MM.dd. HH:mm'}}</div>
+    </div>
+    <pre class="pre-wrap py-2 mb-0">{{reply?.content}}</pre>
+  </div>
+</div>
+
+<div class="textarea-container my-5">
+  <div class="reply-title">답변하기</div>
+  <textarea class="form-control no-outline p-2" swAutoHeight="60px" [(ngModel)]="content"></textarea>
+  <button type="button" class="btn btn-sm btn-primary py-2 px-3 no-outline" (click)="writeReply()">등록</button>
+</div>
+
+<div class="d-flex justify-content-end mt-4">
+  <button type="button" class="btn btn-sm btn-dark py-2 px-3" routerLink="/policy/report/list"><i
+      class="las la-list me-2"></i>목록
+  </button>
+</div>

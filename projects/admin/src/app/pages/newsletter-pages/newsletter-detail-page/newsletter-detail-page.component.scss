@@ -1,0 +1,21 @@
+@import "detail";
+
+.container {
+  position: relative;
+}
+
+.body {
+  overflow-x: auto;
+}
+
+::ng-deep {
+  .ck-content {
+    .container {
+      img {
+        display: block;
+        margin: 0 auto;
+        width: 700px !important;
+      }
+    }
+  }
+}

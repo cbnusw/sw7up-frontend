@@ -1,0 +1,41 @@
+@import "variables";
+
+:host {
+  position: relative;
+  display: block;
+  padding: 0.5rem;
+  color: white;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.file-selector {
+  box-sizing: border-box;
+  border: 1px dotted rgba(0, 0, 0, 0.12);
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.12);
+    color: white;
+  }
+}
+
+.selected-files {
+  list-style: none;
+}
+
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+}
+
+.filename {
+  max-width: 80%;
+}

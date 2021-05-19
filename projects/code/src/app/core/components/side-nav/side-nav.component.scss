@@ -1,0 +1,46 @@
+@import "variables";
+
+.container {
+  height: 100%;
+}
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  height: $header-height;
+
+  .brand-logo {
+    height: 24px;
+    margin-right: auto;
+  }
+}
+
+.nav {
+  width: 250px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.nav-item {
+  padding: 1em 1em;
+
+  a {
+    color: #333;
+    text-decoration: none;
+
+  }
+
+  &:hover {
+    font-weight: bold;
+  }
+
+  &.active {
+    background-color: mat-color($code-accent);
+    font-weight: bold;
+
+    a {
+      color: white;
+    }
+  }
+}

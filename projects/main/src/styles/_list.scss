@@ -1,0 +1,101 @@
+@import "tools";
+
+.table-header {
+  font-size: 0.85em;
+  font-weight: bold;
+  color: black;
+  padding: 0;
+}
+
+.table-body {
+  font-size: 0.85em;
+  color: black;
+  padding: 0;
+
+  small {
+    font-size: 0.9em;
+  }
+}
+
+.title-container {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: black;
+}
+
+.card-frame {
+  cursor: pointer;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+
+  &:hover {
+    border-color: #e7eaf3;
+
+    .title-container {
+      color: #1071AE !important;
+      font-weight: bold;
+    }
+  }
+}
+
+.form-control {
+  font-size: 0.85em;
+  padding: 0.5em;
+  height: 3em;
+}
+
+select {
+  width: 30%;
+}
+
+.input-group {
+  border-radius: 0.25rem;
+
+  .form-control {
+    &:focus + .input-group-text {
+      border-color: $input-focus-border-color;
+    }
+  }
+
+  .input-group-text {
+    background-color: #fff;
+  }
+}
+
+::ng-deep {
+  sw-pagination {
+    .page-item {
+      margin: 0 0.25rem;
+    }
+
+    .page-link {
+      padding: 0 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      text-align: center;
+      min-width: 2.25rem;
+      border: none;
+
+      &:focus, &:active {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+    }
+
+    .page-item.active {
+      .page-link {
+        color: white;
+        background-color: $sw-color;
+        border: 1px solid $sw-color;
+      }
+    }
+  }
+}
+
+@media (max-width: 991.98px) {
+  select {
+    width: 65%;
+  }
+}

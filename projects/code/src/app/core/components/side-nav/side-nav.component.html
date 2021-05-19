@@ -1,0 +1,23 @@
+<mat-drawer-container class="container" autosize>
+  <mat-drawer mode="over" class="mat-elevation-z2">
+    <div class="nav-header">
+      <img class="brand-logo"
+           src="assets/images/logo.png"
+           routerLink="/dashboard"
+           (click)="close()"/>
+      <button type="button"
+              mat-icon-button
+              (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <ul class="nav">
+      <li class="nav-item"
+          *ngFor="let menu of menuGroup"
+          routerLinkActive="active">
+        <a [routerLink]="menu.link" (click)="close()">{{ menu.name }}</a>
+      </li>
+    </ul>
+  </mat-drawer>
+  <ng-content></ng-content>
+</mat-drawer-container>

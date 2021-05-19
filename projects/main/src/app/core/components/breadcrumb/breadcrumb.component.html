@@ -1,0 +1,11 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item cursor pointer" [routerLink]="HOME_URL"><i class="las la-home"></i></li>
+    <li class="breadcrumb-item" *ngFor="let item of items">
+      <span>{{item}}</span>
+    </li>
+    <li class="breadcrumb-item" *ngFor="let item of breadcrumb.items">
+      <span>{{item}}</span>
+    </li>
+  </ol>
+</nav>

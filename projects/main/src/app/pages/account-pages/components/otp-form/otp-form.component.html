@@ -1,0 +1,62 @@
+<form [formGroup]="formGroup" (ngSubmit)="submit()">
+  <div class="form-group mb-4">
+    <label for="no" class="w-100 mb-2 required">학번/교번 또는 아이디</label>
+    <input type="text"
+           id="no"
+           class="form-control no-outline"
+           placeholder="가입된 학번/교번 또는 아이디 입력"
+           autocomplete="off"
+           [class.is-invalid]="invalid('no')"
+           formControlName="no"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('required', 'no')">학번/교번/아이디는 필수 입력 항목입니다.</span>
+    </div>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="email" class="w-100 mb-2 required">이메일</label>
+    <input type="email"
+           id="email"
+           class="form-control no-outline"
+           placeholder="가입시 등록한 이메일 입력(인증번호 전송)"
+           autocomplete="off"
+           [class.is-invalid]="invalid('email')"
+           formControlName="email"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('required', 'email')">이메일은 필수 입력 항목입니다.</span>
+      <span *ngIf="hasError('pattern', 'email')">올바른 형식의 이메일이 아닙니다.</span>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center mb-4 otp-btn-wrapper">
+    <div class="me-auto">
+      <div class="text-info" *ngIf="!!timer">남은 시간: {{timer}}</div>
+      <div class="error" *ngIf="hasSubmissionError('', 'USER_INFO_NOT_FOUND')">{{submissionErrorMessage}}</div>
+    </div>
+<!--    <div class="text-info" *ngIf="otpLoading">인증번호 전송 중...</div>-->
+    <button [disabled]="disableOtpButton"
+            type="button"
+            class="btn btn-info text-white"
+            (click)="requestOtp()">{{otpButtonLabel}}</button>
+  </div>
+
+  <ng-container *ngIf="!!timerSubscription">
+    <div class="form-group mb-4">
+      <label for="code" class="w-100 mb-2 required">인증번호</label>
+      <input type="text"
+             id="code"
+             class="form-control no-outline"
+             placeholder="이메일로 전송된 인증번호 입력"
+             autocomplete="off"
+             [class.is-invalid]="invalid('code')"
+             formControlName="code"/>
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', 'code')">인증번호는 필수 입력 항목입니다.</span>
+        <span *ngIf="hasError('pattern', 'code')">이메일로 전송된 6자리 숫자를 입력해주세요.</span>
+        <span *ngIf="hasSubmissionError('code')">{{submissionErrorMessage}}</span>
+      </div>
+    </div>
+
+    <button class="btn btn-sw btn-block w-100">인증하기</button>
+  </ng-container>
+</form>

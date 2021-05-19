@@ -1,0 +1,56 @@
+<h2 class="page-title">뉴스레터 등록</h2>
+
+<form class="mat-elevation-z1" [formGroup]="formGroup" (ngSubmit)="submit()">
+
+  <mat-form-field class="w-100">
+    <mat-label>제목</mat-label>
+    <input matInput
+           formControlName="title"
+           [errorStateMatcher]="errorMatcher"
+           autocomplete="off"
+           placeholder="Ex. 뉴스레터 Vol.1 - 2020.04"
+           required/>
+    <mat-hint>제목을 입력하세요.</mat-hint>
+    <mat-error *ngIf="hasError('required', 'title')">제목은 필수 입력 항목입니다.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field [class.w-50]="layout.desktop$ | async"
+                  [class.w-100]="layout.mobile$ | async">
+    <mat-label>발간년월</mat-label>
+    <input matInput
+           formControlName="yearMonth"
+           [errorStateMatcher]="errorMatcher"
+           autocomplete="off"
+           placeholder="Ex. 202004 형식"
+           required/>
+    <mat-hint>발간년월을 입력하세요.</mat-hint>
+    <mat-error *ngIf="hasError('required', 'yearMonth')">제목은 필수 입력 항목입니다.</mat-error>
+    <mat-error *ngIf="hasError('pattern', 'yearMonth')">
+      202004와 같은 형식으로 입력해야 합니다.
+    </mat-error>
+  </mat-form-field>
+
+  <div class="file-chooser-wrapper">
+    <div class="file-chooser cursor pointer mat-elevation-z1"
+         swFileChooser
+         accept="application/zip, application/octet-stream, application/x-zip-compressed, multipart/x-zip"
+         (filesChange)="selectFile($event)">
+      <div class="inner-wrapper">{{file ? '선택된 파일: ' + file.name : '파일 선택'}}</div>
+    </div>
+    <span class="guide" *ngIf="!invalid('file')">뉴스레터 압축 파일(.zip 형식)을 선택해주세요.</span>
+    <div class="error" *ngIf="invalid('file')">
+      <span *ngIf="hasError('required', 'file')">파일을 선택해주세요.</span>
+      <span *ngIf="hasError('mimetype', 'file')">zip 형식의 압축파일을 선택해야 합니다.</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button"
+            class="w-100 me"
+            mat-raised-button color="accent"
+            routerLink="/newsletter/list">취소</button>
+    <button class="w-100 ms"
+            mat-raised-button
+            color="primary">등록</button>
+  </div>
+</form>

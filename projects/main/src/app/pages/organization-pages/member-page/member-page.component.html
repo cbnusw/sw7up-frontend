@@ -1,0 +1,136 @@
+<div class="d-flex justify-content-center align-items-center">
+  <div class="organization-container primary">
+    <div class="header-container">
+      <div class="group-name">사업단</div>
+    </div>
+    <div class="body-container">
+      <div class="description-container">
+        <div class="description">· 총괄</div>
+      </div>
+      <div class="member-container">
+        <div class="member">이건명 교수(단장)</div>
+        <div class="member">김미혜 교수(부단장)</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="vertical-line"></div>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="organization-container secondary">
+    <div class="header-container">
+      <div class="group-name">사업지원팀</div>
+    </div>
+    <div class="body-container">
+      <div class="description-container">
+        <div class="description">· 행정총괄</div>
+        <div class="description">· 융합교육, 오픈소스, 홍보지원</div>
+        <div class="description">· 전공 기초교육지원</div>
+        <div class="description">· 전공교육, 산학협력지원</div>
+        <div class="description">· 홍보지원</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="vertical-line"></div>
+</div>
+<div class="center-container">
+  <div class="d-flex flex-column flex-md-row justify-content-center align-items-center">
+    <div class="organization-container tertiary mb-3 mb-md-0">
+      <div class="header-container">
+        <div class="group-name">SW기초교육센터</div>
+      </div>
+      <div class="body-container">
+        <div class="description-container">
+          <div class="description">· 전교생, 초중등 및 일반인 대상 SW 교육 및 캠프 지원</div>
+        </div>
+        <div class="member-container">
+          <div class="member">김미혜 교수(센터장)</div>
+          <div class="member">강봉희 교수</div>
+          <div class="member">주영관 교수</div>
+        </div>
+      </div>
+    </div>
+    <div class="organization-container tertiary mb-3 mb-md-0">
+      <div class="header-container">
+        <div class="group-name">SW전공교육센터</div>
+      </div>
+      <div class="body-container">
+        <div class="description-container">
+          <div class="description">· SW전문 인력 양성 지원</div>
+        </div>
+        <div class="member-container">
+          <div class="member">최경주 교수(센터장)</div>
+          <div class="member">문현주 교수</div>
+          <div class="member">황경순 교수</div>
+        </div>
+      </div>
+    </div>
+    <div class="organization-container tertiary mb-3 mb-md-0">
+      <div class="header-container">
+        <div class="group-name">SW융합교육센터</div>
+      </div>
+      <div class="body-container">
+        <div class="description-container">
+          <div class="description">· SW융합 인력 양성 지원</div>
+        </div>
+        <div class="member-container">
+          <div class="member">김태홍 교수(센터장)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="empty-line d-none d-md-block"></div>
+  </div>
+  <div class="d-flex flex-column flex-md-row justify-content-center align-items-center">
+    <div class="organization-container tertiary mb-3 mb-md-0">
+      <div class="header-container">
+        <div class="group-name">SW산학협력센터</div>
+      </div>
+      <div class="body-container">
+        <div class="description-container">
+          <div class="description">· 산학협력 및 창업 활성화 지원</div>
+        </div>
+        <div class="member-container">
+          <div class="member">권오욱 교수(센터장)</div>
+          <div class="member">강재구 교수</div>
+        </div>
+      </div>
+    </div>
+    <div class="organization-container tertiary">
+      <div class="header-container">
+        <div class="group-name">오픈소스SW센터</div>
+      </div>
+      <div class="body-container">
+        <div class="description-container">
+          <div class="description">· 오픈소스SW 활용 및 개발 활성화 지원</div>
+        </div>
+        <div class="member-container">
+          <div class="member">노서영 교수(센터장)</div>
+          <div class="member">안광모 교수</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4 class="mt-5 mb-3">사업지원팀</h4>
+<div class="card card-frame py-1 px-3 py-md-3 px-md-4 mb-2" *ngFor="let member of members;">
+  <div class="row align-items-sm-center">
+          <span class="col-md-3">
+            <small>{{member.name}} {{member.position}}</small>
+          </span>
+    <div class="col-12 col-md-4">
+      <small>{{member.task}}</small>
+    </div>
+    <div class="col-12 col-md-5 text-lg-right">
+      <div class="d-flex justify-content-md-between align-items-center">
+        <a href="mailto:{{member.email}}" class="me-4"><small>{{member?.email}}</small></a>
+        <a href="tel:{{member.tel}}"><small>{{member?.tel}}</small></a>
+      </div>
+    </div>
+  </div>
+</div>

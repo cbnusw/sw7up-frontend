@@ -1,0 +1,65 @@
+@import "projects/main/src/styles/tools";
+
+:host {
+  display: flex;
+  justify-content: space-around;
+
+  @include mobile {
+    flex-wrap: wrap;
+  }
+}
+
+.banner-item {
+  display: block;
+  transition: all 200ms ease-out;
+  padding: 1rem;
+  width: 100%;
+
+  @include mobile {
+    flex: 0 0 120px;
+  }
+
+  img {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+
+    @include mobile {
+      width: 40px;
+      height: 40px;
+    }
+
+    &:last-child {
+      display: none;
+    }
+  }
+
+  .banner-name {
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: $default-color;
+    text-align: center;
+  }
+
+  &:hover {
+    background-color: #3D61A8;
+
+    img {
+      &:first-child {
+        display: none;
+      }
+      &:last-child {
+        display: inline-block;
+      }
+    }
+
+    .banner-name {
+      color: white;
+      font-weight: bold;
+    }
+  }
+}
+
+.image-wrapper {
+  text-align: center;
+}

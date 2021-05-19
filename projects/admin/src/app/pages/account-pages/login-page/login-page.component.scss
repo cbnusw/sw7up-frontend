@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.container {
+  position: relative;
+  width: 500px;
+  margin: 0 auto;
+  padding: 2em;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+button {
+  width: 100%;
+}

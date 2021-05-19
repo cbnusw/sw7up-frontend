@@ -1,0 +1,96 @@
+@import "tools";
+
+:host {
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 100%),
+  linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.5) 100%);
+  color: $default-color;
+  z-index: 999;
+}
+
+.brand-image {
+  height: 38px;
+}
+
+.nav-header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  height: $mobile-header-height;
+  padding: 0 1rem;
+}
+
+.nav-body {
+  height: calc(100vh - 60px);
+  overflow-y: scroll;
+}
+
+.account {
+  margin: 2rem;
+
+  .account-btn {
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    color: $default-color;
+    font-size: 0.8rem;
+    width: 8em;
+    text-align: center;
+
+    &:nth-child(1) {
+      margin-right: 1rem;
+    }
+
+    &:nth-child(2) {
+      margin-left: 1rem;
+    }
+
+  }
+}
+
+.sw-code {
+  margin: 2rem 0;
+
+  .code-btn {
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    margin: 0 auto;
+    color: $default-color;
+    font-size: 0.8rem;
+    width: calc(16em + 2rem);
+    text-align: center;
+  }
+}
+
+.menus {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0 2em;
+}
+
+.accordion-button:not(.collapsed), .accordion-button, .accordion-item {
+  display: block;
+  text-align: center;
+  background-color: transparent;
+  color: $default-color;
+  border: none;
+  border-radius: 0;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+.accordion-body {
+  list-style: none;
+
+  .sub-menu {
+    padding: 1rem 0;
+    font-size: 0.9rem;
+  }
+}
