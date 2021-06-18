@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-const TAB_MENUS = ['지능SW융합전공', '교과운영지원', '교육품질향상', '실전영어교육', '대학-대학원협력', 'TOPCIT응시지원'];
+const TAB_MENUS = [
+  '지능SW융합전공',
+  '교과운영지원',
+  '교육품질향상',
+  '실전영어교육',
+  '해외교육',
+  '대학-대학원협력',
+  'TOPCIT응시지원'
+];
 declare type TTabMenu = typeof TAB_MENUS[number];
 
 @Component({

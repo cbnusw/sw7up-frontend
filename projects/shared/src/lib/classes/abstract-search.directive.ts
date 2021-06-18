@@ -108,6 +108,9 @@ export abstract class AbstractSearchDirective<T> implements OnInit, OnDestroy {
 
     if (this.router) {
 
+      const nullProperties = Object.keys(this.params).filter(key => !this.params[key]);
+      nullProperties.forEach(key => delete this.params[key]);
+
       const queryParams = {
         ...this.params,
         page: this.page,
@@ -200,6 +203,7 @@ export abstract class AbstractSearchDirective<T> implements OnInit, OnDestroy {
             }
 
             delete params.q;
+
             this.params = { ...this.params, ...params };
             this._request();
           }

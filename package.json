@@ -13,16 +13,16 @@
     "build:app:admin": "npx ng build --prod admin",
     "build:app:code": "npx ng build --prod --base-href /code/ code",
     "build:app:main": "npx ng build --prod --base-href / main && npx ng run main:server:production",
-    "dev:admin": "ng serve admin --port 4201",
-    "dev:code": "ng serve code --port 4202 --public-host",
-    "dev:main": "ng serve main --port 4200 --public-host",
+    "dev:main": "npx ng serve main --port 4200 --public-host",
+    "dev:admin": "npx ng serve admin --port 4201",
+    "dev:code": "npx ng serve code --port 4202 --public-host",
     "dev:main:ssr": "npx ng run main:serve-ssr --port 4200 --public-host",
     "serve:main": "node dist/main/server/main.js",
-    "prerender:main": "ng run main:prerender",
+    "prerender:main": "npx ng run main:prerender",
     "clean": "rm node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "test": "npx ng test",
+    "lint": "npx ng lint",
+    "e2e": "npx ng e2e"
   },
   "private": true,
   "dependencies": {

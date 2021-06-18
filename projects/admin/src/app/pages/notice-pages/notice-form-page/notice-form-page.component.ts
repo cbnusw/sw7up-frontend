@@ -119,7 +119,6 @@ export class NoticeFormPageComponent extends AbstractFormDirective<INotice, bool
       } else {
         const period = new Date(this.model.period);
         if (period.getTime() === model.period.getTime()) {
-          console.log(period, model.period);
           adjust(model.period);
         }
       }

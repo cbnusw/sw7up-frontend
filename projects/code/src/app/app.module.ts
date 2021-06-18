@@ -22,11 +22,14 @@ import { DashboardPageModule } from './pages/dashboard-page/dashboard-page.modul
       apiHost: environment.apiHost,
       apiVersion: environment.apiVersion,
       uploadHost: environment.uploadHost,
+      codeHost: environment.codeHost,
       loginPageUrl: environment.loginPageUrl,
     }),
     DashboardPageModule,
   ],
-  providers: [],
+  providers: [
+    // { provide: APP_BASE_HREF, useValue: '/code/' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

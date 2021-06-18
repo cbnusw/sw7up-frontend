@@ -40,3 +40,25 @@ img.source-size {
     }
   }
 }
+
+table {
+  position: relative;
+}
+
+th, td {
+  white-space: nowrap;
+  vertical-align: middle;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+th {
+  background-color: #f8fafd;
+}
+
+thead {
+  th {
+    position: sticky;
+    top: 0;
+  }
+}

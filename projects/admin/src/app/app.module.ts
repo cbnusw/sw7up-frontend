@@ -24,6 +24,7 @@ import { DashboardPageModule } from './pages/dashboard-page/dashboard-page.modul
       apiHost: environment.apiHost,
       apiVersion: environment.apiVersion,
       uploadHost: environment.uploadHost,
+      codeHost: environment.codeHost,
       loginPageUrl: environment.loginPageUrl,
     })
   ],

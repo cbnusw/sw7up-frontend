@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { BackgroundModule } from 'ui';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 
 
@@ -9,7 +11,9 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
     DashboardPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    BackgroundModule,
+    RouterModule
   ],
   exports: [
     DashboardPageComponent

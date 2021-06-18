@@ -22,7 +22,7 @@ export class EHelpListPageComponent extends AbstractSearchDirective<IQna> {
   }
 
   changeCategory(category: string): void {
-    if (category) {
+    if (category && category !== 'null') {
       this.params.category = category;
     } else {
       delete this.params.category;

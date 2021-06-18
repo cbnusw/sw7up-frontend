@@ -1,1 +1,33 @@
+@import "gmixin";
 @import "body";
+
+.figure-container {
+  display: flex;
+
+  @include mobile {
+    flex-direction: column;
+  }
+
+  figure {
+    margin: 0 0.5rem;
+
+    @include mobile {
+      margin: 0 auto 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  @include mobile {
+    img {
+      width: 50vw;
+      margin: 0 auto;
+    }
+  }
+
+  figcaption {
+    text-align: center;
+  }
+}

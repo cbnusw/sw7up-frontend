@@ -3,6 +3,7 @@ export class SharedConfig {
   apiHost: string;
   apiVersion: string;
   uploadHost: string;
+  codeHost: string;
   loginPageUrl: string;
   baseUrl?: string;
 }

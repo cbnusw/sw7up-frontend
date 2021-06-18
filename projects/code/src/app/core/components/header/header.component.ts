@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, StorageService } from 'shared';
+import { LayoutService } from 'ui';
 import { environment } from '../../../../environments/environment';
-import { SideNavService } from '../../services/side-nav.service';
 
 @Component({
   selector: 'sw-header',
@@ -12,14 +12,9 @@ import { SideNavService } from '../../services/side-nav.service';
 export class HeaderComponent {
 
   constructor(public auth: AuthService,
-              private sideNavService: SideNavService,
+              public layout: LayoutService,
               private storage: StorageService,
               private router: Router) {
-  }
-
-  openSideMenu(): void {
-    console.log('open side');
-    this.sideNavService.hidden = false;
   }
 
   moveLoginPage(): boolean {

@@ -2,11 +2,13 @@
 
 <div class="contents-container border-top pt-5 mt-5"
      *ngFor="let description of easyCourse?.descriptions; let i = index">
-  <ng-container *ngIf="description.courses?.length > 0; else emptyDescriptionTemplate">
+  <div class="label">{{description.question}}</div>
+  <div *ngIf="description.answer">{{description.answer}}</div>
+  <ng-container *ngIf="description.courses?.length > 0">
     <div class="accordion mb-1"
          id="course-accordion-{{i}}"
          *ngFor="let course of description.courses; let i = index">
-      <div class="accordion-item">
+      <div class="accordion-item mt-4">
         <h2 class="accordion-header" id="course-heading-{{i}}">
           <button class="accordion-button no-outline"
                   type="button"
@@ -34,8 +36,4 @@
       </div>
     </div>
   </ng-container>
-  <ng-template #emptyDescriptionTemplate>
-    <div class="label">{{description.question}}</div>
-    <div>{{description.answer}}</div>
-  </ng-template>
 </div>

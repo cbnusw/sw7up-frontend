@@ -20,13 +20,16 @@ $code-warn: mat-palette($mat-red);
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $code-theme: mat-light-theme(
-                (
-                        color: (
-                                primary: $code-primary,
-                                accent: $code-accent,
-                                warn: $code-warn,
-                        ),
-                )
+    (
+      color: (
+        primary: $code-primary,
+        accent: $code-accent,
+        warn: $code-warn,
+      ),
+    )
 );
 
 $header-height: 64px;
+$desktop-width: 1200px;
+$default-color: #333;
+$table-border: 1px solid rgba(0, 0, 0, 0.12);

@@ -67,8 +67,8 @@
         class="cursor pointer"
         [class.warn-color]="!row.user"></tr>
   </table>
-  <div class="empty-table" *ngIf="emptySearchResults">검색된 학생이 없습니다.</div>
-  <div class="empty-table" *ngIf="emptyDocuments">등록된 학생이 없습니다.</div>
+  <div class="empty-table" *ngIf="emptySearchResults">검색된 운영자가 없습니다.</div>
+  <div class="empty-table" *ngIf="emptyDocuments">등록된 운영자가 없습니다.</div>
   <mat-paginator [length]="total"
                  [pageIndex]="page - 1"
                  [pageSize]="limit"

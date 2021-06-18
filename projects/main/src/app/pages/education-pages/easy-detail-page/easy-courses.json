@@ -794,26 +794,26 @@
     "descriptions": [
       {
         "question": "무엇을 배우는 과목인가요?",
-        "answer": ""
+        "answer": "여러 파이썬 데이터 처리 라이브러리를 활용하여 데이터를 처리하고 분석, 시각화하는 방법들에 대해 학습한다. 실습을 병행하여 데이터의 처리 방법에 대한 이해와 함께 처리능력을 배양하도록 한다."
       },
       {
         "question": "이 과목을 듣기 위해선 어떤 기초지식이 필요한가요?",
-        "answer": ""
+        "answer": "프로그래밍 언어, 특히 파이썬을 알고 있다면 도움이 됩니다. 하지만 프로그래밍에 대한 기초 지식이 없어도 강의를 수강할 수 있도록 구성하였습니다."
       },
       {
         "question": "수업은 어떻게 진행되나요?",
-        "answer": "",
+        "answer": "여러 사례별로 데이터 분석을 실습하면서 데이터 분석 기법에 대하여 이해하고, 데이터 분석 및 시각화를 위한 파이썬 라이브러리 사용법을 학습합니다.",
         "courses": [
           {
             "week": 1,
             "contents": [
               {
                 "label": "이론",
-                "content": "<b></b><br> - <br> - <br> - "
+                "content": "<b>빅데이터 소개</b><br> - 데이터 처리 개요<br> - 빅데이터 개요"
               },
               {
                 "label": "실습",
-                "content": "- <br>- "
+                "content": "<b>실습환경 구성</b><br>- Anaconda 설치<br>- Jupyter Notebook 실습"
               }
             ]
           },
@@ -822,11 +822,11 @@
             "contents": [
               {
                 "label": "이론",
-                "content": "<b></b><br> - <br> - "
+                "content": "<b>CSV 파일 다루기</b><br>- CSV 파일의 이해<br>- Python으로 CSV 파일 다루는 방법"
               },
               {
                 "label": "실습",
-                "content": "- <br>- <br>- "
+                "content": "기온 공공데이터 분석<br>- csv 모듈 사용 실습"
               }
             ]
           },
@@ -835,11 +835,11 @@
             "contents": [
               {
                 "label": "이론",
-                "content": "<b></b><br> - <br> - <br> - "
+                "content": "<b>데이터 시각화 1</b>"
               },
               {
                 "label": "실습",
-                "content": "- <br>- <br>- <br>- "
+                "content": "기온 공공데이터 시각화<br>- matplotlib 기초 실습"
               }
             ]
           },
@@ -848,11 +848,11 @@
             "contents": [
               {
                 "label": "이론",
-                "content": "<b></b><br> - <br> - <br> - "
+                "content": "<b>데이터 시각화 2</b>"
               },
               {
                 "label": "실습",
-                "content": "- <br>- "
+                "content": "<b>인구 공공데이터 분석</b><br>- matplotlib를 활용한 다양한 시각화 실습"
               }
             ]
           },
@@ -861,11 +861,11 @@
             "contents": [
               {
                 "label": "이론",
-                "content": "<b></b><br> - <br> - <br> - "
+                "content": "<b>데이터 시각화 3</b>"
               },
               {
                 "label": "실습",
-                "content": "- <br>- <br>- "
+                "content": "<b>대중교통 데이터 분석</b><br>- matplotlib를 활용한 다양한 시각화 실습"
               }
             ]
           },
@@ -874,11 +874,11 @@
             "contents": [
               {
                 "label": "이론",
-                "content": "<b></b><br> - <br> - <br> - "
+                "content": "<b>numpy 라이브러리</b><br>- numpy 기초 사용법<br>- ndarray 개념 이해"
               },
               {
                 "label": "실습",
-                "content": "- <br>- "
+                "content": "<b>numpy 라이브러리 실습</b><br>- numpy를 이용한 matplotlib 시각화 실습"
               }
             ]
           },
@@ -887,11 +887,11 @@
             "contents": [
               {
                 "label": "이론",
-                "content": "<b></b><br> - <br> - <br> - "
+                "content": "<b>pandas 라이브러리</b><br>- Series의 이해<br>- DataFrame의 이해"
               },
               {
                 "label": "실습",
-                "content": "- <br>- <br>- "
+                "content": "<b>pandas 라이브러리 실습</b><br>- pandas를 이용한 인구구조 분석"
               }
             ]
           },
@@ -899,7 +899,7 @@
             "week": 8,
             "contents": [
               {
-                "content": "<b></b>"
+                "content": "<b>Middle Test(중간고사)</b>"
               }
             ]
           },
@@ -908,11 +908,11 @@
             "contents": [
               {
                 "label": "이론",
-                "content": "<b></b><br> - <br> - <br> - "
+                "content": "<b>pandas/matplotlib 라이브러리 심화</b><br>- pandas 고급 기능<br>- matplotlib 고급 기능"
               },
               {
                 "label": "실습",
-                "content": "- <br>- <br>- "
+                "content": "<b>pandas 및 matplotlib 고급 기능 실습"
               }
             ]
           },
@@ -921,11 +921,11 @@
             "contents": [
               {
                 "label": "이론",
-                "content": "<b></b><br> - <br> - <br> - "
+                "content": "<b>지도 시각화</b><br>- Folium 라이브러리"
               },
               {
                 "label": "실습",
-                "content": "- <br>- "
+                "content": "<b>서울시 범죄 현황 분석</b><br>- seaborn 라이브러리 실습<br>- Folium을 이용한 지도 시각화 실습"
               }
             ]
           },
@@ -934,11 +934,11 @@
             "contents": [
               {
                 "label": "이론",
-                "content": "<b></b><br> - <br> - "
+                "content": "<b>웹 데이터 분석 1</b><br>- 웹과 HTML 이해<br>- BeautifulSoup 라이브러리 사용법<br>- 크롬 개발자 도구 사용법"
               },
               {
                 "label": "실습",
-                "content": "- "
+                "content": "<b>웹 사이트 분석 실습</b><br>- BeautifulSoup 라이브러리 실습<br>- 크롬 개발자 도구 실습<br>- Google 지도 API 사용 실습"
               }
             ]
           },
@@ -947,11 +947,11 @@
             "contents": [
               {
                 "label": "이론",
-                "content": "<b><br> - <br> -"
+                "content": "<b>웹 데이터 분석 2<br>- Selenium 라이브러리 사용법"
               },
               {
                 "label": "실습",
-                "content": "- <br>- "
+                "content": "<b>로그인이 필요한 웹 사이트 분석</b><br>- Selenium 라이브러리 실습"
               }
             ]
           },
@@ -960,11 +960,11 @@
             "contents": [
               {
                 "label": "이론",
-                "content": "<b></b><br> - <br> - <br> - "
+                "content": "<b>시계열 데이터 분석</b><br>- 시계열 데이터란?<br>- 회귀 분석<br>- prophet 라이브러리 설치 및 사용법"
               },
               {
                 "label": "실습",
-                "content": "- <br>- "
+                "content": "<b>시계열 데이터 분석 실습</b><br>- numpy를 이용한 회귀 분석 실습<br>- prophet 라이브러리 실습"
               }
             ]
           },
@@ -973,11 +973,11 @@
             "contents": [
               {
                 "label": "이론",
-                "content": "<b></b><br> - <br> - <br> - "
+                "content": "<b>자연어 처리</b><br>- 자연어 처리의 개념<br>- Word Cloud<br>- KoNLPy 및 NLTK 라이브러리 설치 및 사용법"
               },
               {
                 "label": "실습",
-                "content": "- <br>- "
+                "content": "<b>자연어 처리 실습</b><br>- KoNLPy의 다양한 형태소 분석 엔진 실습<br>- WordCloud 실습<br>- KoNLPy와 NLTK 라이브러리 실습"
               }
             ]
           },
@@ -993,7 +993,7 @@
       },
       {
         "question": "이 과목은 어떻게 활용되나요?",
-        "answer": "자료구조와 문제해결기법은 컴퓨터 과학 교과목 중에 가장 기본적이며 핵심적인 원리라 할 수 있습니다. 따라서, 단계적으로 개념을 익히고, 개념에 해당된 내용을 프로그래밍 언어로 구현하게 됩니다. 또한 실질적인 응용 문제를 제시함으로써 실세계의 문제를 다루면서 그 속에서 자료구조와 문제해결기법을 이해할 수 있도록 도움을 드리고자 합니다."
+        "answer": "이 과목을 통해 파이썬을 활용하여 다양한 데이터분석 기법에 대한 기초 지식을 쌓고, 실습을 통해 이를 활용하는 능력을 기른다면, 개인적으로든 직장에서든 데이터분석은 여러 다양한 분야에서 활용될 수 있을 것으로 기대됩니다."
       }
     ]
   },

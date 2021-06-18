@@ -1,0 +1,132 @@
+@import "gmixin";
+@import "variables";
+
+.main-image {
+  position: relative;
+  height: 40vw;
+  width: 100%;
+  min-height: 200px;
+
+  @include mobile {
+    height: 40vh;
+  }
+
+  .main-text {
+    //width: 50%;
+    position: absolute;
+    font-size: 1.8em;
+    color: white;
+    top: 2em;
+    left: 2em;
+    padding: 1.5em;
+    background-color: rgba(0, 0, 0, 0.12);
+
+    h3 {
+      font-size: 1.2em;
+      margin-bottom: 1em;
+    }
+
+    @include mobile {
+      font-size: 0.875em;
+      top: 0.5em;
+      left: 0.5em;
+      right: 0.5em;
+      margin: 1em;
+    }
+
+  }
+
+  .project-btn {
+    position: absolute;
+    background-color: mat-color($code-primary);
+
+    @include desktop {
+      padding: 1rem 1.5rem;
+      font-size: 1.5rem;
+      right: 2rem;
+      bottom: -1.5rem;
+    }
+
+
+    @include mobile {
+      font-size: 1rem;
+      right: 1rem;
+      bottom: -1rem;
+      padding: 0.5rem 1rem;
+    }
+  }
+}
+
+.main-section {
+  margin-top: 5em;
+  display: flex;
+  justify-content: center;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.project-counter-card, .description-card {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 45%;
+  margin: 0 auto;
+  align-items: center;
+  flex-grow: 0;
+
+  @include mobile {
+    width: 100%;
+    margin-bottom: 5em;
+  }
+}
+
+.project-counter-card {
+
+  .header {
+    height: 80px;
+    font-size: 40px;
+    line-height: 80px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    @include mobile {
+      font-size: 20px;
+    }
+  }
+
+  .counter {
+    font-size: 60px;
+    @include mobile {
+      font-size: 30px;
+    }
+  }
+}
+
+.description-card {
+
+  @include mobile {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .icon {
+    height: 80px;
+    line-height: 80px;
+    font-size: 80px;
+    margin-bottom: 1.5rem;
+  }
+
+  .descripton {
+    width: 400px;
+    font-size: 1.2em;
+    color: rgba(0, 0, 0, 0.5);
+
+    @include mobile {
+      width: 100%;
+      font-size: 1em;
+      padding-bottom: 2em;
+    }
+  }
+}
+
+

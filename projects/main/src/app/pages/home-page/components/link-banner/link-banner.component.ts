@@ -39,12 +39,12 @@ export class LinkBannerComponent implements OnInit, OnDestroy {
       logo: 'assets/images/home/link-logo-topcit.png',
       url: 'https://www.topcit.or.kr'
     },
-    {
-      title: '창의융합교육본부',
-      description: '교수⋅학습 지원',
-      logo: 'assets/images/home/link-logo-fole.png',
-      url: 'http://fole.chungbuk.ac.kr'
-    },
+    // {
+    //   title: '창의융합교육본부',
+    //   description: '교수⋅학습 지원',
+    //   logo: 'assets/images/home/link-logo-fole.png',
+    //   url: 'http://fole.chungbuk.ac.kr'
+    // },
     {
       title: 'SW중심대학',
       description: 'SW전문인력 양성',

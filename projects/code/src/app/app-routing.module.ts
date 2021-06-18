@@ -5,6 +5,10 @@ import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page/da
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardPageComponent },
+  {
+    path: 'project',
+    loadChildren: () => import('./pages/project-pages/project-pages.module').then(m => m.ProjectPagesModule)
+  }
 ];
 
 @NgModule({

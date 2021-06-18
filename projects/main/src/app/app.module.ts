@@ -22,6 +22,7 @@ import { HomePageModule } from './pages/home-page/home-page.module';
       apiHost: environment.apiHost,
       apiVersion: environment.apiVersion,
       uploadHost: environment.uploadHost,
+      codeHost: environment.codeHost,
       loginPageUrl: environment.loginPageUrl,
       baseUrl: environment.baseUrl,
     }),

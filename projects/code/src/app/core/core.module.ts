@@ -6,14 +6,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
-import { SideNavComponent } from './components/side-nav/side-nav.component';
-import { SideNavService } from './services/side-nav.service';
-
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    SideNavComponent
   ],
   imports: [
     CommonModule,
@@ -25,11 +21,7 @@ import { SideNavService } from './services/side-nav.service';
   ],
   exports: [
     HeaderComponent,
-    SideNavComponent
   ],
-  providers: [
-    SideNavService
-  ]
 })
 export class CoreModule {
 }

@@ -38,14 +38,16 @@ export interface IFindRegNo {
 export class AuthService extends RequestBase {
 
   private meSubject: BehaviorSubject<IUser> = new BehaviorSubject(null);
+  private readonly config: SharedConfig;
 
   me$: Observable<IUser> = this.meSubject.asObservable();
 
   constructor(private http: HttpClient,
               private router: Router,
               private storage: StorageService,
-              private config: SharedConfig) {
+              config: SharedConfig) {
     super(config.authHost);
+    this.config = config;
     if (this.loggedIn) {
       this.init();
     }
