@@ -10,6 +10,7 @@
 
   figure {
     margin: 0 0.5rem;
+    flex: 1 1 0;
 
     @include mobile {
       margin: 0 auto 1rem;
@@ -21,8 +22,8 @@
   }
 
   img {
-    width: auto;
-    height: 300px;
+    max-width: 400px;
+    max-height: 300px;
   }
 
   @include mobile {
