@@ -20,6 +20,10 @@
     }
   }
 
+  img {
+    width: 400px;
+  }
+
   @include mobile {
     img {
       width: 50vw;
