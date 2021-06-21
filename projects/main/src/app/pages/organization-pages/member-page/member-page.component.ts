@@ -40,7 +40,7 @@ export class MemberPageComponent implements OnInit {
       position: '행정연구원',
       task: '산학협력지원, 홍보지원',
       name: '권이주',
-      email: 'ej0505@cbnu.ac.kr',
+      email: 'kej0505@cbnu.ac.kr',
       tel: '043-249-1833'
     },
     {
