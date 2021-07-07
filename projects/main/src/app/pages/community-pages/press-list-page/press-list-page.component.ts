@@ -16,7 +16,7 @@ export class PressListPageComponent extends AbstractSearchDirective<IPressReleas
   constructor(private pressReleaseService: PressReleaseService,
               route: ActivatedRoute,
               router: Router) {
-    super({ limit: 10, sort: '-createAt' }, ['title', 'writer'], route, router);
+    super({ limit: 10, sort: '-createdAt' }, ['title', 'writer'], route, router);
   }
 
   protected requestObservable(params: IParams | undefined): Observable<IListResponse<IPressRelease>> {
