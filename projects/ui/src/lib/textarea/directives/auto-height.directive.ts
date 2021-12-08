@@ -5,17 +5,29 @@ import { Directive, ElementRef, HostBinding, HostListener, Input, Renderer2 } fr
 })
 export class AutoHeightDirective {
 
-  @Input()
-  @HostBinding('style.min-height')
-  swAutoHeight = '48px';
+  @HostBinding('style.overflow-y') overflowY = 'hidden';
+  @Input() @HostBinding('style.min-height') minHeight = '5rem';
 
-  @HostListener('keydown', ['$event']) handleKeyDown(e: KeyboardEvent): void {
-    this.renderer.setStyle(this.elementRef.nativeElement, 'height', this.swAutoHeight);
-    this.renderer.setStyle(this.elementRef.nativeElement, 'height', `${8 + this.elementRef.nativeElement.scrollHeight}px`);
+  constructor(private _elementRef: ElementRef,
+              private _renderer: Renderer2) {
   }
 
-  constructor(private elementRef: ElementRef,
-              private renderer: Renderer2) {
+  @HostListener('keyup') handleKeyUp(): void {
+    this._renderer.setStyle(this._elementRef.nativeElement, 'height', this.minHeight);
+    this._renderer.setStyle(
+      this._elementRef.nativeElement,
+      'height',
+      `${this._elementRef.nativeElement.scrollHeight}px`
+    );
+  }
+
+  @HostListener('keydown') handleKeyDown(): void {
+    this._renderer.setStyle(this._elementRef.nativeElement, 'height', this.minHeight);
+    this._renderer.setStyle(
+      this._elementRef.nativeElement,
+      'height',
+      `${this._elementRef.nativeElement.scrollHeight}px`
+    );
   }
 
 }

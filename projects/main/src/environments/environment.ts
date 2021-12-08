@@ -7,9 +7,9 @@ import { URLS } from '../app/constants/urls';
 export const environment = {
   ...env,
   loginPageUrl: URLS.ACCOUNT.LOGIN,
-  baseUrl: 'http://localhost:8080',
+  baseUrl: 'http://sw7up.local',
   baseTitle: '충북대학교 SW중심대학사업단',
-  codeUrl: 'http://localhost:8080/code/'
+  codeUrl: 'http://sw7up.local/code/'
 };
 
 /*

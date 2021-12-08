@@ -1,7 +1,7 @@
 export interface ISw7UpPages {
   HOME?: {
     ROOT?: string;
-  }
+  };
   ORGANIZATION?: {
     ROOT?: string;
     GREETINGS?: string;
@@ -25,6 +25,7 @@ export interface ISw7UpPages {
     ROOT?: string;
     PROJECT?: string;
     INTERNSHIP?: string;
+    INTERNSHIP_E_BOOK?: string;
     GUARDIAN?: string;
     STARTUP?: string;
   };
@@ -95,6 +96,7 @@ export const PAGE_NAMES: ISw7UpPages = {
   COOPERATE: {
     PROJECT: 'project',
     INTERNSHIP: 'internship',
+    INTERNSHIP_E_BOOK: 'internship/e-book',
     GUARDIAN: 'guardian',
     STARTUP: 'startup',
   },

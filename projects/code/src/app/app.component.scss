@@ -1,0 +1,30 @@
+$header-height: 45px;
+$side-nav-width: 210px;
+
+sw-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+}
+
+sw-side-nav {
+  position: fixed;
+  top: $header-height;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: $side-nav-width;
+  overflow-y: scroll;
+}
+
+main {
+  margin-top: $header-height;
+  margin-left: 0;
+  min-height: 85vh;
+
+  @screen md {
+    margin-left: $side-nav-width;
+  }
+}

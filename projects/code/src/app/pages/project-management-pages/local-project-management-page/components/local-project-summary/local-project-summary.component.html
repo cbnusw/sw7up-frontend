@@ -1,0 +1,22 @@
+<div class="space-y-4">
+  <div class="grid grid-cols-3 gap-4">
+    <sw-local-project-summary-item title="프로젝트" [value]="projects"></sw-local-project-summary-item>
+    <sw-local-project-summary-item title="파일" [value]="files"></sw-local-project-summary-item>
+    <sw-local-project-summary-item title="코드" [value]="codes"></sw-local-project-summary-item>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <div class="bg-white p-4 border border-gray-200 shadow-sm p-2 space-y-4 overflow-x-scroll">
+      <plotly-plot *ngIf="graphData[0]"
+                   [data]="graphData[0]"
+                   [config]="config"></plotly-plot>
+      <h1 class="text-center">언어별 파일 통계</h1>
+    </div>
+    <div class="bg-white p-4 border border-gray-200 shadow-sm p-2 space-y-4 overflow-x-scroll">
+      <plotly-plot *ngIf="graphData[1]"
+                   [data]="graphData[1]"
+                   [config]="config"></plotly-plot>
+      <h1 class="text-center">언어별 코드 통계</h1>
+    </div>
+  </div>
+</div>

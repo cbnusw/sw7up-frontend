@@ -1,27 +1,14 @@
-<div class="main-image"
-     swBackgroundPosition="center"
-     swBackgroundSize="cover"
-     swBackgroundImage="assets/images/main.jpeg">
-  <div class="main-text">
-    <h3>충북대학교 SW중심대학사업단</h3>
-    <span class="bolder text-primary">코드이력관리 시스템</span>
-    <span class="small">을 통해 쉽게 프로젝트를 등록할 수 있습니다.</span>
+<div class="pt-8 space-y-4">
+  <div class="bg-white px-6 py-4 border border-gray-200">
+    로컬 프로젝트 통계
   </div>
-  <a class="project-btn text-white mat-elevation-z2 cursor pointer" (click)="moveProjectPage()">
-    {{projectButtonLabel}}
-  </a>
-</div>
-
-<div class="main-section main-container">
-  <div class="description-card">
-    <h2 class="icon"><i class="lab la-github"></i></h2>
-    <div class="descripton">GitHub과 연동하여 프로젝트 등록</div>
+  <div class="bg-white px-6 py-4 border border-gray-200">
+    공개 프로젝트 통계
   </div>
-
-  <div class="project-counter-card">
-    <h2 class="header">등록된 프로젝트</h2>
-    <div class="counter">
-      <span class="text-accent">{{totalProjects | number}}</span> 건
-    </div>
+  <div class="bg-white px-6 py-4 border border-gray-200">
+    새로운 로컬 프로젝트
+  </div>
+  <div class="bg-white px-6 py-4 border border-gray-200">
+    새로운 공개 프로젝트
   </div>
 </div>

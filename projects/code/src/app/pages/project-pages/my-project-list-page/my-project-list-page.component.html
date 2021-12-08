@@ -1,0 +1,32 @@
+<div class="main-container">
+  <h2 class="page-title">내 프로젝트 관리</h2>
+  <ng-container *ngIf="account; else githubLoginTemplate">
+    <div class="github-info">
+      <span class="username">GitHub 계정: <span class="text-primary">{{account?.username}}</span></span>
+    </div>
+    <sw-my-project-list></sw-my-project-list>
+  </ng-container>
+  <ng-template #githubLoginTemplate>
+    <div class="github-login-container">
+      <div class="github-image"
+           swBackgroundImage="assets/images/github-login.jpg"
+           swBackgroundSize="cover"
+           swBackgroundPosition="center"></div>
+      <div class="login-wrapper">
+        <div class="description">
+          <span class="bolder text-primary">GitHub 계정을 인증</span>하고 프로젝트를 가져오세요.
+          <div class="notice">
+            <small class="text-warn"><i class="las la-exclamation-circle"></i> 웹브라우저에 Github이 로그인되어 있는 경우 본인의 계정으로
+              로그인이 되어 있는지 확인해주세요. 만약 본인의 계정으로 로그인이 안되어 있다면 로그아웃 해주세요.
+            </small>
+          </div>
+        </div>
+        <div class="btn-wrapper">
+          <button type="button" mat-raised-button color="primary" (click)="loginGithub()">
+            <i class="lab la-github-square"></i> GitHub 인증
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

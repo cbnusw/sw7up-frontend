@@ -6,8 +6,20 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardPageComponent },
   {
-    path: 'project',
-    loadChildren: () => import('./pages/project-pages/project-pages.module').then(m => m.ProjectPagesModule)
+    path: 'projects',
+    loadChildren: () => import('./pages/all-projects-page/all-projects-page.module').then(m => m.AllProjectsPageModule)
+  },
+  {
+    path: 'pm',
+    loadChildren: () => import('./pages/project-management-pages/project-management-pages.module').then(m => m.ProjectManagementPagesModule)
+  },
+  // {
+  //   path: 'project',
+  //   loadChildren: () => import('./pages/project-pages/project-pages.module').then(m => m.ProjectPagesModule)
+  // },
+  {
+    path: 'account',
+    loadChildren: () => import('./pages/account-pages/account-pages.module').then(m => m.AccountPagesModule)
   }
 ];
 

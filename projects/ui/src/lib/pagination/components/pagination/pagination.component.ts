@@ -66,7 +66,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
     return this.router.url.split('?')[0];
   }
 
-  getQueryParams(page: number): Params {
+  getQueryParams(page: number): IParams {
     const query = (this.params.q || '').split('=');
     const params = { ...this.params, page };
 

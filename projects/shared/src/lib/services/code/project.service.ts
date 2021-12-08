@@ -40,4 +40,8 @@ export class ProjectService extends RequestBase {
   addProject(project: IProject): Observable<IResponse<IProject>> {
     return this.http.post(this.url`/`, { project });
   }
+
+  addGithubProject(project: IProject): Observable<IResponse<IProject>> {
+    return this.http.post(this.url`/github`, { project });
+  }
 }

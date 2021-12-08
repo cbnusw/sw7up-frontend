@@ -1,0 +1,15 @@
+@import "gmixin";
+
+.main-container {
+  position: relative;
+
+  @include desktop {
+    min-height: 800px;
+  }
+}
+
+.page-title {
+  padding: 2rem 0;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}

@@ -1,0 +1,17 @@
+<!-- This example requires Tailwind CSS v2.0+ -->
+<span class="relative z-0 inline-flex shadow-sm rounded-md">
+  <button *ngFor="let option of options; let i = index;"
+          type="button"
+          (click)="changeValue(option.value)"
+          [class.bg-indigo-600]="value === option.value"
+          [class.text-white]="value === option.value"
+          [class.border-indigo-800]="value === option.value"
+          [class.bg-white]="value !== option.value"
+          [class.text-gray-700]="value !== option.value"
+          [class.border-gray-300]="value !== option.value"
+          class="relative inline-flex items-center
+                 px-4 py-2 border text-sm font-medium
+                 hover:bg-indigo-500 hover:text-white focus:z-10 focus:outline-none">
+    {{option.viewValue || option.value}}
+  </button>
+</span>

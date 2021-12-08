@@ -1,0 +1,7 @@
+<img *ngIf="media.link; else imageRef" [src]="media.link | youtubeThumbnail"
+     class="w-full object-center object-cover">
+<ng-template #imageRef>
+  <img [src]="media?.file | staticUrl:'assets/images/no-image.jpg'"
+       class="w-full object-center object-cover"
+       alt="banner image">
+</ng-template>

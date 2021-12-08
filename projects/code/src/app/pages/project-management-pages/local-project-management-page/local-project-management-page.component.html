@@ -1,0 +1,12 @@
+<sw-page-header title="{{auth.me?.role === 'student' ? 'MY ' : ''}}로컬 프로젝트 관리">
+  <ng-container controls *ngIf="auth.isStudent">
+    <a type="button"
+       routerLink="/pm/local/register"
+       swButton swButtonColor="blue" swButtonSize="xs">
+      프로젝트 등록
+    </a>
+  </ng-container>
+</sw-page-header>
+
+<sw-local-project-summary class="block mb-4"></sw-local-project-summary>
+<sw-local-project-list></sw-local-project-list>

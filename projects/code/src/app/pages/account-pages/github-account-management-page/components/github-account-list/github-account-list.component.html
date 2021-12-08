@@ -1,0 +1,12 @@
+<div class="border border-gray-200 p-4 text-gray-700" *ngIf="accounts.length === 0; else accountsRef">
+  등록된 GitHub 계정이 없습니다.
+</div>
+
+<ng-template #accountsRef>
+  <div class="space-y-2">
+    <div *ngFor="let account of accounts" class="border border-gray-200 p-4 flex items-center text-gray-800">
+      <span class="mr-4">{{account.username}}</span>
+      <span class="text-xs">계정 생성일: {{account.createdAt | date:'yyyy-MM-dd'}}</span>
+    </div>
+  </div>
+</ng-template>

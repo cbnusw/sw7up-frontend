@@ -1,0 +1,14 @@
+<sw-page-header title="공개 프로젝트 관리">
+  <ng-container controls *ngIf="auth.isStudent">
+    <a routerLink="/pm/public/register" swButton swButtonColor="blue" swButtonSize="xs">
+      프로젝트 등록
+    </a>
+  </ng-container>
+</sw-page-header>
+
+<ng-container *ngIf="accounts.length > 0 && auth.isStudent; else githubLoginRef">
+
+</ng-container>
+
+<ng-template #githubLoginRef>
+</ng-template>

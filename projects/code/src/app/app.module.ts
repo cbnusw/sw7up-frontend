@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PlotlyModule } from 'angular-plotly.js';
+import * as PlotlyJS from 'plotly.js-dist-min';
 import { SharedModule } from 'shared';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
+import { MainModule } from './common/main/main.module';
 import { DashboardPageModule } from './pages/dashboard-page/dashboard-page.module';
+
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [
@@ -16,7 +20,6 @@ import { DashboardPageModule } from './pages/dashboard-page/dashboard-page.modul
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CoreModule,
     SharedModule.forRoot({
       authHost: environment.authHost,
       apiHost: environment.apiHost,
@@ -26,6 +29,8 @@ import { DashboardPageModule } from './pages/dashboard-page/dashboard-page.modul
       loginPageUrl: environment.loginPageUrl,
     }),
     DashboardPageModule,
+    MainModule,
+    PlotlyModule,
   ],
   providers: [
     // { provide: APP_BASE_HREF, useValue: '/code/' }

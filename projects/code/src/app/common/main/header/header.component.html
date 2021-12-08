@@ -1,0 +1,19 @@
+<header class="bg-white px-4 py-2 flex flex-row items-center border-b shadow-sm">
+  <a routerLink="/dashboard" class="mr-auto flex items-center">
+    <img src="assets/images/logo.png" alt="logo" class="mr-4 object-center"/>
+    <h1 class="title text-xl md:text-xl font-bold">
+      코드이력관리시스템
+    </h1>
+  </a>
+<!--  <div class="hidden md:block flex flex-row items-center space-x-2 text-gray-500 text-sm" *ngIf="auth.loggedIn">-->
+  <div class="flex flex-row items-center space-x-2 text-gray-500 text-sm" *ngIf="auth.loggedIn">
+    <span>{{auth.me?.info?.name}} 로그인 중</span>
+    <a href="javascript:void(0)" (click)="auth.logout()">로그아웃</a>
+  </div>
+  <a *ngIf="!auth.loggedIn" [href]="loginUrl" class="text-sm text-gray-500">로그인</a>
+  <button class="p-2 hover:bg-gray-50 md:hidden" *ngIf="auth.loggedIn">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+  </button>
+</header>

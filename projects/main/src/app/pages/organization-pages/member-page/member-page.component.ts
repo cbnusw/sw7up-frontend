@@ -17,13 +17,6 @@ export class MemberPageComponent implements OnInit {
     },
     {
       position: '행정연구원',
-      task: '융합교육',
-      name: '장보영',
-      email: 'jby0312@cbnu.ac.kr',
-      tel: '043-249-1346'
-    },
-    {
-      position: '행정연구원',
       task: '전공 기초교육지원',
       name: '김샘이',
       email: 'u01200501n1@cbnu.ac.kr',
@@ -41,7 +34,7 @@ export class MemberPageComponent implements OnInit {
       task: '산학협력지원, 홍보지원',
       name: '권이주',
       email: 'kej0505@cbnu.ac.kr',
-      tel: '043-249-1833'
+      tel: '043-249-1346'
     },
     {
       position: '행정연구원',
@@ -49,6 +42,13 @@ export class MemberPageComponent implements OnInit {
       name: '이사랑',
       email: 'lsrsw1354@cbnu.ac.kr',
       tel: '043-249-1354'
+    },
+    {
+      position: '행정연구원',
+      task: '',
+      name: '정지윤',
+      email: 'jjung12@chungbuk.ac.kr',
+      tel: '043-249-1833'
     }
   ];
 
@@ -57,5 +57,4 @@ export class MemberPageComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

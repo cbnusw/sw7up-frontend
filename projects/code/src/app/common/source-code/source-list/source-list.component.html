@@ -1,0 +1,37 @@
+<ng-container *ngFor="let entry of source">
+  <div *ngIf="entry.dirname;else fileRef">
+    <div class="flex items-center py-2 cursor-pointer">
+      <div class="flex items-center select-none cursor-pointer text-blue-700" (click)="toggleOpened(entry)">
+        <span class="mr-2 cursor-pointer">
+          <svg *ngIf="!entry.opened"
+               xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/>
+          </svg>
+          <svg *ngIf="entry.opened"
+               xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+                  d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z"
+                  clip-rule="evenodd"/>
+            <path d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z"/>
+          </svg>
+        </span>
+        <span>{{entry.dirname}}</span>
+      </div>
+    </div>
+    <div class="pl-6 overflow-hidden" [class.h-0]="!entry.opened" [class.h-auto]="entry.opened">
+      <sw-source-list [source]="entry.entries"></sw-source-list>
+    </div>
+  </div>
+  <ng-template #fileRef>
+    <div class="flex items-center py-2">
+      <span class="mr-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+        </svg>
+      </span>
+      <span class="mr-auto">{{entry.name}}</span>
+      <span>{{entry.size | fileSize}}</span>
+    </div>
+  </ng-template>
+</ng-container>

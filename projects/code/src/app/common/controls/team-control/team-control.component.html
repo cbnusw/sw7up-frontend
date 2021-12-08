@@ -1,0 +1,46 @@
+<button type="button"
+        *ngIf="!value; else teamRef"
+        (click)="addTeam()"
+        class="w-full h-20 flex justify-center items-center bg-blue-500 hover:bg-blue-600 border border-blue-700 text-white select-none">
+  팀 입력
+</button>
+
+<ng-template #teamRef>
+  <div class="flex justify-end items-center">
+    <button type="button"
+            (click)="removeTeam()"
+            class="p-2 bg-opacity-30 bg-white">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <label class="block mb-2">팀원 검색 <span class="text-xs">더블 클릭하여 추가</span></label>
+      <sw-account-list class="block" (selectChange)="toggleMember($event)"></sw-account-list>
+    </div>
+    <div class="fles flex-col">
+      <label class="block mb-2">팀원 <span class="text-xs">더블 클릭하여 팀에서 제외</span></label>
+      <input class="block w-full" [ngModel]="value.name" (ngModelChange)="changeName($event)" swInput placeholder="팀 이름 입력">
+      <div class="grid grid-cols-3 bg-gray-200 gap-1 mt-2">
+        <div class="text-sm px-4 py-2">이름/학번</div>
+        <div class="text-sm px-4 py-2 col-span-2">소속</div>
+      </div>
+      <div class="h-30 overflow-y-scroll">
+        <div class="grid grid-cols-3 border-b border-gray-200" *ngIf="value.members.length === 0">
+          <div class="text-sm text-red-600 col-span-3 px-4 py-2">추가된 팀원이 없습니다.</div>
+        </div>
+        <div *ngFor="let member of value.members; let i = index"
+             (dblclick)="removeMember(i)"
+             class="striped grid grid-cols-3 gap-1 border-b border-gray-200 cursor-pointer select-none">
+          <div class="px-4 py-2 flex flex-col">
+            <span class="text-sm">{{member.name}}</span>
+            <span class="text-xs">{{member.no}}</span>
+          </div>
+          <div class="text-sm px-4 py-2 col-span-2">{{member.department}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

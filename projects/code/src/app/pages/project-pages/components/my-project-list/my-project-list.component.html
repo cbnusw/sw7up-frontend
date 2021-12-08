@@ -1,0 +1,112 @@
+<div class="actions">
+  <mat-form-field>
+    <mat-label>검색</mat-label>
+    <span matPrefix style="margin-right: 1rem;"><i class="las la-search"></i></span>
+    <input matInput
+           [formControl]="keywordControl"
+           autocomplete="off"
+           placeholder="검색어 입력"/>
+    <mat-hint>저장소URL, 프로젝트명, 멤버명으로 검색</mat-hint>
+  </mat-form-field>
+  <div class="ms-auto">
+    <button *ngIf="layout.desktop$ | async"
+            type="button"
+            mat-flat-button
+            (click)="addProjects()"
+            color="primary">프로젝트 추가
+    </button>
+  </div>
+  <button *ngIf="layout.mobile$ | async"
+          class="fixed pos-be raise"
+          (click)="addProjects()"
+          type="button" mat-fab color="primary">
+    <i class="las la-plus"></i>
+  </button>
+</div>
+
+<div class="table-wrapper">
+  <div class="loading" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <table mat-table
+         [dataSource]="documents"
+         matSort
+         matSortActive="updatedAt"
+         matSortDisableClear
+         matSortDirection="desc">
+
+    <ng-container matColumnDef="no">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let row;let i = index">{{getNo(i)}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>프로젝트명</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.name}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="repository">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>저장소</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.fullName}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef>크기</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.size | number}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="owner">
+      <th mat-header-cell *matHeaderCellDef>소유자</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.owner?.user?.name}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="members">
+      <th mat-header-cell *matHeaderCellDef>멤버수</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.members?.length | number}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>생성일</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.createdAt | date: 'yyyy.MM.dd.'}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="updatedAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>수정일</th>
+      <td mat-cell *matCellDef="let row">
+        {{row.createdAt | date: 'yyyy.MM.dd.'}}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: columns"
+        [routerLink]="['/project', row._id]"
+        class="cursor pointer"></tr>
+
+    <tr class="mat-row empty-row" *matNoDataRow>
+      <td [attr.colspan]="columns.length" class="px">
+        <span class="px" *ngIf="emptySearchResults">검색된 프로젝트가 없습니다.</span>
+        <span class="px" *ngIf="emptyDocuments">등록된 프로젝트가 없습니다.</span>
+      </td>
+    </tr>
+  </table>
+  <mat-paginator [length]="total"
+                 [pageIndex]="page - 1"
+                 [pageSize]="limit"
+                 [pageSizeOptions]="limitOptions"
+                 *ngIf="limit < total"
+                 (page)="changePage($event)"></mat-paginator>
+</div>

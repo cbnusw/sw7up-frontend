@@ -8,4 +8,3 @@ export interface IGithubAccount {
   createdAt?: Date;
   updatedAt?: Date;
 }
-1
