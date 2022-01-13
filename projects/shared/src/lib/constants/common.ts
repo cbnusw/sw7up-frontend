@@ -51,4 +51,5 @@ export const QNA_CATEGORIES = [
   'Java 프로그래밍 기초',
   '운영체제의 이해',
   '웹 응용 프로그래밍',
+  '2022 예비대학'
 ];
