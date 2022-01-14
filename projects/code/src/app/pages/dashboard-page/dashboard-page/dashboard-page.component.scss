@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import "gmixin";
 @import "variables";
 
@@ -38,7 +39,7 @@
 
   .project-btn {
     position: absolute;
-    background-color: mat-color($code-primary);
+    background-color: mat.get-color-from-palette($code-primary);
 
     @include desktop {
       padding: 1rem 1.5rem;

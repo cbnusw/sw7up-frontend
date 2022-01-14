@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import "gmixin";
 @import "variables";
 
@@ -31,6 +32,6 @@
 
 .warn-color {
   td {
-    color: mat-color($admin-warn);
+    color: mat.get-color-from-palette($admin-warn);
   }
 }
