@@ -110,20 +110,6 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/main/tsconfig.app.json",
-              "projects/main/tsconfig.spec.json",
-              "projects/main/e2e/tsconfig.json",
-              "projects/main/tsconfig.server.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -268,8 +254,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "code:build",
-            "baseHref": "/code/"
+            "browserTarget": "code:build"
           },
           "configurations": {
             "production": {
@@ -298,19 +283,6 @@
               "projects/code/src/styles/styles.scss"
             ],
             "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/code/tsconfig.app.json",
-              "projects/code/tsconfig.spec.json",
-              "projects/code/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         },
         "e2e": {
@@ -434,19 +406,6 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/admin/tsconfig.app.json",
-              "projects/admin/tsconfig.spec.json",
-              "projects/admin/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -486,18 +445,6 @@
             "tsConfig": "projects/shared/tsconfig.spec.json",
             "karmaConfig": "projects/shared/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/shared/tsconfig.lib.json",
-              "projects/shared/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     },
@@ -525,18 +472,6 @@
             "main": "projects/ui/src/test.ts",
             "tsConfig": "projects/ui/tsconfig.spec.json",
             "karmaConfig": "projects/ui/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ui/tsconfig.lib.json",
-              "projects/ui/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
