@@ -22,7 +22,6 @@
             "main": "projects/main/src/main.ts",
             "polyfills": "projects/main/src/polyfills.ts",
             "tsConfig": "projects/main/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/main/src/favicon.ico",
               "projects/main/src/assets"
@@ -38,7 +37,13 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -68,7 +73,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -141,7 +147,9 @@
                 "global/styles",
                 "projects/main/src/styles"
               ]
-            }
+            },
+            "sourceMap": true,
+            "optimization": false
           },
           "configurations": {
             "production": {
@@ -155,7 +163,8 @@
               "sourceMap": false,
               "optimization": true
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
@@ -204,7 +213,6 @@
             "main": "projects/code/src/main.ts",
             "polyfills": "projects/code/src/polyfills.ts",
             "tsConfig": "projects/code/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/code/src/favicon.ico",
               "projects/code/src/assets"
@@ -218,7 +226,13 @@
             "styles": [
               "projects/code/src/styles/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -248,7 +262,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -331,7 +346,6 @@
             "main": "projects/admin/src/main.ts",
             "polyfills": "projects/admin/src/polyfills.ts",
             "tsConfig": "projects/admin/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/admin/src/favicon.ico",
               "projects/admin/src/assets"
@@ -347,7 +361,13 @@
             ],
             "scripts": [
               "node_modules/@ckeditor/ckeditor5-build-decoupled-document/build/translations/ko.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -377,7 +397,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
