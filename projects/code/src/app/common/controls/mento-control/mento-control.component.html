@@ -1,0 +1,27 @@
+<div *ngFor="let mento of value; let i = index"
+     class="grid grid-cols-1 lg:grid-cols-7 gap-2 p-1 border border-gray-200 bg-gray-50">
+  <input type="text"
+         class="lg:col-span-2"
+         [ngModel]="mento.name"
+         (ngModelChange)="changeName(mento,$event)"
+         swInput placeholder="멘토 이름">
+  <input type="text"
+         class="lg:col-span-2"
+         [ngModel]="mento.organization"
+         (ngModelChange)="changeOrganization(mento, $event)"
+         swInput placeholder="멘토 소속 기관">
+  <input type="text"
+         class="lg:col-span-2"
+         [ngModel]="mento.position"
+         (ngModelChange)="changePosition(mento, $event)"
+         swInput placeholder="멘토 직위">
+  <button type="button"
+          swButton swButtonSize="sm" swButtonColor="red"
+          (click)="removeMento(i)">삭제
+  </button>
+</div>
+<button type="button"
+        class="w-full"
+        swButton swButtonSize="sm" swButtonColor="blue"
+        (click)="addMento()">멘토추가
+</button>

@@ -1,0 +1,12 @@
+<div class="space-y-4">
+  <div class="flex flex-col space-y-2">
+    <label>프로젝트 종류</label>
+    <sw-select-control [ngModel]="value.type"
+                       (ngModelChange)="changeType($event)"
+                       [options]="typeOptions"></sw-select-control>
+  </div>
+  <div class="flex flex-col space-y-2">
+    <label>멘토</label>
+    <sw-mento-control [ngModel]="value.mentoList" (ngModelChange)="changeMento($event)"></sw-mento-control>
+  </div>
+</div>
