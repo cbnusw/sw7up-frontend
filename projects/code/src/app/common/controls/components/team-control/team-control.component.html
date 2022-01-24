@@ -1,0 +1,79 @@
+<button type="button"
+        *ngIf="!value; else teamRef"
+        (click)="addTeam()"
+        swButton swButtonSize="md" swButtonColor="dark"
+        class="w-full py-6">
+  팀 입력
+</button>
+
+<ng-template #teamRef>
+  <div class="flex justify-end items-center">
+    <button type="button"
+            (click)="removeTeam()"
+            class="p-2 bg-opacity-30 bg-white">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  <div class="grid grid-cols-2 gap-4">
+    <div class="space-y-4">
+
+      <sw-selectable-button-control [(ngModel)]="memberType"
+                                    [options]="memberTypeOptions"></sw-selectable-button-control>
+
+      <div *ngIf="memberType === 'joined'" class="space-y-2 flex flex-col">
+        <label>팀원 검색 <span class="text-xs">더블 클릭하여 추가</span></label>
+        <sw-account-list class="block" (selectChange)="addJoinedMember($event)"></sw-account-list>
+      </div>
+      <div *ngIf="memberType === 'notJoined'" class="space-y-2 flex flex-col">
+        <label>팀원(비회원) 정보 입력</label>
+        <sw-not-joined-member-control [(ngModel)]="notJoinedMember"
+                                      (memberChange)="addNotJoinedMember($event)"></sw-not-joined-member-control>
+      </div>
+    </div>
+    <div class="fles flex-col">
+      <label class="block mb-2">팀 이름</label>
+      <input class="block w-full mb-4"
+             [ngModel]="value.name"
+             (ngModelChange)="changeName($event)"
+             swInput placeholder="팀 이름 입력">
+      <label class="block mb-2">팀원 <span class="text-xs">더블 클릭하여 팀에서 제외</span></label>
+      <div class="bg-gray-200 mt-2 text-sm px-4 py-2">팀원(사업단 회원)</div>
+      <div class="h-30 overflow-y-scroll">
+        <div *ngIf="value.member.joined.length === 0"
+             class="border-b border-gray-200 text-sm text-red-600 px-4 py-2">
+          추가된 팀원(사업단 회원)이 없습니다.
+        </div>
+
+        <div *ngFor="let member of value?.member?.joined; let i = index"
+             (dblclick)="removeJoinedMember(i)"
+             class="striped border-b border-gray-200 cursor-pointer select-none flex items-center space-x-4">
+          <div class="px-4 py-2 flex flex-col">
+            <span class="text-sm">{{member.name}}</span>
+            <span class="text-xs">{{member.no}}</span>
+          </div>
+          <div class="text-sm px-4 py-2 col-span-2">{{member.department}}</div>
+        </div>
+      </div>
+
+      <div class="bg-gray-200 mt-2 text-sm px-4 py-2">팀원(비회원)</div>
+      <div class="h-30 overflow-y-scroll">
+        <div *ngIf="value.member.notJoined.length === 0"
+             class="border-b border-gray-200 text-sm text-red-600 px-4 py-2">
+          추가된 팀원(비회원)이 없습니다.
+        </div>
+
+        <div *ngFor="let member of value?.member?.notJoined; let i = index"
+             (dblclick)="removeNotJoinedMember(i)"
+             class="striped border-b border-gray-200 cursor-pointer select-none flex items-center space-x-4">
+          <div class="px-4 py-2 flex flex-col">
+            <span class="text-sm">{{member.name}}</span>
+            <span class="text-xs">{{member.no}}</span>
+          </div>
+          <div class="text-sm px-4 py-2 col-span-2">{{member.school}} {{member.department}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

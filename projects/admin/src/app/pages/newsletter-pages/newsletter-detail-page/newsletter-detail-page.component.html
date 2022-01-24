@@ -13,7 +13,7 @@
   <div class="header">
     <div class="title">{{newsletter?.title}}</div>
     <div class="info">
-      <span class="writer me">작성자: {{newsletter?.writer.name}}</span>
+      <span class="writer me">작성자: {{newsletter?.writer?.name}}</span>
       <span class="hits me-auto">조회수: {{newsletter?.hits | number}}</span>
       <span class="date">작성일: {{newsletter?.createdAt | date: 'yyyy.MM.dd.'}}</span>
     </div>
@@ -29,5 +29,3 @@
     </a>
   </div>
 </div>
-
-<pre>{{newsletter | json}}</pre>

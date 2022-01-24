@@ -1,4 +1,4 @@
-@import "~line-awesome/dist/line-awesome/css/line-awesome.css";
+//@import "~line-awesome/dist/line-awesome/css/line-awesome.css";
 //@import "variables";
 //// Include theme styles for core and each component used in your app.
 //// Alternatively, you can import and @include the theme mixins for each component
@@ -12,8 +12,6 @@
 @tailwind screens;
 
 /* You can add global styles to this file, and also import other style files */
-
-@import "global";
 
 
 .striped:hover {
@@ -30,4 +28,15 @@
 
 html, body {
   @apply bg-gray-50;
+}
+
+.error {
+  @apply text-red-700 text-xs;
+}
+
+.required {
+  &::after {
+    content: '*';
+    @apply text-red-700 text-xs;
+  }
 }

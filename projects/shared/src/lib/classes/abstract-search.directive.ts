@@ -76,11 +76,11 @@ export abstract class AbstractSearchDirective<T> implements OnInit, OnDestroy {
   }
 
   get emptyDocuments(): boolean {
-    return !this.keyword && this.total === 0;
+    return !this.loading && !this.keyword && this.total === 0;
   }
 
   get emptySearchResults(): boolean {
-    return this.keyword && this.total === 0;
+    return !this.loading && this.keyword && this.total === 0;
   }
 
   get keywordControl(): FormControl {

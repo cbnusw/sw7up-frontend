@@ -1,0 +1,63 @@
+<div class="flex space-x-2">
+  <button *ngIf="editMode && !uploadMode" type="button"
+          swDirectoryChooser
+          swButton swButtonSize="md" swButtonColor="dark"
+          class="w-full py-6"
+          (directoryChange)="changeDirectory($event)">
+    소스파일추가
+  </button>
+  <button *ngIf="value && editMode"
+          type="button"
+          (click)="editMode = false"
+          class="w-full h-20 flex justify-center items-center bg-gray-100 hover:bg-gray-200 border border-gray-300 select-none">
+    취소
+  </button>
+</div>
+
+<ng-container *ngIf="!editMode && !uploadMode">
+  <button type="button"
+          (click)="editMode = true"
+          swButton swButtonColor="green" swButtonSize="md" class="block w-full mb-4">
+    소스 파일 변경
+  </button>
+  <div class="bg-gray-200 px-4 py-2 flex items-center">
+    <span class="mr-auto">소스 목록</span>
+    <span class="text-sm text-gray-600">
+      총 {{value | numSelectedFiles | number}} 파일 / {{value | selectedFilesSize}}
+    </span>
+  </div>
+  <div class="h-96 overflow-y-scroll px-4 py-2 border-gray-200 border shadow-inner shadow-sm">
+    <sw-source-files [value]="value" (valueChange)="changeValue($event)"></sw-source-files>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="uploadMode">
+  <div class="bg-gray-200 px-4 py-2 flex items-center">
+    <span class="mr-auto">소스 목록</span>
+    <span class="text-sm text-gray-600">
+      총 {{entries | numSelectedFiles | number}} 파일 / {{entries | selectedFilesSize}}
+    </span>
+  </div>
+  <div class="h-96 overflow-y-scroll px-4 py-2 border-gray-200 border shadow-inner shadow-sm">
+    <sw-source-upload class="block" [entries]="entries"></sw-source-upload>
+  </div>
+  <div *ngIf="total > 0" class="text-xs text-right py-2 px-4">
+    {{count}} / {{total}}({{count / total | percent}})
+  </div>
+  <div *ngIf="total === 0" class="flex space-x-2 mt-4">
+    <button (click)="cancelUpload()"
+            [disabled]="uploading"
+            type="button"
+            swButton swButtonColor="gray" swButtonSize="md" class="block w-full disabled:bg-gray-200">
+      취소
+    </button>
+    <button (click)="upload()"
+            [disabled]="uploading"
+            type="button"
+            swButton swButtonColor="red" swButtonSize="md" class="block w-full disabled:bg-red-200">
+      업로드
+    </button>
+  </div>
+</ng-container>
+
+

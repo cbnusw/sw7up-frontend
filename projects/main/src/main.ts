@@ -8,7 +8,15 @@ if (environment.production) {
   enableProdMode();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function bootstrap(): void {
   platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
-});
+    .catch(err => console.error(err));
+}
+
+
+if (document.readyState === 'complete') {
+  bootstrap();
+} else {
+  document.addEventListener('DOMContentLoaded', bootstrap);
+}
+

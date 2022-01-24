@@ -6,8 +6,8 @@ import { AuthService } from 'shared';
 import { SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { ProjectService } from '../../../services/project.service';
-import { ILocalProject } from '../../../types/local-project';
 import { IMedia } from '../../../types/media';
+import { IProject } from '../../../types/project';
 import { TEntryList } from '../../../types/project-file';
 
 @Component({
@@ -19,7 +19,7 @@ export class LocalProjectPageComponent implements OnInit, OnDestroy {
 
   @ViewChild('slideRef') indicatorRef: SwiperComponent;
 
-  document: ILocalProject;
+  document: IProject;
   swiperConfig: SwiperOptions = {
     speed: 300,
     direction: 'horizontal',
@@ -46,12 +46,16 @@ export class LocalProjectPageComponent implements OnInit, OnDestroy {
       this.document.meta.reduce((acc, info) => acc + info.codes, 0) : 0;
   }
 
+  get totalComments(): number {
+    return this.document ?
+      this.document.meta && this.document.meta.reduce((acc, info) => acc + info.comments, 0) : 0;
+  }
+
   get source(): TEntryList {
-    return this.document && this.document.source as TEntryList;
+    return this.document.source;
   }
 
   chnageIndicator(index: number): void {
-    console.log(index);
     this.indicatorRef.setIndex(index, 300);
   }
 
@@ -60,12 +64,24 @@ export class LocalProjectPageComponent implements OnInit, OnDestroy {
     if (!yes) {
       return;
     }
-    this.projectService.removeLocalProject(this.document._id).subscribe(
+    this.projectService.removeProject(this.document._id).subscribe(
       () => {
         alert('프로젝트를 삭제하였습니다.');
         this.router.navigateByUrl('/pm/local');
       }
     );
+  }
+
+  approve(): void {
+    const yes = confirm(`해당 프로젝트를 승인 하시겠습니까?`);
+    if (!yes) {
+      return;
+    }
+    this.projectService.approve(this.document._id).subscribe(res => {
+      alert('승인하였습니다.');
+      const { approvedAt } = res.data;
+      this.document.approvedAt = approvedAt;
+    });
   }
 
   hideBanner(): void {
@@ -79,13 +95,14 @@ export class LocalProjectPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.route.params.pipe(
       map(params => params.id),
-      switchMap(id => this.projectService.getLocalProject(id))
+      switchMap(id => this.projectService.getProject(id))
     ).subscribe(
       res => this.document = res.data,
       err => {
         alert(`에러: ${err.message}`);
         this.router.navigateByUrl('/pm/local');
-      });
+      }
+    );
   }
 
   ngOnDestroy(): void {

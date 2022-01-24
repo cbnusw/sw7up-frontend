@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -40,6 +41,7 @@ import { GalleryPagesRoutingModule } from './gallery-pages-routing.module';
     FormsModule,
     DragDropModule,
     TextareaModule,
+    MatDatepickerModule,
   ]
 })
 export class GalleryPagesModule { }

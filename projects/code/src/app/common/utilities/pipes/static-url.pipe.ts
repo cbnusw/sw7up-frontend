@@ -12,7 +12,8 @@ export class StaticUrlPipe implements PipeTransform {
 
   transform(file: IProjectFile | null | undefined, emptyUrl?: string): SafeResourceUrl {
     if (file) {
-      return this.sanitizer.bypassSecurityTrustResourceUrl(file.path);
+      const path = file.path.replace(/^code-uploads/, '');
+      return this.sanitizer.bypassSecurityTrustResourceUrl(path);
     }
     return this.sanitizer.bypassSecurityTrustResourceUrl(emptyUrl || '');
   }

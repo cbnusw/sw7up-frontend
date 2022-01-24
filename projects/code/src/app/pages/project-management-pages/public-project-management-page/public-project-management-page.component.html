@@ -1,4 +1,4 @@
-<sw-page-header title="공개 프로젝트 관리">
+<sw-page-header title="{{auth.me?.role === 'student' ? '내 ' : ''}}공개 프로젝트 관리">
   <ng-container controls *ngIf="auth.isStudent">
     <a routerLink="/pm/public/register" swButton swButtonColor="blue" swButtonSize="xs">
       프로젝트 등록

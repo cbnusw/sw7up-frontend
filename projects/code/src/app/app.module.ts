@@ -1,3 +1,4 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,7 +15,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +34,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     PlotlyModule,
   ],
   providers: [
-    // { provide: APP_BASE_HREF, useValue: '/code/' }
+    { provide: APP_BASE_HREF, useValue: '/code/' }
   ],
   bootstrap: [AppComponent]
 })

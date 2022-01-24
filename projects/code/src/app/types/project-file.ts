@@ -38,8 +38,8 @@ export interface IProjectFile {
   path: string;       // 파일 경로(URL path)
   name: string;       // 원본 파일 명
   size: number;       // 파일 크기(bytes)
-  ref: string;        // 파일과 관련된 모델의 아이디
-  refType: string;    // 파일이 참조하는 모델 유형(파일과 관련된 모델명)
+  type: string;       // mimetype
+  project: string;    // 파일이 참조하는 프로젝트 아이디
   creator: IUserInfo; // 파일 생성자
   createdAt: Date;    // 파일 생성일
 }

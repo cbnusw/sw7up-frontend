@@ -9,7 +9,6 @@ import { IMedia } from '../../../types/media';
 export class MediaModalComponent {
 
   @Output() closeChange: EventEmitter<undefined> = new EventEmitter<undefined>();
-
   @Input() media: IMedia;
 
   private _open: boolean;

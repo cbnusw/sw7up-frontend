@@ -11,10 +11,9 @@ export class QnaWriterNamePipe implements PipeTransform {
       return '';
     }
     if (value.writer) {
-      return value.writer.name || '';
+      return value.writer?.name || '';
     } else {
-      return value.writerInfo.name || '';
+      return value.writerInfo?.name || '';
     }
   }
-
 }

@@ -1,0 +1,15 @@
+<div class="space-y-4">
+  <div class="flex flex-col space-y-2">
+    <label>교과목명</label>
+    <input swInput [ngModel]="value.name" (ngModelChange)="changeName($event)" placeholder="교과목명 입력">
+  </div>
+  <div class="flex flex-col space-y-2">
+    <label>담당교수</label>
+    <input swInput [ngModel]="value.professor" (ngModelChange)="changeProfessor($event)"
+           placeholder="담당교수명 입력">
+  </div>
+  <div class="flex flex-col space-y-2">
+    <label>멘토</label>
+    <sw-mento-control [ngModel]="value.mentoList" (ngModelChange)="changeMentoList($event)"></sw-mento-control>
+  </div>
+</div>

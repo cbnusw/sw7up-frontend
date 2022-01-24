@@ -17,16 +17,7 @@
     <div
       [ngClass]="{'ease-in duration-200 opacity-100 translate-y-0 sm:scale-100': open, 'ease-out duration-300 opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95': !open}"
       class="inline-block align-middle rounded-lg overflow-hidden transform transition-all">
-<!--      <div class="mb-5 mr-2 sm:mb-6 text-right">-->
-<!--        <button type="button"-->
-<!--                class="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none"-->
-<!--                (click)="closeModal()">-->
-<!--          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
-<!--            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>-->
-<!--          </svg>-->
-<!--        </button>-->
-<!--      </div>-->
-      <div class="w-screen sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl h-100">
+      <div class="w-screen sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl h-full">
         <sw-media-viewer *ngIf="this.open" [media]="media" [aspect]="false"></sw-media-viewer>
       </div>
     </div>

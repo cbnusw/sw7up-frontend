@@ -1,10 +1,14 @@
+import { IGithubAccount } from './github-account';
+import { IProjectCommitInfo } from './project';
+
 export interface IGithubProject {
-  repository: string;
+  url: string;
   fullName: string;
   name: string;
   description: string;
   size: number;
-  owner: string;
+  owner: IGithubAccount;
+  commits: IProjectCommitInfo[];
   createdAt: Date;
   updatedAt: Date;
 }

@@ -6,7 +6,7 @@ import { Directive, HostBinding } from '@angular/core';
 export class ButtonDirective {
 
   @HostBinding('class') classes =
-    'text-center border border-transparent font-medium shadow-sm text-white focus:outline-none';
+    'text-center border border-transparent font-medium shadow-md focus:outline-none';
 
   constructor() { }
 

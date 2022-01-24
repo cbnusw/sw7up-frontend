@@ -23,7 +23,13 @@ export class GithubAccountManagementPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.init();
+    this.init().then(
+      () => {
+        this.subscription.add(
+          this.githubService.accounts$.subscribe(accounts => this.accounts = accounts)
+        );
+      }
+    );
   }
 
   private async init(): Promise<void> {
@@ -37,10 +43,10 @@ export class GithubAccountManagementPageComponent implements OnInit {
             tap(() => this.router.navigateByUrl('/account/github')),
             map(res => res.data)
           ) : this.githubService.getMyGithubAccounts()
-        ),
-        switchMap(() => this.githubService.accounts$)
+        )
       ).subscribe(
-        accounts => this.accounts = accounts,
+        () => {
+        },
         err => alert(`계정 추가에 실패하였습니다.\n${err.error && err.error.message || err.message}`)
       );
     }

@@ -1,5 +1,6 @@
 <div class="bg-white px-4 py-6 border border-gray-300 shadow-sm">
-  <sw-search-control [formControl]="keywordControl"
+  <sw-search-control *ngIf="!emptyDocuments"
+                     [formControl]="keywordControl"
                      placeholder="프로젝트 검색(프로젝트 명)"
                      class="block w-full max-w-xl lg:max-w-md mb-8"></sw-search-control>
 
@@ -18,9 +19,14 @@
       </div>
       <div class="p-4 flex flex-col space-y-2">
         <div class="text-sm text-gray-700">작성자: {{document.creator.name}} | {{document.creator.department}}</div>
-        <div class="text-sm text-gray-700">팀원: {{document.team ? document.team.members.length : '-'}}</div>
+        <div class="text-sm text-gray-700">
+          팀원: {{getTeamSize(document) === 0 ? '-' : (getTeamSize(document) | number) + '명'}}
+        </div>
         <div class="text-sm text-gray-700">
           소스: {{document.source | numSelectedFiles:true | number}} 파일 / {{document.source | selectedFilesSize:true}}
+        </div>
+        <div class="text-sm text-gray-700">
+          승인 날짜: <span class="text-blue-700">{{document?.approvedAt ? (document?.approvedAt | date: 'yyyy-MM-dd') : '-'}}</span>
         </div>
       </div>
       <div class="flex justify-end select-none mt-4 px-4 pb-4">

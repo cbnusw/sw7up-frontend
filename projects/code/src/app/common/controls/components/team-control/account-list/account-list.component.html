@@ -1,0 +1,19 @@
+<sw-search-control [formControl]="keywordControl" placeholder="학번 또는 이름으로 팀원 검색"></sw-search-control>
+
+<div class="bg-gray-200 mt-2 text-sm px-4 py-2">학생 목록</div>
+<div class="h-30 overflow-y-scroll">
+  <div class="border-b border-gray-200" *ngIf="documents?.length === 0">
+    <div *ngIf="loading" class="text-sm text-gray-600 col-span-3 px-4 py-2">데이터 로딩 중...</div>
+    <div *ngIf="emptyDocuments" class="text-sm text-gray-600 col-span-3 px-4 py-2">등록된 회원이 없습니다.</div>
+    <div *ngIf="emptySearchResults" class="text-sm text-gray-600 col-span-3 px-4 py-2">결과가 없습니다.</div>
+  </div>
+  <div class="striped border-b border-gray-200 cursor-pointer select-none flex items-center space-x-4"
+       (dblclick)="selectMember(document)"
+       *ngFor="let document of documents">
+    <div class="px-4 py-2 flex flex-col">
+      <span class="text-sm">{{document.name}}</span>
+      <span class="text-xs">{{document.no}}</span>
+    </div>
+    <div class="text-sm px-4 py-2">{{document.department}}</div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { PlotlyViaCDNModule } from 'angular-plotly.js';
 import { SwiperModule } from 'swiper/angular';
 import { ControlsModule } from '../../common/controls/controls.module';
@@ -45,7 +46,9 @@ import { PublicProjectPageComponent } from './public-project-page/public-project
     SwiperModule,
     UtilitiesModule,
     SourceCodeModule,
-    PlotlyViaCDNModule
+    PlotlyViaCDNModule,
+    NgxChartsModule,
+    FormsModule,
   ]
 })
 export class ProjectManagementPagesModule { }

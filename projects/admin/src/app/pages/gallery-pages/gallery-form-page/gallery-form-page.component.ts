@@ -51,7 +51,8 @@ export class GalleryFormPageComponent extends AbstractFormDirective<IGallery, bo
   protected initFormGroup(fb: FormBuilder): FormGroup {
     return fb.group({
       title: [null, [Validators.required]],
-      pictures: [null, [Validators.required]]
+      pictures: [null, [Validators.required]],
+      createdAt: [new Date()],
     });
   }
 

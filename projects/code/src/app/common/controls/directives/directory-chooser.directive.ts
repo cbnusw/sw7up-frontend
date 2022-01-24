@@ -32,7 +32,9 @@ export class DirectoryChooserDirective implements OnInit {
       const files: File[] = Array.from((e.target as HTMLInputElement).files || []);
       const entries: TSelectableEntryList = [];
 
-      files.forEach(file => this._convertPathToEntryList(file, entries));
+      for (const file of files) {
+        this._convertPathToEntryList(file, entries);
+      }
 
       this.directoryChange.emit(entries);
       this.fileInput.value = '';
@@ -42,7 +44,6 @@ export class DirectoryChooserDirective implements OnInit {
   }
 
   private _convertPathToEntryList(file: File, root: TSelectableEntryList): void {
-
     if (!this._validateFile(file)) {
       return;
     }
@@ -74,7 +75,6 @@ export class DirectoryChooserDirective implements OnInit {
       selected: false,
       file,
     });
-    current.sort(compareTracedEntry);
   }
 
   private _validateFile(file: File): boolean {

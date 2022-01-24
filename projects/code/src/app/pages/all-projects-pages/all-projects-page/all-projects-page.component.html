@@ -1,0 +1,18 @@
+<div class="bg-white px-6 py-4 border border-gray-200 space-y-4">
+  <h1 class="font-bold text-xl">최근 등록된 프로젝트</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <div *ngFor="let project of projects" class="flex flex-col shadow">
+      <sw-media-thumbnail-viewer [media]="project.banners[0]"></sw-media-thumbnail-viewer>
+      <div class="p-2 space-y-4">
+        <h1 class="text-md font-bold truncate">{{project.name}}</h1>
+        <div class="text-xs text-gray-700">작성자: {{project.creator.name}} | {{project.creator.department}}</div>
+        <div class="flex justify-end select-none">
+          <a [routerLink]="['/projects', project._id]"
+             class=" shadow-md"
+             swButton swButtonColor="blue" swButtonSize="xs">자세히 보기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

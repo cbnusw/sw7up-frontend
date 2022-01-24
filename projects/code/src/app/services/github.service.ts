@@ -40,6 +40,12 @@ export class GithubService extends RequestBase {
     );
   }
 
+  removeGithubAccount(id: string): Observable<IResponse<IGithubAccount[]>> {
+    return this.http.delete(this.url`/${id}`).pipe(
+      switchMap(() => this.getMyGithubAccounts())
+    );
+  }
+
   private async init(): Promise<void> {
     const me: IUser = this.auth.me || await this.auth.me$.toPromise();
     if (me.role === 'student') {

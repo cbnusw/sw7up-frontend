@@ -7,7 +7,9 @@ export class RequestBase {
 
   protected static params(params?: IParams): HttpParams {
     const keys = Object.keys(params || {});
-    return keys.reduce((p, key) => p.set(key, String(params[key])), new HttpParams());
+    return keys
+      .filter(key => params[key] !== undefined)
+      .reduce((p, key) => p.set(key, String(params[key])), new HttpParams());
   }
 
   protected url(s: any, ...args: any): string {

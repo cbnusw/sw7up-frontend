@@ -4,9 +4,15 @@ import { Observable } from 'rxjs';
 import { IListResponse, IParams, IResponse, RequestBase } from 'shared';
 import { environment } from '../../environments/environment';
 import { IGithubProject } from '../types/github-project';
-import { ILocalProject } from '../types/local-project';
+import { IProject } from '../types/project';
 import { IProjectFile } from '../types/project-file';
-import { IPublicProject } from '../types/public-project';
+
+export declare type TProjectMetaName = 'files' | 'codes' | 'comments';
+
+export interface IProjectMetaResponse {
+  language: string;
+  count: number;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -21,80 +27,76 @@ export class ProjectService extends RequestBase {
     return this.http.get(this.url`/github/${accountId}`);
   }
 
-  getLocalProjects(params?: IParams): Observable<IListResponse<ILocalProject>> {
-    return this.http.get(this.url`/local`, { params: RequestBase.params(params) });
+  search(params?: IParams, isPublic?: boolean): Observable<IListResponse<IProject>> {
+    params = params ?? {};
+    if (isPublic !== undefined) {
+      params.isPublic = isPublic;
+    }
+    return this.http.get(this.url`/`, { params: RequestBase.params(params) });
   }
 
-  countLocalProjects(): Observable<IResponse<number>> {
-    return this.http.get(this.url`/local/count`);
+  countProjects(params?: IParams, isPublic?: boolean): Observable<IResponse<number>> {
+    params = params ?? {};
+    if (isPublic !== undefined) {
+      params.isPublic = isPublic;
+    }
+    return this.http.get(this.url`/count`, { params: RequestBase.params(params) });
   }
 
-  countLocalProjectFiles(): Observable<IResponse<number>> {
-    return this.http.get(this.url`/local/files/count`);
+  countProjectMetaInfo(metaName: TProjectMetaName, isPublic?: boolean, groupByLanguage?: boolean)
+    : Observable<IResponse<number | IProjectMetaResponse[]>> {
+    const params: IParams = { metaName, isPublic, groupByLanguage };
+    return this.http.get(this.url`/meta/count`, { params: RequestBase.params(params) });
   }
 
-  countLocalProjectCodes(): Observable<IResponse<number>> {
-    return this.http.get(this.url`/local/codes/count`);
+  searchMyProjects(params?: IParams, isPublic?: boolean): Observable<IListResponse<IProject>> {
+    params = params ?? {};
+    if (isPublic !== undefined) {
+      params.isPublic = isPublic;
+    }
+    return this.http.get(this.url`/me`, { params: RequestBase.params(params) });
   }
 
-  countLocalProjectFilesByLanguages(): Observable<IResponse<any>> {
-    return this.http.get(this.url`/local/language/files/count`);
+  countMyProjects(params?: IParams, isPublic?: boolean): Observable<IResponse<number>> {
+    params = params ?? {};
+    if (isPublic !== undefined) {
+      params.isPublic = isPublic;
+    }
+    return this.http.get(this.url`/me/count`);
   }
 
-  countLocalProjectCodesByLanguages(): Observable<IResponse<any>> {
-    return this.http.get(this.url`/local/language/codes/count`);
+  countMyProjectMetaInfo(metaName: TProjectMetaName, isPublic?: boolean, groupByLanguage?: boolean)
+    : Observable<IResponse<number | IProjectMetaResponse[]>> {
+    const params: IParams = { metaName, isPublic, groupByLanguage };
+    return this.http.get(this.url`/me/meta/count`, { params: RequestBase.params(params) });
   }
 
-  getMyLocalProjects(params?: IParams): Observable<IListResponse<ILocalProject>> {
-    return this.http.get(this.url`/local/me`, { params: RequestBase.params(params) });
+  getProject(id: string): Observable<IResponse<IProject>> {
+    return this.http.get(this.url`/${id}`);
   }
 
-  countMyLocalProjects(): Observable<IResponse<number>> {
-    return this.http.get(this.url`/local/me/count`);
+  downloadProject(id: string): Observable<IResponse<IProject>> {
+    return this.http.get(this.url`/${id}/download`);
   }
 
-  countMyLocalProjectFiles(): Observable<IResponse<number>> {
-    return this.http.get(this.url`/local/me/files/count`);
+  getProjectCodeText(id: string): Observable<IResponse<{ name: string; path: string; source: string; }>> {
+    return this.http.get(this.url`/${id}/source`);
   }
 
-  countMyLocalProjectCodes(): Observable<IResponse<number>> {
-    return this.http.get(this.url`/local/me/codes/count`);
-  }
-
-  countMyLocalProjectFilesByLanguages(): Observable<IResponse<any>> {
-    return this.http.get(this.url`/local/me/language/files/count`);
-  }
-
-  countMyLocalProjectCodesByLanguages(): Observable<IResponse<any>> {
-    return this.http.get(this.url`/local/me/language/codes/count`);
-  }
-
-  getLocalProject(id: string): Observable<IResponse<ILocalProject>> {
-    return this.http.get(this.url`/local/${id}`);
-  }
-
-  getPublicProjects(params?: IParams): Observable<IListResponse<IPublicProject>> {
-    return this.http.get(this.url`/public`, { params: RequestBase.params(params) });
-  }
-
-  getMyPublicProjects(params?: IParams): Observable<IListResponse<IPublicProject>> {
-    return this.http.get(this.url`/public/me`, { params: RequestBase.params(params) });
-  }
-
-  getPublicProject(id: string): Observable<IResponse<ILocalProject>> {
-    return this.http.get(this.url`/public/${id}`);
+  createProject(body: IProject): Observable<IResponse<IProject>> {
+    return this.http.post(this.url`/`, body);
   }
 
   createProjectId(): Observable<IResponse<string>> {
     return this.http.post(this.url`/id`, null);
   }
 
-  createLocalProject(body: ILocalProject): Observable<IResponse<ILocalProject>> {
-    return this.http.post(this.url`/local`, body);
+  updateProject(id: string, body: IProject): Observable<IResponse<IProject>> {
+    return this.http.put(this.url`/${id}`, body);
   }
 
-  createPublicProject(body: IPublicProject): Observable<IResponse<IPublicProject>> {
-    return this.http.post(this.url`/public`, body);
+  approve(id: string): Observable<IResponse<{ approvedAt: Date; }>> {
+    return this.http.patch(this.url`/${id}/approve`, null);
   }
 
   uploadProjectBanner(id: string, file: File | Blob, filename?: string): Observable<IResponse<IProjectFile>> {
@@ -119,19 +121,19 @@ export class ProjectService extends RequestBase {
     return this.http.post(this.url`/${id}/sources/${dirPath}`, formData);
   }
 
-  updateLocalProject(id: string, body: ILocalProject): Observable<IResponse<undefined>> {
+  updateLocalProject(id: string, body: IProject): Observable<IResponse<undefined>> {
     return this.http.put(this.url`/local/${id}`, body);
   }
 
-  updateGithubProject(id: string, body: IPublicProject): Observable<IResponse<undefined>> {
+  updateGithubProject(id: string, body: IProject): Observable<IResponse<undefined>> {
     return this.http.put(this.url`/public/${id}`, body);
   }
 
-  removeLocalProject(id: string): Observable<IResponse<undefined>> {
-    return this.http.delete(this.url`/local/${id}`);
+  removeProject(id: string): Observable<IResponse<undefined>> {
+    return this.http.delete(this.url`/${id}`);
   }
 
-  removePublicProject(id: string): Observable<IResponse<undefined>> {
-    return this.http.delete(this.url`/public/${id}`);
+  removeTemporarySources(id: string): Observable<IResponse<undefined>> {
+    return this.http.delete(this.url`/${id}/temp-sources`);
   }
 }

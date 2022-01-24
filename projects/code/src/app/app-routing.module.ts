@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardPageComponent },
   {
     path: 'projects',
-    loadChildren: () => import('./pages/all-projects-page/all-projects-page.module').then(m => m.AllProjectsPageModule)
+    loadChildren: () => import('./pages/all-projects-pages/all-projects-page.module').then(m => m.AllProjectsPageModule)
   },
   {
     path: 'pm',

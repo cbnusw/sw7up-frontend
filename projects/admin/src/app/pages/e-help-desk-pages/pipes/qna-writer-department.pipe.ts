@@ -11,9 +11,9 @@ export class QnaWriterDepartmentPipe implements PipeTransform {
       return '';
     }
     if (value.writer) {
-      return value.writer.department || '';
+      return value.writer?.department || '';
     } else {
-      return value.writerInfo.department || '';
+      return value.writerInfo?.department || '';
     }
   }
 

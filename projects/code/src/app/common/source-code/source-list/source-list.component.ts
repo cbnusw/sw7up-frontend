@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ProjectService } from '../../../services/project.service';
 import { IDirectoryEntry, TEntryList } from '../../../types/project-file';
 
 @Component({
@@ -9,8 +10,17 @@ import { IDirectoryEntry, TEntryList } from '../../../types/project-file';
 export class SourceListComponent implements OnInit {
 
   @Input() source: TEntryList;
+  code: { name: string; path: string; source: string; };
 
-  constructor() {
+  constructor(private projectService: ProjectService) {
+  }
+
+  showCode(id: string): void {
+    this.projectService.getProjectCodeText(id).subscribe(res => this.code = res.data);
+  }
+
+  hideCode(): void {
+    this.code = null;
   }
 
   ngOnInit(): void {

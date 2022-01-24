@@ -1,10 +1,10 @@
-<div [class.aspect-w-16]="aspect || media.link" [class.aspect-h-9]="aspect || media.link">
-  <iframe *ngIf="media.link; else imageRef" [src]="media.link | youtube" class="w-full"
+<div class="aspect-video">
+  <iframe *ngIf="media.link; else imageRef" [src]="media.link | youtube" class="w-full h-full"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen></iframe>
   <ng-template #imageRef>
     <img [src]="media?.file | staticUrl:'assets/images/no-image.jpg'"
-         class="object-center object-cover max-w-full max-h-screen mx-auto"
+         class="object-center object-cover w-full h-full mx-auto"
          alt="banner image">
   </ng-template>
 </div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
+import { DownloadSourceLinkPipe } from './pipes/download-source-link.pipe';
 import { SelectedFilesSizePipe } from './pipes/selected-file-size.pipe';
 import { StaticUrlPipe } from './pipes/static-url.pipe';
 import { FileSizePipe } from './pipes/file-size.pipe';
@@ -19,6 +20,7 @@ import { UnidentityPipe } from './pipes/unidentity.pipe';
     YoutubeThumbnailPipe,
     NumSelectedFilesPipe,
     UnidentityPipe,
+    DownloadSourceLinkPipe,
   ],
   imports: [
     CommonModule
@@ -31,6 +33,7 @@ import { UnidentityPipe } from './pipes/unidentity.pipe';
     YoutubeThumbnailPipe,
     NumSelectedFilesPipe,
     UnidentityPipe,
+    DownloadSourceLinkPipe,
   ],
   providers: [
     DecimalPipe
