@@ -1,16 +1,40 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { AbstractFormDirective, GalleryService, IGallery, PlatformService } from 'shared';
 import { ErrorMatcher } from '../../../classes/error-matcher';
 
+const DATE_FORMATS = {
+  parse: {
+    dateInput: 'YYYY-MM-DD',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'YYYY년 M월',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY년 M월'
+  }
+};
+
 @Component({
   selector: 'sw-gallery-form-page',
   templateUrl: './gallery-form-page.component.html',
-  styleUrls: ['./gallery-form-page.component.scss']
+  styleUrls: ['./gallery-form-page.component.scss'],
+  providers: [{
+    provide: DateAdapter,
+    useClass: MomentDateAdapter,
+    deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+  },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: DATE_FORMATS
+    }
+  ]
 })
 export class GalleryFormPageComponent extends AbstractFormDirective<IGallery, boolean> implements OnInit {
 
