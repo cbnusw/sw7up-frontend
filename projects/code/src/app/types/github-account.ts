@@ -5,6 +5,6 @@ export interface IGithubAccount {
   username: string;
   accessToken: string;
   user: IUserInfo;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: Date | null;
+  updatedAt: Date | null;
 }

@@ -1,15 +1,54 @@
-<button type="button"
-        *ngIf="!value && accountOptions.length === 0; else repoRef"
-        (click)="getGithubAccounts()"
-        class="w-full h-20 flex justify-center items-center bg-blue-500 hover:bg-blue-600 border border-blue-700 text-white select-none">
-  GitHub Repository 입력
-</button>
+<div *ngIf="value && !selectMode; else repoRef" class="space-y-2">
+  <div class="grid grid-cols-3 border border-gray-200">
+    <span class="p-2 bg-gray-50 border-b border-r border-gray-200">프로젝트명</span>
+    <span class="p-2 col-span-2 border-b border-gray-200">{{value.name}}</span>
+
+    <span class="p-2 bg-gray-50 border-b border-r border-gray-200">리파지토리 주소</span>
+    <span class="p-2 col-span-2 border-b border-gray-200">
+      <a [href]="value.url" target="_blank" class="text-blue-500">{{value.url}}</a>
+    </span>
+
+    <span class="p-2 bg-gray-50 border-b border-r border-gray-200">프로젝트 오너</span>
+    <span class="p-2 col-span-2 border-b border-gray-200">{{value.owner?.username}}</span>
+
+    <span class="p-2 bg-gray-50 border-r border-gray-200">프로젝트 설명</span>
+    <pre class="p-2 col-span-2 whitespace-pre-wrap">{{value.description || '-'}}</pre>
+  </div>
+  <button type="button"
+          class="w-full"
+          (click)="selectMode = true"
+          swButton swButtonSize="xs" swButtonColor="gray">프로젝트 다시 선택</button>
+</div>
 
 <ng-template #repoRef>
   <sw-select-control [options]="accountOptions"
                      placeholder="GitHub 계정 선택"
                      [ngModel]="selectedAccount"
-                     class="block w-1/2"
+                     class="block w-1/2 mb-4"
                      (ngModelChange)="changeAccount($event)"></sw-select-control>
-  <pre>{{githubRepos | json}}</pre>
+  <div *ngIf="!selectedAccount" class="text-blue-600">GitHub 계정을 선택하면 프로젝트를 가져옵니다.</div>
+  <div *ngIf="githubRepos.length > 0" class="text-blue-600">아래의 GitHub 프로젝트 중 하나를 선택하십시오.</div>
+  <ng-container *ngIf="selectedAccount">
+    <div class="grid grid-cols-4 border border-gray-200 bg-gray-100 font-bold">
+      <div class="p-2 col-span-2">프로젝트명</div>
+      <div class="p-2">소유자 계정</div>
+      <div class="p-2">생성일</div>
+    </div>
+    <div *ngIf="loading" class="p-2 border-b border-l border-r border-gray-200">프로젝트를 가져오는 중입니다.</div>
+    <div *ngIf="!loading && githubRepos.length === 0" class="p-2 border-b border-l border-r border-gray-200">
+      GitHub 프로젝트가 없습니다.
+    </div>
+    <div *ngFor="let repo of githubRepos"
+         class="grid grid-cols-4 border-b border-l border-r border-gray-200 cursor-pointer striped hover:bg-gray-100"
+         (click)="selectlProject(repo)">
+      <div class="p-2 col-span-2">{{repo.name}}</div>
+      <div class="p-2">{{repo.owner.username}}</div>
+      <div class="p-2">{{repo.createdAt | date:'yyyy-MM-dd'}}</div>
+    </div>
+    <button *ngIf="value"
+            type="button"
+            (click)="selectMode = false"
+            class="mt-2 w-full"
+            swButton swButtonSize="xs" swButtonColor="gray">취소</button>
+  </ng-container>
 </ng-template>

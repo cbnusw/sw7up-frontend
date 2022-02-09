@@ -34,7 +34,7 @@ export class ButtonColorDirective {
         this.classes = 'bg-fuchsia-600 hover:bg-fuchsia-700 focus:ring-fuchsia-500 text-white';
         break;
       case 'gray':
-        this.classes = 'bg-gray-200 hover:bg-blue-300 focus:ring-gray-100 text-gray-700';
+        this.classes = 'bg-gray-200 hover:bg-gray-300 focus:ring-gray-100 text-gray-700';
         break;
       case 'green':
         this.classes = 'bg-green-600 hover:bg-green-700 focus:ring-green-500 text-white';

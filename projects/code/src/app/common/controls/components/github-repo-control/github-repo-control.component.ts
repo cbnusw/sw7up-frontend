@@ -1,10 +1,10 @@
-import { Component, forwardRef, OnInit, Provider } from '@angular/core';
+import { Component, EventEmitter, forwardRef, OnInit, Output, Provider } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 import { IGithubAccount } from 'shared';
 import { GithubService } from '../../../../services/github.service';
 import { ProjectService } from '../../../../services/project.service';
-import { IGithubProject } from '../../../../types/github-project';
-import { IProjectRepository } from '../../../../types/project';
+import { IProjectRepository, IProjectTeam } from '../../../../types/project';
 import { ISelectOption } from '../../../../types/select-option';
 
 const VALUE_ACCESSOR: Provider = {
@@ -21,10 +21,14 @@ const VALUE_ACCESSOR: Provider = {
 })
 export class GithubRepoControlComponent implements ControlValueAccessor, OnInit {
 
+  @Output() teamChange: EventEmitter<IProjectTeam> = new EventEmitter<IProjectTeam>();
+
   value: IProjectRepository;
+  selectMode = false;
   selectedAccount: IGithubAccount;
-  accountOptions: ISelectOption<string>[] = [];
-  githubRepos: IGithubProject[] = [];
+  accountOptions: ISelectOption<IGithubAccount>[] = [];
+  githubRepos: IProjectRepository[] = [];
+  loading = false;
 
   private onChange: any;
   private onTouch: any;
@@ -33,18 +37,38 @@ export class GithubRepoControlComponent implements ControlValueAccessor, OnInit 
               private githubService: GithubService) {
   }
 
-  getGithubAccounts(): void {
-    this.githubService.getMyGithubAccounts().subscribe(
-      res => this.accountOptions = res.data.map(account => ({ viewValue: account.username, value: account._id }))
-    );
+  changeAccount(account: IGithubAccount): void {
+    if (this.selectedAccount?._id === account._id) {
+      return;
+    }
+    this.selectedAccount = account;
+    if (account) {
+      this.githubRepos = [];
+      this.loading = true;
+      this.projectService.getGithubProjects(account._id)
+        .pipe(finalize(() => this.loading = false))
+        .subscribe(
+          res => this.githubRepos = res.data
+        );
+    }
   }
 
-  changeAccount(accountId: string): void {
-    if (accountId) {
-      this.projectService.getGithubProjects(accountId).subscribe(
-        res => this.githubRepos = res.data
-      );
+  selectlProject(project: IProjectRepository): void {
+    const yes = confirm(`${project.name}로 등록하시겠습니까?`);
+    if (!yes) {
+      return;
     }
+    this.value = project;
+    const team: IProjectTeam = {
+      name: null,
+      member: {
+        joined: [],
+        notJoined: [],
+        github: project.commitInfo.map(info => info.committer),
+      }
+    };
+    this.change();
+    this.teamChange.emit(team);
   }
 
   registerOnChange(fn: any): void {
@@ -60,5 +84,14 @@ export class GithubRepoControlComponent implements ControlValueAccessor, OnInit 
   }
 
   ngOnInit(): void {
+    this.githubService.getMyGithubAccounts().subscribe(
+      res => this.accountOptions = res.data.map(account => ({ viewValue: account.username, value: account }))
+    );
+  }
+
+  private change(): void {
+    if (this.onChange) {
+      this.onChange(this.value);
+    }
   }
 }

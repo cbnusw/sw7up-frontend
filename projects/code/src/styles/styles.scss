@@ -14,16 +14,12 @@
 /* You can add global styles to this file, and also import other style files */
 
 
-.striped:hover {
-  @apply bg-gray-100;
-}
+//.striped:hover {
+//  @apply bg-gray-100;
+//}
 
 .striped:nth-child(even) {
   @apply bg-gray-50;
-
-  &:hover {
-    @apply bg-gray-100;
-  }
 }
 
 html, body {

@@ -70,8 +70,8 @@ export interface IProjectDocument {
 }
 
 export interface IProjectCommitInfo {
-  commiter: IGithubAccount;
-  commit: number;
+  committer: IGithubAccount;
+  numOfCommits: number;
 }
 
 export interface IProjectRepository {

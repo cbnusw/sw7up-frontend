@@ -21,8 +21,10 @@
 
 <h3 class="course-list-title mt-2 mb-2">강의목록 - 2학기</h3>
 <div class="courses-wrapper">
-  <a class="course-cover shadow"
-     [routerLink]="course?.link"
+  <a class="course-cover shadow cursor"
+     [class.pointer]="!!course?.link"
+     [class.not-allowed]="!course?.link"
+     (click)="movePage(course?.link)"
      [swBackgroundImage]="course.background"
      swBackgroundSize="contain"
      swBackgroundPosition="center center"

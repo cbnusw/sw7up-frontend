@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IListResponse, IParams, IResponse, RequestBase } from 'shared';
 import { environment } from '../../environments/environment';
-import { IGithubProject } from '../types/github-project';
-import { IProject } from '../types/project';
+import { IProject, IProjectRepository } from '../types/project';
 import { IProjectFile } from '../types/project-file';
 
 export declare type TProjectMetaName = 'files' | 'codes' | 'comments';
@@ -23,7 +22,7 @@ export class ProjectService extends RequestBase {
     super(`${environment.codeHost}/projects`);
   }
 
-  getGithubProjects(accountId: string): Observable<IResponse<IGithubProject[]>> {
+  getGithubProjects(accountId: string): Observable<IResponse<IProjectRepository[]>> {
     return this.http.get(this.url`/github/${accountId}`);
   }
 

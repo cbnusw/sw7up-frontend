@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sw-easy-page',
@@ -71,11 +72,23 @@ export class EasyPageComponent implements OnInit {
       background: 'assets/images/education/easy/cover04.jpg',
       link: '/education/easy/10'
     },
+    {
+      type: '이론+실습',
+      title: '인공지능융합의 이해',
+      background: 'assets/images/education/easy/cover05.jpg',
+      // link: '/education/easy/10'
+    },
   ];
 
-  constructor() { }
+  constructor(private router: Router) {
+  }
+
+  movePage(link: string): void {
+    if (link) {
+      this.router.navigateByUrl(link);
+    }
+  }
 
   ngOnInit(): void {
   }
-
 }

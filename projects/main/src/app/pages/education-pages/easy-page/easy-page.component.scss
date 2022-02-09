@@ -7,7 +7,7 @@
 .courses-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: start;
 
   @include mobile {
     justify-content: center;

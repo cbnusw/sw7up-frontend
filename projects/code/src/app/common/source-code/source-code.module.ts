@@ -2,15 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageModule } from '../page/page.module';
 import { UtilitiesModule } from '../utilities/utilities.module';
-import { CodeViewerModalComponent } from './code-viewer-modal/code-viewer-modal.component';
-import { SourceListComponent } from './source-list/source-list.component';
+import { CodeViewerModalComponent } from './components/code-viewer-modal/code-viewer-modal.component';
+import { SourceListComponent } from './components/source-list/source-list.component';
+import { CodeLinesPipe } from './pipes/code-lines.pipe';
 
 
 
 @NgModule({
   declarations: [
     SourceListComponent,
-    CodeViewerModalComponent
+    CodeViewerModalComponent,
+    CodeLinesPipe
   ],
   imports: [
     CommonModule,

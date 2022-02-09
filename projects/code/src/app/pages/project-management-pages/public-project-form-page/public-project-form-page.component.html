@@ -70,7 +70,22 @@
   </sw-section>
 
   <sw-section title="GitHub">
-    <sw-github-repo-control></sw-github-repo-control>
+    <sw-github-repo-control formControlName="repo" (teamChange)="changeTeam($event)"></sw-github-repo-control>
+  </sw-section>
+
+  <sw-section title="팀">
+    <div *ngIf="!team; else teamRef" class="text-blue-500">GitHub 프로젝트를 선택하면 자동으로 팀이 등록됩니다.</div>
+    <ng-template #teamRef>
+      <div class="grid grid-cols-2 border border-gray-200 bg-gray-100">
+        <span class="p-2">GitHub 계정</span>
+        <span class="p-2">연결된 사용자</span>
+      </div>
+      <div *ngFor="let member of team.member.github" class="grid grid-cols-2 border-b border-l border-r border-gray-200 striped">
+        <span class="p-2">{{member.username}}</span>
+        <span class="p-2" *ngIf="member.user">{{member.user.name}} | {{member.user.department}}</span>
+        <span class="p-2 text-gray-600" *ngIf="!member.user">연결된 사용자가 없습니다.</span>
+      </div>
+    </ng-template>
   </sw-section>
 
   <sw-section title="오픈소스">

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProjectService } from '../../../services/project.service';
-import { IDirectoryEntry, TEntryList } from '../../../types/project-file';
+import { ProjectService } from '../../../../services/project.service';
+import { IDirectoryEntry, TEntryList } from '../../../../types/project-file';
 
 @Component({
   selector: 'sw-source-list',

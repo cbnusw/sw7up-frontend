@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AbstractFormDirective, IResponse } from 'shared';
 import { ProjectService } from '../../../services/project.service';
-import { IProject, PROJECT_TYPES, SEMESTERS, TProejctType, TSemester } from '../../../types/project';
+import { IProject, IProjectTeam, PROJECT_TYPES, SEMESTERS, TProejctType, TSemester } from '../../../types/project';
 import { ISelectOption } from '../../../types/select-option';
 
 @Component({
@@ -49,6 +49,14 @@ export class PublicProjectFormPageComponent extends AbstractFormDirective<IProje
 
   get projectType(): TProejctType {
     return this.formGroup.get('projectType').value as TProejctType;
+  }
+
+  get team(): IProjectTeam {
+    return this.formGroup.get('team').value as IProjectTeam;
+  }
+
+  changeTeam(team: IProjectTeam): void {
+    this.formGroup.get('team').patchValue(team);
   }
 
   ngOnInit(): void {
@@ -101,5 +109,4 @@ export class PublicProjectFormPageComponent extends AbstractFormDirective<IProje
       this.projectService.updateProject(this.model._id, m) : this.projectService.createProject(m);
     return observable.pipe(map(res => res.success));
   }
-
 }

@@ -28,6 +28,10 @@ body {
   &.grabbing {
     cursor: grabbing;
   }
+
+  &.not-allowed {
+    cursor: not-allowed;
+  }
 }
 
 .select-none {
