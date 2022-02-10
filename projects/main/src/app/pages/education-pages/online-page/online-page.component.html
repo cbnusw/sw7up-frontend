@@ -6,7 +6,7 @@
       <div class="edu-card transition-3d-hover">
         <div class="edu-card-header">2019년(개발완료)</div>
         <div class="edu-card-description">
-          <div>IoT 구현을 위한 아두이노 코딩</div>
+          <div>아두이노 프로그래밍</div>
         </div>
       </div>
     </div>
@@ -22,9 +22,11 @@
     </div>
     <div class="col-12 col-lg-4 mb-2">
       <div class="edu-card transition-3d-hover">
-        <div class="edu-card-header">2021년(개발예정)</div>
+        <div class="edu-card-header">2021년(개발완료)</div>
         <div class="edu-card-description">
-          <div>스크래치</div>
+          <div>파이썬 프로그래밍</div>
+          <div>인공지능</div>
+          <div>빅데이터분석 시각화</div>
         </div>
       </div>
     </div>
@@ -32,7 +34,7 @@
       <div class="edu-card transition-3d-hover">
         <div class="edu-card-header">2022년(개발예정)</div>
         <div class="edu-card-description">
-          <div>파이썬 프로그래밍</div>
+          <div>드론 프로그래밍</div>
         </div>
       </div>
     </div>
@@ -59,7 +61,7 @@
   <div class="label">온라인 공개 강좌 사이트 CBNU-MOOC 운영</div>
   <div class="content">- 온라인을 통해서 누구나, 어디서나 무료강의를 들을 수 있으며, 수강인증서를 제고하는 온라인 공개 강좌 사이트</div>
   <div class="content">- 사이트 가기: <a href="https://www.edwith.org/ptnr/cbnu">https://www.edwith.org/ptnr/cbnu</a></div>
-  <div class="content">- 2020년 운영 강좌</div>
+  <div class="content">- 2022년 운영 강좌</div>
   <div class="table-responsive mt-2">
     <table class="table table-striped table-sm" style="font-size:0.9rem;">
       <thead>
@@ -76,32 +78,13 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td class="text-dark">1</td>
-        <td class="text-dark">IoT 구현을 위한 아두이노 코딩</td>
+      <tr *ngFor="let lecture of moocLectures; let i = index;">
+        <td class="text-dark">{{i + 1}}</td>
+        <td class="text-dark">{{lecture.name}}</td>
         <td class="text-dark">
-          <a class="text-primary" href="https://www.edwith.org/arduinoprogram">https://www.edwith.org/arduinoprogram</a>
-        </td>
-      </tr>
-      <tr>
-        <td class="text-dark">2</td>
-        <td class="text-dark">정보기술의 이해</td>
-        <td class="text-dark">
-          <a class="text-primary" href="https://www.edwith.org/info01">https://www.edwith.org/info01</a>
-        </td>
-      </tr>
-      <tr>
-        <td class="text-dark">3</td>
-        <td class="text-dark">컴퓨팅 사고력 기르기</td>
-        <td class="text-dark">
-          <a class="text-primary" href="https://www.edwith.org/comthink">https://www.edwith.org/comthink</a>
-        </td>
-      </tr>
-      <tr>
-        <td class="text-dark">4</td>
-        <td class="text-dark">스마트홈 구축을 위한 아두이노 센서 활용</td>
-        <td class="text-dark">
-          <a class="text-primary" href="https://www.edwith.org/iotsensor">https://www.edwith.org/iotsensor</a>
+          <a class="text-primary" [href]="lecture.link" target="_blank">
+            바로가기<i class="las la-chevron-right ms-2"></i>
+          </a>
         </td>
       </tr>
       </tbody>
@@ -110,7 +93,7 @@
 </div>
 
 <div class="contents-container mt-4">
-  <div class="label">KOCW를 통해 SW 강좌 듣기(충북대학교 교수님)</div>
+  <div class="label">KOCW를 통해 SW 강좌 듣기(충북대학교 교수)</div>
   <div class="content">- 청소년/일반인/초・중등교사/재직자 대상 KOCW 9강좌(기초강좌, SW전공강좌, 융합강좌) 온라인 강좌 제공</div>
   <div class="content">
     - 사이트 가기: <a href="http://www.kocw.net/home/index.do">http://www.kocw.net/home/index.do</a>
@@ -129,69 +112,20 @@
         <th scope="col" class="w-40">
           <div class="h6 text-dark">대상자</div>
         </th>
+        <th scope="col" class="w-40">
+          <div class="h6 text-dark">강좌 바로가기</div>
+        </th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td class="text-dark">1</td>
-        <td class="text-dark">응용컴퓨터프로그래밍</td>
+      <tr *ngFor="let lecture of kocwLectures; let i = index;">
+        <td class="text-dark">{{i + 1}}</td>
+        <td class="text-dark">{{lecture.name}}</td>
+        <td class="text-dark">{{lecture.target}}</td>
         <td class="text-dark">
-          청소년/일반인/초・중등교사
-        </td>
-      </tr>
-      <tr>
-        <td class="text-dark">2</td>
-        <td class="text-dark">웹기반프로그래밍</td>
-        <td class="text-dark">
-          청소년/일반인/초・중등교사
-        </td>
-      </tr>
-      <tr>
-        <td class="text-dark">3</td>
-        <td class="text-dark">자료구조</td>
-        <td class="text-dark">
-          청소년/일반인/초・중등교사
-        </td>
-      </tr>
-      <tr>
-        <td class="text-dark">4</td>
-        <td class="text-dark">자바프로그래밍</td>
-        <td class="text-dark">
-          청소년/일반인/초・중등교사
-        </td>
-      </tr>
-      <tr>
-        <td class="text-dark">5</td>
-        <td class="text-dark">운영체제</td>
-        <td class="text-dark">
-          재직자
-        </td>
-      </tr>
-      <tr>
-        <td class="text-dark">6</td>
-        <td class="text-dark">인공지능</td>
-        <td class="text-dark">
-          재직자
-        </td>
-      </tr>
-      <tr>
-        <td class="text-dark">7</td>
-        <td class="text-dark">선형대수학</td>
-        <td class="text-dark">
-          대학생/일반인
-        </td>
-      </tr>
-      <tr>
-        <td class="text-dark">8</td>
-        <td class="text-dark">컴퓨터그래픽스</td>
-        <td class="text-dark">
-          대학생/일반인
-        </td>
-      </tr><tr>
-        <td class="text-dark">9</td>
-        <td class="text-dark">인간상호작용프로그래밍</td>
-        <td class="text-dark">
-          청소년/일반인/초・중등교사
+          <a class="text-primary" [href]="lecture.link" target="_blank">
+            바로가기<i class="las la-chevron-right ms-2"></i>
+          </a>
         </td>
       </tr>
       </tbody>

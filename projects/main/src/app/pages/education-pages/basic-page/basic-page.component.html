@@ -1,38 +1,92 @@
-<div class="contents-container mt-4">
-  <div class="label">소개</div>
-  <div class="content text-indent">
-    - IT 교양 역량을 겸비한 디지털 시대의 소프트웨어 마인드를 갖춘 인재 양성을 위해 예비대학생대상으로 SW기초교양 교육을 실시하여 학점 부여
-  </div>
+<div class="responsive-tabs">
+  <ul class="nav nav-tabs mb-4">
+    <li class="nav-item" *ngFor="let tab of tabs">
+      <a class="nav-link cursor pointer"
+         [class.active]="selectedTab === tab"
+         (click)="changeType(tab)">{{tab}}</a>
+    </li>
+  </ul>
 </div>
 
-<div class="row pt-4 mt-4">
-  <div class="col-12 col-lg-6">
-    <div class="contents-container">
-      <div class="label">대상자</div>
-      <div class="content text-indent">- 충북대학교 수시 합격자(전계열)</div>
+<ng-container [ngSwitch]="selectedTab">
+  <ng-container *ngSwitchCase="tabs[0]">
+    <div class="contents-container mt-4">
+      <div class="label">소개</div>
+      <div class="content text-indent">
+        - IT 교양 역량을 겸비한 디지털 시대의 소프트웨어 마인드를 갖춘 인재 양성을 위해 예비대학생대상으로 SW기초교양 교육을 실시하여 학점 부여
+      </div>
     </div>
-  </div>
-  <div class="col-12 col-lg-6 pt-4 mt-4 pt-lg-0 mt-lg-0">
-    <div class="contents-container">
-      <div class="label">인원</div>
-      <div class="content text-indent">- 210명</div>
-    </div>
-  </div>
-</div>
 
-<div class="contents-container pt-4 mt-4">
-  <div class="label">교과목</div>
-  <div class="row mt-4">
-    <div class="col-12 col-lg-6">
-      <div class="edu-card">
-        <div class="edu-card-header">컴퓨팅 사고력 기르기</div>
-        <div class="edu-card-description">
-          <div>매년 동계방학 중 (8일)</div>
-          <div>교양 3학점 인정</div>
-          <div>온라인(CBNU-MOOC) + 오프라인 병행</div>
-          <div>SW 기초교양 교육</div>
+    <div class="row pt-4 mt-4">
+      <div class="col-12 col-lg-6">
+        <div class="contents-container">
+          <div class="label">대상자</div>
+          <div class="content text-indent">- 충북대학교 수시 합격자(전계열)</div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6 pt-4 mt-4 pt-lg-0 mt-lg-0">
+        <div class="contents-container">
+          <div class="label">인원</div>
+          <div class="content text-indent">- 250명</div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+
+    <div class="contents-container pt-4 mt-4">
+      <div class="label">교과목</div>
+      <div class="row mt-4">
+        <div class="col-12 col-lg-6">
+          <div class="edu-card">
+            <div class="edu-card-header">컴퓨팅 사고력 기르기</div>
+            <div class="edu-card-description">
+              <div>매년 동계방학 중 (10일)</div>
+              <div>교양 3학점 인정</div>
+              <div>온라인(CBNU-MOOC) + 오프라인(또는 실시간 온라인) 병행</div>
+              <div>SW 기초교양 교육</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="tabs[1]">
+    <div class="contents-container mt-4">
+      <div class="label">소개</div>
+      <div class="content text-indent">
+        - 4차 산업혁명 시대에 핵심적 능력 중 하나인 SW 활용 능력이다. SW 체험 교육은 비전공자를 대상으로 SW활용 능력을 향상시킬 수 있는 다양한 SW체험을 실시
+      </div>
+    </div>
+
+    <div class="row pt-4 mt-4">
+      <div class="col-12 col-lg-6">
+        <div class="contents-container">
+          <div class="label">대상자</div>
+          <div class="content text-indent">- 충북도내 초중고, 대학생, 재직자, 일반인</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row pt-4 mt-4">
+      <div class="col-12 col-lg-6">
+        <div class="contents-container">
+          <div class="label">프로그램</div>
+          <div class="content text-indent">- SW멘토링</div>
+          <div class="content text-indent">- AI SW 교육</div>
+          <div class="content text-indent">- SW영재 캠프</div>
+          <div class="content text-indent">- SW체험 특강 등</div>
+        </div>
+      </div>
+<!--      <div class="col-12 col-lg-6">-->
+<!--        <div class="flex mb-2">-->
+<!--          <img class="me-2" src="assets/images/noimage.jpeg" alt="image"/>-->
+<!--          <img src="assets/images/noimage.jpeg" alt="image"/>-->
+<!--        </div>-->
+<!--        <div class="flex">-->
+<!--          <img class="me-2" src="assets/images/noimage.jpeg" alt="image"/>-->
+<!--          <img src="assets/images/noimage.jpeg" alt="image"/>-->
+<!--        </div>-->
+<!--      </div>-->
+    </div>
+
+  </ng-container>
+</ng-container>

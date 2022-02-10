@@ -1,1 +1,12 @@
 @import "body";
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+
+  @include mobile {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
