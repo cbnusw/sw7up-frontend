@@ -6,7 +6,7 @@ import { StaticUrlPipe } from './pipes/static-url.pipe';
 import { FileSizePipe } from './pipes/file-size.pipe';
 import { YoutubePipe } from './pipes/youtube.pipe';
 import { YoutubeThumbnailPipe } from './pipes/youtub-thumbnail.pipe';
-import { NumSelectedFilesPipe } from './pipes/num-selected-files.pipe';
+import { NumOfFilesPipe } from './pipes/num-selected-files.pipe';
 import { UnidentityPipe } from './pipes/unidentity.pipe';
 
 
@@ -18,7 +18,7 @@ import { UnidentityPipe } from './pipes/unidentity.pipe';
     YoutubePipe,
     SelectedFilesSizePipe,
     YoutubeThumbnailPipe,
-    NumSelectedFilesPipe,
+    NumOfFilesPipe,
     UnidentityPipe,
     DownloadSourceLinkPipe,
   ],
@@ -31,7 +31,7 @@ import { UnidentityPipe } from './pipes/unidentity.pipe';
     YoutubePipe,
     SelectedFilesSizePipe,
     YoutubeThumbnailPipe,
-    NumSelectedFilesPipe,
+    NumOfFilesPipe,
     UnidentityPipe,
     DownloadSourceLinkPipe,
   ],

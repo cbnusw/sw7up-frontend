@@ -90,6 +90,7 @@ export interface IProject {
   _id?: string;
   banners: IProjectBanner[];      // 프로젝트 소개 영상/이미지
   name: string;                   // 프로젝트명
+  department: string;             // 학과
   grade: number;                  // 프로젝트 수행 당시 학년
   year: number;                   // 프로젝트 수행 연도
   semester: TSemester;            // 프로젝트 수행 학기

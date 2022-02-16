@@ -74,13 +74,14 @@
                        formControlName="source"></sw-source-control>
   </sw-section>
 
+  <sw-section title="팀">
+    <sw-team-control formControlName="team"></sw-team-control>
+  </sw-section>
+
   <sw-section title="오픈소스">
     <sw-oss-control formControlName="ossList"></sw-oss-control>
   </sw-section>
 
-  <sw-section title="팀">
-    <sw-team-control formControlName="team"></sw-team-control>
-  </sw-section>
 
   <sw-section title="보고서">
     <sw-document-control [projectId]="id" formControlName="documents"></sw-document-control>

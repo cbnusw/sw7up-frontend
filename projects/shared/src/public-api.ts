@@ -9,6 +9,7 @@ export * from './lib/classes/api-base';
 export * from './lib/classes/request-base';
 
 // export constants
+export * from './lib/constants/common';
 export * from './lib/constants/error-code';
 export * from './lib/constants/patterns';
 

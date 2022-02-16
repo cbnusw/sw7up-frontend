@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { AbstractFormDirective, IResponse } from 'shared';
+import { filter, map, switchMap, take } from 'rxjs/operators';
+import { AbstractFormDirective, AuthService, IResponse } from 'shared';
 import { ProjectService } from '../../../services/project.service';
 import { IProject, IProjectTeam, PROJECT_TYPES, SEMESTERS, TProejctType, TSemester } from '../../../types/project';
+import { TEntryList } from '../../../types/project-file';
 import { ISelectOption } from '../../../types/select-option';
 
 @Component({
@@ -27,10 +28,12 @@ export class PublicProjectFormPageComponent extends AbstractFormDirective<IProje
   ];
 
   yearOptions: ISelectOption<number>[] = [];
+  cloning: boolean;
 
   projectTypeOptions: ISelectOption<TProejctType>[] = PROJECT_TYPES.map(t => ({ value: t }));
 
   constructor(private projectService: ProjectService,
+              private auth: AuthService,
               private route: ActivatedRoute,
               private router: Router,
               fb: FormBuilder) {
@@ -55,12 +58,33 @@ export class PublicProjectFormPageComponent extends AbstractFormDirective<IProje
     return this.formGroup.get('team').value as IProjectTeam;
   }
 
+  get isPublic(): boolean {
+    return this.formGroup.get('isPublic').value;
+  }
+
   changeTeam(team: IProjectTeam): void {
     this.formGroup.get('team').patchValue(team);
   }
 
+  changeCloning(cloning: boolean): void {
+    this.cloning = cloning;
+  }
+
+  changeSource(entries: TEntryList): void {
+    this.formGroup.get('source').setValue(entries);
+  }
+
   ngOnInit(): void {
     super.ngOnInit();
+    this.auth.me$.pipe(
+      filter(me => !!me),
+      take(1)
+    ).subscribe(me => {
+      if (me.role === 'student') {
+        this.formGroup.get('department').setValue(me.info.department);
+      }
+    });
+
     this.addSubscriptions(
       this.route.params.pipe(
         map(params => params.id),
@@ -78,7 +102,7 @@ export class PublicProjectFormPageComponent extends AbstractFormDirective<IProje
   }
 
   protected async processAfterSubmission(s: boolean): Promise<void> {
-    await this.router.navigateByUrl('/pm/public');
+    await this.router.navigate(['/pm/projects', this.id]);
   }
 
   protected initFormGroup(fb: FormBuilder): FormGroup {
@@ -89,16 +113,18 @@ export class PublicProjectFormPageComponent extends AbstractFormDirective<IProje
       _id: [null, [Validators.required]],
       banners: [null],
       name: [null, [Validators.required]],
+      department: [null, [Validators.required]],
       grade: [null],
       year: [null],
       semester: [null],
       description: [null, [descriptionValidator]],
-      isPublic: [true],
       projectType: ['교과목프로젝트'],
       subject: [null],
       ownProject: [null],
-      ossList: [null],
+      isPublic: [true],
+      source: [null, [Validators.required]],
       team: [null],
+      ossList: [null],
       documents: [null],
       repo: [null, [Validators.required]]
     });

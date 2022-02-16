@@ -1,0 +1,39 @@
+<div class="space-y-4">
+  <div class="grid grid-cols-3 gap-2">
+    <sw-project-summary-item title="프로젝트" [value]="projects"></sw-project-summary-item>
+    <sw-project-summary-item title="파일" [value]="files"></sw-project-summary-item>
+    <sw-project-summary-item title="코드" [value]="codes"></sw-project-summary-item>
+  </div>
+
+
+  <div class="flex flex-col bg-white p-4 border border-gray-200 shadow-sm p-2 space-y-8 overflow-x-scroll items-center">
+    <sw-selectable-button-control [ngModel]="graphMeta"
+                                  (ngModelChange)="setGraphMeta($event)"
+                                  [options]="graphOptions"></sw-selectable-button-control>
+    <!--      <plotly-plot [data]="graphData[0]"--><!--                   [config]="config"></plotly-plot>-->
+    <ng-container *ngFor="let key of graphKeys">
+      <div [style.height]="GRAPH_HEIGHT + 'px'" *ngIf="graphMeta === key && !graphData[key]">데이터 로딩 중...</div>
+      <ngx-charts-bar-vertical *ngIf="graphMeta === key && graphData[key]"
+                               class="block mx-auto"
+                               [results]="graphData[key].data"
+                               [view]="[undefined, GRAPH_HEIGHT]"
+                               [xAxisLabel]="graphData[key].xLabel"
+                               [showXAxisLabel]="true"
+                               [xAxis]="true"
+                               [yAxis]="true"></ngx-charts-bar-vertical>
+    </ng-container>
+  </div>
+  <!--  <div *ngIf="graphData[1]?.data[0].x.length > 0"-->
+  <!--       class="bg-white p-4 border border-gray-200 shadow-sm p-2 space-y-4 overflow-x-scroll">-->
+  <!--    <plotly-plot [data]="graphData[1]"-->
+  <!--                 [config]="config"></plotly-plot>-->
+  <!--    <h1 class="text-center">언어별 코드 통계</h1>-->
+  <!--  </div>-->
+  <!--  <div *ngIf="graphData[2]?.data[0].x.length > 0"-->
+  <!--       class="bg-white p-4 border border-gray-200 shadow-sm p-2 space-y-4 overflow-x-scroll">-->
+  <!--    <plotly-plot [data]="graphData[2]"-->
+  <!--                 [config]="config"></plotly-plot>-->
+  <!--    <h1 class="text-center">언어별 주석 통계</h1>-->
+  <!--  </div>-->
+
+</div>

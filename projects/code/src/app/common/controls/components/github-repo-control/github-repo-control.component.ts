@@ -1,10 +1,11 @@
-import { Component, EventEmitter, forwardRef, OnInit, Output, Provider } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, OnInit, Output, Provider } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { IGithubAccount } from 'shared';
 import { GithubService } from '../../../../services/github.service';
 import { ProjectService } from '../../../../services/project.service';
 import { IProjectRepository, IProjectTeam } from '../../../../types/project';
+import { TEntryList } from '../../../../types/project-file';
 import { ISelectOption } from '../../../../types/select-option';
 
 const VALUE_ACCESSOR: Provider = {
@@ -22,6 +23,9 @@ const VALUE_ACCESSOR: Provider = {
 export class GithubRepoControlComponent implements ControlValueAccessor, OnInit {
 
   @Output() teamChange: EventEmitter<IProjectTeam> = new EventEmitter<IProjectTeam>();
+  @Output() cloningChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() sourceChange: EventEmitter<TEntryList> = new EventEmitter<TEntryList>();
+  @Input() projectId: string;
 
   value: IProjectRepository;
   selectMode = false;
@@ -69,6 +73,13 @@ export class GithubRepoControlComponent implements ControlValueAccessor, OnInit 
     };
     this.change();
     this.teamChange.emit(team);
+    this.selectMode = false;
+    this.cloningChange.emit(false);
+    this.projectService.clonePublicProject(this.projectId, project.url, this.selectedAccount._id)
+      .pipe(finalize(() => this.cloningChange.emit(false)))
+      .subscribe(
+        res => this.sourceChange.emit(res.data)
+      );
   }
 
   registerOnChange(fn: any): void {

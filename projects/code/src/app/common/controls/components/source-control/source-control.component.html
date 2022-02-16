@@ -22,9 +22,9 @@
   </button>
   <div class="bg-gray-200 px-4 py-2 flex items-center">
     <span class="mr-auto">소스 목록</span>
-    <span class="text-sm text-gray-600">
-      총 {{value | numSelectedFiles | number}} 파일 / {{value | selectedFilesSize}}
-    </span>
+<!--    <span class="text-sm text-gray-600">-->
+<!--      총 {{value | NumOfFiles | number}} 파일 / {{value | selectedFilesSize}}-->
+<!--    </span>-->
   </div>
   <div class="h-96 overflow-y-scroll px-4 py-2 border-gray-200 border shadow-inner shadow-sm">
     <sw-source-files [value]="value" (valueChange)="changeValue($event)"></sw-source-files>
@@ -34,9 +34,9 @@
 <ng-container *ngIf="uploadMode">
   <div class="bg-gray-200 px-4 py-2 flex items-center">
     <span class="mr-auto">소스 목록</span>
-    <span class="text-sm text-gray-600">
-      총 {{entries | numSelectedFiles | number}} 파일 / {{entries | selectedFilesSize}}
-    </span>
+<!--    <span class="text-sm text-gray-600">-->
+<!--      총 {{entries | NumOfFiles | number}} 파일 / {{entries | selectedFilesSize}}-->
+<!--    </span>-->
   </div>
   <div class="h-96 overflow-y-scroll px-4 py-2 border-gray-200 border shadow-inner shadow-sm">
     <sw-source-upload class="block" [entries]="entries"></sw-source-upload>

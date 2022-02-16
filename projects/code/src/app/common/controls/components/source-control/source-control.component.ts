@@ -155,8 +155,8 @@ export class SourceControlComponent implements ControlValueAccessor, OnInit {
 
   private _convertEntryListToSelectableEntryList(entries: TEntryList): TSelectableEntryList {
 
-    function convert(dirEntry: IDirectoryEntry): IDirectoryEntry {
-      const selectableDirEntry: IDirectoryEntry = { dirname: dirEntry.dirname, entries: [] };
+    function convert(dirEntry: IDirectoryEntry, opened = false): IDirectoryEntry {
+      const selectableDirEntry: IDirectoryEntry = { dirname: dirEntry.dirname, opened, entries: [] };
 
       (dirEntry.entries || []).forEach(e =>
         'dirname' in e ?
@@ -173,7 +173,7 @@ export class SourceControlComponent implements ControlValueAccessor, OnInit {
     }
 
     entries.forEach(e => {
-      'dirname' in e ? selectableEntries.push(convert(e)) : selectableEntries.push({ selected: true, file: e });
+      'dirname' in e ? selectableEntries.push(convert(e, true)) : selectableEntries.push({ selected: true, file: e });
     });
 
     return selectableEntries;

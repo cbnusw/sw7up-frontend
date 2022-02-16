@@ -1,3 +1,7 @@
+export const OPERATOR_ROLES = [
+  'admin',
+  'operator',
+];
 export const NOT_OPERATOR_ROLES = [
   'staff',    // 교직원(충북대 소속원만)
   'student',  // 학생(충북대 소속원만)
@@ -11,8 +15,7 @@ export const ACCESS = [
 ];
 
 export const ROLES = [
-  'admin',
-  'operator',
+  ...OPERATOR_ROLES,
   ...NOT_OPERATOR_ROLES,
 ];
 

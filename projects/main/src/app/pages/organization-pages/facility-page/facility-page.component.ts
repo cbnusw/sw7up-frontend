@@ -60,18 +60,23 @@ export class FacilityPageComponent implements OnInit {
     },
     {
       name: '오픈소스SW 전용 실습실-7',
-      location: 'S2동 102호',
+      location: 'E10동 318호',
       images: 'assets/images/organization/facility/11.jpg'
+    },
+    {
+      name: '오픈소스SW 전용 실습실-8',
+      location: 'S2동 102호',
+      images: 'assets/images/organization/facility/12.jpg'
     },
     {
       name: '이러닝 스튜디오(S4-1동 210호)',
       location: 'S1-2동 108호',
-      images: 'assets/images/organization/facility/12.jpg'
+      images: 'assets/images/organization/facility/13.jpg'
     },
     {
       name: 'IoT플레이그리운드',
       location: 'E9동 307호',
-      images: 'assets/images/organization/facility/13.jpg'
+      images: 'assets/images/organization/facility/14.jpg'
     },
   ];
 

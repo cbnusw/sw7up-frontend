@@ -1,3 +1,4 @@
+import { OPERATOR_ROLES } from 'shared';
 import { IMenuItem } from '../../../types/menu-item';
 
 export const menus: IMenuItem[] = [
@@ -8,6 +9,11 @@ export const menus: IMenuItem[] = [
   {
     title: '프로젝트 관리',
     subMenuItems: [
+      {
+        title: '프로그래밍언어관리',
+        link: '/pm/languages',
+        roles: [...OPERATOR_ROLES],
+      },
       {
         title: '로컬 프로젝트',
         link: '/pm/local'
@@ -20,10 +26,12 @@ export const menus: IMenuItem[] = [
   },
   {
     title: '계정관리',
+    roles: ['student'],
     subMenuItems: [
       {
         title: 'GitHub 계정 관리',
-        link: '/account/github'
+        link: '/account/github',
+        roles: ['student'],
       }
     ]
   }

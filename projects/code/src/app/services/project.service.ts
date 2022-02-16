@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { IListResponse, IParams, IResponse, RequestBase } from 'shared';
 import { environment } from '../../environments/environment';
 import { IProject, IProjectRepository } from '../types/project';
-import { IProjectFile } from '../types/project-file';
+import { IProjectFile, TEntryList } from '../types/project-file';
 
 export declare type TProjectMetaName = 'files' | 'codes' | 'comments';
 
@@ -61,7 +61,7 @@ export class ProjectService extends RequestBase {
     if (isPublic !== undefined) {
       params.isPublic = isPublic;
     }
-    return this.http.get(this.url`/me/count`);
+    return this.http.get(this.url`/me/count`, { params: RequestBase.params(params) });
   }
 
   countMyProjectMetaInfo(metaName: TProjectMetaName, isPublic?: boolean, groupByLanguage?: boolean)
@@ -84,6 +84,11 @@ export class ProjectService extends RequestBase {
 
   createProject(body: IProject): Observable<IResponse<IProject>> {
     return this.http.post(this.url`/`, body);
+  }
+
+  clonePublicProject(id: string, url: string, account: string): Observable<IResponse<TEntryList>> {
+    // console.log('id:::', id, 'url:::', url, 'account:::', account);
+    return this.http.post(this.url`/${id}/clone`, { url, account });
   }
 
   createProjectId(): Observable<IResponse<string>> {

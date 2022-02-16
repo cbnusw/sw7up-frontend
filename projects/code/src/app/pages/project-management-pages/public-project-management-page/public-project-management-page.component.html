@@ -6,9 +6,5 @@
   </ng-container>
 </sw-page-header>
 
-<ng-container *ngIf="accounts.length > 0 && auth.isStudent; else githubLoginRef">
-
-</ng-container>
-
-<ng-template #githubLoginRef>
-</ng-template>
+<sw-project-summary class="block mb-4" [isPublic]="true"></sw-project-summary>
+<sw-project-list [isPublic]="true"></sw-project-list>

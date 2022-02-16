@@ -10,6 +10,7 @@ import { IDirectoryEntry, TEntryList } from '../../../../types/project-file';
 export class SourceListComponent implements OnInit {
 
   @Input() source: TEntryList;
+  @Input() opened = false;
   code: { name: string; path: string; source: string; };
 
   constructor(private projectService: ProjectService) {
@@ -24,6 +25,11 @@ export class SourceListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.source.forEach(entry => {
+      if ('dirname' in entry) {
+        entry.opened = this.opened;
+      }
+    });
   }
 
   toggleOpened(entry: IDirectoryEntry): void {

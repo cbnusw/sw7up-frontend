@@ -21,7 +21,7 @@ import { SearchControlComponent } from './components/search-control/search-contr
 import { SelectControlComponent } from './components/select-control/select-control.component';
 import { SelectableButtonControlComponent } from './components/selectable-button-control/selectable-button-control.component';
 import { SourceControlComponent } from './components/source-control/source-control.component';
-import { SourceFilesComponent } from './components/source-control/source-files/source-files.component';
+import { SourceFilesComponent } from './components/source-files/source-files.component';
 import { SourceUploadComponent } from './components/source-control/source-upload/source-upload.component';
 import { SubjectControlComponent } from './components/subject-control/subject-control.component';
 import { AccountListComponent } from './components/team-control/account-list/account-list.component';
@@ -30,6 +30,7 @@ import { GithubRepoControlComponent } from './components/github-repo-control/git
 import { TextareaDirective } from './directives/textarea.directive';
 import { TextareaAutoHeightDirective } from './directives/textarea-auto-height.directive';
 import { NotJoinedMemberControlComponent } from './components/team-control/not-joined-member-control/not-joined-member-control.component';
+import { PublicSourceControlComponent } from './components/public-source-control/public-source-control.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { NotJoinedMemberControlComponent } from './components/team-control/not-j
     TextareaDirective,
     TextareaAutoHeightDirective,
     NotJoinedMemberControlComponent,
+    PublicSourceControlComponent,
   ],
   imports: [
     CommonModule,
@@ -89,6 +91,7 @@ import { NotJoinedMemberControlComponent } from './components/team-control/not-j
     OwnProjectControlComponent,
     TextareaDirective,
     TextareaAutoHeightDirective,
+    PublicSourceControlComponent,
   ],
   providers: [FileSizePipe]
 })

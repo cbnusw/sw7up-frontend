@@ -70,7 +70,15 @@
   </sw-section>
 
   <sw-section title="GitHub">
-    <sw-github-repo-control formControlName="repo" (teamChange)="changeTeam($event)"></sw-github-repo-control>
+    <sw-github-repo-control formControlName="repo"
+                            [projectId]="id"
+                            (cloningChange)="changeCloning($event)"
+                            (sourceChange)="changeSource($event)"
+                            (teamChange)="changeTeam($event)"></sw-github-repo-control>
+  </sw-section>
+
+  <sw-section title="소스코드">
+    <sw-public-source-control formControlName="source" [cloning]="cloning"></sw-public-source-control>
   </sw-section>
 
   <sw-section title="팀">
@@ -98,7 +106,7 @@
 
   <sw-section class="sticky bottom-0 z-10">
     <div class="flex space-x-2">
-      <a [routerLink]="modifying ? ['/pm/public', model._id] : ['/pm/public']"
+      <a [routerLink]="modifying ? ['/pm/projects', model._id] : (isPublic ? ['/pm/public'] : ['/pm/local'])"
          swButton swButtonColor="gray" swButtonSize="md" class="block w-full">
         취소
       </a>

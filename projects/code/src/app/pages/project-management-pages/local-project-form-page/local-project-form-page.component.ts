@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { AbstractFormDirective, IResponse } from 'shared';
+import { filter, map, switchMap, take } from 'rxjs/operators';
+import { AbstractFormDirective, AuthService, IResponse } from 'shared';
 import { ProjectService } from '../../../services/project.service';
 import { IProject, PROJECT_TYPES, SEMESTERS, TProejctType, TSemester } from '../../../types/project';
 import { ISelectOption } from '../../../types/select-option';
@@ -32,6 +32,7 @@ export class LocalProjectFormPageComponent extends AbstractFormDirective<IProjec
   projectTypeOptions: ISelectOption<TProejctType>[] = PROJECT_TYPES.map(t => ({ value: t }));
 
   constructor(private projectService: ProjectService,
+              private auth: AuthService,
               private route: ActivatedRoute,
               private router: Router,
               fb: FormBuilder) {
@@ -52,12 +53,6 @@ export class LocalProjectFormPageComponent extends AbstractFormDirective<IProjec
     return this.formGroup.get('projectType').value as TProejctType;
   }
 
-
-  submit(): Promise<void> {
-    console.log(this.formGroup.getRawValue());
-    return super.submit();
-  }
-
   protected async mapFormToModel(formGroup: FormGroup): Promise<IProject> {
     const model: IProject = await super.mapFormToModel(formGroup);
     if (model.projectType === '교과목프로젝트') {
@@ -70,6 +65,15 @@ export class LocalProjectFormPageComponent extends AbstractFormDirective<IProjec
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.auth.me$.pipe(
+      filter(me => !!me),
+      take(1)
+    ).subscribe(me => {
+      if (me.role === 'student') {
+        this.formGroup.get('department').setValue(me.info.department);
+      }
+    });
+
     this.addSubscriptions(
       this.route.params.pipe(
         map(params => params.id),
@@ -88,7 +92,7 @@ export class LocalProjectFormPageComponent extends AbstractFormDirective<IProjec
   }
 
   protected async processAfterSubmission(s: boolean): Promise<void> {
-    await this.router.navigateByUrl('/pm/local');
+    await this.router.navigate(['/pm/projects', this.id]);
   }
 
   protected initFormGroup(fb: FormBuilder): FormGroup {
@@ -99,6 +103,7 @@ export class LocalProjectFormPageComponent extends AbstractFormDirective<IProjec
       _id: [null, [Validators.required]],
       banners: [null],
       name: [null, [Validators.required]],
+      department: [null, [Validators.required]],
       grade: [null],
       year: [null],
       semester: [null],
@@ -106,10 +111,10 @@ export class LocalProjectFormPageComponent extends AbstractFormDirective<IProjec
       projectType: ['교과목프로젝트'],
       subject: [null],
       ownProject: [null],
-      source: [null, [Validators.required]],
       isPublic: [false],
-      ossList: [null],
+      source: [null, [Validators.required]],
       team: [null],
+      ossList: [null],
       documents: [null]
     });
   }

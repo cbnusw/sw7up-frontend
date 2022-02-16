@@ -37,7 +37,7 @@ export class GithubAccountManagementPageComponent implements OnInit {
     if (me.role === 'student') {
       this.subscription = this.route.queryParams.pipe(
         map(params => params.code),
-        tap(code => console.log(code)),
+        // tap(code => console.log(code)),
         switchMap(code => code ?
           this.githubService.createGithubAccount(code).pipe(
             tap(() => this.router.navigateByUrl('/account/github')),

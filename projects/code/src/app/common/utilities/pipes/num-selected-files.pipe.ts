@@ -1,27 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IProjectFile, TEntryList, TSelectableEntryList } from '../../../types/project-file';
+import { IProjectMeta } from '../../../types/project';
 
 @Pipe({
-  name: 'numSelectedFiles',
+  name: 'NumOfFiles',
   pure: false
 })
-export class NumSelectedFilesPipe implements PipeTransform {
+export class NumOfFilesPipe implements PipeTransform {
 
-  transform(entries: TSelectableEntryList | TEntryList, all: boolean = false): number {
-
-    function convert(elist: TSelectableEntryList | TEntryList, flist: Array<IProjectFile | File>): void {
-      elist.forEach(e => {
-        if ('dirname' in e) {
-          convert(e.entries, flist);
-        } else if (all || e.selected) {
-          flist.push(e.file || e);
-        }
-      });
-    }
-
-    const files: Array<IProjectFile | File> = [];
-    convert(entries || [], files);
-    return files.length;
+  transform(meta: IProjectMeta[]): number {
+    return meta.reduce((acc, item) => acc + item.files, 0);
   }
-
 }
