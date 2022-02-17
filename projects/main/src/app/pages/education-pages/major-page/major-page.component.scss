@@ -33,12 +33,6 @@
     max-height: 300px;
   }
 
-  img[src$=gif] {
-    display: block;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
   @include mobile {
     img {
       width: 50vw;
@@ -50,4 +44,10 @@
   //figcaption {
   //  text-align: center;
   //}
+}
+
+img[src$=gif] {
+  display: block;
+  max-width: 500px;
+  margin: 0 auto;
 }
