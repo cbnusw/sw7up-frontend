@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="pl-6 overflow-hidden" [class.h-0]="!entry.opened" [class.h-auto]="entry.opened">
-      <sw-source-files [value]="entry.entries" (valueChange)="changeValue($event)"></sw-source-files>
+      <sw-source-files [value]="entry.entries" (valueChange)="changeValue()"></sw-source-files>
     </div>
   </div>
   <ng-template #fileRef>

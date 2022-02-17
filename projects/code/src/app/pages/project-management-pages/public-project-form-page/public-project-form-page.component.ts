@@ -62,6 +62,10 @@ export class PublicProjectFormPageComponent extends AbstractFormDirective<IProje
     return this.formGroup.get('isPublic').value;
   }
 
+  get descriptionCount(): number {
+    return (this.formGroup.get('description')?.value || '').replace(/\s+/g, '').length;
+  }
+
   changeTeam(team: IProjectTeam): void {
     this.formGroup.get('team').patchValue(team);
   }
@@ -103,6 +107,10 @@ export class PublicProjectFormPageComponent extends AbstractFormDirective<IProje
 
   protected async processAfterSubmission(s: boolean): Promise<void> {
     await this.router.navigate(['/pm/projects', this.id]);
+  }
+
+  protected processError(): void {
+    alert('잘못된 입력이 있습니다. 각 입력항목을 확인해주세요.');
   }
 
   protected initFormGroup(fb: FormBuilder): FormGroup {

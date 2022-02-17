@@ -152,6 +152,7 @@ export abstract class AbstractFormDirective<M, S> implements OnInit, OnDestroy {
     this.submitted = true;
 
     if (await this.isInvalidForm()) {
+      this.processError();
       return;
     }
 
@@ -189,6 +190,9 @@ export abstract class AbstractFormDirective<M, S> implements OnInit, OnDestroy {
   }
 
   protected async processAfterSubmission(s: S): Promise<void> {
+  }
+
+  protected processError(): void {
   }
 
   protected processSubmissionError(e: HttpErrorResponse): void {

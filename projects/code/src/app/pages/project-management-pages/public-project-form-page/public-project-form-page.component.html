@@ -45,9 +45,15 @@
                   swTextareaAutoHeight
                   formControlName="description"
                   placeholder="프로젝트에 대한 설명을 100자 이상으로 기술"></textarea>
-        <span *ngIf="hasError('min', 'description')" class="error">
-          프로젝트 설명은 최소 100자 이상으로 작성해야 합니다.
-        </span>
+        <div class="flex">
+          <span *ngIf="hasError('min', 'description')" class="error">
+            프로젝트 설명은 최소 100자 이상으로 작성해야 합니다.
+          </span>
+          <div class="text-right text-xs ml-auto">
+            <span [class.text-blue-700]="descriptionCount >= 100"
+                  [class.text-red-700]="descriptionCount < 100">{{descriptionCount | number}}</span> / 100
+            </div>
+        </div>
       </div>
     </div>
   </sw-section>

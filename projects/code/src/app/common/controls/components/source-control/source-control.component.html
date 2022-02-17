@@ -4,7 +4,7 @@
           swButton swButtonSize="md" swButtonColor="dark"
           class="w-full py-6"
           (directoryChange)="changeDirectory($event)">
-    소스파일추가
+    소스파일{{this.value ? '변경' : '추가'}}
   </button>
   <button *ngIf="value && editMode"
           type="button"

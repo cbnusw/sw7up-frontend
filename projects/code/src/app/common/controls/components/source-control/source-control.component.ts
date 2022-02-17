@@ -39,7 +39,12 @@ export class SourceControlComponent implements ControlValueAccessor, OnInit {
   }
 
   changeDirectory(entries: TSelectableEntryList): void {
-    this.entries = entries;
+    this.entries = entries.map(entry => {
+      if ('dirname' in entry) {
+        entry.opened = true;
+      }
+      return entry;
+    });
   }
 
   cancelUpload(): void {
@@ -148,6 +153,12 @@ export class SourceControlComponent implements ControlValueAccessor, OnInit {
       }
       current.push({ selected: true, file });
       current.sort(compareTracedEntry);
+    });
+
+    entries.forEach(entry => {
+      if ('dirname' in entry) {
+        entry.opened = true;
+      }
     });
 
     return entries;

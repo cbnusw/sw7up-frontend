@@ -53,14 +53,8 @@ export class LocalProjectFormPageComponent extends AbstractFormDirective<IProjec
     return this.formGroup.get('projectType').value as TProejctType;
   }
 
-  protected async mapFormToModel(formGroup: FormGroup): Promise<IProject> {
-    const model: IProject = await super.mapFormToModel(formGroup);
-    if (model.projectType === '교과목프로젝트') {
-      model.ownProject = null;
-    } else {
-      model.subject = null;
-    }
-    return model;
+  get descriptionCount(): number {
+    return (this.formGroup.get('description')?.value || '').replace(/\s+/g, '').length;
   }
 
   ngOnInit(): void {
@@ -91,13 +85,28 @@ export class LocalProjectFormPageComponent extends AbstractFormDirective<IProjec
     );
   }
 
+  protected async mapFormToModel(formGroup: FormGroup): Promise<IProject> {
+    const model: IProject = await super.mapFormToModel(formGroup);
+    if (model.projectType === '교과목프로젝트') {
+      model.ownProject = null;
+    } else {
+      model.subject = null;
+    }
+    return model;
+  }
+
   protected async processAfterSubmission(s: boolean): Promise<void> {
     await this.router.navigate(['/pm/projects', this.id]);
   }
 
+
+  protected processError(): void {
+    alert('잘못된 입력이 있습니다. 각 입력항목을 확인해주세요.');
+  }
+
   protected initFormGroup(fb: FormBuilder): FormGroup {
     const descriptionValidator: ValidatorFn =
-      control => (control.value ?? '').trim().replace(/\s+/g, ' ').length >= 100 ? null : { min: true };
+      control => (control.value ?? '').trim().replace(/\s+/g, '').length >= 100 ? null : { min: true };
 
     return fb.group({
       _id: [null, [Validators.required]],
