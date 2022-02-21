@@ -15,7 +15,7 @@
 </div>
 
 <ng-container *ngIf="!editMode && !uploadMode">
-  <button type="button"
+  <button *ngIf="!auth.isOperator" type="button"
           (click)="editMode = true"
           swButton swButtonColor="green" swButtonSize="md" class="block w-full mb-4">
     소스 파일 변경

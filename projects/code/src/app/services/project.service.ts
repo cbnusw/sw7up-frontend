@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IListResponse, IParams, IResponse, RequestBase } from 'shared';
 import { environment } from '../../environments/environment';
-import { IProject, IProjectRepository } from '../types/project';
+import { IProject, IProjectApproval, IProjectRepository } from '../types/project';
 import { IProjectFile, TEntryList } from '../types/project-file';
 
 export declare type TProjectMetaName = 'files' | 'codes' | 'comments';
 
 export interface IProjectMetaResponse {
-  language: string;
+  label: string;
   count: number;
 }
 
@@ -48,6 +48,11 @@ export class ProjectService extends RequestBase {
     return this.http.get(this.url`/meta/count`, { params: RequestBase.params(params) });
   }
 
+  countProjectMetaInfoByGradeAndSemester(isPublic?: boolean): Observable<IResponse<any[]>> {
+    const params: IParams = { isPublic };
+    return this.http.get(this.url`/meta/count/grade-semester`, { params: RequestBase.params(params) });
+  }
+
   searchMyProjects(params?: IParams, isPublic?: boolean): Observable<IListResponse<IProject>> {
     params = params ?? {};
     if (isPublic !== undefined) {
@@ -68,6 +73,11 @@ export class ProjectService extends RequestBase {
     : Observable<IResponse<number | IProjectMetaResponse[]>> {
     const params: IParams = { metaName, isPublic, groupByLanguage };
     return this.http.get(this.url`/me/meta/count`, { params: RequestBase.params(params) });
+  }
+
+  countMyProjectMetaInfoByGradeAndSemester(isPublic?: boolean): Observable<IResponse<IProjectMetaResponse[]>> {
+    const params: IParams = { isPublic };
+    return this.http.get(this.url`/me/meta/count/grade-semester`, { params: RequestBase.params(params) });
   }
 
   getProject(id: string): Observable<IResponse<IProject>> {
@@ -99,8 +109,8 @@ export class ProjectService extends RequestBase {
     return this.http.put(this.url`/${id}`, body);
   }
 
-  approve(id: string): Observable<IResponse<{ approvedAt: Date; }>> {
-    return this.http.patch(this.url`/${id}/approve`, null);
+  approve(id: string, value: boolean, reason: string): Observable<IResponse<IProjectApproval>> {
+    return this.http.patch(this.url`/${id}/approve`, { value, reason });
   }
 
   uploadProjectBanner(id: string, file: File | Blob, filename?: string): Observable<IResponse<IProjectFile>> {

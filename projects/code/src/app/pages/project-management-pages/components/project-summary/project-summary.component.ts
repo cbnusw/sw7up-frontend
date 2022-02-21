@@ -18,9 +18,9 @@ export class ProjectSummaryComponent implements OnInit {
   files: number;
   codes: number;
   comments: number;
-  filesByLanguage: IProjectMetaResponse[] = [];
-  codesByLanguage: IProjectMetaResponse[] = [];
-  commentsByLanguage: IProjectMetaResponse[] = [];
+  // filesByLanguage: IProjectMetaResponse[] = [];
+  // codesByLanguage: IProjectMetaResponse[] = [];
+  // commentsByLanguage: IProjectMetaResponse[] = [];
   graphData: any = {
     files: null,
     codes: null,
@@ -35,6 +35,14 @@ export class ProjectSummaryComponent implements OnInit {
     { viewValue: '파일수', value: 'files' },
     { viewValue: '코드라인수', value: 'codes' },
     { viewValue: '주석수', value: 'comments' },
+  ];
+
+  gradeSemesterGraphData: any[] = [];
+  gradeSemesterGraphIndex = 0;
+  gradeSemesterGraphOptions: ISelectOption<number>[] = [
+    { viewValue: '파일수', value: 0 },
+    { viewValue: '코드라인수', value: 1 },
+    { viewValue: '주석수', value: 2 },
   ];
 
   constructor(private projectService: ProjectService,
@@ -59,13 +67,31 @@ export class ProjectSummaryComponent implements OnInit {
     ).subscribe(res => {
       this.graphData[name] = {
         data: (res.data as IProjectMetaResponse[])
-          .sort((a, b) => a.language > b.language ? 1 : -1)
+          .sort((a, b) => a.label > b.label ? 1 : -1)
           .map(item => ({
-            name: item.language,
+            name: item.label,
             value: item.count,
           })),
-        xLabel: '프로그래밍언어'
+        xLabel: '프로그래밍언어별 프로젝트 통계'
       };
+    });
+  }
+
+  setGradeSemesterGraphMeta(): void {
+    if (this.gradeSemesterGraphData.length !== 0) {
+      return;
+    }
+
+    this.auth.me$.pipe(
+      filter(me => !!me),
+      take(1),
+      switchMap(me =>
+        ['admin', 'operator'].indexOf(me.role) !== -1 ?
+          this.projectService.countProjectMetaInfoByGradeAndSemester(this.isPublic) :
+          this.projectService.countMyProjectMetaInfoByGradeAndSemester(this.isPublic)
+      )
+    ).subscribe(res => {
+      this.gradeSemesterGraphData = res.data;
     });
   }
 
@@ -108,6 +134,7 @@ export class ProjectSummaryComponent implements OnInit {
 
   private _init(): void {
     this.setGraphMeta('files');
+    this.setGradeSemesterGraphMeta();
     this.countProject();
     this.countMeta('files');
     this.countMeta('codes');

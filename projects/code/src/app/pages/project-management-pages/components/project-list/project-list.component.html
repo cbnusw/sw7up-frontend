@@ -26,7 +26,14 @@
           소스: {{document.meta | NumOfFiles | number}} 파일 / {{document.source | selectedFilesSize:true}}
         </div>
         <div class="text-sm text-gray-700">
-          승인 날짜: <span class="text-blue-700">{{document?.approvedAt ? (document?.approvedAt | date: 'yyyy-MM-dd') : '-'}}</span>
+          승인 상태 / 날짜:
+          <span *ngIf="!document?.approval; else approvalRef" class="text-gray-600">승인 미처리 상태</span>
+          <ng-template #approvalRef>
+            <span [class.text-blue-600]="document?.approval?.value" [class.text-red-600]="!document?.approval?.value">
+              {{document?.approval?.value ? '승인' : '미승인'}}
+              / {{document?.approval?.date ? (document.approval.date | date: 'yyyy-MM-dd') : '-'}}
+            </span>
+          </ng-template>
         </div>
       </div>
       <div class="flex justify-end select-none mt-4 px-4 pb-4">

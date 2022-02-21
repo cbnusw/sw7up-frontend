@@ -87,7 +87,7 @@
         <span class="text-gray-800">멘토</span>
         <div class="space-y-2 text-gray-800 col-span-3">
           <div *ngFor="let mento of document?.subject?.mentoList">
-            {{mento.name || '-'}} ({{mento.organization || '-'}}/{{mento.position || '-'}})
+            {{mento.name || '-'}} / {{mento.organization || '-'}} / {{mento.position || '-'}}
           </div>
         </div>
       </ng-container>
@@ -105,7 +105,7 @@
         <span class="text-gray-800">멘토</span>
         <div class="space-y-2 text-gray-800 col-span-3">
           <div *ngFor="let mento of document?.ownProject?.mentoList">
-            {{mento.name || '-'}} ({{mento.organization || '-'}}/{{mento.position || '-'}})
+            {{mento.name || '-'}} / {{mento.organization || '-'}} / {{mento.position || '-'}}
           </div>
         </div>
       </ng-container>
@@ -264,18 +264,59 @@
     </div>
   </sw-section>
 
-  <sw-section title="운영자 확인" *ngIf="auth.isOperator$ | async">
-    <div class="grid grid-cols-2 gap-4 w-full justify-center">
-      <span>최종 승인: {{document?.approvedAt ? (document?.approvedAt | date: 'yyyy-MM-dd') : '-'}}</span>
-      <span>
+  <sw-section title="운영자 확인" *ngIf="(auth.isOperator$ | async); else notOperatorRef">
+    <div class="grid grid-cols-3 border border-gray-200">
+      <span class="p-2 bg-gray-100 border-b border-gray-200">상태</span>
+      <span *ngIf="approval" class="p-2 col-span-2 border-b border-gray-200">
+        <sw-selectable-button-control [options]="approvalOptions"
+                                      [(ngModel)]="approval.value"></sw-selectable-button-control>
+      </span>
+      <span class="p-2 bg-gray-100 border-b border-gray-200">사유</span>
+      <span class="p-2 col-span-2 border-b border-gray-200">
+        <textarea swTextarea
+                  swTextareaAutoHeight
+                  [(ngModel)]="approval.reason"></textarea>
+      </span>
+      <span class="p-2 bg-gray-100">최종 적용일</span>
+      <span class="p-2 col-span-2 text-sm text-blue-600">
+        {{approval.date ? (approval.date | date:'yyyy년 MM월 dd일') : '-'}}
+      </span>
+    </div>
+    <div class="flex justify-end mt-4">
+      <button type="button"
+              (click)="approve()"
+              swButton swButtonSize="xs" swButtonColor="blue">
+        업데이트
+      </button>
+    </div>
+  </sw-section>
+
+  <ng-template #notOperatorRef>
+    <sw-section *ngIf="document?.approval" title="운영자 확인">
+      <div class="grid grid-cols-3 border border-gray-200">
+        <span class="p-2 bg-gray-100 border-b border-gray-200">상태</span>
+        <span class="p-2 col-span-2 border-b border-gray-200"
+              [class.text-blue-600]="approval.value"
+              [class.text-red-600]="!approval.value">{{approval.value ? '승인' : '미승인'}}</span>
+        <span class="p-2 bg-gray-100 border-b border-gray-200">사유</span>
+        <pre class="p-2 col-span-2 border-b border-gray whitespace-pre-wrap">{{approval.reason}}</pre>
+        <span class="p-2 bg-gray-100">최종 적용일</span>
+        <span class="p-2 col-span-2 text-sm text-blue-600">
+          {{approval.date ? (approval.date | date:'yyyy년 MM월 dd일') : '-'}}
+        </span>
+      </div>
+      <div class="flex justify-end mt-4">
         <button type="button"
                 (click)="approve()"
                 swButton swButtonSize="xs" swButtonColor="blue">
-          {{document?.approvedAt ? '재승인' : '승인'}}
+          업데이트
         </button>
-      </span>
-    </div>
-  </sw-section>
+      </div>
+    </sw-section>
+    <sw-section *ngIf="!document?.approval" title="운영자 확인">
+      <span class="text-gray-600">운영자 미확인</span>
+    </sw-section>
+  </ng-template>
 </div>
 
 <sw-media-modal *ngIf="media"

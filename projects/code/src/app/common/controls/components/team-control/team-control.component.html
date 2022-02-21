@@ -39,11 +39,11 @@
              (ngModelChange)="changeName($event)"
              swInput placeholder="팀 이름 입력">
       <label class="block mb-2">팀원 <span class="text-xs">더블 클릭하여 팀에서 제외</span></label>
-      <div class="bg-gray-200 mt-2 text-sm px-4 py-2">팀원(사업단 회원)</div>
+      <div class="bg-gray-200 mt-2 text-sm px-4 py-2">팀원(회원)</div>
       <div class="h-30 overflow-y-scroll">
         <div *ngIf="value.member.joined.length === 0"
              class="border-b border-gray-200 text-sm text-red-600 px-4 py-2">
-          추가된 팀원(사업단 회원)이 없습니다.
+          추가된 팀원(회원)이 없습니다.
         </div>
 
         <div *ngFor="let member of value?.member?.joined; let i = index"

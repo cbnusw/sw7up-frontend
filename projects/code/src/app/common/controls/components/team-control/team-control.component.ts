@@ -24,7 +24,7 @@ export class TeamControlComponent implements ControlValueAccessor, OnInit {
   memberType: keyof IProjectMember = 'joined';
 
   memberTypeOptions: ISelectOption<keyof IProjectMember>[] = [
-    { viewValue: '사업단 회원', value: 'joined' },
+    { viewValue: '회원', value: 'joined' },
     { viewValue: '비회원', value: 'notJoined' }
   ];
 

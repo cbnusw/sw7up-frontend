@@ -86,27 +86,33 @@ export interface IProjectRepository {
   updatedAt: Date;
 }
 
+export interface IProjectApproval {
+  value: boolean;
+  date: Date;
+  reason: string;
+}
+
 export interface IProject {
   _id?: string;
-  banners: IProjectBanner[];      // 프로젝트 소개 영상/이미지
-  name: string;                   // 프로젝트명
-  department: string;             // 학과
-  grade: number;                  // 프로젝트 수행 당시 학년
-  year: number;                   // 프로젝트 수행 연도
-  semester: TSemester;            // 프로젝트 수행 학기
-  description: string;            // 프로젝트 설명
-  projectType: TProejctType;      // 프로젝트 유형
-  subject: IProjectSubject;       // 교과목 프로젝트 정보
-  ownProject: IOwnProject;        // 자체 프로젝트 정보
-  team: IProjectTeam;             // 프로젝트 팀
-  isPublic: boolean;              // 공개 프로젝트 여부
-  repo: IProjectRepository;       // 프로젝트 리파지터리
-  soucreDir: string;              // 소스 파일의 디렉터리 경로
-  source: TEntryList;             // 소스 파일
-  meta: IProjectMeta[];           // 프로젝트 메타 정보
-  ossList: IProjectOss[];         // 오픈소스 사용 정보
-  documents: IProjectDocument[];  // 프로젝트 관련 문서
-  approvedAt: Date;               // 프로젝트 승인 날짜
+  banners: IProjectBanner[];          // 프로젝트 소개 영상/이미지
+  name: string;                       // 프로젝트명
+  department: string;                 // 학과
+  grade: number;                      // 프로젝트 수행 당시 학년
+  year: number;                       // 프로젝트 수행 연도
+  semester: TSemester;                // 프로젝트 수행 학기
+  description: string;                // 프로젝트 설명
+  projectType: TProejctType;          // 프로젝트 유형
+  subject: IProjectSubject;           // 교과목 프로젝트 정보
+  ownProject: IOwnProject;            // 자체 프로젝트 정보
+  team: IProjectTeam;                 // 프로젝트 팀
+  isPublic: boolean;                  // 공개 프로젝트 여부
+  repo: IProjectRepository;           // 프로젝트 리파지터리
+  soucreDir: string;                  // 소스 파일의 디렉터리 경로
+  source: TEntryList;                 // 소스 파일
+  meta: IProjectMeta[];               // 프로젝트 메타 정보
+  ossList: IProjectOss[];             // 오픈소스 사용 정보
+  documents: IProjectDocument[];      // 프로젝트 관련 문서
+  approval: IProjectApproval | null;  // 프로젝트 승인
   creator: IUserInfo;
   createdAt: Date;
   updatedAt: Date;

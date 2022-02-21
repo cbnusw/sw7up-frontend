@@ -1,6 +1,7 @@
 import { Component, forwardRef, Input, OnInit, Provider } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { timeout } from 'rxjs/operators';
+import { AuthService } from 'shared';
 import { ProjectService } from '../../../../services/project.service';
 import { IDirectoryEntry, TSelectableEntryList, TEntryList, IProjectFile } from '../../../../types/project-file';
 import { compareTracedEntry, flatTracedEntries } from '../../../../utils/file';
@@ -31,7 +32,8 @@ export class SourceControlComponent implements ControlValueAccessor, OnInit {
   private onChange: any;
   private onTouch: any;
 
-  constructor(private projectService: ProjectService) {
+  constructor(public auth: AuthService,
+              private projectService: ProjectService) {
   }
 
   get uploadMode(): boolean {

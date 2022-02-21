@@ -7,8 +7,9 @@ import { SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { ProjectService } from '../../../services/project.service';
 import { IMedia } from '../../../types/media';
-import { IProject } from '../../../types/project';
+import { IProject, IProjectApproval } from '../../../types/project';
 import { TEntryList } from '../../../types/project-file';
+import { ISelectOption } from '../../../types/select-option';
 
 @Component({
   selector: 'sw-project-page',
@@ -32,6 +33,16 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
     spaceBetween: 16
   };
   media: IMedia;
+  approvalOptions: ISelectOption<boolean>[] = [
+    { viewValue: '승인', value: true },
+    { viewValue: '미승인', value: false },
+  ];
+
+  private _approval: IProjectApproval = {
+    value: false,
+    date: null,
+    reason: null,
+  };
 
   private subscription: Subscription;
 
@@ -53,6 +64,15 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
 
   get source(): TEntryList {
     return this.document.source;
+  }
+
+  set approval(approval: IProjectApproval) {
+    this.document.approval = approval;
+  }
+
+  get approval(): IProjectApproval {
+    this._approval = this.document?.approval || this._approval;
+    return this._approval;
   }
 
   chnageIndicator(index: number): void {
@@ -77,10 +97,9 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
     if (!yes) {
       return;
     }
-    this.projectService.approve(this.document._id).subscribe(res => {
+    this.projectService.approve(this.document._id, this.approval.value, this.approval.reason).subscribe(res => {
       alert('승인하였습니다.');
-      const { approvedAt } = res.data;
-      this.document.approvedAt = approvedAt;
+      this.approval = res.data;
     });
   }
 
