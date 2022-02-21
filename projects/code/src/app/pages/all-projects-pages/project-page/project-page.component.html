@@ -1,0 +1,250 @@
+<div class="bg-white mb-4 border-b border-gray-200 shadow-sm" *ngIf="document?.banners?.length > 0">
+  <div class="max-w-5xl mx-auto">
+    <swiper [config]="swiperConfig" #slideRef>
+      <ng-template swiperSlide *ngFor="let banner of document.banners">
+        <sw-media-thumbnail-viewer class="cursor-pointer"
+                                   (click)="showBanner(banner)"
+                                   [media]="banner"></sw-media-thumbnail-viewer>
+      </ng-template>
+    </swiper>
+  </div>
+  <div *ngIf="document?.banners?.length > 1" class="py-4 border-t border-gray-200">
+    <swiper [config]="indicatorConfig">
+      <ng-template swiperSlide *ngFor="let banner of document.banners; let i = index;">
+        <sw-media-thumbnail-viewer class="block w-full aspect-w-16 aspect-h-9 cursor-pointer"
+                                   (click)="chnageIndicator(i)"
+                                   [media]="banner"></sw-media-thumbnail-viewer>
+      </ng-template>
+    </swiper>
+  </div>
+</div>
+
+<div class="space-y-4">
+  <sw-section title="기본정보">
+    <div class="space-y-4">
+      <div class="grid grid-cols-4 gap-4">
+        <h1 class="text-lg text-gray-800 font-bold">프로젝트명</h1>
+        <h1 class="text-lg text-indigo-800 font-bold col-span-3">{{document?.name}}</h1>
+        <span class="text-gray-800">작성자</span>
+        <span class="text-gray-800 col-span-3">
+          {{document?.creator?.name}} | {{document?.creator?.department}} | {{document?.grade}}학년
+        </span>
+        <span class="text-gray-800">수행 연도</span>
+        <span class="text-gray-800 col-span-3">
+          {{document?.year}} 년
+        </span>
+        <span class="text-gray-800">수행 당시 학년</span>
+        <span class="text-gray-800 col-span-3">
+          {{document?.grade}} 학년
+        </span>
+        <span class="text-gray-800">수행 당시 학기</span>
+        <span class="text-gray-800 col-span-3">
+          {{document?.semester}}
+        </span>
+        <span class="text-gray-800">작성일</span>
+        <span class="text-gray-800 col-span-3">{{document?.createdAt | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+        <span class="text-gray-800">수정일</span>
+        <span class="text-gray-800 col-span-3">{{document?.updatedAt | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+      </div>
+      <div class="space-y-2">
+        <label>프로젝트 설명</label>
+        <pre class="border border-gray-200 w-full p-2 pre-wrap">{{document?.description}}</pre>
+      </div>
+    </div>
+  </sw-section>
+
+  <sw-section title="교과목 정보" *ngIf="document?.subject">
+    <div class="grid grid-cols-4 gap-4">
+      <span class="text-gray-800">교과목명</span>
+      <span class="text-gray-800 col-span-3">{{document?.subject?.name || '-'}}</span>
+      <ng-container *ngIf="document?.subject?.professor">
+        <span class="text-gray-800">담당교수</span>
+        <span class="text-gray-800 col-span-3">{{document?.subject?.professor}}</span>
+      </ng-container>
+      <ng-container *ngIf="document?.subject?.mentoList?.length > 0">
+        <span class="text-gray-800">멘토</span>
+        <div class="space-y-2 text-gray-800 col-span-3">
+          <div *ngFor="let mento of document?.subject?.mentoList">
+            {{mento.name || '-'}} ({{mento.organization || '-'}}/{{mento.position || '-'}})
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </sw-section>
+
+  <sw-section title="자체프로젝트 정보" *ngIf="document?.ownProject">
+    <div class="grid grid-cols-4 gap-4">
+      <span class="text-gray-800">프로젝트유형</span>
+      <span class="text-gray-800 col-span-3">{{document?.ownProject?.type || '-'}}</span>
+      <ng-container *ngIf="document?.ownProject.professor">
+        <span class="text-gray-800">담당교수</span>
+        <span class="text-gray-800 col-span-3">{{document?.ownProject?.professor}}</span>
+      </ng-container>
+      <ng-container *ngIf="document?.ownProject?.mentoList?.length > 0">
+        <span class="text-gray-800">멘토</span>
+        <div class="space-y-2 text-gray-800 col-span-3">
+          <div *ngFor="let mento of document?.ownProject?.mentoList">
+            {{mento.name || '-'}} ({{mento.organization || '-'}}/{{mento.position || '-'}})
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </sw-section>
+
+  <sw-section title="소스코드 요약" *ngIf="document?.source || document?.meta">
+    <div class="grid grid-cols-3 mb-2 border border-gray-200" *ngIf="document?.source">
+      <span class="text-gray-800 bg-gray-100 py-2 px-4">
+        전체 파일 수
+      </span>
+      <span class="text-gray-800 col-span-2 py-2 px-4">
+        {{document?.meta | NumOfFiles | number}} 파일
+      </span>
+      <span class="text-gray-800 bg-gray-100 py-2 px-4">
+        전체 크기
+      </span>
+      <span class="text-gray-800 col-span-2 py-2 px-4">
+        {{document?.source | selectedFilesSize:true}}
+      </span>
+      <span class="text-gray-800 bg-gray-100 py-2 px-4">
+        전체 코드
+      </span>
+      <span class="text-gray-800 col-span-2 py-2 px-4" *ngIf="document?.meta?.length > 0">
+        {{totalCodes | number}} 라인
+      </span>
+      <span class="text-gray-800 bg-gray-100 py-2 px-4">
+        전체 주석
+      </span>
+      <span class="text-gray-800 col-span-2 py-2 px-4" *ngIf="document?.meta?.length > 0">
+        {{totalComments | number}} 라인
+      </span>
+    </div>
+    <div *ngIf="document?.meta?.length > 0"
+         class="h-56 overflow-y-scroll bg-gray-50 p-2 border border-gray-200 space-y-2 shadow-sm shadow-inner">
+      <div class="grid grid-cols-3 border border-gray-200" *ngFor="let info of document?.meta">
+        <span class="text-sm text-gray-800 bg-gray-100 py-1 px-4">언어</span>
+        <span class="text-sm text-gray-800 bg-white col-span-2 py-1 px-4">{{info.language}}</span>
+        <span class="text-sm text-gray-800 bg-gray-100 py-1 px-4">파일수</span>
+        <span class="text-sm text-gray-800 bg-white col-span-2 py-1 px-4">{{info.files | number}} 파일</span>
+        <span class="text-sm text-gray-800 bg-gray-100 py-1 px-4">코드</span>
+        <span class="text-sm text-gray-800 bg-white col-span-2 py-1 px-4">{{info.codes | number}} 라인</span>
+        <span class="text-sm text-gray-800 bg-gray-100 py-1 px-4">주석</span>
+        <span class="text-sm text-gray-800 bg-white col-span-2 py-1 px-4">{{info.comments | number}} 라인</span>
+      </div>
+    </div>
+  </sw-section>
+
+  <sw-section title="GitHub" *ngIf="document?.repo">
+    <div class="grid grid-cols-3 border border-gray-200">
+      <span class="p-2 bg-gray-50 border-b border-r border-gray-200">프로젝트명</span>
+      <span class="p-2 col-span-2 border-b border-gray-200">{{document?.repo?.name}}</span>
+
+      <span class="p-2 bg-gray-50 border-b border-r border-gray-200">리파지토리 주소</span>
+      <span class="p-2 col-span-2 border-b border-gray-200">
+      <a [href]="document?.repo?.url" target="_blank" class="text-blue-500">{{document?.repo?.url}}</a>
+    </span>
+
+      <span class="p-2 bg-gray-50 border-b border-r border-gray-200">프로젝트 오너</span>
+      <span class="p-2 col-span-2 border-b border-gray-200">{{document?.repo?.owner?.username}}</span>
+
+      <span class="p-2 bg-gray-50 border-r border-gray-200">프로젝트 설명</span>
+      <pre class="p-2 col-span-2 whitespace-pre-wrap">{{document?.repo?.description || '-'}}</pre>
+    </div>
+  </sw-section>
+
+  <sw-section title="소스코드" *ngIf="document?.source">
+    <div class="flex justify-between items-center bg-gray-200 px-4 py-2 flex items-center">
+      <span class="mr-auto">소스 목록</span>
+      <a class="text-xs text-blue-600" [href]="document._id | downloadSourceLink">다운로드</a>
+    </div>
+    <div class="shadow-sm shadow-inner border border-gray-200 px-4 py-2 h-56 overflow-y-scroll">
+      <sw-source-list [source]="source" [opened]="true"></sw-source-list>
+    </div>
+  </sw-section>
+
+  <sw-section title="팀" *ngIf="document?.team">
+    <div class="grid grid-cols-4 gap-4">
+      <span class="text-gray-800">팀 이름</span>
+      <span class="text-gray-800 col-span-3">{{document?.team?.name || '-'}}</span>
+    </div>
+    <ng-container *ngIf="document?.team?.member?.joined?.length > 0 || document?.team?.member?.notJoined?.length > 0">
+      <div class="grid grid-cols-3 bg-gray-100 p-2 mt-4">
+        <span class="p-2">소속</span>
+        <span class="p-2">학번</span>
+        <span class="p-2">이름</span>
+      </div>
+      <div class="grid grid-cols-3 bg-white border border-gray-200 p-2">
+        <ng-container *ngFor="let member of document?.team?.member?.joined">
+          <span class="p-2 text-gray-800">{{member.department}}</span>
+          <span class="p-2 text-gray-800">{{member | unidentity}}</span>
+          <span class="p-2 text-gray-800">{{member.name}}</span>
+        </ng-container>
+        <ng-container *ngFor="let member of document?.team?.member?.notJoined">
+          <span class="p-2 text-gray-800">{{member.school}} {{member.department}}</span>
+          <span class="p-2 text-gray-800">{{member | unidentity}}</span>
+          <span class="p-2 text-gray-800">{{member.name || '-'}}</span>
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="document?.team?.member?.github?.length > 0">
+      <div class="grid grid-cols-2 bg-gray-100 p-2 mt-4">
+        <span>GitHub 계정</span>
+        <span>연결된 사용자</span>
+      </div>
+      <div class="grid grid-cols-3 bg-white border border-gray-200 p-2">
+        <ng-container *ngFor="let member of document?.team?.member?.github">
+          <span class="p-2 text-gray-800">{{member.username}}</span>
+          <div *ngIf="member?.user; else noUserRef" class="p-2 text-gray-800">
+            <div class="text-gray-800">{{member?.user?.name}}</div>
+            <div class="text-gray-800 text-xs">
+              {{member.user?.department}} | {{member.user | unidentity}}
+            </div>
+          </div>
+          <ng-template #noUserRef>
+            <span class="p-2 text-gray-800">-</span>
+          </ng-template>
+        </ng-container>
+      </div>
+    </ng-container>
+  </sw-section>
+
+  <sw-section title="오픈소스" *ngIf="document?.ossList?.length > 0">
+    <div class="grid grid-cols-3 border border-gray-200" *ngFor="let oss of document?.ossList">
+      <span class="text-sm text-gray-800 bg-gray-100 py-1 px-4">오픈소스명</span>
+      <span class="text-sm text-gray-800 bg-white col-span-2 py-1 px-4 font-bold">{{oss.name}}</span>
+      <span class="text-sm text-gray-800 bg-gray-100 py-1 px-4">링크</span>
+      <a *ngIf="oss.link; else noOssLinkRef"
+         target="_blank"
+         [href]="oss.link" class="text-sm text-gray-800 bg-white col-span-2 py-1 px-4">
+        {{oss.link}}
+      </a>
+      <ng-template #noOssLinkRef>
+        <span class="text-sm text-gray-800 bg-white col-span-2 py-1 px-4">-</span>
+      </ng-template>
+      <span class="text-sm text-gray-800 bg-gray-100 py-1 px-4">라이선스</span>
+      <span class="text-sm text-gray-800 bg-white col-span-2 py-1 px-4">{{oss.license || '-'}}</span>
+      <span class="text-sm text-gray-800 bg-gray-100 py-1 px-4 border-t border-gray-200">설명</span>
+      <div class="col-span-2 border-t border-gray-200">
+        <pre class="text-sm text-gray-800 bg-white py-1 px-2">
+          {{oss.description || '-'}}
+        </pre>
+      </div>
+    </div>
+  </sw-section>
+
+  <sw-section title="보고서" *ngIf="document?.documents?.length > 0">
+    <div class="grid grid-cols-3 border border-gray-200">
+      <ng-container *ngFor="let report of document?.documents">
+        <span class="text-gray-800 bg-gray-100 py-1 px-4">{{report.name}}</span>
+        <a [href]="report.file | staticUrl"
+           target="_blank"
+           class="text-gray-800 bg-white text-blue-700 col-span-2 py-1 px-4">{{report.file.name}}
+        </a>
+      </ng-container>
+    </div>
+  </sw-section>
+</div>
+
+<sw-media-modal *ngIf="media"
+                [media]="media"
+                [open]="!!media"
+                (closeChange)="hideBanner()"></sw-media-modal>

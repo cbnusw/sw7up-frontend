@@ -1,0 +1,17 @@
+<div class="flex flex-col space-y-2">
+  <input type="text"
+         [(ngModel)]="value.school"
+         swInput placeholder="학교 입력(예: 충북대학교)"/>
+  <input type="text"
+         [(ngModel)]="value.department"
+         swInput placeholder="학과(부) 입력(예: 소프트웨어학과)"/>
+  <input type="text"
+         [(ngModel)]="value.no"
+         swInput placeholder="학번 입력"/>
+  <input type="text"
+         [(ngModel)]="value.name"
+         swInput placeholder="이름 입력"/>
+  <button type="button"
+          (click)="changeMember()"
+          swButton swButtonSize="sm" swButtonColor="blue">추가</button>
+</div>

@@ -1,0 +1,35 @@
+<div [ngClass]="{'visible z-20': open, 'invisible': !open}"
+     class="fixed inset-0 h-full overflow-y-hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <button type="button"
+          class="z-30 fixed top-10 right-10 inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
+          (click)="closeModal()">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+  <!--  <div class="flex items-center justify-center min-h-screen pt-4 pb-20 text-center sm:p-0">-->
+  <div class="flex items-center justify-center min-h-screen text-center sm:p-0">
+    <div
+        [ngClass]="{'ease-in duration-200 opacity-100': open, 'ease-out duration-300 opacity-0': !open}"
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+    <div
+        [ngClass]="{'ease-in duration-200 opacity-100 translate-y-0 sm:scale-100': open, 'ease-out duration-300 opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95': !open}"
+        class="inline-block align-middle rounded-lg overflow-hidden transform transition-all">
+      <div class="flex flex-col w-screen sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg bg-white
+                  xl:max-w-screen-xl h-full max-h-screen  overflow-y-scroll">
+        <h1 class="text-left border-b border-gray-200 p-4 font-bold text-blue-700">{{path}}</h1>
+        <div class="space-y-1 px-4 py-4">
+          <div class="flex items-center striped" *ngFor="let line of code.source | codeLines; let i = index;">
+            <span class="flex-shrink-0 justify-self-end w-16 text-right text-gray-400 border-r border-gray-400 pr-2">
+              {{i + 1}}
+            </span>
+            <pre class="ml-4">{{line}}</pre>
+          </div>
+        </div>
+<!--        <pre class="p-4 text-left h-full overflow-x-scroll">{{code.source}}</pre>-->
+      </div>
+    </div>
+  </div>
+</div>

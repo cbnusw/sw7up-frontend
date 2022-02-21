@@ -1,0 +1,41 @@
+<sw-page-header title="프로그래밍언어 관리">
+</sw-page-header>
+
+<div class="grid grid-cols-1 md:grid-cols-2 bg-white gap-4 px-4 py-6 border border-gray-200 shadow-sm">
+  <div class="space-y-2">
+    <h2 class="text-lg">전체 프로젝트에서 사용 중인 언어 목록</h2>
+    <span class="text-xs text-blue-600">클릭하여 프로젝트 소스에서 제외</span>
+    <div class="border border-gray-200">
+      <div class="grid grid-cols-2 bg-gray-100 border-bottom border-gray-200">
+        <span class="p-2">언어</span>
+        <span class="p-2">파일수</span>
+      </div>
+      <div *ngIf="languages?.length === 0" class="p-2 text-blue-500">등록된 언어가 없습니다.</div>
+      <div *ngFor="let item of languages;"
+           (click)="addFilter(item)"
+           class="grid grid-cols-2 striped cursor-pointer">
+        <span class="p-2">{{item.language}}</span>
+        <span class="p-2">{{item.count | number}} 파일</span>
+      </div>
+    </div>
+  </div>
+  <div class="space-y-2">
+    <h2 class="text-lg">통계에서 제외시킬 언어 목록</h2>
+    <span class="text-xs text-blue-600">클릭하여 삭제</span>
+    <div class="border border-gray-200">
+      <div class="grid grid-cols-3 bg-gray-100 border-bottom border-gray-200">
+        <span class="p-2">언어</span>
+        <span class="p-2">작성자</span>
+        <span class="p-2">등록일</span>
+      </div>
+      <div *ngIf="filters?.length === 0" class="p-2 text-blue-500">등록된 언어가 없습니다.</div>
+      <div *ngFor="let filter of filters;"
+           (click)="removeFilter(filter)"
+           class="grid grid-cols-3 striped">
+        <span class="p-2">{{filter.name}}</span>
+        <span class="p-2">{{filter.creator.name}}</span>
+        <span class="p-2">{{filter.createdAt | date:'yyyy.MM.dd'}}</span>
+      </div>
+    </div>
+  </div>
+</div>
