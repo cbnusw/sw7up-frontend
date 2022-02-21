@@ -39,7 +39,7 @@ export class LoginPageComponent extends AbstractFormDirective<IUser, boolean> {
         this.submissionError = { path: 'no', message: '권한이 없는 사용자입니다.' };
         break;
       default:
-        console.log(e);
+        console.error(e);
     }
   }
 

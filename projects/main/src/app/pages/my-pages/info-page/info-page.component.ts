@@ -77,7 +77,7 @@ export class InfoPageComponent extends AbstractFormDirective<IUserInfo, boolean>
         this.submissionError = { path: 'phone', message: '이미 사용 중인 휴대폰 번호입니다.' };
         break;
       default:
-        console.log(e);
+        console.error(e);
     }
   }
 
