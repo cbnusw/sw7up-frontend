@@ -101,10 +101,10 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
     this.manual = m;
   }
 
-  updateMajor(ms: string): any {
+  async updateMajor(ms: string): Promise<any> {
     const val = this.formGroup.getRawValue();
     if (val.info.department === '직접입력') {
-      this.formGroup.get('info.department').setValue(ms);
+      await this.formGroup.get('info.department').setValue(ms);
     }
   }
 
@@ -185,6 +185,7 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
   }
 
   protected requestObservable(m: IUser): Observable<boolean> {
+    console.log(this.formGroup.getRawValue());
     return this.auth.join(m);
   }
 }
