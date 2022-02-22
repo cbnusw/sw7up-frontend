@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { update } from 'plotly.js-dist-min';
 import { Observable } from 'rxjs';
 import {
   AbstractFormDirective,
@@ -87,7 +88,9 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
 
   isManual(): boolean {
     const val = this.formGroup.getRawValue();
-    if (val.info.department === '직접입력') { return true; }
+    if (val.info.department === '직접입력') {
+      return true;
+    }
   }
 
   changeMajor(m: string): any {
@@ -100,10 +103,13 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
 
   updateMajor(ms: string): any {
     const val = this.formGroup.getRawValue();
-    if (val.info.department === '직접입력') { this.formGroup.get('info.department').setValue(ms); }
+    if (val.info.department === '직접입력') {
+      this.formGroup.get('info.department').setValue(ms);
+    }
   }
 
   protected async mapFormToModel(formGroup: FormGroup): Promise<IUser> {
+    this.updateMajor(this.manual);
     const rawValue = formGroup.getRawValue();
     rawValue.info.phone = rawValue.info.phone.replace(/[^\d]/g, '');
     rawValue.info.email = rawValue.info.email.toLowerCase();
@@ -179,8 +185,6 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
   }
 
   protected requestObservable(m: IUser): Observable<boolean> {
-    this.updateMajor(this.manual);
-    console.log(this.formGroup.getRawValue());
     return this.auth.join(m);
   }
 }
