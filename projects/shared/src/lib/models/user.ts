@@ -1,8 +1,9 @@
-import { PERMISSIONS, ROLES } from '../constants/common';
+import { PERMISSIONS, ROLES, MAJORS } from '../constants/common';
 import { IUserInfo } from './user-info';
 
 export declare type TUserRole = typeof ROLES[number];
 export declare type TUserPermission = typeof PERMISSIONS[number];
+export declare type TMajor = typeof MAJORS[number];
 
 export interface IUser {
   _id?: string;

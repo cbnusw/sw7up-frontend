@@ -12,7 +12,8 @@ import {
   OPTIONAL_EMAIL_PATTERN,
   OPTIONAL_MOBILE_NUM_PATTERN,
   PasswordValidator,
-  TUserRole
+  TUserRole,
+  MAJORS
 } from 'shared';
 import { URLS } from '../../../constants/urls';
 import { PrivacyDialogComponent } from '../dialogs/privacy-dialog/privacy-dialog.component';
@@ -25,6 +26,8 @@ import { PrivacyDialogComponent } from '../dialogs/privacy-dialog/privacy-dialog
 export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
 
   readonly LOGIN_URL = URLS.ACCOUNT.LOGIN;
+  readonly MAJORS = [...MAJORS, '직접입력'];
+  manual: string;
 
   roles = [
     { value: 'student', viewValue: '충북대학생' },
@@ -79,8 +82,25 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
       height: '90vh',
       data: this.formGroup.get('agreement').value
     });
-
     return false;
+  }
+
+  isManual(): boolean {
+    const val = this.formGroup.getRawValue();
+    if (val.info.department === '직접입력') { return true; }
+  }
+
+  changeMajor(m: string): any {
+    this.formGroup.get('info.department').setValue(m);
+  }
+
+  changeMajorSub(m: string): any {
+    this.manual = m;
+  }
+
+  updateMajor(ms: string): any {
+    const val = this.formGroup.getRawValue();
+    if (val.info.department === '직접입력') { this.formGroup.get('info.department').setValue(ms); }
   }
 
   protected async mapFormToModel(formGroup: FormGroup): Promise<IUser> {
@@ -112,6 +132,7 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
     }
   }
 
+  //
   protected initFormGroup(fb: FormBuilder): FormGroup {
     const formGroup = fb.group({
       no: [null, [Validators.required]],
@@ -154,11 +175,12 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
         }
       }
     ]);
-
     return formGroup;
   }
 
   protected requestObservable(m: IUser): Observable<boolean> {
+    this.updateMajor(this.manual);
+    console.log(this.formGroup.getRawValue());
     return this.auth.join(m);
   }
 }
