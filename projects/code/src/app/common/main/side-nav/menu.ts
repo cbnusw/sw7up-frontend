@@ -8,6 +8,7 @@ export const menus: IMenuItem[] = [
   },
   {
     title: '프로젝트 관리',
+    roles: [...OPERATOR_ROLES, 'student'],
     subMenuItems: [
       {
         title: '프로그래밍언어관리',

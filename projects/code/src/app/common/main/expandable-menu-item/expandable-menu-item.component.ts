@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { IMenuItem } from '../../../types/menu-item';
 
@@ -7,7 +7,7 @@ import { IMenuItem } from '../../../types/menu-item';
   templateUrl: './expandable-menu-item.component.html',
   styleUrls: ['./expandable-menu-item.component.scss']
 })
-export class ExpandableMenuItemComponent implements OnInit, AfterViewInit {
+export class ExpandableMenuItemComponent implements OnInit {
 
   @Input() menuItem: IMenuItem;
   @Output() hiddenSubMenusChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -51,8 +51,5 @@ export class ExpandableMenuItemComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
   }
 }

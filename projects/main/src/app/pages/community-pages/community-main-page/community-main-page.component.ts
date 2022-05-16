@@ -14,6 +14,7 @@ export class CommunityMainPageComponent implements OnInit {
     { name: 'E-헬프데스크', link: URLS.COMMUNITY.E_HELP },
     { name: '보도자료', link: URLS.COMMUNITY.PRESS },
     { name: '뉴스레터', link: URLS.COMMUNITY.NEWSLETTER },
+    { name: '해외교육', link: URLS.COMMUNITY.OVERSEAS },
     { name: '포토갤러리', link: URLS.COMMUNITY.GALLERY },
     { name: '자료실', link: URLS.COMMUNITY.ARCHIVE },
   ];

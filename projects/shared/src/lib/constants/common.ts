@@ -29,6 +29,7 @@ export const FILE_TYPES = [
   'CorruptionReport',
   'Gallery',
   'Notice',
+  'OverseasEducation',
   'PressRelease',
   'Resource',
 ];

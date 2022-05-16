@@ -3,18 +3,17 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { update } from 'plotly.js-dist-min';
 import { Observable } from 'rxjs';
 import {
   AbstractFormDirective,
   AuthService,
   ERROR_CODES,
   IUser,
+  MAJORS,
   OPTIONAL_EMAIL_PATTERN,
   OPTIONAL_MOBILE_NUM_PATTERN,
   PasswordValidator,
-  TUserRole,
-  MAJORS
+  TUserRole
 } from 'shared';
 import { URLS } from '../../../constants/urls';
 import { PrivacyDialogComponent } from '../dialogs/privacy-dialog/privacy-dialog.component';

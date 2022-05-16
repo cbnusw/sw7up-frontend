@@ -25,6 +25,7 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
     { name: '교직원관리', link: '/staff' },
     { name: '운영자관리', link: '/operator' },
     { name: '공지사항관리', link: '/notice' },
+    { name: '해외교육관리', link: '/overseas-education' },
     { name: 'E-Help Desk 관리', link: '/e-help' },
     { name: '보도자료관리', link: '/press-release' },
     { name: '갤러리관리', link: '/gallery' },

@@ -32,6 +32,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/notice-pages/notice-pages.module').then(m => m.NoticePagesModule)
   },
   {
+    path: 'overseas-education',
+    canActivateChild: [AuthGuard],
+    loadChildren: () =>
+      import('./pages/overseas-education-pages/overseas-education-pages.module').then(m => m.OverseasEducationPagesModule),
+  },
+  {
     path: 'e-help',
     canActivateChild: [AuthGuard],
     loadChildren: () => import('./pages/e-help-desk-pages/e-help-desk-pages.module').then(m => m.EHelpDeskPagesModule)

@@ -42,6 +42,7 @@ export interface ISw7UpPages {
     NEWSLETTER?: string;
     GALLERY?: string;
     ARCHIVE?: string;
+    OVERSEAS?: string;
   };
   MY_PAGE?: {
     ROOT?: string;
@@ -111,6 +112,7 @@ export const PAGE_NAMES: ISw7UpPages = {
     NEWSLETTER: 'newsletter',
     GALLERY: 'gallery',
     ARCHIVE: 'archive',
+    OVERSEAS: 'overseas',
   },
   MY_PAGE: {
     INFO: 'info',
