@@ -10,6 +10,7 @@ import {
   ERROR_CODES,
   IUser,
   MAJORS,
+  UNIVERSITIES,
   OPTIONAL_EMAIL_PATTERN,
   OPTIONAL_MOBILE_NUM_PATTERN,
   PasswordValidator,
@@ -27,10 +28,11 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
 
   readonly LOGIN_URL = URLS.ACCOUNT.LOGIN;
   readonly MAJORS = [...MAJORS, '직접입력'];
-  manual: string;
+  readonly UNIVERSITIES = UNIVERSITIES.slice(1);
 
   roles = [
     { value: 'student', viewValue: '충북대학생' },
+    { value: 'other-student', viewValue: '타대학생' },
     { value: 'staff', viewValue: '충북대교직원' },
     { value: 'member', viewValue: '일반회원' },
   ];
@@ -47,6 +49,8 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
     switch (this.roleValue) {
       case 'student':
         return '학번';
+      case 'other-student':
+        return '학번';
       case 'staff':
         return '교번';
       default:
@@ -58,6 +62,8 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
     switch (this.roleValue) {
       case 'student':
         return '학번 10자리 입력, Ex. 2021123456';
+      case 'other-student':
+        return '학번 입력, Ex. 2021123456';
       case 'staff':
         return '교번 6자리 입력, Ex. 123456';
       default:
@@ -70,6 +76,7 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
   }
 
   changeRole(role: TUserRole): boolean {
+    this.reset()
     this.formGroup.get('role').setValue(role);
     return false;
   }
@@ -86,29 +93,31 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
   }
 
   isManual(): boolean {
-    const val = this.formGroup.getRawValue();
-    if (val.info.department === '직접입력') {
+    if (this.formGroup.getRawValue().info.department === '직접입력') {
       return true;
     }
   }
 
-  changeMajor(m: string): any {
-    this.formGroup.get('info.department').setValue(m);
-  }
-
-  changeMajorSub(m: string): any {
-    this.manual = m;
-  }
-
-  async updateMajor(ms: string): Promise<any> {
+  async updateManualDepartment(): Promise<any> {
     const val = this.formGroup.getRawValue();
     if (val.info.department === '직접입력') {
-      await this.formGroup.get('info.department').setValue(ms);
+      await this.formGroup.get('info.department').setValue(val.info.manualDepartment);
     }
   }
 
+  async updateUniversity(): Promise<any> {
+    const val = this.formGroup.getRawValue();
+    if(val.role === 'student' || val.role === 'staff') await this.formGroup.get('info.university').setValue('충북대학교');
+  }
+
+  async updateOtherStudent(): Promise<any> {
+    const val = this.formGroup.getRawValue();
+    if(val.role === 'other-student') await this.formGroup.get('role').setValue('student');
+  }
+
   protected async mapFormToModel(formGroup: FormGroup): Promise<IUser> {
-    this.updateMajor(this.manual);
+    await this.updateManualDepartment();
+    await this.updateOtherStudent();
     const rawValue = formGroup.getRawValue();
     rawValue.info.phone = rawValue.info.phone.replace(/[^\d]/g, '');
     rawValue.info.email = rawValue.info.email.toLowerCase();
@@ -137,7 +146,6 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
     }
   }
 
-  //
   protected initFormGroup(fb: FormBuilder): FormGroup {
     const formGroup = fb.group({
       no: [null, [Validators.required]],
@@ -149,6 +157,8 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
         email: [null, [Validators.required, Validators.pattern(OPTIONAL_EMAIL_PATTERN)]],
         phone: [null, [Validators.required, Validators.pattern(OPTIONAL_MOBILE_NUM_PATTERN)]],
         department: [null],
+        manualDepartment: [null],
+        university: [null],
         position: [null],
       }),
       agreement: [false, [Validators.requiredTrue]],
@@ -166,11 +176,31 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
         return null;
       },
       form => {
+        const role = form.get('role').value;
+        const university = form.get(['info', 'university']).value;
+        if (role !== 'member' && !(university || '').trim()) {
+          return { requiredUniversity: true };
+        }
+        return null;
+      },
+      form => {
+        const role = form.get('role').value;
+        const department = form.get(['info', 'department']).value;
+        const manualDepartment = form.get(['info', 'manualDepartment']).value;
+        if (role !== 'member' && department === '직접입력' && (manualDepartment === null || manualDepartment === '')) {
+            return { requiredManualDepartment: true };
+        }
+        return null;
+      },
+      form => {
         const no = form.get('no').value;
         switch (this.roleValue) {
           case 'student':
             // 충북대 학생의 경우 10자리 숫자
             return /^\d{10}$/.test(no) ? null : { invalidNo: true };
+          case 'other-student':
+            // 타대학 학생의 경우 숫자
+            return /^\d+$/.test(no) ? null : { invalidNo: true };
           case 'staff':
             // 충북대 교직원의 경우 6자리 숫자
             return /^\d{6}$/.test(no) ? null : { invalidNo: true };
@@ -183,8 +213,12 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
     return formGroup;
   }
 
+  async submit(): Promise<void> {
+    await this.updateUniversity();
+    return super.submit();
+  }
+
   protected requestObservable(m: IUser): Observable<boolean> {
-    console.log(this.formGroup.getRawValue());
     return this.auth.join(m);
   }
 }

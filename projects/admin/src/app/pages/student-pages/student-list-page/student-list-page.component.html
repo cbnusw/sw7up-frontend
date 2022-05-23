@@ -1,6 +1,6 @@
 <h2 class="page-title">학생 관리</h2>
 
-<div class="actions mat-elevation-z1">
+<div class="actions mat-elevation-z1 flex justify-between">
   <mat-form-field>
     <mat-label>검색</mat-label>
     <span matPrefix style="margin-right: 1rem;"><i class="las la-search"></i></span>
@@ -10,6 +10,31 @@
            placeholder="검색어 입력"/>
     <mat-hint>학번, 학과(부), 이름, 이메일, 연락처로 검색</mat-hint>
   </mat-form-field>
+  <div class="ms-auto">
+    <button mat-flat-button color="primary"
+            *ngIf="layout.desktop$ | async"
+            [matMenuTriggerFor]="menu">
+      {{params.university}}
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngFor="let univ of universities" (click)="changeUnivParam(univ)">
+        <span>{{univ}}</span>
+      </button>
+    </mat-menu>
+    <button
+      *ngIf="layout.mobile$ | async"
+      [mat-menu-trigger-for]="aboveMenu"
+       class="fixed pos-be raise"
+       mat-fab
+       color="primary">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #aboveMenu="matMenu" yPosition="above">
+      <button mat-menu-item *ngFor="let univ of universities" (click)="changeUnivParam(univ)">
+        <span>{{univ}}</span>
+      </button>
+    </mat-menu>
+  </div>
 </div>
 <div class="table-wrapper mat-elevation-z1">
   <div class="loading" *ngIf="loading">

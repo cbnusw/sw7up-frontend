@@ -5,6 +5,18 @@
          [class.active]="roleValue === role.value" (click)="changeRole(role.value)">{{role.viewValue}}</a>
     </li>
   </ul>
+
+  <div *ngIf="roleValue === 'other-student'" class="mb-4" formGroupName="info">
+    <label class="w-100 mb-2 required">소속 대학</label>
+    <select class="form-select no-outline me-2" formControlName="university">
+      <option value=''>선택하세요</option>
+      <option *ngFor="let option of UNIVERSITIES">{{option}}</option>
+    </select>
+    <div class="error">
+      <span *ngIf="hasError('requiredUniversity')">소속대학은 필수 입력 항목입니다.</span>
+    </div>
+  </div>
+
   <div class="form-group mb-4">
     <label for="no" class="w-100 mb-2 required">{{idLabel}}</label>
     <input type="text"
@@ -15,9 +27,9 @@
            [class.is-invalid]="invalid('no') || hasError(['invalidId', 'invalidNo'])"
            formControlName="no"/>
     <div class="invalid-feedback">
-      <span *ngIf="hasError('required', 'no')">{{idLabel}}은 필수 입력 항목입니다.</span>
-      <span *ngIf="hasError('invalidNo')">올바르지 않은 학번/교번입니다.</span>
-      <span *ngIf="hasError('invalidId')">잘못된 형식의 아이디입니다.</span>
+      <span *ngIf="hasError('required', 'no')">{{idLabel}}은 필수 입력 항목입니다. </span>
+      <span *ngIf="hasError('invalidNo')">올바르지 않은 학번/교번입니다. </span>
+      <span *ngIf="hasError('invalidId')">잘못된 형식의 아이디입니다. </span>
       <span *ngIf="hasSubmissionError('no')">{{submissionErrorMessage}}</span>
     </div>
   </div>
@@ -95,37 +107,42 @@
     </div>
   </div>
 
-      <div *ngIf="roleValue === 'student'" class="mb-4">
-        <label class="w-100 mb-2 required">소속</label>
-        <select class="form-select no-outline me-2 " #majors (change)="changeMajor(majors.value)">
-          <option *ngFor="let option of MAJORS" [value]="option">{{option}}</option>
-        </select>
-        <div *ngIf="isManual()">
-          <label class="w-100 mb-2 mt-4 required">SW사업단 미참여학과</label>
-          <input type="text"
-                 class="form-control no-outline"
-                 autocomplete="off"
-                 placeholder="SW중심사업단 미참여학과 기입"
-                 #majorSubInput (input)="changeMajorSub(majorSubInput.value)" />
-        </div>
-        <div class="invalid-feedback">
-          <span *ngIf="hasError('requiredDepartment')">소속은 필수 입력 항목입니다.</span>
-        </div>
-      </div>
+  <div *ngIf="roleValue === 'student'" class="mb-4" formGroupName="info">
+    <label for="department" class="w-100 mb-2 required">소속</label>
+    <select class="form-select no-outline me-2" formControlName="department">
+      <option value="">선택하세요</option>
+      <option *ngFor="let option of MAJORS">{{option}}</option>
+    </select>
+    <div *ngIf="isManual()">
+      <label for="department" class="w-100 mb-2 mt-4 required">SW사업단 미참여학과</label>
+      <input type="text"
+             formControlName="manualDepartment"
+             class="form-control no-outline"
+             autocomplete="off"
+             placeholder="SW중심사업단 미참여학과 기입"
+            />
+    </div>
+    <div class="error">
+      <span *ngIf="hasError('requiredDepartment')">소속은 필수 입력 항목입니다.</span>
+    </div>
+    <div class="error">
+      <span *ngIf="hasError('requiredManualDepartment')">소속은 필수 입력 항목입니다.</span>
+    </div>
+  </div>
 
-      <div *ngIf="roleValue === 'staff'" class="mb-4" formGroupName="info">
-        <label for="department" class="w-100 mb-2 required">소속</label>
-        <input type="text"
-               id="department"
-               class="form-control no-outline"
-               placeholder="소속(학과 및 학부 또는 부서)"
-               autocomplete="off"
-               [class.is-invalid]="hasError('requiredDepartment')"
-               formControlName="department"/>
-        <div class="invalid-feedback">
-          <span *ngIf="hasError('requiredDepartment')">소속은 필수 입력 항목입니다.</span>
-        </div>
-      </div>
+  <div *ngIf="roleValue === 'staff' || roleValue === 'other-student'" class="mb-4" formGroupName="info">
+    <label for="department" class="w-100 mb-2 required">소속</label>
+    <input type="text"
+           id="department"
+           class="form-control no-outline"
+           placeholder="소속(학과 및 학부 또는 부서)"
+           autocomplete="off"
+           [class.is-invalid]="hasError('requiredDepartment')"
+           formControlName="department"/>
+    <div class="invalid-feedback">
+      <span *ngIf="hasError('requiredDepartment')">소속은 필수 입력 항목입니다.</span>
+    </div>
+  </div>
 
   <div class="form-group mb-4" formGroupName="info" *ngIf="roleValue === 'staff'">
     <label for="position" class="w-100 mb-2">직책</label>

@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'student',
-    canActivateChild: [AuthGuard],
+    // canActivateChild: [AuthGuard],
     loadChildren: () => import('./pages/student-pages/student-pages.module').then(m => m.StudentPagesModule)
   },
   {

@@ -34,6 +34,15 @@ export const FILE_TYPES = [
   'Resource',
 ];
 
+export const UNIVERSITIES = [
+  '충북대학교',
+  '한국교통대학교',
+  '건국대학교',
+  '서원대학교',
+  '청주대학교',
+  '공군사관학교'
+];
+
 export const CENTERS = [
   '사업지원팀',
   'SW전공교육센터',
