@@ -37,7 +37,7 @@ const routes: Routes = [
   {
     path: PAGE_GROUPS.ACCOUNT,
     loadChildren: () => import('./pages/account-pages/account-pages.module').then(m => m.AccountPagesModule)
-  }
+  },
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
-import { CENTERS } from '../constants/common';
+import { CENTERS, UNIVERSITIES } from '../constants/common';
 import { IUser, TUserRole } from './user';
 
+export declare type TUserInfoUniversity = typeof UNIVERSITIES[number];
 export declare type TUserInfoCenter = typeof CENTERS[number];
 export const USER_INFO_CENTERS: TUserInfoCenter[] = CENTERS;
 
@@ -13,6 +14,7 @@ export interface IUserInfo {
   phone?: string;
   department?: string;
   position?: string;
+  university?: TUserInfoUniversity;
   center?: TUserInfoCenter;
   role?: TUserRole;
   user?: IUser;
