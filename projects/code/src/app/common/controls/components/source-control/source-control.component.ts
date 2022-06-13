@@ -67,26 +67,35 @@ export class SourceControlComponent implements ControlValueAccessor, OnInit {
     const files: File[] = [];
     flatTracedEntries(this.entries, files);
 
-    const list: Array<{ uploaded: boolean; file: File }> = files.map(file => ({ uploaded: false, file }));
+    const list: Array<{ uploaded: boolean; file: File; }> = files.map(file => ({ uploaded: false, file }));
     const uploadedList: IProjectFile[] = [];
 
     this.total = list.length;
 
     this.uploading = true;
+
+    // 소스 파일들을 업로드 전 임시 폴더가 있을 경우 삭제
+    // 이유: 프로젝트를 등록하기 전에 소스 파일들을 변경하여 다시 업로드할 수 있기 때문
     await this.projectService.removeTemporarySources(this.projectId);
+
     while (!list.every(item => item.uploaded)) {
       for (const item of list) {
         if (item.uploaded) {
           continue;
         }
+
         const chunks = (item.file as any).webkitRelativePath.split('/');
+
         chunks.pop();
+
         const dirPath = chunks.join('/');
+
         try {
           const { data } = await this.projectService
             .uploadProjectSource(this.projectId, item.file, dirPath)
             .pipe(timeout(2000))
             .toPromise();
+
           item.uploaded = true;
           this.count++;
           uploadedList.push(data);

@@ -10,11 +10,17 @@
       <div class="flex items-center select-none cursor-pointer text-blue-700" (click)="toggleOpened(entry)">
         <span class="mr-2 cursor-pointer">
           <svg *ngIf="!entry.opened"
-               xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+               xmlns="http://www.w3.org/2000/svg"
+               class="h-5 w-5"
+               viewBox="0 0 20 20"
+               fill="currentColor">
             <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/>
           </svg>
           <svg *ngIf="entry.opened"
-               xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+               xmlns="http://www.w3.org/2000/svg"
+               class="h-5 w-5"
+               viewBox="0 0 20 20"
+               fill="currentColor">
             <path fill-rule="evenodd"
                   d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z"
                   clip-rule="evenodd"/>
@@ -24,7 +30,9 @@
         <span>{{entry.dirname}}</span>
       </div>
     </div>
-    <div class="pl-6 overflow-hidden" [class.h-0]="!entry.opened" [class.h-auto]="entry.opened">
+    <div class="pl-6 overflow-hidden"
+         [class.h-0]="!entry.opened"
+         [class.h-auto]="entry.opened">
       <sw-source-upload [entries]="entry.entries"></sw-source-upload>
     </div>
   </div>
