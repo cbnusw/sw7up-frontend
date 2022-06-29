@@ -40,7 +40,10 @@ export const UNIVERSITIES = [
   '건국대학교',
   '서원대학교',
   '청주대학교',
-  '공군사관학교'
+  '공군사관학교',
+  '우석대학교',
+  '중원대학교',
+  '세명대학교'
 ];
 
 export const CENTERS = [
