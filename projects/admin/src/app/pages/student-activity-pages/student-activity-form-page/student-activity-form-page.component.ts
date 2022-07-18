@@ -9,11 +9,11 @@ import { ErrorMatcher } from '../../../classes/error-matcher';
 import { UploadAdapter } from '../../../classes/upload-adaptor';
 
 @Component({
-  selector: 'sw-student-actifity-form-page',
-  templateUrl: './student-actifity-form-page.component.html',
-  styleUrls: ['./student-actifity-form-page.component.scss']
+  selector: 'sw-student-activity-form-page',
+  templateUrl: './student-activity-form-page.component.html',
+  styleUrls: ['./student-activity-form-page.component.scss']
 })
-export class StudentActifityFormPageComponent extends AbstractFormDirective<IStudentActivity, boolean> implements OnInit {
+export class StudentActivityFormPageComponent extends AbstractFormDirective<IStudentActivity, boolean> implements OnInit {
 
   editor: any = null;
   config = {

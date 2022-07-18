@@ -8,11 +8,11 @@ import { AbstractSearchDirective, IParams, IStudentActivity, StudentActivityServ
 import { LayoutService } from 'ui';
 
 @Component({
-  selector: 'sw-student-actifity-list-page',
-  templateUrl: './student-actifity-list-page.component.html',
-  styleUrls: ['./student-actifity-list-page.component.scss']
+  selector: 'sw-student-activity-list-page',
+  templateUrl: './student-activity-list-page.component.html',
+  styleUrls: ['./student-activity-list-page.component.scss']
 })
-export class StudentActifityListPageComponent extends AbstractSearchDirective<IStudentActivity> implements AfterViewInit {
+export class StudentActivityListPageComponent extends AbstractSearchDirective<IStudentActivity> implements AfterViewInit {
 
   columns: string[] = ['no', 'title', 'hits', 'writer', 'createdAt'];
   limitOptions: number[] = [15, 30, 50, 100];

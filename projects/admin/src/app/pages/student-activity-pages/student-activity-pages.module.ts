@@ -11,14 +11,14 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { CoreModule } from '../../core/core.module';
 
 import { StudentActivityPagesRoutingModule } from './student-activity-pages-routing.module';
-import { StudentActifityListPageComponent } from './student-actifity-list-page/student-actifity-list-page.component';
-import { StudentActifityFormPageComponent } from './student-actifity-form-page/student-actifity-form-page.component';
+import { StudentActivityListPageComponent } from './student-activity-list-page/student-activity-list-page.component';
+import { StudentActivityFormPageComponent } from './student-activity-form-page/student-activity-form-page.component';
 
 
 @NgModule({
   declarations: [
-    StudentActifityListPageComponent,
-    StudentActifityFormPageComponent
+    StudentActivityListPageComponent,
+    StudentActivityFormPageComponent
   ],
   imports: [
     CommonModule,
