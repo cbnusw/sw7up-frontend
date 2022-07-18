@@ -39,6 +39,7 @@ export * from './lib/models/project';
 export * from './lib/models/qna';
 export * from './lib/models/resource';
 export * from './lib/models/response';
+export * from './lib/models/student-activity';
 export * from './lib/models/user';
 export * from './lib/models/user-info';
 
@@ -53,6 +54,7 @@ export * from './lib/services/apis/overseas-education.service';
 export * from './lib/services/apis/press-release.service';
 export * from './lib/services/apis/qna.service';
 export * from './lib/services/apis/resource.service';
+export * from './lib/services/apis/student-activity.service';
 export * from './lib/services/apis/user.service';
 export * from './lib/services/code/github.service';
 export * from './lib/services/code/project.service';

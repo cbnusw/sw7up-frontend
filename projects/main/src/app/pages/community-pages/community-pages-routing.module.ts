@@ -18,6 +18,8 @@ import { OverseasEducationDetailPageComponent } from './overseas-education-detai
 import { OverseasEducationListPageComponent } from './overseas-education-list-page/overseas-education-list-page.component';
 import { PressDetailPageComponent } from './press-detail-page/press-detail-page.component';
 import { PressListPageComponent } from './press-list-page/press-list-page.component';
+import { StudentActivityDetailPageComponent } from './student-activity-detail-page/student-activity-detail-page.component';
+import { StudentActivityListPageComponent } from './student-activity-list-page/student-activity-list-page.component';
 
 const routes: Routes = [
   {
@@ -39,6 +41,8 @@ const routes: Routes = [
       { path: `${PAGE_NAMES.COMMUNITY.ARCHIVE}/:id`, canActivate: [AuthGuard], component: ArchiveDetailPageComponent },
       { path: PAGE_NAMES.COMMUNITY.OVERSEAS, component: OverseasEducationListPageComponent },
       { path: `${PAGE_NAMES.COMMUNITY.OVERSEAS}/:id`, component: OverseasEducationDetailPageComponent },
+      { path: PAGE_NAMES.COMMUNITY.STUDENT_ACTIVITY, component: StudentActivityListPageComponent },
+      { path: `${PAGE_NAMES.COMMUNITY.STUDENT_ACTIVITY}/:id`, component: StudentActivityDetailPageComponent },
     ]
   }
 ];

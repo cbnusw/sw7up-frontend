@@ -25,6 +25,8 @@ import { QnaWriterDepartmentPipe } from './pipes/qna-writer-department.pipe';
 import { PasswordDialogComponent } from './dialog/password-dialog/password-dialog.component';
 import { OverseasEducationListPageComponent } from './overseas-education-list-page/overseas-education-list-page.component';
 import { OverseasEducationDetailPageComponent } from './overseas-education-detail-page/overseas-education-detail-page.component';
+import { StudentActivityListPageComponent } from './student-activity-list-page/student-activity-list-page.component';
+import { StudentActivityDetailPageComponent } from './student-activity-detail-page/student-activity-detail-page.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { OverseasEducationDetailPageComponent } from './overseas-education-detai
     PasswordDialogComponent,
     OverseasEducationListPageComponent,
     OverseasEducationDetailPageComponent,
+    StudentActivityListPageComponent,
+    StudentActivityDetailPageComponent,
   ],
   imports: [
     CommonModule,

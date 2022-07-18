@@ -25,13 +25,14 @@ export const PERMISSIONS = [
 ];
 
 export const FILE_TYPES = [
-  'UserInfo',
   'CorruptionReport',
   'Gallery',
   'Notice',
   'OverseasEducation',
   'PressRelease',
   'Resource',
+  'StudentActivity',
+  'UserInfo',
 ];
 
 export const UNIVERSITIES = [

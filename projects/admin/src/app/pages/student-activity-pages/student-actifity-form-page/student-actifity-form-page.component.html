@@ -1,4 +1,4 @@
-<h2 class="page-title">해외교육 글 {{modifying ? '수정' : '등록'}}</h2>
+<h2 class="page-title">학생활동사례 {{modifying ? '수정' : '등록'}}</h2>
 
 <form class="mat-elevation-z1" [formGroup]="formGroup" (ngSubmit)="submit()">
   <button *ngIf="model"
@@ -6,7 +6,7 @@
           class="remove-btn absolute raise"
           type="button"
           color="warn"
-          (click)="removeOverseasEducation()">
+          (click)="removeStudentActivity()">
     <i class="las la-trash-alt"></i>
   </button>
 
@@ -39,7 +39,7 @@
     <button type="button"
             class="me"
             mat-raised-button color="accent"
-            routerLink="/overseas-education/list">취소
+            routerLink="/student-activity/list">취소
     </button>
     <button class="ms"
             mat-raised-button

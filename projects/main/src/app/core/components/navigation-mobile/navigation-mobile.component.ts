@@ -69,9 +69,11 @@ export class NavigationMobileComponent implements OnInit {
       name: '커뮤니티',
       subMenus: [
         { name: '공지사항', link: URLS.COMMUNITY.NOTICE },
+        { name: 'E-헬프데스크', link: URLS.COMMUNITY.E_HELP },
         { name: '보도자료', link: URLS.COMMUNITY.PRESS },
         { name: '뉴스레터', link: URLS.COMMUNITY.NEWSLETTER },
-        { name: 'E-Help Desk', link: URLS.COMMUNITY.E_HELP },
+        { name: '해외교육', link: URLS.COMMUNITY.OVERSEAS },
+        { name: '학생활동사례', link: URLS.COMMUNITY.STUDENT_ACTIVITY },
         { name: '포토갤러리', link: URLS.COMMUNITY.GALLERY },
         { name: '자료실', link: URLS.COMMUNITY.ARCHIVE },
       ]
@@ -111,7 +113,7 @@ export class NavigationMobileComponent implements OnInit {
               private router: Router) {
   }
 
-  close() {
+  close(): void {
     this.navigation.hidden = true;
   }
 

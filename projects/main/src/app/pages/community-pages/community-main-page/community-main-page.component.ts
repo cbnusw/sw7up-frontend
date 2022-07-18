@@ -15,6 +15,7 @@ export class CommunityMainPageComponent implements OnInit {
     { name: '보도자료', link: URLS.COMMUNITY.PRESS },
     { name: '뉴스레터', link: URLS.COMMUNITY.NEWSLETTER },
     { name: '해외교육', link: URLS.COMMUNITY.OVERSEAS },
+    { name: '학생활동사례', link: URLS.COMMUNITY.STUDENT_ACTIVITY },
     { name: '포토갤러리', link: URLS.COMMUNITY.GALLERY },
     { name: '자료실', link: URLS.COMMUNITY.ARCHIVE },
   ];

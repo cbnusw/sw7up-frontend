@@ -1,7 +1,7 @@
 import { IFile } from './file';
 import { IUserInfo } from './user-info';
 
-export interface IOverseasEducation {
+export interface IStudentActivity {
   _id?: string;
   title: string;
   content: string;

@@ -43,6 +43,7 @@ export interface ISw7UpPages {
     GALLERY?: string;
     ARCHIVE?: string;
     OVERSEAS?: string;
+    STUDENT_ACTIVITY?: string;
   };
   MY_PAGE?: {
     ROOT?: string;
@@ -113,6 +114,7 @@ export const PAGE_NAMES: ISw7UpPages = {
     GALLERY: 'gallery',
     ARCHIVE: 'archive',
     OVERSEAS: 'overseas',
+    STUDENT_ACTIVITY: 'student-activity'
   },
   MY_PAGE: {
     INFO: 'info',
