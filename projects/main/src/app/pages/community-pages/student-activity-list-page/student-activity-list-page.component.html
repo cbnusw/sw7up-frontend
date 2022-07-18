@@ -15,7 +15,7 @@
 
 <div class="card card-frame py-3 px-3 px-sm-4"
      *ngFor="let doc of documents; let i = index;"
-     [routerLink]="[OVERSEAS_URL, doc._id]">
+     [routerLink]="[STUDENT_ACTIVITY_URL, doc._id]">
   <div class="notice-wrapper row align-items-sm-center">
     <span class="table-body col-lg-1 text-sm-center d-none d-lg-block">
       {{getNo(i)}}

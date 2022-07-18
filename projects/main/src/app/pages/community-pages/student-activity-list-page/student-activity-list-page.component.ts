@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IParams } from 'projects/shared/src/public-api';
 import { Observable } from 'rxjs';
 import { AbstractSearchDirective, IListResponse, IStudentActivity, StudentActivityService } from 'shared';
+import { URLS } from '../../../constants/urls';
 
 @Component({
   selector: 'sw-student-activity-list-page',
@@ -10,6 +11,8 @@ import { AbstractSearchDirective, IListResponse, IStudentActivity, StudentActivi
   styleUrls: ['./student-activity-list-page.component.scss']
 })
 export class StudentActivityListPageComponent extends AbstractSearchDirective<IStudentActivity> {
+
+  readonly STUDENT_ACTIVITY_URL = URLS.COMMUNITY.STUDENT_ACTIVITY;
 
   constructor(private studentActivityService: StudentActivityService,
               route: ActivatedRoute,
