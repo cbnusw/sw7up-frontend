@@ -53,7 +53,15 @@ export class ProjectListService {
     this.search();
   }
 
-  getMore(): void {
+  removeProject(id: string): void {
+    const idx = this.projects.findIndex(project => project._id === id);
+    if (idx !== -1) {
+      this.projects.splice(idx, 1);
+      this.getMore(1);
+    }
+  }
+
+  getMore(limit = 12): void {
     if (this.pending || this.projects.length >= this.total) {
       return;
     }
@@ -61,9 +69,10 @@ export class ProjectListService {
     const last = this.projects[this.projects.length - 1];
 
     (this.params as any).sort = `_id:-1:${last._id}`;
+    const params = { ...this.params, limit };
 
     this._pendingSubject.next(true);
-    this._http.get<IListResponse<IProject>>(this._url, { params: this.params })
+    this._http.get<IListResponse<IProject>>(this._url, { params })
       .pipe(
         timeout(5000),
         retry(5),
@@ -72,14 +81,14 @@ export class ProjectListService {
       .subscribe(res => {
         const { total, documents } = res.data;
         this.total = total;
-        console.log(total, documents);
         this._projectsSubject.next([...this.projects, ...documents]);
       });
   }
 
-  search(): void {
+  search(limit = 12): void {
     this._pendingSubject.next(true);
-    this._http.get<IListResponse<IProject>>(this._url, { params: this.params }).pipe(
+    const params = { ...this.params, limit };
+    this._http.get<IListResponse<IProject>>(this._url, { params }).pipe(
       timeout(5000),
       retry(5),
       finalize(() => this._pendingSubject.next(false))

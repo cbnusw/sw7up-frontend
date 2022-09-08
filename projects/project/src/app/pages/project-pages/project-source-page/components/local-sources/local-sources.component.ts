@@ -55,7 +55,6 @@ export class LocalSourcesComponent implements OnInit {
       mergeMap(file => {
         const chunks = file.webkitRelativePath.split('/');
         const path = chunks.slice(0, chunks.length - 1).join('/');
-        console.log(path);
         return this._projectService
           .uploadSourceFile(this.projectId, path, file)
           .pipe(

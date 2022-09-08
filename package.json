@@ -12,7 +12,7 @@
     "build:app": "run-s build:app:main build:app:admin build:app:code",
     "build:app:admin": "npx ng build --configuration production admin",
     "build:app:code": "npx ng build --configuration production --base-href /code/ code",
-    "build:app:project": "npx ng build --configuration production --base-href /prject/ project",
+    "build:app:project": "npx ng build --configuration production --base-href /project/ project",
     "build:app:main": "npx ng build --configuration production --base-href / main && npx ng run main:server:production",
     "dev:main": "npx ng serve main --port 4200 --disable-host-check",
     "dev:admin": "npx ng serve admin --port 4201 --disable-host-check",

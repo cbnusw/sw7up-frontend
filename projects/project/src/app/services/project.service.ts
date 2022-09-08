@@ -177,6 +177,13 @@ export class ProjectService extends RequestBase {
     );
   }
 
+  removeProject(id: string): Observable<IResponse<undefined>> {
+    return this._http.delete(this.url`/${id}`).pipe(
+      timeout(5000),
+      retry(5),
+    );
+  }
+
   private _createFormDataWithFiles(files: File[]): FormData {
     const formData = new FormData();
     files.forEach(file => formData.append('files', file));

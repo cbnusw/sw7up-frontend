@@ -7,7 +7,7 @@
     </ng-template>
   </swiper>
 
-  <swiper (swiper)="setIndicator($event)" [config]="indicatorConfig">
+  <swiper (swiper)="setIndicator($event)" [config]="indicatorConfig" [class.hidden]="slide.length < 2">
     <ng-template swiperSlide *ngFor="let item of slide; let i = index;">
       <div class="relative">
         <button *ngIf="editable"

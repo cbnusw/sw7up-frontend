@@ -45,6 +45,16 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  removeProject(): void {
+    const yes = confirm(`프로젝트를 삭제하시겠습니까?`);
+    if (yes) {
+      this._projectService.removeProject(this.project._id).subscribe({
+        next: () => this.redirectRouter.exitProjectPage(),
+        error: err => alert(`프로젝트 삭제에 실패하였습니다.\nError: ${err?.error?.code || err?.message}`),
+      });
+    }
+  }
+
   ngOnInit(): void {
     this._headerService.hidden = true;
 

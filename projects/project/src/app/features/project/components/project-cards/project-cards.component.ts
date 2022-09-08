@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IProject } from 'projects/project/src/app/types';
 import { RedirectRouterService } from '../../../../services';
 import { ProjectListService } from '../../services';
 
@@ -13,6 +14,10 @@ export class ProjectCardsComponent implements OnInit {
     public projectListService: ProjectListService,
     private _redirectRouter: RedirectRouterService
   ) {
+  }
+
+  removeProject(project: IProject): void {
+    this.projectListService.removeProject(project._id);
   }
 
   ngOnInit(): void {
