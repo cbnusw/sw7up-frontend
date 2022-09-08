@@ -1,0 +1,31 @@
+<ng-container *ngIf="project.banners.length > 0">
+  <img *ngIf="project.banners[0].link; else imageRef"
+       class="aspect-video object-cover object-center"
+       [src]="project.banners[0].link | youtubeThumbnailUrl" alt="video cover"/>
+  <ng-template #imageRef>
+    <img class="aspect-video object-cover object-center"
+         [src]="project.banners[0].file | staticUrl" alt="image"/>
+  </ng-template>
+</ng-container>
+
+<section class="flex flex-col gap-4 p-4 justify-self-stretch">
+  <h2 class="font-bold truncate flex-grow-0">{{project.name}}</h2>
+  <span class="text-sm text-secondary-600 text-right">{{project.createdAt | date:'yyyy.MM.dd'}}</span>
+  <div class="pre-wrapper">
+    <p>{{project.description}}</p>
+  </div>
+</section>
+
+<footer class="flex gap-4 items-center p-4 border-t border-secondary-200 text-sm gap-2 text-secondary-600">
+  <span>[{{project.department}}]</span>
+  <span class="font-bold">{{project.creator?.name}}</span>
+  <sw-popup-button *ngIf="auth.isOperator || auth.me?.info?._id === project?.creator?._id"
+                   class="ml-auto"
+                   [items]="popupItems">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+         stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+    </svg>
+  </sw-popup-button>
+</footer>

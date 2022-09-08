@@ -1,0 +1,6 @@
+<div *ngFor="let item of chartData"
+     class="card space-y-2 p-4 w-full flex-grow-1 flex-shrink-1">
+  <h3 class="font-bold">{{item.title}}</h3>
+  <sw-bar-chart [data]="item.data$ | async"
+                height="250px"></sw-bar-chart>
+</div>

@@ -1,0 +1,15 @@
+<div class="border border-secondary-200">
+  <div class="grid-container bg-secondary-50 border-b border-secondary-200">
+    <h4 class="font-bold p-2 border-r border-secondary-200">언어</h4>
+    <h4 class="font-bold p-2 hidden md:block">등록</h4>
+  </div>
+  <div class="overflow-y-scroll" style="max-height: 344px;">
+    <div *ngFor="let item of languageService.availableLanguages$ | async"
+         class="grid-container border-b border-secondary-200 last:border-b-0 cursor-pointer hover:bg-primary-50"
+         (click)="languageSelect.emit(item)">
+      <div class="p-2 border-r border-secondary-200">{{item.name}}</div>
+      <div class="p-2 hidden md:block">{{item.creator.name}}</div>
+    </div>
+  </div>
+</div>
+<p class="text-info-500">* 언어를 클릭하여 통계에서 제거</p>

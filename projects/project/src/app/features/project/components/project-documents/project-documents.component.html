@@ -1,0 +1,16 @@
+<div *ngIf="(documents || []).length === 0" class="text-secondary-500 p-2">
+  등록된 문서가 없습니다.
+</div>
+<div *ngFor="let document of documents; let i = index"
+     class="flex gap-2 p-2 border-secondary-200 border border-secondary-200">
+  <h6 class="flex-shrink-0">{{document.name}}</h6>
+  <a class="text-primary-500 truncate" [href]="document.file | downloadDocumentLink">{{document.file.name}}</a>
+  <button *ngIf="editable"
+          type="button"
+          class="ml-auto flex-shrink-0 text-danger-500"
+          (click)="documentRemove.emit(i)">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+</div>

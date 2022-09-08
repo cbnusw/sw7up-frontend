@@ -23,13 +23,13 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError(err => {
-        if (err.error && err.error.code === ERROR_CODES.ACCESS_TOKEN_EXPIRED) {
+        if (err?.error?.code === ERROR_CODES.ACCESS_TOKEN_EXPIRED) {
           return this.refreshToken(request, next);
         }
         return throwError(err);
       }),
       catchError(err => {
-        if (err.status === 401 || err.error.status === 401) {
+        if (err?.error?.code === ERROR_CODES.REFRESH_TOKEN_EXPIRED || err?.error?.code === ERROR_CODES.INVALID_REFRESH_TOKEN) {
           const loginPageUrl = this.config.loginPageUrl;
           this.storage.clear();
           this.storage.emit(TOKEN_FLUSH_EVENT);

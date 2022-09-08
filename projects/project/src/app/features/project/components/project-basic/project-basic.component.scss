@@ -1,0 +1,12 @@
+:host {
+  @apply block border border-secondary-200;
+}
+
+.grid-container {
+  @apply grid;
+  grid-template-columns: 1fr;
+
+  @screen sm {
+    grid-template-columns: 150px 1fr;
+  }
+}

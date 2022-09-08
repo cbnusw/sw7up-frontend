@@ -1,0 +1,13 @@
+<div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  <sw-project-card *ngFor="let project of projectListService.projects$ | async"
+                   (click)="moveProjectPage(project._id)"
+                   class="card
+                        aspect-[3/4]
+                        duration-200
+                        hover:scale-105
+                        hover:shadow-lg
+                        cursor-pointer"
+                   [project]="project">
+  </sw-project-card>
+</div>
+<sw-pending *ngIf="projectListService.pending$ | async"></sw-pending>

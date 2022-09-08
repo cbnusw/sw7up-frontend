@@ -1,0 +1,12 @@
+<img class="w-full object-center object-contain"
+     src="assets/images/github.jpg" alt="github image">
+<div class="flex flex-col justify-center flex-shrink-0 p-4 gap-6">
+  <h3 class="font-bold text-xl">GitHub 계정 추가</h3>
+  <div class="space-y-2">
+    <p class="font-bold">GitHub에 올린 프로젝트를 등록하기 위해 GitHub 계정을 인증해야 합니다.</p>
+    <p>먼저 <a href="https://github.com" target="_blank" class="text-primary-500">GitHub 홈페이지</a>에 접속하여 GitHub에 로그인된 상태인지 확인하십오.</p>
+    <p>만약 GitHub에 로그인 상태라면 본인의 계정으로 로그인된 상태인지 확인하고, 본인의 계정이 아니라면 로그아웃 후 계정을 추가해야 합니다.</p>
+    <p>위 사항을 확인했다면 아래의 버튼을 클릭하여 GitHub 계정을 추가해주십시오.</p>
+  </div>
+  <sw-button type="button" (click)="githubService.addGithubAccount()">계정 추가</sw-button>
+</div>

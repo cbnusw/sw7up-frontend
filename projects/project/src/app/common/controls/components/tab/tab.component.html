@@ -1,0 +1,9 @@
+<ul class="flex select-none">
+  <li *ngFor="let option of options"
+      [class]="LI_STYLE_CLASSES[selected !== option ? 0 : 1]">
+    <button type="button"
+            class="px-4 py-2"
+            [class]="BUTTON_CLASSES[selected !== option ? 0 : 1]"
+            (click)="change(option)">{{option.viewValue || option}}</button>
+  </li>
+</ul>

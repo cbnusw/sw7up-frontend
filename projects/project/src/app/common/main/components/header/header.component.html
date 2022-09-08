@@ -1,0 +1,30 @@
+<sw-responsive-container class="flex items-center gap-4 select-none">
+  <a routerLink="/dashboard" class="flex gap-4 items-center h-8 mr-auto">
+    <img class="h-full" src="assets/images/logo.png" alt="logo">
+    <h1 class="text-2xl font-bold">코드이력관리시스템</h1>
+  </a>
+
+  <div class="flex gap-4 items-center">
+    <a *ngIf="!auth.loggedIn; else loggedInRef" [href]="loginUrl"
+       class="text-sm font-bold border rounded-full py-2 px-4 text-white bg-primary-500 hover:bg-primary-400">로그인</a>
+  </div>
+  <ng-template #loggedInRef>
+    <button *ngIf="auth.isStudent"
+            (click)="redirectRouter.navigateByUrl('/projects/register')"
+            class="hidden lg:block text-sm font-bold border rounded-full py-2 px-4 text-white bg-primary-500 hover:bg-primary-400">
+      프로젝트 등록
+    </button>
+    <a *ngIf="auth.isOperator"
+       routerLink="/management"
+       class="hidden lg:block text-sm font-bold border rounded-full py-2 px-4 text-white bg-primary-500 hover:bg-primary-400">프로젝트
+      관리</a>
+
+    <sw-popup-button [items]="popupItems">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+           stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+      </svg>
+    </sw-popup-button>
+  </ng-template>
+</sw-responsive-container>

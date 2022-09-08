@@ -1,0 +1,30 @@
+<sw-responsive-container class="block space-y-8">
+
+  <div class="flex items-center">
+    <h2 class="text-3xl font-bold">슬라이드</h2>
+    <sw-exit-button class="ml-auto" (click)="redirectRouter.redirect()"></sw-exit-button>
+  </div>
+
+  <h3 class="text-2xl font-bold">{{projectName}}</h3>
+
+  <div class="card p-4 space-y-4">
+    <h4 class="text-xl font-bold">슬라이드 추가</h4>
+    <sw-project-slide-uploader [projectId]="projectId"
+                               (uploadChange)="addSlide($event)" (addVideo)="addVideoSlide($event)"></sw-project-slide-uploader>
+  </div>
+
+  <div class="space-y-1">
+    <div *ngIf="slide.length === 0; else slideRef"
+         class="aspect-video flex items-center justify-center bg-secondary-100">
+      <p *ngIf="!pending; else pendingRef" class="text-secondary-500">등록된 슬라이드가 없습니다.</p>
+      <ng-template #pendingRef>
+        <sw-pending></sw-pending>
+      </ng-template>
+    </div>
+    <ng-template #slideRef>
+      <sw-project-slide [slide]="slide"
+                        [editable]="true"
+                        (removeChange)="removeSlide($event)"></sw-project-slide>
+    </ng-template>
+  </div>
+</sw-responsive-container>

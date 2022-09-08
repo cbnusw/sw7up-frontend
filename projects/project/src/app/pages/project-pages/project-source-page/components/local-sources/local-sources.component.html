@@ -1,0 +1,32 @@
+<div class="space-y-2">
+  <ng-container *ngIf="!sourceTree; else sourceTreeRef">
+    <p class="text-info-500">
+      폴더에 파일이 많은 경우 시간이 걸릴 수 있습니다. 폴더 선택 후 기다려주십시오.
+    </p>
+    <sw-button type="button"
+               [disabled]="disabled"
+               swDirectoryChooser
+               (converting)="setDisabled($event)"
+               (directoryChange)="changeSources($event)">소스 폴더 선택
+    </sw-button>
+  </ng-container>
+  <ng-template #sourceTreeRef>
+    <p class="text-info-500">
+      외부 라이브러리 등을 제외하고 본인이 작성한 파일들로 업로드해주세요.<br/>
+      (예: node_module, .env 등은 제외하고 업로드)
+    </p>
+    <div class="flex gap-4">
+      <sw-button type="button" [color]="1" (click)="cancel()">취소</sw-button>
+      <sw-button type="button" [color]="2" (click)="upload()">업로드</sw-button>
+    </div>
+    <sw-source-tree *ngIf="!pending; else pendingRef"
+                    [selectable]="true"
+                    [sourceTree]="sourceTree"
+                    height="500px"></sw-source-tree>
+    <ng-template #pendingRef>
+      <sw-pending>
+        <div class="text-center">파일 업로드 중... {{uploadCount / uploadTotal | percent}}</div>
+      </sw-pending>
+    </ng-template>
+  </ng-template>
+</div>

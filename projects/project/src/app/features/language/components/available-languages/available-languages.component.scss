@@ -1,0 +1,12 @@
+:host {
+  @apply block space-y-4;
+}
+
+.grid-container {
+  @apply grid;
+  grid-template-columns: 1fr;
+
+  @screen md {
+    grid-template-columns: 1fr 100px;
+  }
+}

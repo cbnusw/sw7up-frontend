@@ -1,0 +1,12 @@
+<header class="flex items-center text-xl font-bold select-none">
+  <span>
+    <ng-content select="[icon]"></ng-content>
+  </span>
+  <h2 *ngIf="title">{{title}}</h2>
+  <ng-content select="[tools]"></ng-content>
+</header>
+
+<div>
+  <ng-content></ng-content>
+</div>
+

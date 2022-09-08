@@ -1,0 +1,42 @@
+<sw-responsive-container class="block space-y-8">
+  <div class="flex items-center">
+    <h2 class="text-3xl font-bold">팀</h2>
+    <sw-exit-button class="ml-auto" (click)="redirectRouter.redirect()"></sw-exit-button>
+  </div>
+
+  <h3 class="text-2xl font-bold">{{project?.name}}</h3>
+
+  <div *ngIf="project?.repo" class="card p-4 space-y-4">
+    <h4 class="text-lg font-bold">팀 추가</h4>
+    <div class="overflow-x-scroll">
+      <sw-select-buttons class="w-full" [options]="teamOptions" [(value)]="selectedOption"></sw-select-buttons>
+    </div>
+    <ng-container [ngSwitch]="selectedOption">
+      <ng-container *ngSwitchCase="'깃헙'">
+        <ng-container *ngIf="!project?.repo; else repoRef">
+          <p class="text-secondary-500">깃헙 저장소 정보가 없습니다.</p>
+        </ng-container>
+        <ng-template #repoRef>
+          <sw-button type="button" (click)="addGitHubMembers()">커밋 정보로 등록</sw-button>
+          <sw-project-repository [repo]="project?.repo"></sw-project-repository>
+        </ng-template>
+      </ng-container>
+      <ng-container *ngSwitchCase="'사업단회원'">
+        <sw-member-searcher (memberSelect)="addJoinedMember($event)"></sw-member-searcher>
+      </ng-container>
+      <ng-container *ngSwitchCase="'비회원'">
+        <sw-none-member (memberCreate)="addNotJoinedMember($event)"></sw-none-member>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <div class="card p-4 space-y-4">
+    <h4 class="text-lg font-bold">팀 정보</h4>
+    <sw-project-team [projectId]="project?._id"
+                     [team]="project?.team"
+                     [editable]="true"
+                     (joinedMemberRemove)="removeJoinedMember($event)"
+                     (notJoinedMemberRemove)="removeNotJoinedMember($event)"
+                     (githubMemberRemove)="removeGitHubMember($event)"></sw-project-team>
+  </div>
+</sw-responsive-container>

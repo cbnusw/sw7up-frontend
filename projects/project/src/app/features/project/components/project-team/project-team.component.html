@@ -1,0 +1,85 @@
+<div *ngIf="editable; else teamNameRef" class="flex flex-col md:flex-row gap-4 items-start md:items-center">
+  <label class="flex-shrink-0 text-xl">팀명</label>
+  <div class="flex w-full">
+    <sw-input type="text" [(ngModel)]="teamName" placeholder="팀명을 입력해주세요." class="w-full flex-grow-1"></sw-input>
+    <sw-button type="button" class="flex-shrink-0" (click)="updateTeamName()">수정</sw-button>
+  </div>
+</div>
+<ng-template #teamNameRef>
+  <h3 class="text-xl">팀명: <span class="font-bold">{{teamName || '-'}}</span></h3>
+</ng-template>
+
+<p *ngIf="isEmpty; else teamRef" class="text-secondary-500">등록된 팀이 없습니다.</p>
+<ng-template #teamRef>
+  <div *ngIf="(team?.member?.joined || []).length > 0" class="space-y-2">
+    <h4 class="font-bold">사업단회원</h4>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
+      <div *ngFor="let member of team?.member?.joined" class="card p-2 relative">
+        <p>소속 학교: {{member.university}}</p>
+        <p>학과/학부: {{member.department}}</p>
+        <p>학번: {{member.no}}</p>
+        <p>이름: {{member.name}}</p>
+        <button *ngIf="editable"
+                type="button"
+                (click)="joinedMemberRemove.emit(member)"
+                class="z-10 absolute top-1 right-1 text-danger-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor"
+               class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="(team?.member?.notJoined || []).length > 0" class="space-y-2">
+    <h4 class="font-bold">비회원</h4>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
+      <div *ngFor="let member of team?.member?.notJoined; let i = index;" class="card p-2 relative">
+        <p>소속 학교: {{member.school}}</p>
+        <p>학과/학부: {{member.department}}</p>
+        <p>학번: {{member.no}}</p>
+        <p>이름: {{member.name}}</p>
+        <button *ngIf="editable"
+                type="button"
+                (click)="notJoinedMemberRemove.emit(i)"
+                class="z-10 absolute top-1 right-1 text-danger-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor"
+               class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="(team?.member?.github || []).length > 0" class="space-y-2">
+    <h4 class="font-bold">깃헙회원</h4>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
+      <div *ngFor="let member of team?.member?.github" class="card p-2 relative">
+        <p>깃헙계정: <a href="https://github.com/{{member.username}}" class="text-primary-500" target="_blank">{{member.username}}</a></p>
+        <ng-container *ngIf="!member.user; else userRef">
+          <p class="text-secondary-500">사업단 계정과 연결되지 않음</p>
+        </ng-container>
+        <ng-template #userRef>
+          <p>소속 학교: {{member.user.university}}</p>
+          <p>학과/학부: {{member.user.department}}</p>
+          <p>학번: {{member.user.no}}</p>
+          <p>이름: {{member.user.name}}</p>
+        </ng-template>
+        <button *ngIf="editable"
+                type="button"
+                (click)="githubMemberRemove.emit(member)"
+                class="z-10 absolute top-1 right-1 text-danger-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor"
+               class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

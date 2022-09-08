@@ -1,0 +1,6 @@
+label {
+ &.required::after {
+   content: '*';
+   @apply text-red-600 ml-1;
+ }
+}

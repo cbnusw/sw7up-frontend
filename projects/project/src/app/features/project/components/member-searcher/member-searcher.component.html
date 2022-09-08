@@ -1,0 +1,30 @@
+<sw-search-input [formControl]="keywordControl"
+                 placeholder="학번 또는 이름 입력"></sw-search-input>
+<div class="space-y-1 overflow-y-scroll"
+     swScrollBottom
+     (bottom)="accountService.getMore()"
+     style="max-height: 500px">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
+    <button type="button"
+            *ngFor="let account of accountService.accounts$ | async"
+            (click)="memberSelect.emit(account)"
+            class="card block w-full p-2 space-y-1 cursor-pointer hover:bg-primary-500 hover:text-white hover:font-bold text-left">
+      <p>소속 학교: {{account.university}}</p>
+      <p>학과/학부: {{account.department}}</p>
+      <p>학번: {{account.no}}</p>
+      <p>이름: {{account.name}}</p>
+    </button>
+  </div>
+  <div *ngIf="!accountService.keyword" class="p-2 text-secondary-500">
+    검색어를 입력하세요.
+  </div>
+  <div *ngIf="accountService.keyword && accountService.accounts.length === 0" class="p-2 text-secondary-500">
+    검색 결과가 없습니다.
+  </div>
+  <div *ngIf="accountService.pending$ | async" class="p-2">
+    <sw-pending sizeClass="h-8 w-8">
+      <div class="text-center text-secondary-500">데이터 로딩 중...</div>
+    </sw-pending>
+  </div>
+</div>
+<p *ngIf="accountService.accounts.length > 0" class="text-info-500">팀원을 클릭하여 팀에 추가</p>

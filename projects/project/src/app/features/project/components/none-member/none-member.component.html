@@ -1,0 +1,29 @@
+<form [formGroup]="formGroup" (ngSubmit)="addNotJoinedMember()" class="space-y-2">
+  <sw-control-wrapper class="block" label="소속 학교" labelWidth="120px">
+    <sw-input type="text" formControlName="school" placeholder="소속 학교 입력"></sw-input>
+    <span error *ngIf="submiited && formGroup.hasError('required', 'school')">
+      팀원의 소속 학교를 입력해주세요.
+    </span>
+  </sw-control-wrapper>
+  <sw-control-wrapper class="block" label="소속 학과/학부" labelWidth="120px">
+    <sw-input type="text" formControlName="department" placeholder="소속 학과/학부 입력"></sw-input>
+    <span error *ngIf="submiited && formGroup.hasError('required', 'department')">
+      팀원이 소속 학과/학부를 입력해주세요.
+    </span>
+  </sw-control-wrapper>
+  <sw-control-wrapper class="block" label="학번" labelWidth="120px">
+    <sw-input type="text" formControlName="no" placeholder="학번 입력"></sw-input>
+    <span error *ngIf="submiited && formGroup.hasError('required', 'no')">
+      팀원의 학번을 입력해주세요.
+    </span>
+  </sw-control-wrapper>
+  <sw-control-wrapper class="block" label="이름" labelWidth="120px">
+    <sw-input type="text" formControlName="name" placeholder="팀원 이름 입력"></sw-input>
+    <span error *ngIf="submiited && formGroup.hasError('required', 'name')">
+      팀원의 이름을 입력해주세요.
+    </span>
+  </sw-control-wrapper>
+  <div class="flex justify-end">
+    <sw-button type="submit" class="w-full sm:w-fit">팀원 추가</sw-button>
+  </div>
+</form>

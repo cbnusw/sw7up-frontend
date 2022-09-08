@@ -1,0 +1,30 @@
+<div class="space-y-1">
+  <swiper *ngIf="mainConfig" [config]="mainConfig">
+    <ng-template swiperSlide *ngFor="let item of slide">
+      <sw-project-slide-item [item]="item"
+                             [showPlayButton]="true"
+                             (playChange)="playVideo($event)"></sw-project-slide-item>
+    </ng-template>
+  </swiper>
+
+  <swiper (swiper)="setIndicator($event)" [config]="indicatorConfig">
+    <ng-template swiperSlide *ngFor="let item of slide; let i = index;">
+      <div class="relative">
+        <button *ngIf="editable"
+                type="button"
+                class="absolute top-0.5 right-0.5 bg-black opacity-50 text-white z-10"
+                (click)="removeChange.emit(i)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <sw-project-slide-item [item]="item" class="cursor-pointer"></sw-project-slide-item>
+      </div>
+    </ng-template>
+  </swiper>
+</div>
+
+<sw-video-viewer *ngIf="playLink && isOpenViewer"
+                 [link]="playLink"
+                 (closeChange)="isOpenViewer = false"></sw-video-viewer>

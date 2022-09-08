@@ -1,0 +1,10 @@
+<input class="border px-6 py-2 focus:outline-none focus:border-primary-300 w-full text-secondary-900"
+       [class.border-secondary-200]="!hasError"
+       [class.border-danger-400]="hasError"
+       #input
+       [value]="value"
+       (input)="change(input.value)"
+       [disabled]="disabled"
+       [type]="type"
+       [readonly]="readonly"
+       [placeholder]="placeholder">

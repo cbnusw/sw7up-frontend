@@ -3,9 +3,9 @@ import { environment as env } from './environment.shared';
 export const environment = {
   production: false,
   ...env,
-  authHost: 'http://localhost:3000',
-  apiHost: 'http://localhost:3001',
+  authHost: 'http://auth.sw7up.local',
+  apiHost: 'http://api.sw7up.local',
   apiVersion: 'v1',
-  uploadHost: 'http://localhost:3002',
-  codeHost: 'http://localhost:3003',
+  uploadHost: 'http://upload.sw7up.local',
+  codeHost: 'http://code.sw7up.local',
 };

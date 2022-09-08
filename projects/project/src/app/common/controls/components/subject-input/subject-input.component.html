@@ -1,0 +1,29 @@
+<sw-control-wrapper label="교과목명"
+                    class="block w-full"
+                    [hasHint]="true"
+                    [required]="true"
+                    [labelWidth]="labelWidth">
+  <sw-input [value]="value.name"
+            (valueChange)="changeName($event)"
+            placeholder="교과목 입력"></sw-input>
+  <span hint>프로젝트를 수행한 교과목 입력</span>
+</sw-control-wrapper>
+<sw-control-wrapper label="담당교수"
+                    class="block w-full"
+                    [hasHint]="true"
+                    [required]="true"
+                    [labelWidth]="labelWidth">
+  <sw-input [value]="value.professor"
+            (valueChange)="changeProfessor($event)"
+            placeholder="담당교수 입력"></sw-input>
+  <span hint>교과목 담당교수 입력</span>
+</sw-control-wrapper>
+<sw-control-wrapper label="멘토"
+                    class="block w-full"
+                    [labelWidth]="labelWidth"
+                    [hasHint]="true">
+  <div class="border border-secondary-200 bg-secondary-50 p-2">
+    <sw-mento-list-input [value]="value.mentoList" (valueChange)="changeMentoList($event)"></sw-mento-list-input>
+  </div>
+  <span hint>프로젝트를 담당한 멘토가 있다면 추가</span>
+</sw-control-wrapper>

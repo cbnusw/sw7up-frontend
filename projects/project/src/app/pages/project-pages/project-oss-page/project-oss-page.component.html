@@ -1,0 +1,33 @@
+<sw-responsive-container class="block space-y-8">
+  <div class="flex items-center">
+    <h2 class="text-3xl font-bold">오픈소스</h2>
+    <sw-exit-button class="ml-auto" (click)="redirectRouter.redirect()"></sw-exit-button>
+  </div>
+
+  <h3 class="text-2xl font-bold">{{project?.name}}</h3>
+
+  <form class="card p-4 space-y-2" [formGroup]="formGroup" (ngSubmit)="addOss()">
+    <h4 class="text-lg font-bold">오픈소스 추가</h4>
+    <sw-control-wrapper class="block" label="오픈소스명" labelWidth="120px">
+      <sw-input type="text" formControlName="name" placeholder="사용한 오픈소스명 입력"></sw-input>
+      <span *ngIf="submitted && formGroup.hasError('required', 'name')">오픈소스명을 입력해주세요.</span>
+    </sw-control-wrapper>
+    <sw-control-wrapper class="block" label="홈페이지" labelWidth="120px">
+      <sw-input type="text" formControlName="link" placeholder="오픈소스 홈페이지 입력(GitHub 등)"></sw-input>
+    </sw-control-wrapper>
+    <sw-control-wrapper class="block" label="라이선스" labelWidth="120px">
+      <sw-input type="text" formControlName="license" placeholder="오픈소스 라이선스 임력(MIT 등)"></sw-input>
+    </sw-control-wrapper>
+    <sw-control-wrapper class="block" label="사용한 이유" labelWidth="120px">
+      <sw-textarea formControlName="description" placeholder="오픈소스를 사용한 부분이나 이유 입력"></sw-textarea>
+    </sw-control-wrapper>
+    <div class="flex justify-end">
+      <sw-button type="submit" class="w-full sm:w-fit">추가</sw-button>
+    </div>
+  </form>
+
+  <div class="card p-4 space-y-4">
+    <h4 class="text-lg font-bold">오픈소스 정보</h4>
+    <sw-project-oss [ossList]="project?.ossList" [editable]="true" (ossRemove)="removeOss($event)"></sw-project-oss>
+  </div>
+</sw-responsive-container>

@@ -1,0 +1,10 @@
+<sw-responsive-container class="flex flex-col md:flex-row gap-8 md:gap-4">
+  <div class="card p-2 space-y-4 w-full">
+    <h3 class="font-bold text-xl">통계에 적용되지 않은 언어</h3>
+    <sw-languages (languageSelect)="addLanguage($event)"></sw-languages>
+  </div>
+  <div class="card p-2 space-y-4 w-full">
+    <h3 class="font-bold text-xl">통계에 적용된 언어</h3>
+    <sw-available-languages (languageSelect)="removeLanguage($event)"></sw-available-languages>
+  </div>
+</sw-responsive-container>

@@ -1,0 +1,21 @@
+<div class="grid grid-cols-1 md:grid-cols-2 space-y-1">
+  <p *ngIf="(ossList || []).length === 0" class="text-secondary-500 p-2">등록된 오픈소스가 없습니다.</p>
+  <div *ngFor="let oss of ossList; let i = index" class="card p-2 space-y-2 relative">
+    <button *ngIf="editable"
+            type="button"
+            class="absolute top-1 right-1 text-danger-500"
+            (click)="ossRemove.emit(i)">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <p>오픈소스명: {{oss.name}}</p>
+    <p>홈페이지: <a [href]="oss.link" class="text-primary-500" target="_blank">{{oss.link}}</a></p>
+    <p>라이선스: {{oss.license}}</p>
+    <div class="space-y-1">
+      <h6>사용한 이유</h6>
+      <pre class="pre-wrap px-4 py-2 border border-secondary-100">{{oss.description}}</pre>
+    </div>
+  </div>
+</div>

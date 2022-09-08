@@ -15,6 +15,9 @@ import { PasswordPageComponent } from './password-page/password-page.component';
     InfoPageComponent,
     PasswordPageComponent
   ],
+  exports: [
+    InfoPageComponent
+  ],
   imports: [
     CommonModule,
     MyPagesRoutingModule,

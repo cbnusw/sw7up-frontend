@@ -1,0 +1,25 @@
+<div class="grid-container border-b border-gray-200">
+  <h6 class="px-4 py-2 font-bold bg-secondary-100">저장소 URL</h6>
+  <div class="px-4 py-2">
+    <a [href]="repo?.url" target="_blank" class="text-primary-500">{{repo?.url}}</a>
+  </div>
+</div>
+<div class="grid-container border-b border-gray-200">
+  <h6 class="px-4 py-2 font-bold bg-secondary-100">저장소 소유자</h6>
+  <div class="px-4 py-2">
+    <p>깃헙 계정: {{repo?.owner.username}}</p>
+    <p *ngIf="repo?.owner.user">연결된 계정: {{repo?.owner.user.name}}({{repo?.owner.user.department}})</p>
+    <p *ngIf="!repo?.owner.user">연결된 계정: <span class="text-secondary-500">없음</span></p>
+  </div>
+</div>
+<div class="grid-container border-b border-gray-200">
+  <h6 class="px-4 py-2 font-bold bg-secondary-100">커밋 정보</h6>
+  <div class="px-4 overflow-y-scroll" style="max-height: 300px;">
+    <div *ngFor="let item of repo?.commitInfo" class="pb-2 mb-2 border-b border-secondary-200 last:border-b-0 last:mb-0 first:pt-2">
+      <p>깃헙 계정: {{item.committer.username}}</p>
+      <p *ngIf="item.committer.user">연결된 계정: {{item.committer.user.name}}({{item.committer.user.department}})</p>
+      <p *ngIf="!item.committer.user">연결된 계정: <span class="text-secondary-500">없음</span></p>
+      <p>커밋 카운트: {{item.numOfCommits | number}}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<sw-select-buttons [value]="selected"
+                   (valueChange)="changeOption($event)"
+                   [options]="options"></sw-select-buttons>
+
+<ng-container *ngIf="selected === '비디오'; else imageRef">
+<div class="flex gap-2">
+  <sw-input class="w-full" [(value)]="videoLink" placeholder="Youtube 링크만 올려주세요."></sw-input>
+  <sw-button type="button" class="flex-shrink-0" (click)="addVideoSlide()">추가</sw-button>
+</div>
+</ng-container>
+<ng-template #imageRef>
+  <div class="flex gap-4 items-center">
+    <p class="text-primary-500">이미지 파일들을 선택해서 업로드해주세요.</p>
+    <sw-button type="button"
+               swFileChooser
+               accept="image/*"
+               [multiple]="true"
+               (filesChange)="uploadSlides($event)" class="ml-auto flex-shrink-0">이미지 추가</sw-button>
+  </div>
+</ng-template>

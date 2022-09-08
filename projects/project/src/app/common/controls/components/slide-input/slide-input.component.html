@@ -1,0 +1,16 @@
+<div *ngIf="value?.length === 0" class="border border-secondary-200 bg-secondary-100 px-6 py-2">
+  등록된 슬라이드가 없습니다.
+</div>
+
+<sw-tab [options]="options" (optionChange)="type = $event"></sw-tab>
+
+<ng-container *ngIf="type === IMAGE; else videoRef">
+  <sw-button type="button" class="block">이미지 파일 추가</sw-button>
+</ng-container>
+<ng-template #videoRef>
+  <div class="flex w-full">
+    <sw-input type="url"
+              placeholder="유투브 링크 입력" class="w-full flex-grow-1"></sw-input>
+    <sw-button type="button" class="flex-shrink-0">추가</sw-button>
+  </div>
+</ng-template>

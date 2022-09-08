@@ -13,6 +13,6 @@ export class RequestBase {
   }
 
   protected url(s: any, ...args: any): string {
-    return s.reduce((p, c, i) => p + s[i] + (args[i] || ''), this.baseUrl);
+    return s.reduce((p, c, i) => p + s[i] + (args[i] ?? ''), this.baseUrl);
   }
 }

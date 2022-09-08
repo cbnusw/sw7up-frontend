@@ -1,0 +1,162 @@
+<sw-responsive-container class="block space-y-8">
+  <div class="flex items-center mb-4">
+    <h2 class="text-3xl font-bold">{{project?.name}}</h2>
+    <sw-exit-button class="ml-auto" (click)="redirectRouter.exitProjectPage()"></sw-exit-button>
+  </div>
+
+  <ng-container *ngIf="!pending; else pendingRef">
+    <div class="relative top-6">
+      <button type="button"
+              *ngIf="editable"
+              [swRedirectRouterLink]="['/projects', project?._id, 'slide']"
+              class="text-white bg-black p-2 absolute top-2 right-2 z-10">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+             class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+        </svg>
+      </button>
+      <div *ngIf="editable && (project?.banners || []).length === 0; else slideRef"
+           class="h-16 flex items-center justify-center bg-secondary-100">
+        <p class="text-secondary-500">등록된 슬라이드가 없습니다.</p>
+      </div>
+      <ng-template #slideRef>
+        <sw-project-slide [editable]="editable" [slide]="project?.banners" class="-mt-8"></sw-project-slide>
+      </ng-template>
+    </div>
+
+    <div class="card p-4 space-y-4">
+      <div class="flex items-center">
+        <h3 class="font-bold text-lg">기본 정보</h3>
+        <button type="button"
+                *ngIf="editable"
+                [swRedirectRouterLink]="['/projects', project?._id, 'basic']"
+                class="ml-auto text-secondary-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor"
+               class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+          </svg>
+        </button>
+      </div>
+      <sw-project-basic [project]="project"></sw-project-basic>
+    </div>
+
+    <div class="card p-4 space-y-4">
+      <div class="flex items-center">
+        <h3 class="font-bold text-lg">소스 파일</h3>
+        <div class="ml-auto flex gap-4">
+          <a [href]="project?._id | downloadSourceLink" class="text-secondary-500">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+              <path fill-rule="evenodd"
+                    d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z"
+                    clip-rule="evenodd"/>
+            </svg>
+          </a>
+          <button *ngIf="editable"
+                  type="button"
+                  [swRedirectRouterLink]="['/projects', project?._id, 'source']"
+                  class="text-secondary-500">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <sw-source-tree *ngIf="project?.source; else emptySourceRef" [sourceTree]="project?.source"
+                      height="500px"></sw-source-tree>
+      <ng-template #emptySourceRef>
+        <p class="text-secondary-500">등록된 소스가 없습니다. 소스를 등록해 주세요.</p>
+      </ng-template>
+    </div>
+
+    <div *ngIf="project?.repo" class="card p-4 space-y-4">
+      <h3 class="font-bold text-lg">깃헙 저장소 정보</h3>
+      <sw-project-repository [repo]="project?.repo"></sw-project-repository>
+    </div>
+
+    <div class="card p-4 space-y-4">
+      <div class="flex items-center">
+        <h3 class="font-bold text-lg">소스 코드 통계</h3>
+        <button type="button" class="ml-auto" (click)="reload()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor"
+               class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M4.5 12c0-1.232.046-2.453.138-3.662a4.006 4.006 0 013.7-3.7 48.678 48.678 0 017.324 0 4.006 4.006 0 013.7 3.7c.017.22.032.441.046.662M4.5 12l-3-3m3 3l3-3m12 3c0 1.232-.046 2.453-.138 3.662a4.006 4.006 0 01-3.7 3.7 48.657 48.657 0 01-7.324 0 4.006 4.006 0 01-3.7-3.7c-.017-.22-.032-.441-.046-.662M19.5 12l-3 3m3-3l3 3"/>
+          </svg>
+        </button>
+      </div>
+      <div *ngIf="!project?.metaUpdating; else metaUpdatingRef">
+        <sw-project-meta-charts [meta]="project?.meta"></sw-project-meta-charts>
+      </div>
+      <ng-template #metaUpdatingRef>
+        <p class="text-secondary-500">메타 정보 업데이트 중입니다. 메타 정보 분석은 시간이 소요될 수 있습니다.</p>
+      </ng-template>
+    </div>
+
+    <div class="card p-4 space-y-4">
+      <div class="flex items-center">
+        <h3 class="font-bold text-lg">팀</h3>
+        <button *ngIf="editable"
+                type="button"
+                [swRedirectRouterLink]="['/projects', project?._id, 'team']"
+                class="ml-auto text-secondary-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor"
+               class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+          </svg>
+        </button>
+      </div>
+      <sw-project-team [projectId]="project?._id" [team]="project?.team"></sw-project-team>
+    </div>
+
+    <div class="card p-4 space-y-4">
+      <div class="flex items-center">
+        <h3 class="font-bold text-lg">오픈소스</h3>
+        <button *ngIf="editable"
+                type="button"
+                [swRedirectRouterLink]="['/projects', project?._id, 'oss']"
+                class="ml-auto text-secondary-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor"
+               class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+          </svg>
+        </button>
+      </div>
+      <sw-project-oss [ossList]="project?.ossList"></sw-project-oss>
+    </div>
+
+    <div class="card p-4 space-y-4">
+      <div class="flex items-center">
+        <h3 class="font-bold text-lg">문서</h3>
+        <button *ngIf="editable"
+                type="button"
+                [swRedirectRouterLink]="['/projects', project?._id, 'documents']"
+                class="ml-auto text-secondary-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor"
+               class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+          </svg>
+        </button>
+      </div>
+      <sw-project-documents [documents]="project?.documents"></sw-project-documents>
+    </div>
+  </ng-container>
+
+  <ng-template #pendingRef>
+    <div class="h-screen flex items-center justify-center">
+      <sw-pending></sw-pending>
+    </div>
+  </ng-template>
+
+</sw-responsive-container>

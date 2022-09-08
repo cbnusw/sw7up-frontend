@@ -1,0 +1,68 @@
+<div class="grid-container border-b border-gray-200">
+  <h6 class="px-4 py-2 font-bold bg-secondary-100">작성자</h6>
+  <div class="px-4 py-2">{{project?.creator?.name}}</div>
+</div>
+<div class="grid-container border-b border-gray-200">
+  <h6 class="px-4 py-2 font-bold bg-secondary-100">생성일</h6>
+  <div class="px-4 py-2">{{project?.createdAt | date:'yyyy년 M월 d일'}}</div>
+</div>
+<div class="grid-container border-b border-gray-200">
+  <h6 class="px-4 py-2 font-bold bg-secondary-100">수정일</h6>
+  <div class="px-4 py-2">{{project?.updatedAt | date:'yyyy년 M월 d일'}}</div>
+</div>
+<div class="grid-container border-b border-gray-200">
+  <h6 class="px-4 py-2 font-bold bg-secondary-100">소속 학교</h6>
+  <div class="px-4 py-2">{{project?.school}}</div>
+</div>
+<div class="grid-container border-b border-gray-200">
+  <h6 class="px-4 py-2 font-bold bg-secondary-100">소속 학과/학부</h6>
+  <div class="px-4 py-2">{{project?.department}}</div>
+</div>
+<div class="grid-container border-b border-gray-200">
+  <h6 class="px-4 py-2 font-bold bg-secondary-100">수행연도</h6>
+  <div class="px-4 py-2">{{project?.year}}년</div>
+</div>
+<div class="grid-container border-b border-gray-200">
+  <h6 class="px-4 py-2 font-bold bg-secondary-100">수행학년</h6>
+  <div class="px-4 py-2">{{project?.grade}}학년</div>
+</div>
+<div class="grid-container border-b border-gray-200">
+  <h6 class="px-4 py-2 font-bold bg-secondary-100">수행학기</h6>
+  <div class="px-4 py-2">{{project?.semester}}</div>
+</div>
+<ng-container *ngIf="project?.subject; else ownProjectRef">
+  <div class="grid-container border-b border-gray-200">
+    <h6 class="px-4 py-2 font-bold bg-secondary-100">교과목명</h6>
+    <div class="px-4 py-2">{{project?.subject.name}}</div>
+  </div>
+  <div class="grid-container border-b border-gray-200">
+    <h6 class="px-4 py-2 font-bold bg-secondary-100">담당교수</h6>
+    <div class="px-4 py-2">{{project?.subject.professor}}</div>
+  </div>
+</ng-container>
+<ng-template #ownProjectRef>
+  <div class="grid-container border-b border-gray-200">
+    <h6 class="px-4 py-2 font-bold bg-secondary-100">프로젝트유형</h6>
+    <div class="px-4 py-2">{{project?.ownProject.type}}</div>
+  </div>
+  <div class="grid-container border-b border-gray-200">
+    <h6 class="px-4 py-2 font-bold bg-secondary-100">담당교수</h6>
+    <div class="px-4 py-2">{{project?.ownProject.professor || '-'}}</div>
+  </div>
+</ng-template>
+<ng-container *ngIf="mentoList.length > 0">
+  <div class="grid-container border-b border-gray-200">
+    <h6 class="px-4 py-2 font-bold bg-secondary-100">프로젝트 멘토</h6>
+    <div class="px-4 py-2 space-y-2">
+      <p class="flex gap-2" *ngFor="let mento of mentoList">
+        <span *ngIf="mento.organization">{{mento.organization}}</span>
+        <span>{{mento.name}}</span>
+        <span *ngIf="mento.position">{{mento.position}}</span>
+      </p>
+    </div>
+  </div>
+</ng-container>
+<div class="grid-container">
+  <h6 class="px-4 py-2 font-bold bg-secondary-100">프로젝트 설명</h6>
+  <pre class="px-4 py-2 pre-wrap">{{project?.description}}</pre>
+</div>

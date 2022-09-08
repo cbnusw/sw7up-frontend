@@ -1,0 +1,32 @@
+<div class="flex flex-col md:flex-row gap-2">
+  <sw-input [value]="mento.name"
+            (valueChange)="changeName($event)"
+            class="block w-full flex-grow-1"
+            placeholder="멘토 이름"></sw-input>
+  <sw-input [(value)]="mento.organization"
+            class="block w-full flex-grow-1"
+            placeholder="멘토 소속"></sw-input>
+  <sw-input [(value)]="mento.position"
+            class="block w-full flex-grow-1"
+            placeholder="멘토 직위"></sw-input>
+  <sw-button type="button" [color]="2" class="flex-shrink-0" (click)="add()">추가</sw-button>
+</div>
+<div *ngIf="value.length > 0; else emptyMentoListRef"
+     class="space-y-2">
+  <div *ngFor="let mento of value; let i = index"
+       class="flex gap-2 bg-white p-2 border border-secondary-200 items-center">
+    <span>{{mento.name}}</span>
+    <span>/</span>
+    <span>{{mento.organization || '-'}}</span>
+    <span>/</span>
+    <span>{{mento.position || '-'}}</span>
+    <button type="button" class="ml-auto p-2 text-danger-500 hover:text-danger-400" (click)="remove(i)">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m-15 0l15 15" />
+      </svg>
+    </button>
+  </div>
+</div>
+<ng-template #emptyMentoListRef>
+  <div class="px-6 py-2 text-secondary-400">추가된 멘토가 없습니다.</div>
+</ng-template>

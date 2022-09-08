@@ -1,0 +1,7 @@
+<sw-responsive-container class="block space-y-8 print:hidden">
+  <h2 class="font-bold text-2xl">{{auth.me?.info?.name}}의 마이페이지</h2>
+  <sw-tab [selected]="selectedOption" [options]="tabOptions" (optionChange)="changeOption($event)"></sw-tab>
+</sw-responsive-container>
+<div>
+  <router-outlet></router-outlet>
+</div>

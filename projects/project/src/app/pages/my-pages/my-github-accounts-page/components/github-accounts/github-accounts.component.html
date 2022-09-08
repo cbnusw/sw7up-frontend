@@ -1,0 +1,16 @@
+<h2 class="font-bold text-lg">내 깃헙 계정</h2>
+<p *ngIf="githubService.accounts.length === 0; else accountsRef" class="text-secondary-500">등록된 깃헙 계정이 없습니다.</p>
+<ng-template #accountsRef>
+  <div class="border border-secondary-200 bg-secondary-50 p-2">
+    <div *ngFor="let account of githubService.accounts$ | async"
+         class="border border-secondary-200 px-6 py-2 bg-white flex items-center gap-2">
+      <span class="truncate font-bold">{{account.username}}</span>
+      <span class="hidden sm:block text-sm text-secondary-400">계정생성일{{account.createdAt | date:'yyyy.MM.dd'}}</span>
+      <sw-button type="button"
+                 class="ml-auto flex-shrink-0"
+                 [color]="3"
+                 (click)="remove(account)">삭제
+      </sw-button>
+    </div>
+  </div>
+</ng-template>

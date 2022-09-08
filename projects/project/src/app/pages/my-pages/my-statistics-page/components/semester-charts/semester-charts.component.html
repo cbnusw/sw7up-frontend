@@ -1,0 +1,7 @@
+<div class="card p-4 w-full space-y-4">
+  <h3 class="font-bold">학기별 통계</h3>
+  <sw-select class="w-full md:w-1/2" [(value)]="selected" [options]="options"></sw-select>
+  <div>
+    <sw-line-chart [data]="chartData[selected]" height="250px"></sw-line-chart>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+.report-container {
+  width: 8.5in;
+  @apply p-8;
+
+  @media print {
+    width: 7in;
+    @apply p-0;
+  }
+}

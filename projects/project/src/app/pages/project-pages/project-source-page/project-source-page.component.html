@@ -1,0 +1,88 @@
+<sw-responsive-container class="block space-y-8">
+  <div class="flex items-center">
+    <h2 class="text-3xl font-bold mr-auto">소스 파일</h2>
+    <sw-exit-button (click)="redirectRouter.redirect()"></sw-exit-button>
+  </div>
+
+  <h3 class="text-2xl font-bold">{{project?.name}}</h3>
+
+  <div class="card p-4 space-y-4">
+    <h4 class="text-xl font-bold">소스파일 {{project?.source ? '다시 업로드' : '업로드'}}</h4>
+    <sw-select-buttons *ngIf="project"
+                       [(value)]="project.isPublic"
+                       [options]="sourceOriginOptions"></sw-select-buttons>
+
+    <sw-local-sources *ngIf="!project?.isPublic; else githubReposRef"
+                      [projectId]="project?._id"
+                      (uploadedChange)="reload()"></sw-local-sources>
+    <ng-template #githubReposRef>
+      <sw-github-repos *ngIf="project"
+                       [projectId]="project._id"
+                       (pendingChange)="changePending($event)"></sw-github-repos>
+    </ng-template>
+  </div>
+
+  <div class="card p-4 space-y-4">
+    <div class="flex items-center">
+      <h4 class="text-xl font-bold">소스 코드</h4>
+      <a class="ml-auto" [href]="project?._id | downloadSourceLink">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+        </svg>
+      </a>
+    </div>
+    <ng-container *ngIf="pending; else sourceRef">
+      <sw-pending>
+        <div class="text-center">소스코드 적용 중...</div>
+      </sw-pending>
+    </ng-container>
+    <ng-template #sourceRef>
+      <ng-container *ngIf="project?.source; else noneSourceRef">
+        <sw-source-tree [sourceTree]="project?.source"
+                        [selectable]="true"
+                        height="500px"></sw-source-tree>
+        <div *ngIf="sourceTreeComponent?.unselectedFiles.length > 0" class="flex justify-end">
+          <sw-button type="button"
+                     [color]="2"
+                     (click)="removeSourceFiles()">수정
+          </sw-button>
+        </div>
+      </ng-container>
+      <ng-template #noneSourceRef>
+        <p>등록된 소스파일이 없습니다. 소스파일을 등록해 주십시오.</p>
+      </ng-template>
+    </ng-template>
+  </div>
+
+  <div *ngIf="project?.repo" class="card p-4 space-y-4">
+    <h4 class="text-xl font-bold">깃헙 저장소 정보</h4>
+    <sw-project-repository [repo]="project?.repo"></sw-project-repository>
+  </div>
+
+  <div *ngIf="project?.source" class="card p-4 space-y-4">
+    <div class="flex items-center">
+      <h4 class="text-xl font-bold">소스 코드 통계</h4>
+      <button type="button" class="ml-auto" (click)="reload()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+             class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M4.5 12c0-1.232.046-2.453.138-3.662a4.006 4.006 0 013.7-3.7 48.678 48.678 0 017.324 0 4.006 4.006 0 013.7 3.7c.017.22.032.441.046.662M4.5 12l-3-3m3 3l3-3m12 3c0 1.232-.046 2.453-.138 3.662a4.006 4.006 0 01-3.7 3.7 48.657 48.657 0 01-7.324 0 4.006 4.006 0 01-3.7-3.7c-.017-.22-.032-.441-.046-.662M19.5 12l-3 3m3-3l3 3"/>
+        </svg>
+      </button>
+    </div>
+    <ng-container *ngIf="metaPending; else metaRef;">
+      <sw-pending>
+        <div class="text-center">소스 코드 정보 로딩 중...</div>
+      </sw-pending>
+    </ng-container>
+    <ng-template #metaRef>
+      <div *ngIf="!project?.metaUpdating; else metaUpdatingRef">
+        <sw-project-meta-charts [meta]="project?.meta"></sw-project-meta-charts>
+      </div>
+      <ng-template #metaUpdatingRef>
+        <p class="text-secondary-500">메타 정보 업데이트 중입니다. 메타 정보 분석은 시간이 소요될 수 있습니다.</p>
+      </ng-template>
+    </ng-template>
+  </div>
+
+</sw-responsive-container>

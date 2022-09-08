@@ -1,0 +1,25 @@
+<div class="card rounded-md overflow-hidden w-full mx-4">
+  <header class="flex py-2 px-4 border-b border-secondary-200">
+    <h3 class="font-bold">{{path}}</h3>
+    <button type="button" class="ml-auto"
+            (click)="closeChange.emit()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+        <path fill-rule="evenodd"
+              d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z"
+              clip-rule="evenodd"/>
+      </svg>
+    </button>
+  </header>
+  <sw-pending *ngIf="pending; else sourceCodeRef">
+    <div class="text-center text-secondary-500">소스코드 가져오는 중...</div>
+  </sw-pending>
+  <ng-template #sourceCodeRef>
+    <main class="overflow-scroll py-2 px-4">
+      <div *ngFor="let line of code.source | splitLines; let i =  index"
+           class="flex items-center odd:bg-secondary-50">
+        <span class="flex-shrink-0 text-right pr-2 py-1 w-16 border-r border-secondary-200 text-secondary-500 text-monospace">{{i + 1}}</span>
+        <pre class="pl-4 py-1 text-monospace">{{line}}</pre>
+      </div>
+    </main>
+  </ng-template>
+</div>

@@ -1,0 +1,25 @@
+:host {
+  @apply relative flex flex-col;
+}
+
+section {
+  flex: 1 1;
+
+  .pre-wrapper {
+    flex: 1 1 0;
+
+    p {
+      word-break: break-word;
+      overflow-wrap: break-word;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      height: 3.9375rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+}

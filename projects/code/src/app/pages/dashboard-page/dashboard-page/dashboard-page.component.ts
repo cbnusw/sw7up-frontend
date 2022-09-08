@@ -1,9 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { AuthService } from 'shared';
-import { ProjectService } from '../../../services/project.service';
 
 @Component({
   selector: 'sw-dashboard-page',
@@ -12,9 +7,7 @@ import { ProjectService } from '../../../services/project.service';
 })
 export class DashboardPageComponent implements OnInit {
 
-  constructor(private auth: AuthService,
-              private projectService: ProjectService,
-              private router: Router) {
+  constructor() {
   }
 
   ngOnInit(): void {

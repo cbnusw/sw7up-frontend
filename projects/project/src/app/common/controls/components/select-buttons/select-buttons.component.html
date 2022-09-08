@@ -1,0 +1,5 @@
+<button *ngFor="let option of options"
+        type="button"
+        class="px-6 py-2 border rounded-full shadow-sm select-none flex-shrink-0"
+        [class]="STYLE_CLASSES[value !== option.value ? 0 : 1]"
+        (click)="select(option.value)">{{option.viewValue || option.value}}</button>

@@ -1,0 +1,128 @@
+<sw-responsive-container class="block space-y-8">
+  <div class="flex items-center">
+    <h2 class="text-3xl font-bold">기본 정보 {{modifying ? '수정' : '등록'}}</h2>
+    <sw-exit-button class="ml-auto" (click)="cancel()"></sw-exit-button>
+  </div>
+
+  <form [formGroup]="formGroup" (ngSubmit)="submit()" class="space-y-4">
+
+    <div class="card p-4 space-y-4 ">
+      <sw-control-wrapper label="프로젝트명"
+                          class="block w-full"
+                          [labelWidth]="labelWidth"
+                          [required]="true">
+        <sw-input class="block w-full"
+                  placeholder="프로젝트명 입력"
+                  formControlName="name"></sw-input>
+        <span error *ngIf="hasError('required', 'name')">프로젝트명은 필수 항목입니다.</span>
+      </sw-control-wrapper>
+
+      <sw-control-wrapper label="소속 학교"
+                          class="block w-full"
+                          [hasHint]="!invalid('school')"
+                          [labelWidth]="labelWidth"
+                          [required]="true">
+        <sw-input class="block w-full"
+                  placeholder="소속 학교 입력"
+                  formControlName="school"
+                  [readonly]="true"></sw-input>
+        <span hint>로그인한 사용자의 소속 학교로 자동 입력</span>
+        <span error *ngIf="hasError('required', 'department')">소속 학교는 필수 항목입니다.</span>
+      </sw-control-wrapper>
+
+      <sw-control-wrapper label="소속 학과(부)"
+                          class="block w-full"
+                          [hasHint]="!invalid('department')"
+                          [labelWidth]="labelWidth"
+                          [required]="true">
+        <sw-input class="block w-full"
+                  placeholder="학과(부) 입력"
+                  formControlName="department"
+                  [readonly]="true"></sw-input>
+        <span hint>로그인한 사용자의 소속 학과(부)로 자동 입력</span>
+        <span error *ngIf="hasError('required', 'department')">학과(부)는 필수 항목입니다.</span>
+      </sw-control-wrapper>
+
+      <sw-control-wrapper label="수행연도"
+                          class="block w-full"
+                          [hasHint]="!invalid('year')"
+                          [labelWidth]="labelWidth"
+                          [required]="true">
+        <sw-select class="block w-full"
+                   [options]="yearOptions"
+                   formControlName="year"></sw-select>
+        <span hint>프로젝트를 수행할 당시의 연도 입력</span>
+        <span error *ngIf="hasError('required', 'year')">수행연도는 필수 항목입니다.</span>
+      </sw-control-wrapper>
+
+      <sw-control-wrapper label="수행학년"
+                          class="block w-full"
+                          [hasHint]="!invalid('grade')"
+                          [labelWidth]="labelWidth"
+                          [required]="true">
+        <sw-select class="block w-full"
+                   [options]="gradeOptions"
+                   formControlName="grade"></sw-select>
+        <span hint>프로젝트를 수행할 당시의 학년 입력</span>
+        <span error *ngIf="hasError('required', 'grade')">수행학년은 필수 항목입니다.</span>
+      </sw-control-wrapper>
+
+      <sw-control-wrapper label="수행학기"
+                          class="block w-full"
+                          [hasHint]="!invalid('semester')"
+                          [labelWidth]="labelWidth"
+                          [required]="true">
+        <sw-select class="block w-full"
+                   [options]="semesterOptions"
+                   formControlName="semester"></sw-select>
+        <span hint>프로젝트를 수행할 당시의 학기 입력</span>
+        <span error *ngIf="hasError('required', 'semester')">수행학기는 필수 항목입니다.</span>
+      </sw-control-wrapper>
+
+      <sw-control-wrapper label="프로젝트 유형"
+                          class="block w-full"
+                          [labelWidth]="labelWidth"
+                          [required]="true">
+        <sw-select-buttons class="w-full"
+                           (valueChange)="changeProjectType($event)"
+                           [options]="projectTypeOptions"
+                           formControlName="projectType"></sw-select-buttons>
+        <span error *ngIf="hasError('required', 'projectType')">프로젝트 유형은 필수 항목입니다.</span>
+      </sw-control-wrapper>
+
+      <sw-control-wrapper *ngIf="!!formGroup.get('projectType').value"
+                          [label]="formGroup.get('projectType').value === '교과목프로젝트' ? '교과목정보' : '프로젝트정보'"
+                          class="block w-full"
+                          [labelWidth]="labelWidth"
+                          [required]="true">
+        <sw-subject-input *ngIf="formGroup.get('projectType').value === '교과목프로젝트'"
+                          class="block -w-full"
+                          formControlName="subject"></sw-subject-input>
+        <sw-own-project-input *ngIf="formGroup.get('projectType').value === '자체프로젝트'"
+                              formControlName="ownProject"></sw-own-project-input>
+        <span error *ngIf="hasError('subject')">교과목 정보를 입력해야 합니다.</span>
+        <span error *ngIf="hasError('ownProject')">자체프로젝트 정보를 입력해야 합니다.</span>
+      </sw-control-wrapper>
+
+      <sw-control-wrapper label="프로젝트 설명"
+                          class="block w-full"
+                          [hasHint]="!invalid('description')"
+                          [labelWidth]="labelWidth"
+                          [required]="true">
+        <sw-textarea class="block w-full"
+                     placeholder="프로젝트 설명 입력"
+                     formControlName="description"></sw-textarea>
+        <span hint>100자 이상으로 설명 작성
+            (<span [class.text-red-600]="descriptionLength < DESCRIPTION_MIN_LENGTH">
+              {{descriptionLength}} / {{DESCRIPTION_MIN_LENGTH}}
+            </span>)
+          </span>
+        <span error *ngIf="hasError('min', 'description')">공백을 제외하고 100자 이상으로 작성해야 합니다.</span>
+      </sw-control-wrapper>
+    </div>
+
+    <div class="card shadow-md px-6 py-2 sticky bottom-0">
+      <sw-button class="w-full">{{modifying ? '수정' : '등록'}}</sw-button>
+    </div>
+  </form>
+</sw-responsive-container>

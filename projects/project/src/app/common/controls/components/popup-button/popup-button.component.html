@@ -1,0 +1,23 @@
+<button (click)="toggle($event)"
+        (blur)="blur($event)"
+        type="button"
+        cdkOverlayOrigin #trigger="cdkOverlayOrigin"
+        class="px-2">
+  <ng-content></ng-content>
+</button>
+<ng-template cdkConnectedOverlay
+             [cdkConnectedOverlayOrigin]="trigger"
+             [cdkConnectedOverlayOpen]="isOpen">
+  <ul class="bg-white flex flex-col text-sm select-none shadow-md border border-secondary-200 my-2">
+    <ng-container *ngFor="let item of items">
+      <li *ngIf="!item.filter || item.filter()"
+          (mousedown)="$event.preventDefault()"
+          [class]="item.styleClass ? item.styleClass() : ''"
+          class="hover:bg-secondary-100">
+        <button type="button"
+                class="w-full h-full px-6 py-3"
+                (click)="execute($event, item.action)">{{item.viewValue()}}</button>
+      </li>
+    </ng-container>
+  </ul>
+</ng-template>
