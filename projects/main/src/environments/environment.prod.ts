@@ -6,5 +6,5 @@ export const environment = {
   loginPageUrl: URLS.ACCOUNT.LOGIN,
   baseUrl: 'https://sw7up.cbnu.ac.kr',
   baseTitle: '충북대학교 SW중심대학사업단',
-  codeUrl: 'https://sw7up.cbnu.ac.kr/code/'
+  codeUrl: 'https://sw7up.cbnu.ac.kr/project/'
 };

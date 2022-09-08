@@ -9,7 +9,7 @@ export const environment = {
   loginPageUrl: URLS.ACCOUNT.LOGIN,
   baseUrl: 'http://sw7up.local',
   baseTitle: '충북대학교 SW중심대학사업단',
-  codeUrl: 'http://sw7up.local/code/'
+  codeUrl: 'http://sw7up.local/project/'
 };
 
 /*
