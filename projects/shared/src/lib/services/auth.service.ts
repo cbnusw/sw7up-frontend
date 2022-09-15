@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, retry, tap, timeout } from 'rxjs/operators';
+import { filter, map, retry, tap, timeout } from 'rxjs/operators';
 import { RequestBase } from '../classes/request-base';
 import { IAuthenticationTokens } from '../models/authentication-tokens';
 import { IResponse } from '../models/response';
@@ -227,6 +227,7 @@ export class AuthService extends RequestBase {
 
   hasRole$(role: TUserRole): Observable<boolean> {
     return this.me$.pipe(
+      filter(me => this.loggedIn ? !!me : true),
       map(me => {
         const { role: r } = me || {};
         return r === role;

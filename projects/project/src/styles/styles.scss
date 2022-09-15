@@ -32,6 +32,16 @@ body, html {
   font-family: 'Roboto Mono', monospace;
 }
 
+@media print{
+  @page {
+    size: A4 portrait;
+    margin:1cm;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer components {
   .card {
     @apply bg-white border border-secondary-200 shadow-sm;
