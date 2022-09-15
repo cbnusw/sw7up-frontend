@@ -47,7 +47,6 @@ export class HeaderComponent implements OnInit {
   }
 
   get loginUrl(): string {
-    console.log(this.router.url);
     this.storage.redirectUrl = `${environment.host}${this.router.url}`;
     return environment.loginPageUrl;
   }
