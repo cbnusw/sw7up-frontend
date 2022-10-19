@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, retry, tap, timeout } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { RequestBase } from '../classes/request-base';
 import { IAuthenticationTokens } from '../models/authentication-tokens';
 import { IResponse } from '../models/response';
@@ -109,8 +109,6 @@ export class AuthService extends RequestBase {
 
   join(user: IUser): Observable<boolean> {
     return this.http.post<IResponse<undefined>>(this.url`/join`, user).pipe(
-      timeout(5000),
-      retry(5),
       map(res => res.success)
     );
   }
@@ -118,8 +116,6 @@ export class AuthService extends RequestBase {
   login(no: string, password: string): Observable<boolean> {
     return this.http.post<IResponse<IAuthenticationTokens>>(this.url`/login`, { no, password })
       .pipe(
-        timeout(5000),
-        retry(5),
         tap(res => {
           this.initTokens(res.data);
           this.init();
@@ -131,8 +127,6 @@ export class AuthService extends RequestBase {
   loginOperator(no: string, password: string): Observable<boolean> {
     return this.http.post<IResponse<IAuthenticationTokens>>(this.url`/operator/login`, { no, password })
       .pipe(
-        timeout(5000),
-        retry(5),
         tap(res => {
           this.initTokens(res.data);
           this.init();
@@ -148,9 +142,6 @@ export class AuthService extends RequestBase {
       await this.http.get(
         this.url`/logout`,
         { headers: { 'x-refresh-token': token } }
-      ).pipe(
-        timeout(5000),
-        retry(5)
       ).toPromise();
     } catch (e) {
       console.error(e);
@@ -160,10 +151,7 @@ export class AuthService extends RequestBase {
   }
 
   getMe(): void {
-    this.http.get<IResponse<IUser>>(this.url`/me`).pipe(
-      timeout(5000),
-      retry(5),
-    ).subscribe(
+    this.http.get<IResponse<IUser>>(this.url`/me`).subscribe(
       res => this.meSubject.next(res.data),
       err => {
         this.clear();
@@ -173,46 +161,29 @@ export class AuthService extends RequestBase {
   }
 
   findRegNo({ name, email, phone }: IFindRegNo): Observable<IResponse<{ no: string }>> {
-    return this.http.post(this.url`/no/find`, { name, email, phone }).pipe(
-      timeout(5000),
-      retry(5),
-    );
+    return this.http.post(this.url`/no/find`, { name, email, phone });
   }
 
   sendOtp(no: string, email: string): Observable<IResponse<undefined>> {
-    return this.http.post(this.url`/otp/send`, { no, email }).pipe(
-      timeout(5000),
-      retry(5),
-    );
+    return this.http.post(this.url`/otp/send`, { no, email });
   }
 
   checkOtp(no: string, code: string): Observable<IResponse<undefined>> {
-    return this.http.post(this.url`/otp/check`, { no, code }).pipe(
-      timeout(5000),
-      retry(5),
-    );
+    return this.http.post(this.url`/otp/check`, { no, code });
   }
 
   initPassword(no: string, code: string, password: string): Observable<IResponse<undefined>> {
-    return this.http.post(this.url`/password/init`, { no, code, password }).pipe(
-      timeout(5000),
-      retry(5),
-    );
+    return this.http.post(this.url`/password/init`, { no, code, password });
   }
 
   updateMe(body: IUserInfo): Observable<IResponse<undefined>> {
     return this.http.put(this.url`/me`, body).pipe(
-      timeout(5000),
-      retry(5),
       tap(() => this.getMe())
     );
   }
 
   changePassword(oldPassword: string, newPassword: string): Observable<IResponse<undefined>> {
-    return this.http.patch(this.url`/password`, { oldPassword, newPassword }).pipe(
-      timeout(5000),
-      retry(5),
-    );
+    return this.http.patch(this.url`/password`, { oldPassword, newPassword });
   }
 
   hasRole(role: TUserRole): boolean {

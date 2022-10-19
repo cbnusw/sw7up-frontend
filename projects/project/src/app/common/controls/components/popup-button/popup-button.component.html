@@ -1,7 +1,8 @@
 <button (click)="toggle($event)"
         (blur)="blur($event)"
         type="button"
-        cdkOverlayOrigin #trigger="cdkOverlayOrigin"
+        cdkOverlayOrigin
+        #trigger="cdkOverlayOrigin"
         class="px-2">
   <ng-content></ng-content>
 </button>
