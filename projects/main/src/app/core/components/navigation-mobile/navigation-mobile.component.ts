@@ -50,10 +50,18 @@ export class NavigationMobileComponent implements OnInit {
       ]
     },
     {
+      name: '가디언프로그램',
+      subMenus: [
+        { name: '1인 1가디언', link: URLS.GUARDIAN.ONE2ONE },
+      ],
+    },
+    {
       name: '산학협력',
       subMenus: [
         { name: '산학프로젝트', link: URLS.COOPERATE.PROJECT },
         { name: '인턴십', link: URLS.COOPERATE.INTERNSHIP },
+        { name: '가족회사', link: URLS.COOPERATE.FAMILY_COMPANY },
+        { name: '몰입교육', link: URLS.COOPERATE.IMMERSION_EDUCATION },
         { name: '1인 1가디언', link: URLS.COOPERATE.GUARDIAN },
         { name: '創-Up 프로그램', link: URLS.COOPERATE.STARTUP },
       ]
@@ -72,7 +80,7 @@ export class NavigationMobileComponent implements OnInit {
         { name: 'E-헬프데스크', link: URLS.COMMUNITY.E_HELP },
         { name: '보도자료', link: URLS.COMMUNITY.PRESS },
         { name: '뉴스레터', link: URLS.COMMUNITY.NEWSLETTER },
-        { name: '해외교육', link: URLS.COMMUNITY.OVERSEAS },
+        { name: '해외교육 참여 및 활동기', link: URLS.COMMUNITY.OVERSEAS },
         { name: '학생활동사례', link: URLS.COMMUNITY.STUDENT_ACTIVITY },
         { name: '포토갤러리', link: URLS.COMMUNITY.GALLERY },
         { name: '자료실', link: URLS.COMMUNITY.ARCHIVE },

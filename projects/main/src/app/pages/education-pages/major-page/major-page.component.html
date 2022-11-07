@@ -45,7 +45,7 @@
           </thead>
           <tbody>
           <tr>
-            <td rowspan="4">소프트웨어학과</td>
+            <td rowspan="4">소프트웨어학부</td>
             <td rowspan="2">지능형SW</td>
             <td>1</td>
             <td></td>
@@ -233,7 +233,7 @@
     </div>
 
     <div class="contents-container pt-4 mt-4">
-      <div class="label">創-Up&reg;</div>
+      <div class="label">創-Up</div>
       <div class="content">- 교과 활동에 의한 창업 교육</div>
       <div class="content ps-2">
         &#9702; 공업법규와창업 &#8594; 창업탐색/창업기획/창업설계 &#8594; 창업파일럿프로젝트 &#8594; 창업산학초청세미나 I, II
@@ -319,6 +319,8 @@
             </td>
           </tr>
           <tr>
+            <!--            <td>전공 교과목 영어 활용 증대</td>-->
+            <!--            <td>전공 교과목의 영어활용강좌 운영</td>-->
             <td rowspan="2">전공 교과목 영어 활용 증대</td>
             <td style="background-color: #f8fafd;">전공 교과목의 영어활용강좌 운영</td>
           </tr>
@@ -326,7 +328,7 @@
             <td>
               <span style="text-decoration: underline;">영어활용강의에 대한 기준안</span><br/><br/>
               &lt;필수&gt; 영어강의계획서<br/><br/>
-              &lt;선택&gt; 아래 항목 중 택1 진행<br/>
+              &lt;선택사항&gt;<br/>
               &#9312; 영어로 강의<br/>
               &#9313; 영어 교재 활용<br/>
               &#9314; 50% 이상의 영어로 된 강의 자료<br/>
@@ -404,6 +406,10 @@
   <ng-container *ngSwitchCase="tabs[4]">
     <div class="contents-container mt-4">
       <div class="label mb-4">해외 대학과 연계한 교육 참여 경험을 통해 적극성과 리더십 향상</div>
+      <div class="py-4" style="text-align: right;">
+        <a style="border: 1px solid #eee;background-color: #fafafa;border-radius: 0.5rem; padding: 0.5rem 1rem;"
+           [routerLink]="overseaUrl">해외교육 참여 및 활동기</a>
+      </div>
       <div class="table-responsive mt-2">
         <table class="table table-bordered table-sm" style="font-size:0.9rem;">
           <thead>
@@ -488,9 +494,145 @@
             <td class="text-center">2일</td>
             <td class="text-center">00명</td>
           </tr>
+          <tr>
+            <td class="text-center">
+              AKCSE<br>
+              (The Association of<br>
+              Korean-Canadian<br>
+              Scientists and<br>
+              Engineers)<br>
+              (캐나다)
+            </td>
+            <td>
+              <h5>International Collegiate Challenge for AI-assisted Society (ICCAS)</h5>
+              <ul class="m-0">
+                <li>한국과 캐나다 대학생들이 한 팀이 되어 '지능형 기능성 게임' 팀프로젝트를 통해 문제해결 능력,<br>프로젝트 수행 역량 및 글로벌 커뮤니케이션 역량 강화</li>
+                <li>Unity 기반 지능형 기능성 게임 프로그래밍 교육 및 경진대회</li>
+                <li>국내 사전교육(2주) + 캐나다 현지교육(1주)</li>
+              </ul>
+            </td>
+            <td class="text-center">
+              3주
+            </td>
+            <td class="text-center">00명</td>
+          </tr>
           </tbody>
         </table>
         <div># 해외교육 기관은 사업이 진행되면서 변경될 수 있음.</div>
+      </div>
+    </div>
+    <div class="contents-container mt-4">
+      <div class="label">글로벌 챌린저(Global Chanllenger) 프로그램</div>
+      <div class="content">- 우수한 AI-SW 인재를 선발하여 교과와 비교과 연계 운영을 통한 해외교육 지원</div>
+      <div class="table-responsive mt-2">
+        <table class="table table-bordered table-sm" style="font-size:0.9rem;">
+          <thead>
+          <tr>
+            <th colspan="2">구분</th>
+            <th>봄학기</th>
+            <th>여름방학</th>
+            <th>가을학기</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td colspan="2">정규교과</td>
+            <td colspan="3">
+              <ul class="m-0">
+                <li>프로그래밍 교과 - 기초컴퓨터프로그래밍(필수) / 응용컴퓨터프로그래밍(필수)</li>
+                <li>프로젝트 교과 [택1 이상 이수] - 오픈소스기초프로젝트/오픈소스개발프로젝트/오프소스전문프로젝트</li>
+                <li>자료구조(필수), 알고리즘</li>
+              </ul>
+              <p class="mb-0 mt-2 ps-4" style="font-weight: bold;">필수 교과목을 미이수한 경우, 온라인(KOCW, MOOC) 강의 수강 후 수료증 제출</p>
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="4">
+              비<br>
+              교<br>
+              과
+            </td>
+            <td>
+              SW전공특강
+            </td>
+            <td colspan="3">
+              <ul class="m-0">
+                <li>
+                  SW중심대학사업단 교육(특강) 프로그램 참여
+                  <p class="m-0">- Git-Hub 특강(필수) <span style="font-weight: bold;">Git-Hub 특강 이수증 제출</span></p>
+                  <p class="m-0">- 글로벌 에티켓(매너) 특강(SW중심대학사업단 장준환 글로벌 챌린저 디렉터)</p>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              SW영어특강
+            </td>
+            <td>
+              <ul class="m-0">
+                <li>
+                  영어특강
+                  <p class="m-0">- 자기소개서(첨삭지도)</p>
+                  <p class="m-0">- 인터뷰(태도 및 발음)</p>
+                </li>
+              </ul>
+              <p class="ps-4" style="font-weight: bold;">* 1일 3시간(3~4명) &times; 1회</p>
+            </td>
+            <td colspan="2">
+              <ul class="m-0">
+                <li>
+                  영어특강
+                  <p class="m-0">- 영작연습: <span style="font-weight: bold">1일 3시간(전체) &times; 2회</span></p>
+                  <p class="m-0">- SW 관련 발표주제 선정 및 자료 만들기</p>
+                  <p class="m-0">- 영문발표자료 만들기(첨삭지도), 발표, 회의, 토론 등 방법지도</p>
+                </li>
+              </ul>
+              <p class="ps-4" style="font-weight: bold;">* 1일 2시간(6명) &times; 2회</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              경진대회
+            </td>
+            <td>
+              <ul class="m-0">
+                <li>교내프로그래밍경진대회(필수)</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="m-0">
+                <li>영어발표회(필수)</li>
+              </ul>
+            </td>
+            <td>
+              <ul class="m-0">
+                <li>교내프로그래밍경진대회(필수)</li>
+                <li>영어발표회</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              TOPCIT &<br>
+              TOEIC
+            </td>
+            <td>
+              <ul class="m-0">
+                <li>TOPCIT/TOEIC 시험 응시</li>
+              </ul>
+              <p class="ps-4" style="font-weight: bold;">* 성적표 제출</p>
+            </td>
+            <td></td>
+            <td>
+              <ul class="m-0">
+                <li>TOPCIT/TOEIC 시험 응시</li>
+              </ul>
+              <p class="ps-4" style="font-weight: bold;">* 성적표 제출</p>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </ng-container>
@@ -498,7 +640,7 @@
   <ng-container *ngSwitchCase="tabs[5]">
     <div class="contents-container pt-4 mt-4">
       <div class="label">대학-대학원간 협력</div>
-      <div class="content">- 단과대학 연계 연구실 인턴제</div>
+      <div class="content">- 연구실 인턴제</div>
       <div class="content ps-2">&#9702; 재학생들의 전문적인 지식 및 문제해결 능력향상을 도모하기 위하여 대학원연구실 인턴제 운영</div>
       <div class="content">- 대학원생 멘토링</div>
       <div class="content ps-2">&#9702; 대학원생들의 학부 실습/프로젝트 수업 TA 활동 지원</div>
@@ -511,15 +653,28 @@
 
   <ng-container *ngSwitchCase="tabs[6]">
     <div class="contents-container mt-4">
-      <div class="label">TOPCIT 시험 응시 지원</div>
-      <div class="content">- 소프트웨어직군의 필수 직무역량을 평가하는 TOPCIT 시험 응시 지원</div>
-      <div class="content">- 참가 대상: SW중심대학사업단 참여 학과(부) 재학생 3, 4학년</div>
-      <div class="content">- 사이트 가기: <a class="text-primary" href="http://www.topcit.or.kr">http://www.topcit.or.kr</a>
+      <div class="label">소프트웨어 역량 검정(TOPCIT)</div>
+      <div class="content" style="font-weight: bold;">&#10065; 학생들의 ICT 관련 역량 향상과 지식 향상도를 측정, 평가 및 활용</div>
+      <div class="content"> - 참가대상: SW중심대학사업 참여학과(부) 3,4학년 및 융합전공 재학생</div>
+      <div class="content"> - TOPCIT 사이트: <a href="https://www.topcit.or.kr">https://www.topcit.or.kr</a></div>
+      <div class="content"> - 참가자 특전</div>
+      <div class="content">&nbsp; &nbsp;・응시료 전액 지원 및 사업단 우수마일리지 지원</div>
+      <div class="content">&nbsp;&nbsp; ・특별장학금 지급 및 참여 프로그램 선발 시 TOPCIT 응시여부 반영</div>
+      <div class="content"> - 시험 일정: 2회/년(상반기: 5월, 하반기: 10월)</div>
+
+      <div class="content mt-2" style="font-weight: bold;">&#10065; TOPCIT 학습 자료</div>
+      <div class="content"> - TOPCIT에센스: 영역별 과목 학습자료 교재 제공</div>
+      <div class="content">&nbsp; &nbsp;・사이트: <a href="https://www.topcit.or.kr/board/study.do">https://www.topcit.or.kr/board/study.do</a>
       </div>
-      <div class="content">- 참가자 특전</div>
-      <div class="content">&nbsp;&nbsp;・응시료 전액 지원 및 사업단 우수마일리지 지원</div>
-      <div class="content">&nbsp;&nbsp;・특별장학금 지급 및 참여 프로그램 선발 시 TOPCIT 응시여부 반영</div>
-      <div class="content">- 시험 일정: 1년에 2번 실시(1학기, 2학기)</div>
+      <div class="content"> - 동영상 학습자료 교재 제공</div>
+      <div class="content">&nbsp; &nbsp;・사이트: <a href="https://www.topcit.or.kr/board/library.do">https://www.topcit.or.kr/board/library.do</a>
+      </div>
+      <div class="content"> - TOPCIT 연습하기: 모의 응시와 UML/컴파일러 도구를 미리 체험</div>
+      <div class="content">&nbsp; &nbsp;・사이트: <a href="https://www.topcit.or.kr/board/library.do">https://www.topcit.or.kr/board/library.do</a>
+      </div>
+
+      <div class="content mt-2" style="font-weight: bold;">&#10065; 학생들의 ICT 관련 역량 향상과 지식 향상도를 측정, 평가 및 활용</div>
+      <div class="content"> - TOPCIT 소개, 효율적인 TOPCIT 공부 방법, 기술문제풀이</div>
     </div>
   </ng-container>
 </ng-container>

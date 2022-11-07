@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/organization-pages/organization-pages.module').then(m => m.OrganizationPagesModule)
   },
   {
+    path: PAGE_GROUPS.GUARDIAN,
+    loadChildren: () => import('./pages/guardian-pages/guardian-pages.module').then(m => m.GuardianPagesModule),
+  },
+  {
     path: PAGE_GROUPS.EDUCATION,
     loadChildren: () => import('./pages/education-pages/education-pages.module').then(m => m.EducationPagesModule)
   },
@@ -43,7 +47,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     initialNavigation: 'enabled'
-})],
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { URLS } from '../../../constants/urls';
 
 const TAB_MENUS = [
   '지능SW융합전공',
@@ -7,7 +8,7 @@ const TAB_MENUS = [
   '실전영어교육',
   '해외교육',
   '대학-대학원협력',
-  'TOPCIT응시지원'
+  '소프트웨어 역량 검정(TOPCIT)'
 ];
 declare type TTabMenu = typeof TAB_MENUS[number];
 
@@ -20,6 +21,7 @@ export class MajorPageComponent implements OnInit {
 
   selectedTab: TTabMenu;
   tabs: TTabMenu[] = TAB_MENUS;
+  overseaUrl = URLS.COMMUNITY.OVERSEAS;
 
   constructor() {
     this.selectedTab = this.tabs[0];

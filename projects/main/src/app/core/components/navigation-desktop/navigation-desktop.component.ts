@@ -19,6 +19,7 @@ export class NavigationDesktopComponent implements OnInit {
 
   menus: NavMenu[] = [
     { name: '사업소개', link: URLS.ORGANIZATION.ROOT },
+    { name: '가디언', link: URLS.GUARDIAN.ROOT },
     { name: 'SW교육', link: URLS.EDUCATION.ROOT },
     { name: '산학협력', link: URLS.COOPERATE.ROOT },
     { name: 'SW가치확산', link: URLS.VALUE.ROOT },

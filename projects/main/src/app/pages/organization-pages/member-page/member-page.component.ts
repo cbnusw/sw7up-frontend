@@ -17,7 +17,7 @@ export class MemberPageComponent implements OnInit {
     },
     {
       position: '행정연구원',
-      task: 'SW전공교육센터',
+      task: 'SW전공교육센터, 오픈소스SW센터',
       name: '김샘이',
       email: 'u01200501n1@cbnu.ac.kr',
       tel: '043-249-1348'
@@ -38,16 +38,16 @@ export class MemberPageComponent implements OnInit {
     },
     {
       position: '행정연구원',
-      task: 'SW기초교육센터, 오픈소스SW센터',
-      name: '이사랑',
-      email: 'lsrsw1354@cbnu.ac.kr',
+      task: 'SW기초교육센터',
+      name: '오유진',
+      email: 'oujin@cbnu.ac.kr',
       tel: '043-249-1354'
     },
     {
       position: '행정연구원',
       task: 'SW산학협력센터',
-      name: '최수진',
-      email: '',
+      name: '김현진',
+      email: 'khj1217@cbnu.ac.kr',
       tel: '043-249-1833'
     }
   ];

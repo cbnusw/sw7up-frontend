@@ -12,7 +12,9 @@ export class CooperateMainPageComponent implements OnInit {
   menus: IPageNavMenu[] = [
     { name: '산학프로젝트', link: URLS.COOPERATE.PROJECT },
     { name: '인턴십', link: URLS.COOPERATE.INTERNSHIP },
-    { name: '1인 1가디언', link: URLS.COOPERATE.GUARDIAN },
+    { name: '가족회사', link: URLS.COOPERATE.FAMILY_COMPANY },
+    { name: '몰입교육', link: URLS.COOPERATE.IMMERSION_EDUCATION },
+    // { name: '1인 1가디언', link: URLS.COOPERATE.GUARDIAN },
     { name: '創-Up 프로그램', link: URLS.COOPERATE.STARTUP },
   ];
 

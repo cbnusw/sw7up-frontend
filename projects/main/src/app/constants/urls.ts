@@ -11,6 +11,10 @@ export interface ISw7UpPages {
     MEMBER?: string;
     LOCATION?: string;
   };
+  GUARDIAN?: {
+    ROOT?: string;
+    ONE2ONE?: string;
+  };
   EDUCATION?: {
     ROOT?: string;
     BASIC?: string;
@@ -25,6 +29,8 @@ export interface ISw7UpPages {
     ROOT?: string;
     PROJECT?: string;
     INTERNSHIP?: string;
+    FAMILY_COMPANY?: string;
+    IMMERSION_EDUCATION?: string;
     INTERNSHIP_E_BOOK?: string;
     GUARDIAN?: string;
     STARTUP?: string;
@@ -68,6 +74,7 @@ export interface ISw7UpPages {
 export const PAGE_GROUPS = {
   HOME: 'home',
   ORGANIZATION: 'organization',
+  GUARDIAN: 'guardian',
   EDUCATION: 'education',
   COOPERATE: 'cooperate',
   VALUE: 'value',
@@ -86,6 +93,9 @@ export const PAGE_NAMES: ISw7UpPages = {
     MEMBER: 'member',
     LOCATION: 'location',
   },
+  GUARDIAN: {
+    ONE2ONE: '1to1',
+  },
   EDUCATION: {
     BASIC: 'basic',
     MAJOR: 'major',
@@ -98,6 +108,8 @@ export const PAGE_NAMES: ISw7UpPages = {
   COOPERATE: {
     PROJECT: 'project',
     INTERNSHIP: 'internship',
+    FAMILY_COMPANY: 'family-company',
+    IMMERSION_EDUCATION: 'immersion-education',
     INTERNSHIP_E_BOOK: 'internship/e-book',
     GUARDIAN: 'guardian',
     STARTUP: 'startup',

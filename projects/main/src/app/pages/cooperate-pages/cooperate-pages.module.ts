@@ -9,6 +9,8 @@ import { InternshipEBookPageComponent } from './internship-e-book-page/internshi
 import { InternshipPageComponent } from './internship-page/internship-page.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
 import { StartupPageComponent } from './startup-page/startup-page.component';
+import { FamilyCompanyPageComponent } from './family-company-page/family-company-page.component';
+import { ImmersionEducationPageComponent } from './immersion-education-page/immersion-education-page.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { StartupPageComponent } from './startup-page/startup-page.component';
     InternshipPageComponent,
     GuardianPageComponent,
     StartupPageComponent,
-    InternshipEBookPageComponent
+    InternshipEBookPageComponent,
+    FamilyCompanyPageComponent,
+    ImmersionEducationPageComponent
   ],
   imports: [
     CommonModule,
