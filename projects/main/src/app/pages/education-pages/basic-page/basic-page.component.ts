@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 const TAB_MENUS = [
   'SW기초교육',
-  'SW체험교육',
+  'SW기초교육체계',
 ];
 declare type TTabMenu = typeof TAB_MENUS[number];
 
