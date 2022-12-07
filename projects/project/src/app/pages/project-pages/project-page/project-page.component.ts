@@ -27,6 +27,10 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
   ) {
   }
 
+  get enableSourceViewer(): boolean {
+    return OPERATOR_ROLES.indexOf(this._auth.me?.role) !== -1 || this._auth.me?.info?._id === this.project?.creator?._id;
+  }
+
   get editable(): boolean {
     return OPERATOR_ROLES.indexOf(this._auth.me?.role) !== -1 || this._auth.me?.info?._id === this.project?.creator?._id;
   }

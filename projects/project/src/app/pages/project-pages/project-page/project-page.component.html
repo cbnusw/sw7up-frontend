@@ -55,7 +55,7 @@
       <sw-project-basic [project]="project"></sw-project-basic>
     </div>
 
-    <div class="card p-4 space-y-4">
+    <div class="card p-4 space-y-4" *ngIf="enableSourceViewer">
       <div class="flex items-center">
         <h3 class="font-bold text-lg">소스 파일</h3>
         <div class="ml-auto flex gap-4">
