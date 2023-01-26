@@ -78,6 +78,20 @@ export class EasyPageComponent implements OnInit {
       background: 'assets/images/education/easy/cover05.jpg',
       // link: '/education/easy/10'
     },
+
+    {
+      type: '이론+실습',
+      title: '기초부터배우는 딥러닝',
+      background: 'assets/images/education/easy/cover06.jpg',
+      // link: '/education/easy/10'
+    },
+
+    {
+      type: '이론+실습',
+      title: 'R을 활용한 데이터 분석 기초',
+      background: 'assets/images/education/easy/cover01.jpg',
+      // link: '/education/easy/10'
+    },
   ];
 
   constructor(private router: Router) {

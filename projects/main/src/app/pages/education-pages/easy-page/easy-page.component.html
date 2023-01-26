@@ -24,6 +24,7 @@
   <a class="course-cover shadow cursor"
      [class.pointer]="!!course?.link"
      [class.not-allowed]="!course?.link"
+     [class.link]="!!course?.link"
      (click)="movePage(course?.link)"
      [swBackgroundImage]="course.background"
      swBackgroundSize="contain"
