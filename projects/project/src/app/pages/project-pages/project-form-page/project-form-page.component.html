@@ -112,12 +112,12 @@
         <sw-textarea class="block w-full"
                      placeholder="프로젝트 설명 입력"
                      formControlName="description"></sw-textarea>
-        <span hint>100자 이상으로 설명 작성
+        <span hint>{{DESCRIPTION_MIN_LENGTH}}자 이상으로 설명 작성
             (<span [class.text-red-600]="descriptionLength < DESCRIPTION_MIN_LENGTH">
               {{descriptionLength}} / {{DESCRIPTION_MIN_LENGTH}}
             </span>)
           </span>
-        <span error *ngIf="hasError('min', 'description')">공백을 제외하고 100자 이상으로 작성해야 합니다.</span>
+        <span error *ngIf="hasError('min', 'description')">공백을 제외하고 {{DESCRIPTION_MIN_LENGTH}}자 이상으로 작성해야 합니다.</span>
       </sw-control-wrapper>
     </div>
 

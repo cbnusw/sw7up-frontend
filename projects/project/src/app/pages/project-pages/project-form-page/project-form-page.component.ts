@@ -16,7 +16,7 @@ import { IProject, ISelectOption, PROJECT_TYPES, SEMESTERS, TProjectType } from 
 })
 export class ProjectFormPageComponent extends AbstractFormDirective<IProject, boolean> implements OnInit {
 
-  readonly DESCRIPTION_MIN_LENGTH = 100;
+  readonly DESCRIPTION_MIN_LENGTH = 10;
 
   labelWidth = '110px';
 
