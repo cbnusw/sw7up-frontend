@@ -1,0 +1,48 @@
+<div class="overflow-scroll text-sm relative" swScrollBottom (bottom)="more()">
+  <div class="row border-y border-gray-300 bg-gray-100 text-center font-bold w-fit sticky top-0">
+    <div class="py-1 px-2">프로젝트명</div>
+    <div class="py-1 px-2">소속학교</div>
+    <div class="py-1 px-2">소속학과(부)</div>
+    <div class="py-1 px-2">학번</div>
+    <div class="py-1 px-2">이름</div>
+    <div class="py-1 px-2">수행연도</div>
+    <div class="py-1 px-2">수행학년</div>
+    <div class="py-1 px-2">수행학기</div>
+    <div class="py-1 px-2">유형</div>
+    <div class="py-1 px-2">교과목/자체프로젝트</div>
+    <div class="py-1 px-2">등록일</div>
+    <div class="py-1 px-2">파일수</div>
+    <div class="py-1 px-2">코드수</div>
+    <div class="py-1 px-2">주석수</div>
+    <div class="py-1 px-2">사용언어</div>
+    <div class="py-1 px-2">파일수(전체)</div>
+    <div class="py-1 px-2">코드수(전체)</div>
+    <div class="py-1 px-2">주석수(전체)</div>
+    <div class="py-1 px-2">사용언어(전체)</div>
+  </div>
+  <div class="list-wrapper">
+    <div *ngFor="let document of service.documents$ | async" class="row border-b border-gray-300 w-fit">
+      <div class="py-1 px-2 max-w-[300px] truncate">{{document[1]}}</div>
+      <div class="py-1 px-2 text-center truncate">{{document[2]}}</div>
+      <div class="py-1 px-2 text-center truncate">{{document[3]}}</div>
+      <div class="py-1 px-2 text-center truncate">{{document[4]}}</div>
+      <div class="py-1 px-2 text-center truncate">{{document[5]}}</div>
+      <div class="py-1 px-2 text-center truncate">{{document[6]}}년</div>
+      <div class="py-1 px-2 text-center truncate">{{document[7]}}학년</div>
+      <div class="py-1 px-2 text-center truncate">{{document[8]}}</div>
+      <div class="py-1 px-2 text-center truncate">{{document[9]}}</div>
+      <div class="py-1 px-2 text-center truncate">{{document[10]}}</div>
+      <div class="py-1 px-2 text-center truncate">{{document[11] | date:'yyyy.MM.dd'}}</div>
+      <div class="py-1 px-2 text-right truncate">{{document[12] | number}}</div>
+      <div class="py-1 px-2 text-right truncate">{{document[13] | number}}</div>
+      <div class="py-1 px-2 text-right truncate">{{document[14] | number}}</div>
+      <div class="py-1 px-2 text-center truncate">{{document[15] || '-'}}</div>
+      <div class="py-1 px-2 text-right truncate">{{document[16] | number}}</div>
+      <div class="py-1 px-2 text-right truncate">{{document[17] | number}}</div>
+      <div class="py-1 px-2 text-right truncate">{{document[18] | number}}</div>
+      <div class="py-1 px-2 text-center truncate">{{document[19] || '-'}}</div>
+    </div>
+    <sw-pending *ngIf="service.pending$ | async"></sw-pending>
+  </div>
+</div>
+<!--<pre>{{service.documents$ | async | json}}</pre>-->

@@ -1,3 +1,10 @@
-<sw-responsive-container class="block">
-  <p class="text-xl text-secondary-500">준비 중입니다.</p>
+<sw-responsive-container class="block space-y-4">
+  <sw-project-filter></sw-project-filter>
+  <div class="bg-white border border-gray-300">
+    <div class="flex justify-between px-4 py-2 items-center">
+      <span>총 {{service.total | number}} 결과</span>
+      <sw-button type="button" [color]="2">엑셀 다운로드</sw-button>
+    </div>
+    <sw-project-list></sw-project-list>
+  </div>
 </sw-responsive-container>

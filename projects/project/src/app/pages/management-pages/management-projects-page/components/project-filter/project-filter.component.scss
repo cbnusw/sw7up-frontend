@@ -1,0 +1,11 @@
+:host {
+  @apply block bg-white border border-gray-300;
+}
+
+.tool-wrapper {
+  height: 464px;
+
+  &.collapse {
+    height: 0;
+  }
+}

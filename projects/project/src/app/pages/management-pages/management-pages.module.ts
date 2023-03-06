@@ -1,14 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ControlsModule } from '../../common/controls';
 import { MainModule } from '../../common/main/main.module';
 import { LanguageModule } from '../../features/language';
-
-import { ManagementPagesRoutingModule } from './management-pages-routing.module';
-import { ManagementMainPageComponent } from './management-main-page/management-main-page.component';
-import { ManagementStatisticsPageComponent } from './management-statistics-page/management-statistics-page.component';
-import { ManagementProjectsPageComponent } from './management-projects-page/management-projects-page.component';
 import { ManagementLanguagesPageComponent } from './management-languages-page/management-languages-page.component';
+import { ManagementMainPageComponent } from './management-main-page/management-main-page.component';
+import { ManagementPagesRoutingModule } from './management-pages-routing.module';
+import { ProjectFilterComponent } from './management-projects-page/components/project-filter/project-filter.component';
+import { ManagementProjectsPageComponent } from './management-projects-page/management-projects-page.component';
+import { ManagementRankingPageComponent } from './management-ranking-page/management-ranking-page.component';
+import { ManagementStatisticsPageComponent } from './management-statistics-page/management-statistics-page.component';
+import { ProjectListComponent } from './management-projects-page/components/project-list/project-list.component';
 
 
 @NgModule({
@@ -16,7 +19,10 @@ import { ManagementLanguagesPageComponent } from './management-languages-page/ma
     ManagementMainPageComponent,
     ManagementStatisticsPageComponent,
     ManagementProjectsPageComponent,
-    ManagementLanguagesPageComponent
+    ManagementLanguagesPageComponent,
+    ManagementRankingPageComponent,
+    ProjectFilterComponent,
+    ProjectListComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +30,8 @@ import { ManagementLanguagesPageComponent } from './management-languages-page/ma
     MainModule,
     ControlsModule,
     LanguageModule,
-  ]
+    FormsModule,
+  ],
 })
-export class ManagementPagesModule { }
+export class ManagementPagesModule {
+}

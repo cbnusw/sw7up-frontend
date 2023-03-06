@@ -1,0 +1,10 @@
+
+.row {
+  display: grid;
+  grid-template-columns: 300px 140px 140px 140px 120px 120px 120px 120px 120px 160px 120px 120px 120px 120px 200px 120px 120px 120px 200px;
+}
+
+.list-wrapper {
+  min-height: 500px;
+  height: calc(100vh - 406px);
+}
