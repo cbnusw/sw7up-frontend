@@ -1,5 +1,6 @@
-<ul class="flex select-none">
+<ul class="flex select-none w-fit">
   <li *ngFor="let option of options"
+      class="flex-shrink-0"
       [class]="LI_STYLE_CLASSES[selected !== option ? 0 : 1]">
     <button type="button"
             class="px-4 py-2"
