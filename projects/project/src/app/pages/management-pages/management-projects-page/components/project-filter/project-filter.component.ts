@@ -84,7 +84,10 @@ export class ProjectFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.search();
+    this._convertParams();
+    if (this.service.total === 0) {
+      this.search();
+    }
   }
 
   private _getQuery(): ProjectManagementQuery {
@@ -130,5 +133,45 @@ export class ProjectFilterComponent implements OnInit {
       ownProjectType: this.ownProjectType,
       professor: this.professor,
     };
+  }
+
+  private _convertParams(): void {
+    const {
+      createdStart,
+      createdEnd,
+      grade,
+      performedStart,
+      performedEnd,
+      creatorName,
+      creatorNo,
+      school,
+      departments,
+      projectType,
+      subjectName,
+      ownProjectType,
+      professor,
+    } = this.service.convertParamToQuery();
+
+    this.createdStart = createdStart;
+    this.createdEnd = createdEnd;
+    this.grade = grade ? +grade : null;
+    if (performedStart) {
+      const [year, semester] = performedStart.split('-');
+      this.performedYearStart = +year;
+      this.performedSemesterStart = +semester;
+    }
+    if (performedEnd) {
+      const [year, semester] = performedEnd.split('-');
+      this.performedYearEnd = +year;
+      this.performedSemesterEnd = +semester;
+    }
+    this.creatorName = creatorName;
+    this.creatorNo = creatorNo;
+    this.school = school;
+    this.departments = departments;
+    this.projectType = projectType;
+    this.subjectName = subjectName;
+    this.ownProjectType = ownProjectType;
+    this.professor = professor;
   }
 }

@@ -79,6 +79,39 @@ export class ProjectManagementService {
     return this._http.get(this._BASE_URL + '/download', { params, responseType: 'blob' });
   }
 
+  convertParamToQuery(): ProjectManagementQuery {
+    const {
+      createdStart = null,
+      createdEnd = null,
+      grade = null,
+      performedStart = null,
+      performedEnd = null,
+      creatorName = null,
+      creatorNo = null,
+      school = null,
+      departments = null,
+      projectType = null,
+      subjectName = null,
+      ownProjectType = null,
+      professor = null,
+    } = this.params as any;
+    return {
+      createdStart,
+      createdEnd,
+      grade,
+      performedStart,
+      performedEnd,
+      creatorName,
+      creatorNo,
+      school,
+      departments: departments ? departments.split(',') : [],
+      projectType,
+      subjectName,
+      ownProjectType,
+      professor,
+    };
+  }
+
   private _convertQuery(query: ProjectManagementQuery): Params {
     const params: { [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>; } = {
       limit: 100,
