@@ -168,7 +168,7 @@ export class ProjectFilterComponent implements OnInit {
     this.creatorName = creatorName;
     this.creatorNo = creatorNo;
     this.school = school;
-    this.departments = departments;
+    this.departments = departments ?? [...MAJORS, '기타'];
     this.projectType = projectType;
     this.subjectName = subjectName;
     this.ownProjectType = ownProjectType;

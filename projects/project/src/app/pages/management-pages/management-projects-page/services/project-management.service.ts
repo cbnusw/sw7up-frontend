@@ -104,7 +104,7 @@ export class ProjectManagementService {
       creatorName,
       creatorNo,
       school,
-      departments: departments ? departments.split(',') : [],
+      departments: departments ? departments.split(',') : null,
       projectType,
       subjectName,
       ownProjectType,
