@@ -1,6 +1,6 @@
 <div class="nav-header d-flex justify-content-between">
   <a [routerLink]="HOME_URL" (click)="close()">
-    <img class="brand-image" src="assets/images/logo-h.png"/>
+    <img class="brand-image" src="assets/images/logo-h.png" alt="logo"/>
   </a>
   <button type="button"
           class="btn-close"
@@ -15,7 +15,7 @@
     <a class="account-btn border" *ngIf="auth.loggedIn" (click)="logout()">로그아웃</a>
   </div>
   <div class="sw-code d-flex justify-content-center">
-    <a class="code-btn border" [href]="CODE_URL">프로젝트관리</a>
+    <a class="code-btn border" [href]="CODE_URL">코딩이력관리</a>
   </div>
   <div class="menus mb-4">
     <div class="accordion" id="navigation-menus">
