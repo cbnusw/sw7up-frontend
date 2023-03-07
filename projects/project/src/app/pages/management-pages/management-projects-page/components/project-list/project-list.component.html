@@ -24,11 +24,11 @@
     <div class="py-1 px-2">요약(언어: 파일수/코드라인수/주석수)</div>
   </div>
   <div [class.expand]="expand"
-       class="list-wrapper">
+       class="list-wrapper border-b border-gray-300">
     <div *ngIf="!(service.pending$ | async) && service.total === 0" class="py-1 px-2 text-gray-500 col-span-[20]">
       검색 결과가 없습니다.
     </div>
-    <div *ngFor="let document of service.documents$ | async; index as i" class="row border-b border-gray-300 w-fit hover:bg-gray-100 even:bg-gray-50 odd:bg-white">
+    <div *ngFor="let document of service.documents$ | async; index as i" class="row border-b last:border-0 border-gray-300 w-fit hover:bg-gray-100 even:bg-gray-50 odd:bg-white">
       <div class="py-1 px-2 text-right border-r border-gray-300">{{i + 1 | number}}</div>
       <div class="py-1 px-2 max-w-[300px] break-all border-r border-gray-300 md:sticky md:left-0 z-10 bg-inherit">
         <a [swRedirectRouterLink]="['/projects', document[0]]" class="underline underline-offset-4 cursor-pointer">{{document[1]}}</a>
