@@ -98,6 +98,7 @@ export class ProjectFilterComponent implements OnInit {
 
   ngOnInit(): void {
     this._convertParams();
+    this.collapsed = this.service.total > 0;
     if (this.service.total === 0) {
       this.search();
     }
