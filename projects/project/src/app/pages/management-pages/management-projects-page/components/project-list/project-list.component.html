@@ -23,7 +23,8 @@
     <div class="py-1 px-2 border-r border-gray-300">사용언어(전체)</div>
     <div class="py-1 px-2">요약(언어: 파일수/코드라인수/주석수)</div>
   </div>
-  <div class="list-wrapper">
+  <div [class.expand]="expand"
+       class="list-wrapper">
     <div *ngIf="!(service.pending$ | async) && service.total === 0" class="py-1 px-2 text-gray-500 col-span-[20]">
       검색 결과가 없습니다.
     </div>

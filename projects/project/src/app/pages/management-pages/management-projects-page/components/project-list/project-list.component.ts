@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProjectManagementService } from '../../services/project-management.service';
 
 @Component({
@@ -8,9 +8,12 @@ import { ProjectManagementService } from '../../services/project-management.serv
 })
 export class ProjectListComponent implements OnInit {
 
+  @Input() expand = false;
+
   constructor(
     public service: ProjectManagementService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
