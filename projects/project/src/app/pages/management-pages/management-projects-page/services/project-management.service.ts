@@ -26,7 +26,9 @@ type Params = {
   [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
 };
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProjectManagementService {
   total = 0;
   params: Params = {};
