@@ -39,11 +39,11 @@
       <div class="py-1 px-2 text-right break-all">{{document[12] | number}}</div>
       <div class="py-1 px-2 text-right break-all">{{document[13] | number}}</div>
       <div class="py-1 px-2 text-right break-all">{{document[14] | number}}</div>
-      <div class="py-1 px-2 text-center break-all">{{document[15] || '-'}}</div>
+      <div class="py-1 px-2" [innerHTML]="document[15] | nl2br"></div>
       <div class="py-1 px-2 text-right break-all">{{document[16] | number}}</div>
       <div class="py-1 px-2 text-right break-all">{{document[17] | number}}</div>
       <div class="py-1 px-2 text-right break-all">{{document[18] | number}}</div>
-      <div class="py-1 px-2 text-center break-all">{{document[19] || '-'}}</div>
+      <div class="py-1 px-2" [innerHTML]="document[19] | nl2br"></div>
       <div class="py-1 px-2" [innerHTML]="document[20] | nl2br"></div>
     </div>
     <sw-pending *ngIf="service.pending$ | async"></sw-pending>
