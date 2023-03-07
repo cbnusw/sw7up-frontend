@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { filter, take } from 'rxjs/operators';
 import { MAJORS } from 'shared';
 import { ISelectOption, OWN_PROJECT_TYPES, PROJECT_TYPES, SEMESTERS, TOwnProjectType, TProjectType } from '../../../../../types';
 import { ProjectManagementQuery, ProjectManagementService } from '../../services/project-management.service';
@@ -86,7 +87,10 @@ export class ProjectFilterComponent implements OnInit {
     try {
       const query = this._getQuery();
       this.service.search(query);
-      this.collapsed = true;
+      this.service.pending$.pipe(
+        filter(pending => pending === false),
+        take(1)
+      ).subscribe(() => this.collapsed = true);
     } catch (e) {
       alert(e.message);
     }
