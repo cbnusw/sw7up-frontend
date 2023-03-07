@@ -1,5 +1,6 @@
 <div class="overflow-scroll text-sm relative" swScrollBottom (bottom)="more()">
   <div class="row border-y border-gray-300 bg-gray-100 text-center font-bold w-fit sticky top-0">
+    <div class="py-1 px-2">#</div>
     <div class="py-1 px-2">프로젝트명</div>
     <div class="py-1 px-2">소속학교</div>
     <div class="py-1 px-2">소속학과(부)</div>
@@ -26,7 +27,8 @@
     <div *ngIf="!(service.pending$ | async) && service.total === 0" class="py-1 px-2 text-gray-500 col-span-[20]">
       검색 결과가 없습니다.
     </div>
-    <div *ngFor="let document of service.documents$ | async" class="row border-b border-gray-300 w-fit hover:bg-gray-100">
+    <div *ngFor="let document of service.documents$ | async; index as i" class="row border-b border-gray-300 w-fit hover:bg-gray-100">
+      <div class="py-1 px-2 text-right">{{i + 1 | number}}</div>
       <div class="py-1 px-2 max-w-[300px] break-all">
         <a [swRedirectRouterLink]="['/projects', document[0]]" class="underline underline-offset-4 cursor-pointer">{{document[1]}}</a>
       </div>
