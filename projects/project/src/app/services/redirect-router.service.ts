@@ -20,6 +20,7 @@ export class RedirectRouterService {
 
   async exitProjectPage(): Promise<void> {
     const redirectUrl: string = this._storage.get('project-redirect-url');
+    console.log('exit:::', redirectUrl);
     this._storage.remove('project-redirect-url');
     await this._router.navigateByUrl(redirectUrl || '/');
   }
@@ -40,6 +41,7 @@ export class RedirectRouterService {
   }
 
   private _setRedirectUrl(): void {
+    console.log(this._router.url);
     this._storage.redirectUrl = this._router.url;
   }
 }
