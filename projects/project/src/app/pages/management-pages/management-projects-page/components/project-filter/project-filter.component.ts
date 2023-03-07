@@ -11,8 +11,8 @@ import { ProjectManagementQuery, ProjectManagementService } from '../../services
 export class ProjectFilterComponent implements OnInit {
   collapsed = true;
 
-  createdStart: Date | null = null;
-  createdEnd: Date | null = null;
+  createdStart: Date | string | null = null;
+  createdEnd: Date | string | null = null;
   grade: number | null = null;
   performedYearStart: number | null = null;
   performedSemesterStart: number | null = null;
@@ -152,8 +152,22 @@ export class ProjectFilterComponent implements OnInit {
       professor,
     } = this.service.convertParamToQuery();
 
-    this.createdStart = createdStart;
-    this.createdEnd = createdEnd;
+    if (createdStart) {
+      const date = new Date(createdStart);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      this.createdStart = [year, month, day].join('-');
+    }
+
+    if (createdEnd) {
+      const date = new Date(createdEnd);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      this.createdEnd = [year, month, day].join('-');
+    }
+
     this.grade = grade ? +grade : null;
     if (performedStart) {
       const [year, semester] = performedStart.split('-');
