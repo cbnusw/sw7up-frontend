@@ -10,6 +10,7 @@
     <div class="py-1 px-2">수행학기</div>
     <div class="py-1 px-2">유형</div>
     <div class="py-1 px-2">교과목/자체프로젝트</div>
+    <div class="py-1 px-2">담당교수</div>
     <div class="py-1 px-2">등록일</div>
     <div class="py-1 px-2">파일수</div>
     <div class="py-1 px-2">코드수</div>
@@ -33,21 +34,22 @@
       <div class="py-1 px-2 text-center break-all">{{document[3]}}</div>
       <div class="py-1 px-2 text-center break-all">{{document[4]}}</div>
       <div class="py-1 px-2 text-center break-all">{{document[5]}}</div>
-      <div class="py-1 px-2 text-center break-all">{{document[6]}}년</div>
-      <div class="py-1 px-2 text-center break-all">{{document[7]}}학년</div>
+      <div class="py-1 px-2 text-center break-all">{{document[6]}}</div>
+      <div class="py-1 px-2 text-center break-all">{{document[7]}}</div>
       <div class="py-1 px-2 text-center break-all">{{document[8]}}</div>
       <div class="py-1 px-2 text-center break-all">{{document[9]}}</div>
       <div class="py-1 px-2 text-center break-all">{{document[10]}}</div>
-      <div class="py-1 px-2 text-center break-all">{{document[11] | date:'yyyy.MM.dd'}}</div>
-      <div class="py-1 px-2 text-right break-all">{{document[12] | number}}</div>
+      <div class="py-1 px-2 text-center break-all">{{document[11]}}</div>
+      <div class="py-1 px-2 text-center break-all">{{document[12] | date:'yyyy.MM.dd'}}</div>
       <div class="py-1 px-2 text-right break-all">{{document[13] | number}}</div>
       <div class="py-1 px-2 text-right break-all">{{document[14] | number}}</div>
-      <div class="py-1 px-2" [innerHTML]="document[15] | nl2br"></div>
-      <div class="py-1 px-2 text-right break-all">{{document[16] | number}}</div>
+      <div class="py-1 px-2 text-right break-all">{{document[15] | number}}</div>
+      <div class="py-1 px-2" [innerHTML]="document[16] | nl2br"></div>
       <div class="py-1 px-2 text-right break-all">{{document[17] | number}}</div>
       <div class="py-1 px-2 text-right break-all">{{document[18] | number}}</div>
-      <div class="py-1 px-2" [innerHTML]="document[19] | nl2br"></div>
+      <div class="py-1 px-2 text-right break-all">{{document[19] | number}}</div>
       <div class="py-1 px-2" [innerHTML]="document[20] | nl2br"></div>
+      <div class="py-1 px-2" [innerHTML]="document[21] | nl2br"></div>
     </div>
     <sw-pending *ngIf="service.pending$ | async"></sw-pending>
   </div>
