@@ -85,8 +85,8 @@ export class ProjectFilterComponent implements OnInit {
   search(): void {
     try {
       const query = this._getQuery();
-      console.log(query);
       this.service.search(query);
+      this.collapsed = true;
     } catch (e) {
       alert(e.message);
     }
