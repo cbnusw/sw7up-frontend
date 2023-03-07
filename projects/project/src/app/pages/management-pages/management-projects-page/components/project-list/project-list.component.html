@@ -1,7 +1,7 @@
 <div class="overflow-scroll text-sm relative" swScrollBottom (bottom)="more()">
   <div class="row border-y border-gray-300 bg-gray-200 text-center font-bold w-fit sticky top-0 z-30">
     <div class="py-1 px-2 border-r border-gray-300">#</div>
-    <div class="py-1 px-2 border-r border-gray-300 sticky left-0 z-20">프로젝트명</div>
+    <div class="py-1 px-2 border-r border-gray-300 sticky left-0 z-20 bg-inherit">프로젝트명</div>
     <div class="py-1 px-2 border-r border-gray-300">소속학교</div>
     <div class="py-1 px-2 border-r border-gray-300">소속학과(부)</div>
     <div class="py-1 px-2 border-r border-gray-300">학번</div>
@@ -29,7 +29,7 @@
     </div>
     <div *ngFor="let document of service.documents$ | async; index as i" class="row border-b border-gray-300 w-fit hover:bg-gray-100 even:bg-gray-50 odd:bg-white">
       <div class="py-1 px-2 text-right border-r border-gray-300">{{i + 1 | number}}</div>
-      <div class="py-1 px-2 max-w-[300px] break-all border-r border-gray-300 sticky left-0 z-10">
+      <div class="py-1 px-2 max-w-[300px] break-all border-r border-gray-300 sticky left-0 z-10 bg-inherit">
         <a [swRedirectRouterLink]="['/projects', document[0]]" class="underline underline-offset-4 cursor-pointer">{{document[1]}}</a>
       </div>
       <div class="py-1 px-2 text-center break-all border-r border-gray-300">{{document[2]}}</div>
