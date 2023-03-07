@@ -45,6 +45,10 @@ export class ProjectManagementService {
     this.pending$ = this._pendingSubject.asObservable();
   }
 
+  get pending(): boolean {
+    return this._pendingSubject.value;
+  }
+
   get documents(): IProject[] {
     return this._documentsSubject.value;
   }
