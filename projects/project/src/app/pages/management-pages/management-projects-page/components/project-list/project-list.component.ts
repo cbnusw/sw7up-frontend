@@ -19,6 +19,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   more(): void {
+    console.log(this.service.total, this.service.documents.length);
     if (this.service.total > this.service.documents.length) {
       this.service.more();
     }
