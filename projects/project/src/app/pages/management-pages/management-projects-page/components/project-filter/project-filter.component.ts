@@ -9,7 +9,7 @@ import { ProjectManagementQuery, ProjectManagementService } from '../../services
   styleUrls: ['./project-filter.component.scss']
 })
 export class ProjectFilterComponent implements OnInit {
-  collapsed = true;
+  collapsed = false;
 
   createdStart: Date | string | null = null;
   createdEnd: Date | string | null = null;
@@ -180,6 +180,7 @@ export class ProjectFilterComponent implements OnInit {
       this.performedYearEnd = +year;
       this.performedSemesterEnd = +semester;
     }
+    this.creatorOption = creatorNo ? '학번' : '이름';
     this.creatorName = creatorName;
     this.creatorNo = creatorNo;
     this.school = school;
