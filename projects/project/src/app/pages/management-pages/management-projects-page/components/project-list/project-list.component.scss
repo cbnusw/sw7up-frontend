@@ -10,6 +10,7 @@
 
 .list-wrapper {
   max-height: calc(100vh - 406px);
+  min-height: 200px;
   &.expand {
     max-height: calc(100vh - 118px);
   }
