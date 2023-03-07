@@ -24,7 +24,7 @@
   <div class="list-wrapper">
     <div *ngFor="let document of service.documents$ | async" class="row border-b border-gray-300 w-fit hover:bg-gray-100">
       <div class="py-1 px-2 max-w-[300px] break-all">
-        <a routerLink="/projects/{{document[0]}}" class="underline underline-offset-4">{{document[1]}}</a>
+        <a [swRedirectRouterLink]="['/projects', document[0]]" class="underline underline-offset-4">{{document[1]}}</a>
       </div>
       <div class="py-1 px-2 text-center break-all">{{document[2]}}</div>
       <div class="py-1 px-2 text-center break-all">{{document[3]}}</div>
