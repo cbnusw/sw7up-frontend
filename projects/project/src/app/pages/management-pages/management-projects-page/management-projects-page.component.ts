@@ -9,6 +9,7 @@ import { ProjectManagementService } from './services/project-management.service'
 })
 export class ManagementProjectsPageComponent implements OnInit {
 
+  expand = false;
   pending = false;
 
   constructor(

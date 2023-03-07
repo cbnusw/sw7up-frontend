@@ -1,4 +1,4 @@
-<div class="overflow-scroll text-sm relative" swScrollBottom (bottom)="more()">
+<div class="w-full overflow-scroll text-sm relative" swScrollBottom (bottom)="more()">
   <div class="row border-y border-gray-300 bg-gray-200 text-center font-bold w-fit sticky top-0 z-30">
     <div class="py-1 px-2 border-r border-gray-300">#</div>
     <div class="py-1 px-2 border-r border-gray-300 md:sticky md:left-0 z-20 bg-inherit">프로젝트명</div>
@@ -56,4 +56,3 @@
     <sw-pending *ngIf="service.pending$ | async"></sw-pending>
   </div>
 </div>
-<!--<pre>{{service.documents$ | async | json}}</pre>-->
