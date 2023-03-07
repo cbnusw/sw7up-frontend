@@ -26,6 +26,9 @@ export class ProjectFilterComponent implements OnInit {
   ownProjectType: TOwnProjectType | null = null;
   professor: string | null = null;
 
+  createdOption: '기간설정' | null = null;
+  createdOptions: ISelectOption[] = [{ viewValue: '전체', value: null }, { value: '기간설정' }];
+
   gradeOptions: ISelectOption[] = [{ viewValue: '전체', value: null }, ...[1, 2, 3, 4, 5, 6].map(grade => ({
     viewValue: `${grade} 학년`,
     value: grade
@@ -52,6 +55,11 @@ export class ProjectFilterComponent implements OnInit {
   constructor(
     public readonly service: ProjectManagementService
   ) {
+  }
+
+  changeCreatedOption(value: '기간설정' | null): void {
+    this.createdStart = this.createdEnd = null;
+    this.createdOption = value;
   }
 
   changeCreatorOption(value: '이름' | '학번'): void {
@@ -152,6 +160,10 @@ export class ProjectFilterComponent implements OnInit {
       ownProjectType,
       professor,
     } = this.service.convertParamToQuery();
+
+    if (createdStart || createdEnd) {
+      this.createdOption = '기간설정';
+    }
 
     if (createdStart) {
       const date = new Date(createdStart);
