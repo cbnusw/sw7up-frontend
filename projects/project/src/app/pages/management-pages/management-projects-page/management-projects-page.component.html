@@ -3,7 +3,10 @@
   <div class="bg-white border border-gray-300">
     <div class="flex justify-between px-4 py-2 items-center">
       <span>총 {{service.total | number}} 결과</span>
-      <sw-button type="button" [color]="2">엑셀 다운로드</sw-button>
+      <sw-button type="button"
+                 [color]="2"
+                 [disabled]="pending"
+                 (click)="download()">{{pending ? '파일 생성중...' : '엑셀 다운로드'}}</sw-button>
     </div>
     <sw-project-list></sw-project-list>
   </div>

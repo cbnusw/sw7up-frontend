@@ -33,8 +33,8 @@ export class ProjectManagementService {
   readonly documents$: Observable<IProject[]>;
   readonly pending$: Observable<boolean>;
 
-  private readonly _BASE_URL = environment.codeHost + '/projects/list';
-  // private readonly _BASE_URL = 'https://swcode.cbnu.ac.kr' + '/projects/list';
+  private readonly _BASE_URL = environment.codeHost + '/managements/projects';
+  // private readonly _BASE_URL = 'https://swcode.cbnu.ac.kr' + '/managements/projects';
   private readonly _documentsSubject = new BehaviorSubject<IProject[]>([]);
   private readonly _pendingSubject = new BehaviorSubject<boolean>(false);
 
@@ -70,6 +70,11 @@ export class ProjectManagementService {
       this.total = res.data.total;
       this._documentsSubject.next([...this.documents, ...res.data.documents]);
     });
+  }
+
+  downloadExcel(): Observable<Blob> {
+    const { limit, skip, ...params } = this.params;
+    return this._http.get(this._BASE_URL + '/download', { params, responseType: 'blob' });
   }
 
   private _convertQuery(query: ProjectManagementQuery): Params {

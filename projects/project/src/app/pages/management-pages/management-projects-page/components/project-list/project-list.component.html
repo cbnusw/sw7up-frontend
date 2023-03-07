@@ -19,28 +19,32 @@
     <div class="py-1 px-2">코드수(전체)</div>
     <div class="py-1 px-2">주석수(전체)</div>
     <div class="py-1 px-2">사용언어(전체)</div>
+    <div class="py-1 px-2">요약(언어: 파일수/코드라인수/주석수)</div>
   </div>
   <div class="list-wrapper">
     <div *ngFor="let document of service.documents$ | async" class="row border-b border-gray-300 w-fit">
-      <div class="py-1 px-2 max-w-[300px] truncate">{{document[1]}}</div>
-      <div class="py-1 px-2 text-center truncate">{{document[2]}}</div>
-      <div class="py-1 px-2 text-center truncate">{{document[3]}}</div>
-      <div class="py-1 px-2 text-center truncate">{{document[4]}}</div>
-      <div class="py-1 px-2 text-center truncate">{{document[5]}}</div>
-      <div class="py-1 px-2 text-center truncate">{{document[6]}}년</div>
-      <div class="py-1 px-2 text-center truncate">{{document[7]}}학년</div>
-      <div class="py-1 px-2 text-center truncate">{{document[8]}}</div>
-      <div class="py-1 px-2 text-center truncate">{{document[9]}}</div>
-      <div class="py-1 px-2 text-center truncate">{{document[10]}}</div>
-      <div class="py-1 px-2 text-center truncate">{{document[11] | date:'yyyy.MM.dd'}}</div>
-      <div class="py-1 px-2 text-right truncate">{{document[12] | number}}</div>
-      <div class="py-1 px-2 text-right truncate">{{document[13] | number}}</div>
-      <div class="py-1 px-2 text-right truncate">{{document[14] | number}}</div>
-      <div class="py-1 px-2 text-center truncate">{{document[15] || '-'}}</div>
-      <div class="py-1 px-2 text-right truncate">{{document[16] | number}}</div>
-      <div class="py-1 px-2 text-right truncate">{{document[17] | number}}</div>
-      <div class="py-1 px-2 text-right truncate">{{document[18] | number}}</div>
-      <div class="py-1 px-2 text-center truncate">{{document[19] || '-'}}</div>
+      <div class="py-1 px-2 max-w-[300px] break-all">
+        <a routerLink="/projects/{{document[0]}}" class="underline underline-offset-4">{{document[1]}}</a>
+      </div>
+      <div class="py-1 px-2 text-center break-all">{{document[2]}}</div>
+      <div class="py-1 px-2 text-center break-all">{{document[3]}}</div>
+      <div class="py-1 px-2 text-center break-all">{{document[4]}}</div>
+      <div class="py-1 px-2 text-center break-all">{{document[5]}}</div>
+      <div class="py-1 px-2 text-center break-all">{{document[6]}}년</div>
+      <div class="py-1 px-2 text-center break-all">{{document[7]}}학년</div>
+      <div class="py-1 px-2 text-center break-all">{{document[8]}}</div>
+      <div class="py-1 px-2 text-center break-all">{{document[9]}}</div>
+      <div class="py-1 px-2 text-center break-all">{{document[10]}}</div>
+      <div class="py-1 px-2 text-center break-all">{{document[11] | date:'yyyy.MM.dd'}}</div>
+      <div class="py-1 px-2 text-right break-all">{{document[12] | number}}</div>
+      <div class="py-1 px-2 text-right break-all">{{document[13] | number}}</div>
+      <div class="py-1 px-2 text-right break-all">{{document[14] | number}}</div>
+      <div class="py-1 px-2 text-center break-all">{{document[15] || '-'}}</div>
+      <div class="py-1 px-2 text-right break-all">{{document[16] | number}}</div>
+      <div class="py-1 px-2 text-right break-all">{{document[17] | number}}</div>
+      <div class="py-1 px-2 text-right break-all">{{document[18] | number}}</div>
+      <div class="py-1 px-2 text-center break-all">{{document[19] || '-'}}</div>
+      <div class="py-1 px-2" [innerHTML]="document[20] | nl2br"></div>
     </div>
     <sw-pending *ngIf="service.pending$ | async"></sw-pending>
   </div>

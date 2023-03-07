@@ -12,6 +12,7 @@ import { ManagementProjectsPageComponent } from './management-projects-page/mana
 import { ManagementRankingPageComponent } from './management-ranking-page/management-ranking-page.component';
 import { ManagementStatisticsPageComponent } from './management-statistics-page/management-statistics-page.component';
 import { ProjectListComponent } from './management-projects-page/components/project-list/project-list.component';
+import { Nl2brPipe } from './management-projects-page/pipes/nl2br.pipe';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ProjectListComponent } from './management-projects-page/components/proj
     ManagementLanguagesPageComponent,
     ManagementRankingPageComponent,
     ProjectFilterComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    Nl2brPipe
   ],
   imports: [
     CommonModule,

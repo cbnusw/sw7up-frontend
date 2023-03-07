@@ -9,7 +9,7 @@ import { ManagementStatisticsPageComponent } from './management-statistics-page/
 const routes: Routes = [
   {
     path: '', component: ManagementMainPageComponent, children: [
-      { path: '', redirectTo: '/management/statistics', pathMatch: 'full' },
+      { path: '', redirectTo: '/management/projects', pathMatch: 'full' },
       { path: 'projects', component: ManagementProjectsPageComponent },
       { path: 'statistics', component: ManagementStatisticsPageComponent },
       { path: 'ranking', component: ManagementRankingPageComponent },
