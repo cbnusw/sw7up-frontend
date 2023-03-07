@@ -21,6 +21,6 @@
                  [disabled]="pending"
                  (click)="download()">{{pending ? '파일 생성중...' : '엑셀 다운로드'}}</sw-button>
     </div>
-    <sw-project-list [expand]="expand"></sw-project-list>
+    <sw-project-list class="mx-auto" [expand]="expand"></sw-project-list>
   </div>
 </sw-responsive-container>
