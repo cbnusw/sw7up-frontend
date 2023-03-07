@@ -15,7 +15,10 @@
       원하시는 결과가 없는 경우 + 버튼을 눌러 검색 설정을 다시 해보세요.
     </span>
   </div>
-  <sw-button type="button" (click)="search()">검색</sw-button>
+  <div class="flex gap-2 items-center">
+    <sw-button type="button" [color]="2" (click)="initQuery()">초기화</sw-button>
+    <sw-button type="button" (click)="search()">검색</sw-button>
+  </div>
 </div>
 <div class="overflow-y-scroll tool-wrapper duration-300" [class.collapse]="collapsed">
   <div class="flex flex-col gap-4 p-4">

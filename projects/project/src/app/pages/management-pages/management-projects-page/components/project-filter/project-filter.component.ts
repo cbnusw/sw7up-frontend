@@ -96,6 +96,26 @@ export class ProjectFilterComponent implements OnInit {
     }
   }
 
+  initQuery(): void {
+    this.createdStart = null;
+    this.createdEnd = null;
+    this.grade = null;
+    this.performedYearStart = null;
+    this.performedSemesterStart = null;
+    this.performedYearEnd = null;
+    this.performedSemesterEnd = null;
+    this.creatorName = null;
+    this.creatorNo = null;
+    this.school = null;
+    this.departments = [...MAJORS, '기타'];
+    this.subjectName = null;
+    this.ownProjectType = null;
+    this.professor = null;
+    this.createdOption = null;
+    this.creatorOption = '이름';
+    this.projectType = null;
+  }
+
   ngOnInit(): void {
     this._convertParams();
     this.collapsed = this.service.total > 0;
