@@ -44,7 +44,8 @@ export const UNIVERSITIES = [
   '공군사관학교',
   '우석대학교',
   '중원대학교',
-  '세명대학교'
+  '세명대학교',
+  '한국교원대학교'
 ];
 
 export const CENTERS = [
