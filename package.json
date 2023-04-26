@@ -9,7 +9,7 @@
     "build:lib": "run-s build:lib:shared build:lib:ui",
     "build:lib:shared": "npx ng build --configuration production shared",
     "build:lib:ui": "npx ng build --configuration production ui",
-    "build:app": "run-s build:app:main build:app:admin build:app:code",
+    "build:app": "run-s build:app:*",
     "build:app:admin": "npx ng build --configuration production admin",
     "build:app:project": "npx ng build --configuration production --base-href /project/ project",
     "build:app:main": "npx ng build --configuration production --base-href / main && npx ng run main:server:production",

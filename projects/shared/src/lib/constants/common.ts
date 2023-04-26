@@ -44,7 +44,8 @@ export const UNIVERSITIES = [
   '공군사관학교',
   '우석대학교',
   '중원대학교',
-  '세명대학교'
+  '세명대학교',
+  '한국교원대학교'
 ];
 
 export const CENTERS = [
@@ -68,7 +69,8 @@ export const QNA_CATEGORIES = [
   'Java 프로그래밍 기초',
   '운영체제의 이해',
   '웹 응용 프로그래밍',
-  '입학전 SW 기초교육'
+  '입학전 SW 기초교육',
+  '인공지능(ChatGPT)'
 ];
 
 export const MAJORS = [
