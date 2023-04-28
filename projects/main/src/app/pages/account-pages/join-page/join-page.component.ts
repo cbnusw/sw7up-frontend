@@ -76,7 +76,7 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
   }
 
   changeRole(role: TUserRole): boolean {
-    this.reset()
+    this.reset();
     this.formGroup.get('role').setValue(role);
     return false;
   }
@@ -107,19 +107,23 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
 
   async updateUniversity(): Promise<any> {
     const val = this.formGroup.getRawValue();
-    if(val.role === 'student' || val.role === 'staff') await this.formGroup.get('info.university').setValue('충북대학교');
+    if (val.role === 'student' || val.role === 'staff') {
+      await this.formGroup.get('info.university').setValue('충북대학교');
+    }
   }
 
   async updateOtherStudent(): Promise<any> {
     const val = this.formGroup.getRawValue();
-    if(val.role === 'other-student') await this.formGroup.get('role').setValue('student');
+    if (val.role === 'other-student') {
+      await this.formGroup.get('role').setValue('student');
+    }
   }
 
   protected async mapFormToModel(formGroup: FormGroup): Promise<IUser> {
     await this.updateManualDepartment();
     await this.updateOtherStudent();
     const rawValue = formGroup.getRawValue();
-    rawValue.info.phone = rawValue.info.phone.replace(/[^\d]/g, '');
+    rawValue.info.phone = rawValue.info.phone.replace(/\D/g, '');
     rawValue.info.email = rawValue.info.email.toLowerCase();
     delete rawValue.agreement;
     return rawValue as IUser;
@@ -188,7 +192,7 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
         const department = form.get(['info', 'department']).value;
         const manualDepartment = form.get(['info', 'manualDepartment']).value;
         if (role !== 'member' && department === '직접입력' && (manualDepartment === null || manualDepartment === '')) {
-            return { requiredManualDepartment: true };
+          return { requiredManualDepartment: true };
         }
         return null;
       },
