@@ -18,7 +18,7 @@ export class ResourceFormPageComponent extends AbstractFormDirective<IResource, 
   editor: any = null;
   config = {
     language: 'ko',
-    placeholder: '공지사항 작성',
+    placeholder: '내용 작성',
   };
 
   errorMatcher = new ErrorMatcher(this.submitted$, this.submissionError$);

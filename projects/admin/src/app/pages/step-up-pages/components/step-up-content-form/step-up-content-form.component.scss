@@ -1,0 +1,43 @@
+@import "form";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.subjects {
+  color: #00b4f6;
+  font-size: 0.9rem;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+
+  button {
+    $closeColor: #8c98a4;
+    $submitColor: #00b4f6;
+
+    background-color: $submitColor;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    min-width: 120px;
+
+    &:hover {
+      background-color: darken($submitColor, 5);
+    }
+
+    &[type=button] {
+      background-color: $closeColor;
+
+      &:hover {
+        background-color: darken($closeColor, 5);
+      }
+    }
+  }
+}

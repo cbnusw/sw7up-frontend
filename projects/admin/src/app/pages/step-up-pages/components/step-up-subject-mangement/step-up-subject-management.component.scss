@@ -1,0 +1,38 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.subjects-container {
+  max-height: 415.2px;
+  overflow-y: scroll;
+  padding: 1rem;
+}
+
+.empty {
+  padding: 1rem;
+  color: #8c98a4;
+}
+
+.add-btn {
+  $bg: #eeeeee;
+  display: block;
+  padding: 1rem;
+  border: none;
+  background-color: $bg;
+  cursor: pointer;
+  .add-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    stroke: #8c98a4;
+  }
+
+  &:hover {
+    background-color: darken($bg, 5);
+    .add-icon {
+      stroke: white;
+    }
+  }
+}

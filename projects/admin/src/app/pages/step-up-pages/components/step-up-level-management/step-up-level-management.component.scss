@@ -1,0 +1,95 @@
+:host {
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+.level-container {
+  display: block;
+  border: 1px solid #eeeeee;
+  padding: 0.5rem;
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.level-item {
+  $bg: #00b4f6;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: $bg;
+  padding: 0.5rem 1rem;
+  color: white;
+  margin-bottom: 0.5rem;
+
+  &:hover, &.selected {
+    background-color: darken($bg, 10);
+    .level-name {
+      color: white;
+    }
+  }
+
+  .level-name {
+    flex-grow: 1;
+    padding: 0.5rem 0;
+    color: #ddd;
+    user-select: none;
+
+    &:hover {
+      color: darken(white, 5);
+    }
+  }
+}
+
+
+.level-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    cursor: pointer;
+    font-size: 0.6rem;
+    border: none;
+    padding: 0.2rem 0.5rem;
+    background-color: transparent;
+
+    .icon {
+      width: 1rem;
+      height: 1rem;
+      stroke: #ddd;
+    }
+
+    &:hover {
+      .icon {
+        stroke: white;
+      }
+    }
+  }
+}
+
+.add-btn {
+  $bg: #eeeeee;
+  display: block;
+  width: 200px;
+  padding: 1rem;
+  border: none;
+  background-color: $bg;
+  cursor: pointer;
+  .add-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    stroke: #8c98a4;
+  }
+
+  &:hover {
+    background-color: darken($bg, 5);
+    .add-icon {
+      stroke: white;
+    }
+  }
+}
+
+.text-center {
+  text-align: center;
+}

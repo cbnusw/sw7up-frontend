@@ -80,6 +80,10 @@ const routes: Routes = [
   {
     path: 'account',
     loadChildren: () => import('./pages/account-pages/account-pages.module').then(m => m.AccountPagesModule)
+  },
+  {
+    path: 'step-up',
+    loadChildren: () => import('./pages/step-up-pages/step-up-pages.module').then(m => m.StepUpPagesModule)
   }
 ];
 

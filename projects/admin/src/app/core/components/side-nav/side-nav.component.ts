@@ -20,11 +20,12 @@ export class SideNavComponent implements AfterViewInit, OnDestroy {
   private subscription: Subscription;
 
   menuGroup: Array<Menu> = [
-    { name: '일반회원관리', link: '/member' },
     { name: '학생관리', link: '/student' },
     { name: '교직원관리', link: '/staff' },
     { name: '운영자관리', link: '/operator' },
+    { name: '일반회원관리', link: '/member' },
     { name: '공지사항관리', link: '/notice' },
+    { name: 'STEP-Up관리', link: '/step-up' },
     { name: '해외교육관리', link: '/overseas-education' },
     { name: '학생활동사례관리', link: '/student-activity' },
     { name: 'E-Help Desk 관리', link: '/e-help' },
