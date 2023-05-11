@@ -52,9 +52,8 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.3rem 1rem;
+  padding: 0.25rem 1rem;
   width: fit-content;
-  margin: 0.5rem 0;
 
   .content-title {
     font-size: 0.9rem;
@@ -68,7 +67,7 @@
   .remove-content-btn {
     background-color: transparent;
     border: none;
-    padding: 0.5rem;
+    padding: 0.25rem 0.5rem;
     cursor: pointer;
 
     &:hover {
@@ -85,8 +84,9 @@
 .add-content-btn {
   background-color: transparent;
   border: none;
-  padding: 0.5rem 1rem;
-  margin: 0.5rem 0;
+  padding: 0.25rem 1rem;
+  margin-top: 0.25rem;
+  cursor: pointer;
 
   &:hover {
     background-color: #eee;
