@@ -3,6 +3,7 @@
 </div>
 <div class="subjects-container">
   <sw-step-up-subject *ngFor="let subject of subjects; let i = index"
+                      [collapse]="i !== 0"
                       (changeContent)="changeContent.emit()"
                       (addContent)="addContent.emit()"
                       [subject]="subject"

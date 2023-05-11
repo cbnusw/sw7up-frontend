@@ -32,7 +32,7 @@ export class StepUpLevelManagementComponent {
   }
 
   removeLevel(level: IStepUpLevel): void {
-    const yes = confirm(`"${level.name}" 레벨을 삭제하시겠습니까? 삭제할 경우 하위 주제 및 콘텐츠가 모두 삭제됩니다.`);
+    const yes = confirm(`"${level.name}" 레벨을 삭제하시겠습니까?\n(주의) 삭제할 경우 하위 주제 및 콘텐츠가 모두 삭제됩니다.`);
     if (yes) {
       this.service.removeStepUpLevel(level._id);
     }

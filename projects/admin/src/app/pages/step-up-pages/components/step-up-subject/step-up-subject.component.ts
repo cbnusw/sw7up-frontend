@@ -13,6 +13,7 @@ import { StepUpSubjectService } from '../../services/step-up-subject.service';
   ]
 })
 export class StepUpSubjectComponent implements OnInit, OnDestroy {
+  @Input() collapse = true;
   @Input() subject: IStepUpSubject;
   @Output() removeSubject: EventEmitter<void> = new EventEmitter<void>();
   @Output() changeContent: EventEmitter<void> = new EventEmitter<void>();
@@ -20,7 +21,6 @@ export class StepUpSubjectComponent implements OnInit, OnDestroy {
 
   contents: IStepUpContent[] = [];
   children: IStepUpSubject[] = [];
-  collapse = true;
 
   private readonly _subscription = new Subscription();
 
@@ -55,7 +55,7 @@ export class StepUpSubjectComponent implements OnInit, OnDestroy {
   }
 
   remove(): void {
-    const yes = confirm(`${this.subject.name}을 삭제하시겠습니까? 삭제할 경우 하위 주제 및 콘텐츠가 모두 삭제됩니다.`);
+    const yes = confirm(`"${this.subject.name}" 주제를 삭제하시겠습니까?\n(주의) 삭제할 경우 하위 주제 및 콘텐츠가 모두 삭제됩니다.`);
     if (yes) {
       this.subjectService.removeSubject(this.subject._id).subscribe(() => {
         if (this.subject._id === this.subjectService.selected._id) {

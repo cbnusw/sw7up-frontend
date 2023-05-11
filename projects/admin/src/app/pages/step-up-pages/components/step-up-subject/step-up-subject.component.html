@@ -50,6 +50,7 @@
   </div>
   <button type="button" class="add-content-btn" *ngIf="children.length === 0" (click)="createContent()">콘텐츠 추가</button>
   <sw-step-up-subject *ngFor="let child of children; let i = index"
+                      [collapse]="i !== 0"
                       [subject]="child"
                       (changeContent)="changeContent.emit()"
                       (addContent)="addContent.emit()"
