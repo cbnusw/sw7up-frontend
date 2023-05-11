@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { IStepUpSubject } from 'shared';
@@ -13,6 +13,8 @@ import { StepUpSubjectService } from '../../services/step-up-subject.service';
   ]
 })
 export class StepUpSubjectManagementComponent implements OnInit, OnDestroy {
+  @Output() changeContent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() addContent: EventEmitter<void> = new EventEmitter<void>();
   subjects: IStepUpSubject[] = [];
   private readonly _subscription = new Subscription();
 

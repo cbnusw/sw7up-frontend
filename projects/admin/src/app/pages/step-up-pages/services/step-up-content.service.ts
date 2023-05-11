@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { IStepUpContent, StepUpService } from 'shared';
 
 @Injectable()
@@ -33,14 +33,23 @@ export class StepUpContentService {
   }
 
   createContent(body: IStepUpContent): Observable<boolean> {
-    return this._stepUpService.createContent(body).pipe(map(res => res.success));
+    return this._stepUpService.createContent(body).pipe(
+      tap(() => this.update()),
+      map(res => res.success)
+    );
   }
 
   updateContent(id: string, body: IStepUpContent): Observable<boolean> {
-    return this._stepUpService.updateContent(id, body).pipe(map(res => res.success));
+    return this._stepUpService.updateContent(id, body).pipe(
+      tap(() => this.update()),
+      map(res => res.success)
+    );
   }
 
   removeContent(id: string): Observable<void> {
-    return this._stepUpService.removeContent(id).pipe(map(() => undefined));
+    return this._stepUpService.removeContent(id).pipe(
+      tap(() => this.update()),
+      map(() => undefined)
+    );
   }
 }

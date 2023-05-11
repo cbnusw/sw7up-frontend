@@ -11,15 +11,15 @@
     <span *ngIf="!levelService.selected; else subjectRef">레벨을 선택해주세요.</span>
     <ng-template #subjectRef>
       <h3>{{levelService.selected.name}} 주제</h3>
-      <sw-step-up-subject-management></sw-step-up-subject-management>
+      <sw-step-up-subject-management (changeContent)="openForm()" (addContent)="openForm()"></sw-step-up-subject-management>
     </ng-template>
   </div>
 </section>
 
-<section class="contents-container mat-elevation-z1">
-  <h3>콘텐츠</h3>
-  <sw-step-up-content-list (openForm)="openForm($event)"></sw-step-up-content-list>
-</section>
+<!--<section class="contents-container mat-elevation-z1">-->
+<!--  <h3>콘텐츠</h3>-->
+<!--  <sw-step-up-content-list (openForm)="openForm($event)"></sw-step-up-content-list>-->
+<!--</section>-->
 
 <div *ngIf="showForm" class="backgrop"></div>
 <section *ngIf="showForm" class="form-wrapper mat-elevation-z2">

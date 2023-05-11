@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { IStepUpSubject } from 'shared';
+import { IStepUpContent, IStepUpSubject } from 'shared';
+import { StepUpContentService } from '../../services/step-up-content.service';
 import { StepUpSubjectService } from '../../services/step-up-subject.service';
 
 @Component({
@@ -10,26 +12,54 @@ import { StepUpSubjectService } from '../../services/step-up-subject.service';
     './step-up-subject.component.scss'
   ]
 })
-export class StepUpSubjectComponent implements OnInit {
+export class StepUpSubjectComponent implements OnInit, OnDestroy {
   @Input() subject: IStepUpSubject;
   @Output() removeSubject: EventEmitter<void> = new EventEmitter<void>();
+  @Output() changeContent: EventEmitter<void> = new EventEmitter<void>();
+  @Output() addContent: EventEmitter<void> = new EventEmitter<void>();
 
+  contents: IStepUpContent[] = [];
   children: IStepUpSubject[] = [];
   collapse = true;
 
-  constructor(public readonly service: StepUpSubjectService) {
+  private readonly _subscription = new Subscription();
+
+  constructor(public readonly subjectService: StepUpSubjectService,
+              private readonly _contentService: StepUpContentService) {
   }
 
   select(): void {
-    this.service.selected = this.subject;
+    this.subjectService.selected = this.subject;
+  }
+
+  selectContent(content: IStepUpContent): void {
+    this._contentService.selected = content;
+    this.subjectService.selected = this.subject;
+    this.changeContent.emit();
+  }
+
+  createContent(): void {
+    this.subjectService.selected = this.subject;
+    this._contentService.selected = null;
+    this.changeContent.emit();
+  }
+
+  removeContent(index: number): void {
+    const content = this.contents[index];
+    const yes = confirm(`"${content.title}" 콘텐츠를 삭제하시겠습니까?`);
+    if (yes) {
+      this._contentService.removeContent(content._id).subscribe({
+        next: () => this.contents.splice(index, 1),
+      });
+    }
   }
 
   remove(): void {
     const yes = confirm(`${this.subject.name}을 삭제하시겠습니까? 삭제할 경우 하위 주제 및 콘텐츠가 모두 삭제됩니다.`);
     if (yes) {
-      this.service.removeSubject(this.subject._id).subscribe(() => {
-        if (this.subject._id === this.service.selected._id) {
-          this.service.selected = null;
+      this.subjectService.removeSubject(this.subject._id).subscribe(() => {
+        if (this.subject._id === this.subjectService.selected._id) {
+          this.subjectService.selected = null;
         }
         this.removeSubject.emit();
       });
@@ -43,7 +73,7 @@ export class StepUpSubjectComponent implements OnInit {
   edit(): void {
     const name = (prompt(`"${this.subject.name}" 수정`, this.subject.name) || '').trim();
     if (name) {
-      this.service.updateSubjectName(this.subject._id, name).subscribe(() => this.subject.name = name);
+      this.subjectService.updateSubjectName(this.subject._id, name).subscribe(() => this.subject.name = name);
     }
   }
 
@@ -51,8 +81,8 @@ export class StepUpSubjectComponent implements OnInit {
     const name = (prompt(`"${this.subject.name}" 하위에 추가할 주제명을 입력하세요.`) || '').trim();
     const { level, _id } = this.subject;
     if (name) {
-      this.service.createSubject(name, level, _id).pipe(
-        switchMap(() => this.service.getSubjects(level, _id))
+      this.subjectService.createSubject(name, level, _id).pipe(
+        switchMap(() => this.subjectService.getSubjects(level, _id))
       ).subscribe({
         next: children => this.children = children
       });
@@ -61,10 +91,26 @@ export class StepUpSubjectComponent implements OnInit {
 
   ngOnInit(): void {
     const { level, _id } = this.subject;
-    this.service.getSubjects(level, _id).subscribe({
+    this.subjectService.getSubjects(level, _id).subscribe({
       next: children => {
         this.children = children;
       },
     });
+
+    this._contentService.getContents(_id).subscribe({
+      next: contents => this.contents = contents
+    });
+
+    this._subscription.add(
+      this._contentService.update$.pipe(
+        switchMap(() => this._contentService.getContents(_id))
+      ).subscribe({
+        next: contents => this.contents = contents
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe();
   }
 }

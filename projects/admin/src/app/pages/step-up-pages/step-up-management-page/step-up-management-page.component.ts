@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { IStepUpContent } from 'shared';
 import { StepUpContentService } from '../services/step-up-content.service';
 import { StepUpLevelService } from '../services/step-up-level.service';
 
@@ -18,8 +17,7 @@ export class StepUpManagementPageComponent {
               public readonly contentService: StepUpContentService) {
   }
 
-  openForm(content: IStepUpContent): void {
-    this.contentService.selected = content;
+  openForm(): void {
     this.showForm = true;
   }
 
