@@ -1,7 +1,7 @@
-<h6 class="subjects">{{subjects}}</h6>
-<h1>{{contentService.selected ? contentService.selected.title + '수정' : '새로운 콘텐츠 등록'}}</h1>
-
 <form [formGroup]="formGroup" (ngSubmit)="submit()">
+  <h6 class="subjects">{{subjects}}</h6>
+  <h1 class="title">{{contentService.selected ? contentService.selected.title + ' 수정' : '새로운 콘텐츠 등록'}}</h1>
+
   <mat-form-field class="w-100">
     <mat-label>제목</mat-label>
     <input matInput

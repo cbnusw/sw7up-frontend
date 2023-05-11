@@ -1,10 +1,5 @@
 <h2 class="page-title">STEP-Up 관리</h2>
 
-<section class="contents-container mat-elevation-z1">
-  <h3>콘텐츠</h3>
-  <sw-step-up-content-list (openForm)="openForm($event)"></sw-step-up-content-list>
-</section>
-
 <section class="container">
   <div class="wrapper mat-elevation-z1 bg-white">
     <h3 class="mb-4">레벨</h3>
@@ -19,6 +14,11 @@
       <sw-step-up-subject-management></sw-step-up-subject-management>
     </ng-template>
   </div>
+</section>
+
+<section class="contents-container mat-elevation-z1">
+  <h3>콘텐츠</h3>
+  <sw-step-up-content-list (openForm)="openForm($event)"></sw-step-up-content-list>
 </section>
 
 <div *ngIf="showForm" class="backgrop"></div>

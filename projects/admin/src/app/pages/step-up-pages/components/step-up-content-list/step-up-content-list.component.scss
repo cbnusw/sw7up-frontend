@@ -11,24 +11,24 @@
   color: #8c98a4;
 }
 
-.contents-header {
-  display: flex;
-
-  button {
-    $bg: #00b4f6;
-    margin-left: auto;
-    background-color: $bg;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    font-weight: bold;
-    cursor: pointer;
-
-    &:hover {
-      background-color: darken($bg, 5);
-    }
-  }
-}
+//.contents-header {
+//  display: flex;
+//  gap: 2rem;
+//
+//  button {
+//    $bg: #00b4f6;
+//    background-color: $bg;
+//    color: white;
+//    border: none;
+//    padding: 0.5rem 1rem;
+//    font-weight: bold;
+//    cursor: pointer;
+//
+//    &:hover {
+//      background-color: darken($bg, 5);
+//    }
+//  }
+//}
 
 .empty, .total {
   font-size: 0.9rem;
@@ -37,9 +37,31 @@
 
 .contents {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 0.5rem;
   padding: 1rem 0;
+
+  .add-btn {
+    $bg: #eeeeee;
+    width: 284px;
+    height: 66px;
+    background-color: $bg;
+    border: none;
+    cursor: pointer;
+
+    .add-icon {
+      width: 1.2rem;
+      height: 1.2rem;
+      stroke: #8c98a4;
+    }
+
+    &:hover {
+      background-color: darken($bg, 5);
+      .add-icon {
+        stroke: white;
+      }
+    }
+  }
 }
 
 .content {
@@ -47,17 +69,31 @@
   align-items: center;
   padding: 0.5rem 1rem;
   border: 1px solid #eeeeee;
+  width: 250px;
 
   &:hover {
     background-color: darken(white, 5);
   }
 
+  .content-header {
+    margin-right: auto;
+    overflow: hidden;
+  }
+
   .content-title {
     cursor: pointer;
-    margin-right: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
     &:hover {
       color: #00b4f6;
     }
+  }
+
+  .content-info {
+    color: #8c98a4;
+    font-size: 0.8rem;
   }
 
   .toolbar {
