@@ -21,6 +21,10 @@ export class StepUpService extends ApiBase {
     return this._http.get(this.url`/levels`);
   }
 
+  getLevel(id: string): Observable<IResponse<IStepUpLevel>> {
+    return this._http.get(this.url`/levels/${id}`);
+  }
+
   createLevel(name: string): Observable<IResponse<IStepUpLevel>> {
     return this._http.post(this.url`/levels`, { name });
   }
@@ -64,7 +68,7 @@ export class StepUpService extends ApiBase {
   }
 
   getContent(id: string): Observable<IResponse<IStepUpContent>> {
-    return this._http.get(this.url`/contents${id}`);
+    return this._http.get(this.url`/contents/${id}`);
   }
 
   createContent(body: IStepUpContent): Observable<IResponse<IStepUpContent>> {

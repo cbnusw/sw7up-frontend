@@ -19,6 +19,7 @@ export interface ISw7UpPages {
     ROOT?: string;
     BASIC?: string;
     MAJOR?: string;
+    STEP_UP?: string;
     CONVERGENCE?: string;
     ONLINE?: string;
     OSS?: string;
@@ -99,6 +100,7 @@ export const PAGE_NAMES: ISw7UpPages = {
   EDUCATION: {
     BASIC: 'basic',
     MAJOR: 'major',
+    STEP_UP: 'step-up',
     CONVERGENCE: 'convergence',
     ONLINE: 'online',
     OSS: 'oss',

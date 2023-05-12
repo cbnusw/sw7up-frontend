@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BackgroundModule } from 'ui';
+import { BackgroundModule, InnerHtmlModule } from 'ui';
 import { CoreModule } from '../../core/core.module';
 import { BasicPageComponent } from './basic-page/basic-page.component';
 import { ConvergencePageComponent } from './convergence-page/convergence-page.component';
@@ -13,6 +13,9 @@ import { MileagePageComponent } from './mileage-page/mileage-page.component';
 import { OnlinePageComponent } from './online-page/online-page.component';
 import { OssPageComponent } from './oss-page/oss-page.component';
 import { EasyDetailPageComponent } from './easy-detail-page/easy-detail-page.component';
+import { StepUpContentComponent } from './step-up-page/components/step-up-content/step-up-content.component';
+import { StepUpSubjectComponent } from './step-up-page/components/step-up-subject/step-up-subject.component';
+import { StepUpPageComponent } from './step-up-page/step-up-page.component';
 
 
 @NgModule({
@@ -20,6 +23,9 @@ import { EasyDetailPageComponent } from './easy-detail-page/easy-detail-page.com
     EducationMainPageComponent,
     BasicPageComponent,
     MajorPageComponent,
+    StepUpPageComponent,
+    StepUpSubjectComponent,
+    StepUpContentComponent,
     ConvergencePageComponent,
     OnlinePageComponent,
     OssPageComponent,
@@ -32,6 +38,7 @@ import { EasyDetailPageComponent } from './easy-detail-page/easy-detail-page.com
     EducationPagesRoutingModule,
     CoreModule,
     BackgroundModule,
+    InnerHtmlModule,
   ]
 })
 export class EducationPagesModule { }

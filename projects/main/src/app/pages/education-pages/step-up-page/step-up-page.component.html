@@ -1,0 +1,23 @@
+<ng-container *ngIf="!showContent; else contentRef">
+  <div class="responsive-tabs">
+    <ul class="nav nav-tabs mb-4">
+      <li class="nav-item" *ngFor="let level of levels$ | async">
+        <a class="nav-link cursor pointer"
+           [class.active]="selected?._id === level._id"
+           (click)="selectLevel(level)">{{level.name}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="(subjects$ | async)?.length === 0" class="empty">
+    준비중입니다.
+  </div>
+
+  <section class="subject-container">
+    <sw-step-up-subject *ngFor="let subject of subjects$ | async" [subject]="subject"></sw-step-up-subject>
+  </section>
+</ng-container>
+
+<ng-template #contentRef>
+  <sw-step-up-content></sw-step-up-content>
+</ng-template>

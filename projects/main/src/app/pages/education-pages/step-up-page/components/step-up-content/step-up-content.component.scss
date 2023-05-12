@@ -1,0 +1,37 @@
+@import "gmixin";
+@import "body";
+
+.back-button {
+  display: block;
+  margin-bottom: 1rem;
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke: #00b4f6;
+  }
+}
+
+.subjects {
+  color: #616672;
+  font-size: 0.9rem;
+}
+
+.content-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+
+  .content-title {
+    margin: 0 auto 0 0;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .content-info {
+    font-size: 0.8rem;
+    color: #8c98a4;
+  }
+}

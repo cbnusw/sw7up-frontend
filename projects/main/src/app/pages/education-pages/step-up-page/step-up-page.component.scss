@@ -1,0 +1,16 @@
+@import "gmixin";
+@import "body";
+
+.subject-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.empty {
+  padding: 1.5rem 2rem;
+  background-color: #efefef;
+  font-size: 0.9rem;
+  color: #616672;
+  border-radius: 1rem;
+}

@@ -43,6 +43,7 @@ export class NavigationMobileComponent implements OnInit {
       subMenus: [
         { name: 'SW기초교육', link: URLS.EDUCATION.BASIC },
         { name: 'SW전공교육', link: URLS.EDUCATION.MAJOR },
+        { name: 'STEP-Up', link: URLS.EDUCATION.STEP_UP },
         { name: 'SW융합교육', link: URLS.EDUCATION.CONVERGENCE },
         { name: '오픈소스SW', link: URLS.EDUCATION.OSS },
         { name: 'EASY코스', link: URLS.EDUCATION.EASY },

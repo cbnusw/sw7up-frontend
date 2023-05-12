@@ -1,6 +1,12 @@
-<div class="grid-row" *ngFor="let buttons of buttonGroups">
-  <a class="grid-button" *ngFor="let button of buttons" [routerLink]="button.link">
-    <div class="name">{{button.name}}</div>
-    <div class="description">{{button.description}}</div>
-  </a>
+<a class="step-up-button" [routerLink]="stepUpLink">
+  <div class="name">프로그래밍 기초 역량 평가</div>
+  <div class="description">STEP-Up</div>
+</a>
+<div class="grid-container">
+  <div class="grid-row" *ngFor="let buttons of buttonGroups">
+    <a class="grid-button" *ngFor="let button of buttons" [routerLink]="button.link">
+      <div class="name">{{button.name}}</div>
+      <div class="description">{{button.description}}</div>
+    </a>
+  </div>
 </div>

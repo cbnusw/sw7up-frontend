@@ -1,0 +1,25 @@
+<div class="subject" (click)="collapse = !collapse">
+  <svg *ngIf="collapse && (children$ | async)?.length !== 0"
+       xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+  </svg>
+  <svg *ngIf="!collapse && (children$ | async)?.length !== 0"
+       xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/>
+  </svg>
+  <svg *ngIf="(children$ | async)?.length === 0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+  </svg>
+  <h5 class="subject-name" [class.bigger]="!subject.parent">{{subject.name}}</h5>
+</div>
+
+<div *ngIf="(contents$ | async)?.length > 0" class="contents">
+  <a *ngFor="let content of contents$ | async" class="content" [routerLink]="[BASE_URL, subject.level, subject._id, content._id]">
+    <h6 class="content-title">{{content.title}}</h6>
+    <span class="content-info">조회수: {{content.hits | number}}</span>
+  </a>
+</div>
+
+<div class="subjects" [class.collopse]="collapse">
+  <sw-step-up-subject *ngFor="let child of children$ | async" [subject]="child"></sw-step-up-subject>
+</div>

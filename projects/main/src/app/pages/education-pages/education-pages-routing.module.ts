@@ -10,6 +10,7 @@ import { MajorPageComponent } from './major-page/major-page.component';
 import { MileagePageComponent } from './mileage-page/mileage-page.component';
 import { OnlinePageComponent } from './online-page/online-page.component';
 import { OssPageComponent } from './oss-page/oss-page.component';
+import { StepUpPageComponent } from './step-up-page/step-up-page.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,8 @@ const routes: Routes = [
       { path: '', redirectTo: URLS.EDUCATION.BASIC, pathMatch: 'full' },
       { path: PAGE_NAMES.EDUCATION.BASIC, component: BasicPageComponent },
       { path: PAGE_NAMES.EDUCATION.MAJOR, component: MajorPageComponent },
+      { path: PAGE_NAMES.EDUCATION.STEP_UP, component: StepUpPageComponent },
+      { path: PAGE_NAMES.EDUCATION.STEP_UP + '/:level/:subject/:content', component: StepUpPageComponent },
       { path: PAGE_NAMES.EDUCATION.CONVERGENCE, component: ConvergencePageComponent },
       { path: PAGE_NAMES.EDUCATION.ONLINE, component: OnlinePageComponent },
       { path: PAGE_NAMES.EDUCATION.OSS, component: OssPageComponent },

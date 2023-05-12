@@ -3,6 +3,42 @@
 :host {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+}
+
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.step-up-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #616672;
+  color: white;
+  padding: 0.75rem;
+
+  &:hover {
+    .name, .description {
+      transform: scale(1.1);
+    }
+  }
+
+  .name, .description {
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .name {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  .description {
+    font-size: 0.8em;
+  }
 }
 
 .grid-row {

@@ -1,0 +1,26 @@
+<a [routerLink]="BASE_URL" class="back-button">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+  </svg>
+</a>
+<div class="subjects">{{subjects}}</div>
+<header class="content-header">
+  <h3 class="content-title">{{content?.title}}</h3>
+  <span class="content-info">조회수:{{content?.hits}}</span>
+</header>
+
+<div class="responsive-tabs">
+  <ul class="nav nav-tabs mb-1">
+    <li class="nav-item" *ngFor="let type of ['문제', '정답']">
+      <a class="nav-link cursor pointer"
+         [class.active]="contentType === type"
+         (click)="contentType = type">{{type}}</a>
+    </li>
+  </ul>
+</div>
+<ng-container *ngIf="contentType === '문제'; else solutionRef">
+  <div class="my-4" [swInnerHtml]="content?.problem"></div>
+</ng-container>
+<ng-template #solutionRef>
+  <div class="my-4" [swInnerHtml]="content?.solution"></div>
+</ng-template>

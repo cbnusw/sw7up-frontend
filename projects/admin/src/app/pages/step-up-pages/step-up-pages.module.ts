@@ -32,6 +32,9 @@ import { StepUpPagesRoutingModule } from './step-up-pages-routing.module';
     MatInputModule,
     CKEditorModule,
   ],
+  exports: [
+    StepUpSubjectComponent
+  ],
   providers: [
     StepUpLevelService,
     StepUpSubjectService,
