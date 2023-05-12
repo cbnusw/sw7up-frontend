@@ -12,8 +12,7 @@
     </svg>
   </button>
   <h5 class="subject-name" [class.selected]="subjectService.selected?._id === subject?._id"
-      (dblclick)="collapse = !collapse"
-      (click)="select()">{{subject.name}}</h5>
+      (click)="collapse = !collapse">{{subject.name}}</h5>
   <div class="subject-toolbar">
     <button type="button" (click)="remove()">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

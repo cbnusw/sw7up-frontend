@@ -6,6 +6,13 @@
   gap: 1rem;
 }
 
+::ng-deep {
+  ckeditor .ck-content {
+    height: 40vh;
+    min-height: 250px;
+  }
+}
+
 .subjects {
   color: #00b4f6;
   font-size: 0.9rem;
@@ -45,4 +52,11 @@
       }
     }
   }
+}
+
+label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }

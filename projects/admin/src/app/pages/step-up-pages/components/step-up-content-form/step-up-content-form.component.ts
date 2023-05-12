@@ -22,9 +22,13 @@ export class StepUpContentFormComponent extends AbstractFormDirective<IStepUpCon
 
   // CKEditor
   editor: any = null;
-  config = {
+  problemConfig = {
     language: 'ko',
-    placeholder: '내용 작성',
+    placeholder: '문제 작성'
+  };
+  solutionConfig = {
+    language: 'ko',
+    placeholder: '정답 코드 작성'
   };
 
   constructor(public contentService: StepUpContentService,
@@ -80,7 +84,8 @@ export class StepUpContentFormComponent extends AbstractFormDirective<IStepUpCon
       _id: [null],
       subject: [this._subjectService.selected._id],
       title: [null, Validators.required],
-      content: [null, Validators.required],
+      problem: [null, Validators.required],
+      solution: [null, Validators.required],
     });
   }
 

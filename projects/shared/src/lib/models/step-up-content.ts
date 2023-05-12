@@ -4,7 +4,8 @@ export interface IStepUpContent {
   _id?: string;
   subject: string;
   title: string;
-  content: string;
+  problem: string;
+  solution: string;
   hits?: number;
   writer?: IUserInfo;
   createdAt?: Date;
