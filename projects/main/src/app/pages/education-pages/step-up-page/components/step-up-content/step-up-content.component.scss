@@ -1,6 +1,10 @@
 @import "gmixin";
 @import "body";
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .back-button {
   display: block;
   margin-bottom: 1rem;
@@ -20,18 +24,90 @@
   display: flex;
   align-items: flex-end;
   gap: 1rem;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0 1rem;
   margin-bottom: 2rem;
-
-  .content-title {
-    margin: 0 auto 0 0;
-    padding: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
+  border-bottom: 1px solid #eee;
 
   .content-info {
     font-size: 0.8rem;
     color: #8c98a4;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.content-title {
+  margin: 0 auto 0 0;
+  padding: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.solution-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: white;
+  z-index: 20;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+}
+
+.solution-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 0 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.solution {
+  padding: 1rem 0;
+  max-height: calc(100vh - 14rem);
+  max-width: calc(100vw - 10rem);
+  overflow-y: scroll;
+
+  @include mobile {
+    min-width: calc(100vw - 10rem);
+  }
+
+  @include desktop {
+    min-width: 500px;
+  }
+}
+
+.solution-toolbar {
+  display: flex;
+  justify-content: flex-end;
+
+  .show-solution-btn {
+    padding: 0.5rem 1.5rem;
+    background-color: $sw-color;
+    color: white;
+    border: none;
+
+    &:hover {
+      font-weight: bold;
+      background-color: darken($sw-color, 5);
+    }
+  }
+
+  button {
+    padding: 0.5rem 1.5rem;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+      background-color: #e7eaf3;
+    }
   }
 }

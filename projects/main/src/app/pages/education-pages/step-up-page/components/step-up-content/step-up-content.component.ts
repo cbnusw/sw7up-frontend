@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin, of, Subscription } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { IStepUpContent, StepUpService } from 'shared';
 import { URLS } from '../../../../../constants/urls';
 
@@ -14,9 +14,8 @@ export class StepUpContentComponent implements OnInit, OnDestroy {
   readonly BASE_URL = URLS.EDUCATION.STEP_UP;
 
   subjects = '';
-  contentType: '문제' | '정답' = '문제';
-
   content: IStepUpContent | null = null;
+  showSolution = false;
 
   private readonly _subscription = new Subscription();
 
@@ -29,11 +28,6 @@ export class StepUpContentComponent implements OnInit, OnDestroy {
     this._subscription.add(
       this._route.params.pipe(
         map(({ level, subject, content }) => [level, subject, content]),
-        tap(([level, subject, content]) => {
-          if (!level || !subject || !content) {
-            this.contentType = '문제';
-          }
-        }),
         switchMap(([level, subject, content]) => {
           return (level && subject && content)
             ? forkJoin([

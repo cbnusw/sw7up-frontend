@@ -1,6 +1,12 @@
 @import "gmixin";
 @import "body";
 
+.title {
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+}
+
 .subject-container {
   display: flex;
   flex-direction: column;

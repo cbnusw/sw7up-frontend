@@ -8,19 +8,22 @@
   <h3 class="content-title">{{content?.title}}</h3>
   <span class="content-info">조회수:{{content?.hits}}</span>
 </header>
+<div class="my-4" [swInnerHtml]="content?.problem"></div>
 
-<div class="responsive-tabs">
-  <ul class="nav nav-tabs mb-1">
-    <li class="nav-item" *ngFor="let type of ['문제', '정답']">
-      <a class="nav-link cursor pointer"
-         [class.active]="contentType === type"
-         (click)="contentType = type">{{type}}</a>
-    </li>
-  </ul>
+<div class="solution-toolbar">
+  <button type="button" class="show-solution-btn" (click)="showSolution = true">코드사례보기</button>
 </div>
-<ng-container *ngIf="contentType === '문제'; else solutionRef">
-  <div class="my-4" [swInnerHtml]="content?.problem"></div>
+
+<ng-container *ngIf="showSolution">
+  <div class="backdrop"></div>
+  <div class="solution-container shadow">
+    <header class="solution-header">
+      <div class="subjects">{{subjects}}</div>
+      <h3 class="content-title">{{content?.title}}</h3>
+    </header>
+    <div class="solution" [swInnerHtml]="content?.solution"></div>
+    <div class="solution-toolbar">
+      <button type="button" (click)="showSolution = false">닫기</button>
+    </div>
+  </div>
 </ng-container>
-<ng-template #solutionRef>
-  <div class="my-4" [swInnerHtml]="content?.solution"></div>
-</ng-template>
