@@ -1,5 +1,6 @@
-<h2 class="title">STEP-UP 문제사례모음</h2>
 <ng-container *ngIf="!showContent; else contentRef">
+  <h2 class="title">STEP-UP 문제사례모음</h2>
+
   <div class="responsive-tabs">
     <ul class="nav nav-tabs mb-4">
       <li class="nav-item" *ngFor="let level of levels$ | async">
