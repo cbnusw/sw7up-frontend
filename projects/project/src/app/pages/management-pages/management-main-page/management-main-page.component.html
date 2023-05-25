@@ -1,9 +1,8 @@
-<sw-responsive-container class="block space-y-8 print:hidden">
-  <h2 class="font-bold text-2xl">프로젝트 관리</h2>
+<sw-responsive-container class="flex flex-col gap-8 mb-4 print:hidden">
+  <h2 class="font-bold text-2xl">관리 페이지</h2>
   <sw-tab [selected]="selectedOption"
           [options]="tabOptions"
           (optionChange)="changeOption($event)"></sw-tab>
 </sw-responsive-container>
-<div>
-  <router-outlet></router-outlet>
-</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,38 @@
+<sw-responsive-container class="flex flex-col gap-4">
+  <div class="p-4 bg-white border border-gray-300 flex flex-col gap-4">
+    <sw-tab [options]="gradeOptions" [selected]="selectedGrade" (optionChange)="changeGradeOption($event)"></sw-tab>
+    <div class="flex gap-2">
+      <sw-select [options]="studentOptions" [ngModel]="studentOption"
+                 (ngModelChange)="changeStudentOption($event)" class="flex-shrink-0 basis-[120px]"></sw-select>
+      <sw-input *ngIf="studentOption === '이름'" [(ngModel)]="studentName" placeholder="예) 홍길동"></sw-input>
+      <sw-input *ngIf="studentOption === '학번'" [(ngModel)]="studentNo" placeholder="예) 2023001001"></sw-input>
+    </div>
+    <div class="table-wrapper relative w-full overflow-scroll scrollbar-none">
+      <div class="grid bg-gray-200 border-y border-gray-300 sticky top-0 w-fit mx-auto">
+        <h4 class="text-sm font-bold text-center px-2 py-1 border-r border-gray-300">#</h4>
+        <h4 class="text-sm font-bold text-center px-2 py-1 border-r border-gray-300">학과(부)</h4>
+        <h4 class="text-sm font-bold text-center px-2 py-1 border-r border-gray-300">학년</h4>
+        <h4 class="text-sm font-bold text-center px-2 py-1 border-r border-gray-300">학번</h4>
+        <h4 class="text-sm font-bold text-center px-2 py-1 border-r border-gray-300">이름</h4>
+        <h4 class="text-sm font-bold text-center px-2 py-1 border-r">비고</h4>
+      </div>
+      <div
+          class="text-sm text-center text-gray-500 px-2 py-1"
+          *ngIf="(service.students$ | async | studentsFilter:selectedGrade | studentNoFilter:studentNo | studentNameFilter:studentName)?.length === 0">
+        검색 결과가 없습니다.
+      </div>
+      <a
+          *ngFor="let student of service.students$ | async | studentsFilter:selectedGrade | studentNoFilter:studentNo | studentNameFilter:studentName; let i = index"
+          [routerLink]="['/professor/students', student._id]"
+          class="grid even:bg-white odd:bg-gray-100 border-b border-gray-300 w-fit mx-auto hover:bg-gray-200 cursor-pointer"
+      >
+        <div class="text-sm text-center px-2 py-1 border-r border-gray-300">{{i + 1 | number}}</div>
+        <div class="text-sm text-center px-2 py-1 border-r border-gray-300 truncate">{{student.department}}</div>
+        <div class="text-sm text-center px-2 py-1 border-r border-gray-300 truncate">{{student.grade || '미입력'}}</div>
+        <div class="text-sm text-center px-2 py-1 border-r border-gray-300 truncate">{{student.no}}</div>
+        <div class="text-sm text-center px-2 py-1 border-r border-gray-300 truncate">{{student.name}}</div>
+        <div class="text-sm text-center px-2 py-1 truncate">{{student.note || '-'}}</div>
+      </a>
+    </div>
+  </div>
+</sw-responsive-container>

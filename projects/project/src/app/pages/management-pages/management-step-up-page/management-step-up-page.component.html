@@ -1,0 +1,18 @@
+<sw-responsive-container class="flex flex-col gap-4">
+  <sw-step-up-filter></sw-step-up-filter>
+  <div class="bg-white border border-gray-300">
+    <div class="flex justify-end sm:justify-start gap-2 px-4 py-2 items-center">
+      <span class="hidden sm:block text-gray-500 mr-auto">총 {{service.total | number}} 건의 결과</span>
+      <sw-select [options]="options" [(ngModel)]="clear" class="flex-shrink-0 basis-[120px]"></sw-select>
+      <sw-button type="button"
+                 [disabled]="pending"
+                 [color]="2"
+                 (click)="register()">
+        {{pending ? '등록 중...' : '등록'}}
+      </sw-button>
+      <input type="file" class="hidden" #fileInput
+             accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+    </div>
+    <sw-step-up-list></sw-step-up-list>
+  </div>
+</sw-responsive-container>

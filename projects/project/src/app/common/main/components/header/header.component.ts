@@ -20,7 +20,13 @@ export class HeaderComponent implements OnInit {
       action: () => this.router.navigateByUrl('/projects/register'),
     },
     {
-      viewValue: () => '프로젝트 관리',
+      viewValue: () => '지도학생 관리',
+      styleClass: () => 'lg:hidden',
+      filter: () => this.auth.isStaff,
+      action: () => this.router.navigateByUrl('/professor'),
+    },
+    {
+      viewValue: () => '관리 페이지',
       styleClass: () => 'lg:hidden',
       filter: () => this.auth.isOperator,
       action: () => this.router.navigateByUrl('/management'),

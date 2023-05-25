@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OperatorGuard } from './common/guards/operator.guard';
+import { StaffGuard } from './common/guards/staff.guard';
 import { StudentGuard } from './common/guards/student.guard';
 import { DashboardPageComponent } from './pages/dashboard-page';
 
@@ -10,6 +11,11 @@ const routes: Routes = [
   {
     path: 'projects',
     loadChildren: () => import('./pages/project-pages/project-pages.module').then(m => m.ProjectPagesModule),
+  },
+  {
+    path: 'professor',
+    canActivateChild: [StaffGuard],
+    loadChildren: () => import('./pages/professor-pages/professor-pages.module').then(m => m.ProfessorPagesModule),
   },
   {
     path: 'management',

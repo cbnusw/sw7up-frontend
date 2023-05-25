@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { finalize, map, switchMap } from 'rxjs/operators';
-import { IUserInfo, PlatformService, UserService } from 'shared';
+import { IUserInfo, PlatformService, TUserPermission, UserService } from 'shared';
 import { LayoutService } from 'ui';
 
 @Component({
@@ -24,23 +24,18 @@ export class OperatorDetailPageComponent implements OnInit, OnDestroy {
               private userService: UserService) {
   }
 
-  get judgePermission(): boolean {
-    if (this.operator && this.operator.user) {
-      return this.operator.user.permissions.indexOf('judge') !== -1;
-    }
-    return false;
+  hasPermission(permission: TUserPermission): boolean {
+    return this.operator?.user?.permissions?.indexOf(permission) !== -1;
   }
 
-  toggleJudgePermission(): void {
+  togglePermission(permission: TUserPermission): void {
     const { permissions } = this.operator.user;
+    const idx = permissions.indexOf(permission);
+    idx === -1 ? permissions.push(permission) : permissions.splice(idx, 1);
+    this._setPermission(permissions);
+  }
 
-    if (this.judgePermission) {
-      const idx = permissions.indexOf('judge');
-      permissions.splice(idx, 1);
-    } else {
-      permissions.push('judge');
-    }
-
+  private _setPermission(permissions: TUserPermission[]): void {
     this.loading = true;
     this.userService.setPermissions(this.operator._id, permissions).pipe(
       finalize(() => this.loading = false),

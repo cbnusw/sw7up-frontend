@@ -1,0 +1,14 @@
+:host {
+  @apply block w-full;
+}
+
+.grid {
+  @apply mx-auto;
+  grid-template-columns: 80px 150px 100px 150px 80px 100px 80px;
+}
+
+
+.list-wrapper {
+  @apply w-full;
+  max-height: calc(100vh - 406px);
+}

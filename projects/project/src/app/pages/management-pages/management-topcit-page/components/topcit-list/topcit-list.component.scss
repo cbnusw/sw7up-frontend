@@ -1,0 +1,13 @@
+:host {
+  @apply block w-full;
+}
+
+.grid {
+  @apply mx-auto;
+}
+
+
+.list-wrapper {
+  @apply w-full;
+  max-height: calc(100vh - 586px);
+}

@@ -114,6 +114,8 @@ export class ProjectFilterComponent implements OnInit {
     this.createdOption = null;
     this.creatorOption = '이름';
     this.projectType = null;
+
+    this.search();
   }
 
   ngOnInit(): void {

@@ -14,10 +14,14 @@
             class="hidden lg:block text-sm font-bold border rounded-full py-2 px-4 text-white bg-primary-500 hover:bg-primary-400">
       프로젝트 등록
     </button>
+    <a *ngIf="auth.isStaff"
+       routerLink="/professor"
+       class="hidden lg:block text-sm font-bold border rounded-full py-2 px-4 text-white bg-primary-500 hover:bg-primary-400">
+      지도학생 관리</a>
     <a *ngIf="auth.isOperator"
        routerLink="/management"
-       class="hidden lg:block text-sm font-bold border rounded-full py-2 px-4 text-white bg-primary-500 hover:bg-primary-400">프로젝트
-      관리</a>
+       class="hidden lg:block text-sm font-bold border rounded-full py-2 px-4 text-white bg-primary-500 hover:bg-primary-400">
+      관리 페이지</a>
 
     <sw-popup-button [items]="popupItems">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"

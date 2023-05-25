@@ -50,11 +50,22 @@
         <div class="form-check content">
           <input class="form-check-input"
                  type="checkbox"
-                 id="e-help-check"
-                 [checked]="judgePermission"
-                 (click)="toggleJudgePermission()">
-          <label class="form-check-label" for="e-help-check">
+                 id="judge"
+                 [checked]="hasPermission('judge')"
+                 (click)="togglePermission('judge')">
+          <label class="form-check-label" for="judge">
             온라인 저지
+          </label>
+        </div>
+
+        <div class="form-check content">
+          <input class="form-check-input"
+                 type="checkbox"
+                 id="professor"
+                 [checked]="hasPermission('professor')"
+                 (click)="togglePermission('professor')">
+          <label class="form-check-label" for="professor">
+            교수 권한
           </label>
         </div>
       </div>

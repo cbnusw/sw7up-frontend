@@ -4,7 +4,7 @@
     <h4 class="font-bold p-2 border-r border-secondary-200">언어</h4>
     <h4 class="font-bold p-2 hidden md:block">파일수</h4>
   </div>
-  <div class="overflow-y-scroll" style="max-height: 300px;">
+  <div class="overflow-y-scroll scrollbar-none" style="max-height: 300px;">
     <div *ngFor="let item of languageService.projectLanguages$ | async | regexFilter:keyword"
          class="grid-container border-b border-secondary-200 last:border-b-0 cursor-pointer hover:bg-primary-50"
          (click)="languageSelect.emit(item)">

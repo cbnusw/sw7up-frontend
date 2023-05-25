@@ -14,6 +14,9 @@ export class ManagementMainPageComponent implements OnInit {
     { viewValue: '통계', value: '/management/statistics' },
     { viewValue: '랭킹', value: '/management/ranking' },
     { viewValue: '프로그래밍언어', value: '/management/languages' },
+    { viewValue: '지도 학생', value: '/management/students' },
+    { viewValue: 'TOPCIT', value: '/management/topcit' },
+    { viewValue: 'STEP-Up', value: '/management/step-up' }
   ];
 
   constructor(

@@ -1,0 +1,42 @@
+<div class="relative overflow-scroll scrollbar-none border-y border-gray-300 text-sm mx-auto" swScrollBottom
+     (bottom)="service.more()">
+  <div class="grid border-b border-gray-300 bg-gray-200 text-center font-bold w-fit sticky top-0 z-30">
+    <h4 class="py-1 px-2 border-r border-gray-300">#</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">학과</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">학년</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">학번</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">학생명</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">비고</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">교번</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">교수명</h4>
+    <h4 class="py-1 px-2">삭제</h4>
+  </div>
+  <div class="list-wrapper">
+    <div *ngIf="!(service.pending$ | async) && service.total === 0" class="py-1 px-2 text-gray-500 text-center">
+      검색 결과가 없습니다.
+    </div>
+    <div *ngFor="let document of service.documents$ | async; index as i"
+         class="grid border-b last:border-0 border-gray-300 w-fit hover:bg-gray-100 even:bg-gray-50 odd:bg-white">
+      <div class="py-1 px-2 text-right border-r border-gray-300 truncate">{{i + 1 | number}}</div>
+      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.department}}</div>
+      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.grade || '-'}}</div>
+      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.no}}</div>
+      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.name}}</div>
+      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.note || '-'}}</div>
+      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.professor.no}}</div>
+      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.professor.name}}</div>
+      <div class="py-1 px-2 text-center">
+        <button type="button"
+                class="py-1 px-2 text-rose-500 hover:bg-rose-500 hover:text-white"
+                [disabled]="pending"
+                (click)="removeStudent(document)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+               stroke="currentColor" class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <sw-pending *ngIf="service.pending$ | async"></sw-pending>
+</div>

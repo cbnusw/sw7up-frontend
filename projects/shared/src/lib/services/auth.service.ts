@@ -42,9 +42,9 @@ export class AuthService extends RequestBase {
 
   me$: Observable<IUser> = this.meSubject.asObservable();
 
-  constructor(private http: HttpClient,
-              private router: Router,
-              private storage: StorageService,
+  constructor(private readonly _http: HttpClient,
+              private readonly _router: Router,
+              private readonly _storage: StorageService,
               config: SharedConfig) {
     super(config.authHost);
     this.config = config;
@@ -54,13 +54,13 @@ export class AuthService extends RequestBase {
   }
 
   get tokens(): IAuthenticationTokens {
-    const accessToken: string = this.storage.get(ACCESS_TOKEN_KEY);
-    const refreshToken: string = this.storage.get(REFRESH_TOKEN_KEY);
+    const accessToken: string = this._storage.get(ACCESS_TOKEN_KEY);
+    const refreshToken: string = this._storage.get(REFRESH_TOKEN_KEY);
     return { accessToken, refreshToken };
   }
 
   get loggedIn(): boolean {
-    return !!this.storage.get(ACCESS_TOKEN_KEY);
+    return !!this._storage.get(ACCESS_TOKEN_KEY);
   }
 
   get me(): IUser {
@@ -108,13 +108,13 @@ export class AuthService extends RequestBase {
   }
 
   join(user: IUser): Observable<boolean> {
-    return this.http.post<IResponse<undefined>>(this.url`/join`, user).pipe(
+    return this._http.post<IResponse<undefined>>(this.url`/join`, user).pipe(
       map(res => res.success)
     );
   }
 
   login(no: string, password: string): Observable<boolean> {
-    return this.http.post<IResponse<IAuthenticationTokens>>(this.url`/login`, { no, password })
+    return this._http.post<IResponse<IAuthenticationTokens>>(this.url`/login`, { no, password })
       .pipe(
         tap(res => {
           this.initTokens(res.data);
@@ -125,7 +125,7 @@ export class AuthService extends RequestBase {
   }
 
   loginOperator(no: string, password: string): Observable<boolean> {
-    return this.http.post<IResponse<IAuthenticationTokens>>(this.url`/operator/login`, { no, password })
+    return this._http.post<IResponse<IAuthenticationTokens>>(this.url`/operator/login`, { no, password })
       .pipe(
         tap(res => {
           this.initTokens(res.data);
@@ -136,10 +136,10 @@ export class AuthService extends RequestBase {
   }
 
   async logout(): Promise<void> {
-    const token: string = this.storage.get(REFRESH_TOKEN_KEY);
+    const token: string = this._storage.get(REFRESH_TOKEN_KEY);
     const { loginPageUrl } = this.config;
     try {
-      await this.http.get(
+      await this._http.get(
         this.url`/logout`,
         { headers: { 'x-refresh-token': token } }
       ).toPromise();
@@ -147,11 +147,11 @@ export class AuthService extends RequestBase {
       console.error(e);
     }
     this.clear();
-    loginPageUrl.startsWith('/') ? await this.router.navigateByUrl(loginPageUrl) : location.href = loginPageUrl;
+    loginPageUrl.startsWith('/') ? await this._router.navigateByUrl(loginPageUrl) : location.href = loginPageUrl;
   }
 
   getMe(): void {
-    this.http.get<IResponse<IUser>>(this.url`/me`).subscribe(
+    this._http.get<IResponse<IUser>>(this.url`/me`).subscribe(
       res => this.meSubject.next(res.data),
       err => {
         this.clear();
@@ -161,29 +161,29 @@ export class AuthService extends RequestBase {
   }
 
   findRegNo({ name, email, phone }: IFindRegNo): Observable<IResponse<{ no: string }>> {
-    return this.http.post(this.url`/no/find`, { name, email, phone });
+    return this._http.post(this.url`/no/find`, { name, email, phone });
   }
 
   sendOtp(no: string, email: string): Observable<IResponse<undefined>> {
-    return this.http.post(this.url`/otp/send`, { no, email });
+    return this._http.post(this.url`/otp/send`, { no, email });
   }
 
   checkOtp(no: string, code: string): Observable<IResponse<undefined>> {
-    return this.http.post(this.url`/otp/check`, { no, code });
+    return this._http.post(this.url`/otp/check`, { no, code });
   }
 
   initPassword(no: string, code: string, password: string): Observable<IResponse<undefined>> {
-    return this.http.post(this.url`/password/init`, { no, code, password });
+    return this._http.post(this.url`/password/init`, { no, code, password });
   }
 
   updateMe(body: IUserInfo): Observable<IResponse<undefined>> {
-    return this.http.put(this.url`/me`, body).pipe(
+    return this._http.put(this.url`/me`, body).pipe(
       tap(() => this.getMe())
     );
   }
 
   changePassword(oldPassword: string, newPassword: string): Observable<IResponse<undefined>> {
-    return this.http.patch(this.url`/password`, { oldPassword, newPassword });
+    return this._http.patch(this.url`/password`, { oldPassword, newPassword });
   }
 
   hasRole(role: TUserRole): boolean {
@@ -208,6 +208,7 @@ export class AuthService extends RequestBase {
 
   hasRoles$(...values: Array<TUserRole>): Observable<boolean> {
     return this.me$.pipe(
+      filter(me => this.loggedIn ? !!me : true),
       map(me => {
         const { role } = me || {};
         return hasSomeValues(values, role);
@@ -216,36 +217,25 @@ export class AuthService extends RequestBase {
   }
 
   hasPermission(permission: TUserPermission): boolean {
-    const { role, permissions = [] } = this.me || {};
-    if (hasSomeValues(['admin', 'operator'], role)) {
-      return true;
-    }
+    const { permissions = [] } = this.me || {};
     return hasValue(permissions, permission);
   }
 
   hasSomePermissions(...values: Array<TUserPermission>): boolean {
-    const { role, permissions = [] } = this.me || {};
-    if (hasSomeValues(['admin', 'operator'], role)) {
-      return true;
-    }
+    const { permissions = [] } = this.me || {};
     return hasSomeValues(permissions, values);
   }
 
   hasEveryPermissions(...values: Array<TUserPermission>): boolean {
-    const { role, permissions = [] } = this.me || {};
-    if (hasSomeValues(['admin', 'operator'], role)) {
-      return true;
-    }
+    const { permissions = [] } = this.me || {};
     return hasEveryValues(permissions, values);
   }
 
   hasPermission$(permission: TUserPermission): Observable<boolean> {
     return this.me$.pipe(
+      filter(me => this.loggedIn ? !!me : true),
       map(me => {
-        const { role, permissions = [] } = me || {};
-        if (hasSomeValues(['admin', 'operator'], role)) {
-          return true;
-        }
+        const { permissions = [] } = me || {};
         return hasValue(permissions, permission);
       })
     );
@@ -253,11 +243,9 @@ export class AuthService extends RequestBase {
 
   hasSomePermissions$(...values: Array<TUserPermission>): Observable<boolean> {
     return this.me$.pipe(
+      filter(me => this.loggedIn ? !!me : true),
       map(me => {
-        const { role, permissions = [] } = me || {};
-        if (hasSomeValues(['admin', 'operator'], role)) {
-          return true;
-        }
+        const { permissions = [] } = me || {};
         return hasSomeValues(permissions, values);
       })
     );
@@ -265,11 +253,9 @@ export class AuthService extends RequestBase {
 
   hasEveryPermissions$(...values: Array<TUserPermission>): Observable<boolean> {
     return this.me$.pipe(
+      filter(me => this.loggedIn ? !!me : true),
       map(me => {
-        const { role, permissions = [] } = me || {};
-        if (hasSomeValues(['admin', 'operator'], role)) {
-          return true;
-        }
+        const { permissions = [] } = me || {};
         return hasEveryValues(permissions, values);
       })
     );
@@ -281,14 +267,14 @@ export class AuthService extends RequestBase {
   }
 
   private initTokens({ accessToken, refreshToken }: IAuthenticationTokens): void {
-    this.storage.set(ACCESS_TOKEN_KEY, accessToken);
-    this.storage.set(REFRESH_TOKEN_KEY, refreshToken);
-    this.storage.emit(TOKEN_SHARE_EVENT, { accessToken, refreshToken });
+    this._storage.set(ACCESS_TOKEN_KEY, accessToken);
+    this._storage.set(REFRESH_TOKEN_KEY, refreshToken);
+    this._storage.emit(TOKEN_SHARE_EVENT, { accessToken, refreshToken });
   }
 
   private clear(): void {
-    this.storage.clear();
-    this.storage.emit(TOKEN_FLUSH_EVENT);
+    this._storage.clear();
+    this._storage.emit(TOKEN_FLUSH_EVENT);
     this.meSubject.next(null);
   }
 }

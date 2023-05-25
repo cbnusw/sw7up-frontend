@@ -1,0 +1,40 @@
+<sw-responsive-container class="flex flex-col gap-4">
+  <div class="bg-white border border-gray-300">
+    <div class="flex justify-end gap-2 px-4 py-2 items-center">
+      <sw-select [options]="options" [ngModel]="clear" (ngModelChange)="changeClear($event)" class="flex-shrink-0 basis-[140px]"></sw-select>
+      <sw-select *ngIf="clear" [options]="noOptions" [(ngModel)]="no" class="flex-shrink-0 basis-[100px]"></sw-select>
+      <sw-button type="button"
+                 [disabled]="pending"
+                 [color]="2"
+                 (click)="register()">
+        {{pending ? '등록 중...' : '등록'}}
+      </sw-button>
+      <input type="file" class="hidden" #fileInput
+             accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-4 px-4 py-4 bg-white border border-gray-300">
+    <sw-tab [selected]="selectedPage"
+            [options]="pageOptions"
+            (optionChange)="changePage($event)"></sw-tab>
+    <ng-container [ngSwitch]="selectedPage">
+      <ng-container *ngSwitchCase="pageOptions[0]">
+        <sw-topcit-filter></sw-topcit-filter>
+        <div class="px-4 py-2">
+          <span class="hidden sm:block text-gray-500">총 {{topcitService.total | number}} 건의 결과</span>
+        </div>
+        <sw-topcit-list></sw-topcit-list>
+      </ng-container>
+      <ng-container *ngSwitchCase="pageOptions[1]">
+        <sw-topcit-stat-filter></sw-topcit-stat-filter>
+        <div class="px-4 py-2">
+          <span class="hidden sm:block text-gray-500">
+            <span class="hidden sm:block text-gray-500">총 {{statService.total | number}} 건의 결과</span>
+          </span>
+        </div>
+        <sw-topcit-stat-list></sw-topcit-stat-list>
+      </ng-container>
+    </ng-container>
+  </div>
+</sw-responsive-container>

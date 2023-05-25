@@ -25,7 +25,7 @@
              [cdkConnectedOverlayOrigin]="trigger"
              [cdkConnectedOverlayOpen]="isOpenOptions">
   <ul [style.width]="button.offsetWidth + 'px'"
-      class="bg-white flex flex-col text-sm select-none shadow-md border border-secondary-200 mt-2">
+      class="bg-white flex flex-col text-sm select-none shadow-md border border-secondary-200 mt-2 max-h-[500px] overflow-y-auto">
     <li *ngFor="let option of options"
         (mousedown)="$event.preventDefault()"
         (click)="select($event, option)"

@@ -22,6 +22,7 @@ export const ROLES = [
 export const PERMISSIONS = [
   'judge',
   'qna',
+  'professor',
 ];
 
 export const FILE_TYPES = [
