@@ -48,6 +48,7 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
     let end = this._GRADE_SEMESTERS.indexOf(lbs[lbs.length - 1]);
     start = ['1', '3'].includes(this._GRADE_SEMESTERS[start].split('-')[1]) ? start + 1 : start;
     end = ['0', '2'].includes(this._GRADE_SEMESTERS[end].split('-')[1]) ? end + +2 : end + 1;
+    console.log(this._GRADE_SEMESTERS[start], this._GRADE_SEMESTERS[end]);
     return this._GRADE_SEMESTERS.slice(start, end);
   }
 
