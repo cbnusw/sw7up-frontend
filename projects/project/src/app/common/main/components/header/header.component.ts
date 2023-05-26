@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     {
       viewValue: () => '지도학생 관리',
       styleClass: () => 'lg:hidden',
-      filter: () => this.auth.isStaff,
+      filter: () => this.auth.isStaff || this.auth.isOperator,
       action: () => this.router.navigateByUrl('/professor'),
     },
     {

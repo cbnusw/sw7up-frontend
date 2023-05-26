@@ -1,0 +1,21 @@
+<div class="p-4 bg-white border border-gray-300 flex flex-col gap-6">
+  <h2 class="text-xl font-bold">활용언어</h2>
+  <div *ngIf="pending; else languagesRef" class="text-gray-400 py-6">
+    데이터 로드 중...
+  </div>
+  <ng-template #languagesRef>
+    <div *ngIf="languages; else noDataRef"
+         class="py-2 px-4 sm:py-6 sm:px-10 flex flex-col justify-center md:flex-row gap-8 items-center overflow-hidden">
+      <div
+          class="flex-shrink-0 h-[200px] flex items-center justify-center bg-amber-500 text-white rounded-full aspect-square text-3xl font-bold">
+        <span>{{numOfLanguages | number}}</span>
+      </div>
+      <sw-languages-chart class="flex-shrink flex-grow" [data]="languages"></sw-languages-chart>
+    </div>
+  </ng-template>
+  <ng-template #noDataRef>
+    <div class="text-gray-500 py-6">
+      등록된 프로젝트가 없습니다.
+    </div>
+  </ng-template>
+</div>

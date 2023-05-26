@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { AuthService } from 'shared';
+import { AuthService, OPERATOR_ROLES } from 'shared';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class StaffGuard implements CanActivate, CanActivateChild {
   }
 
   private _activate(): Observable<boolean> {
-    return this.auth.hasRole$('staff').pipe(
+    return this.auth.hasRoles$('staff', ...OPERATOR_ROLES).pipe(
       tap(isStaff => {
         if (!isStaff) {
           alert('권한이 없는 페이지입니다');

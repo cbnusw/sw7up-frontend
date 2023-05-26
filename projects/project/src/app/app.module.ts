@@ -13,6 +13,10 @@ import { MainModule } from './common/main/main.module';
 import { ProjectModule } from './features/project';
 import { StatisticsModule } from './features/statistics/statistics.module';
 import { DashboardChartComponent, DashboardPageComponent } from './pages/dashboard-page';
+import { Chart, registerables } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
+Chart.register(ChartDataLabels, ...registerables);
 
 @NgModule({
   declarations: [
@@ -42,4 +46,5 @@ import { DashboardChartComponent, DashboardPageComponent } from './pages/dashboa
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

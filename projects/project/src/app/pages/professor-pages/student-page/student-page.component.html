@@ -16,4 +16,8 @@
       <div class="text-gray-500 font-bold sm:text-lg">{{student?.name}}</div>
     </div>
   </div>
+  <sw-step-up *ngIf="student" [student]="student"></sw-step-up>
+  <sw-projects *ngIf="student" [student]="student"></sw-projects>
+  <sw-languages *ngIf="student" [student]="student"></sw-languages>
+  <sw-topcit *ngIf="student" [student]="student"></sw-topcit>
 </sw-responsive-container>

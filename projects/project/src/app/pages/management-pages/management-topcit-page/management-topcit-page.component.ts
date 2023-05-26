@@ -130,10 +130,13 @@ export class ManagementTopcitPageComponent implements OnInit, OnDestroy, AfterVi
       },
       level: this._toNumber(row['수준']),
       totalScore: this._toNumber(row['총점']),
-      subjects: Object.keys(row).filter(key => !this._TOPCIT_KEYS.includes(key)).map(key => ({
-        name: key,
-        score: this._toNumber(row[key]),
-      }))
+      subjects: Object.keys(row)
+        .filter(key => key !== '순번')
+        .filter(key => !this._TOPCIT_KEYS.includes(key))
+        .map(key => ({
+          name: key,
+          score: this._toNumber(row[key]),
+        }))
     }));
   }
 
@@ -146,10 +149,12 @@ export class ManagementTopcitPageComponent implements OnInit, OnDestroy, AfterVi
       subjects: Object.keys(row)
         .filter(key => key !== '순번')
         .filter(key => !this._STAT_KEYS.includes(key))
-        .map(key => ({
-          name: key,
-          score: this._toNumber(row[key])
-        }))
+        .map(key => {
+          return ({
+            name: key,
+            score: this._toNumber(row[key])
+          });
+        })
     }));
   }
 

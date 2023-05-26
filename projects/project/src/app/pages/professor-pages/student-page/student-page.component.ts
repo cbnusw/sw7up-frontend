@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
+import { StudentStatService } from '../services/student-stat.service';
 import { StudentDto, StudentService } from '../services/student.service';
 
 @Component({
@@ -11,12 +12,12 @@ import { StudentDto, StudentService } from '../services/student.service';
 })
 export class StudentPageComponent implements OnInit, OnDestroy {
   student: StudentDto;
-
   private readonly _subscription = new Subscription();
 
   constructor(private readonly _service: StudentService,
               private readonly _router: Router,
-              private readonly _route: ActivatedRoute) {
+              private readonly _route: ActivatedRoute,
+              private readonly _statService: StudentStatService) {
   }
 
   ngOnInit(): void {
@@ -37,7 +38,7 @@ export class StudentPageComponent implements OnInit, OnDestroy {
       this._route.params.pipe(
         tap(params => id = params.id),
         switchMap(() => this._service.students$),
-        map(students => students.find(student => student._id === id))
+        map(students => students.find(student => student._id === id)),
       ).subscribe(student => {
         if (!student) {
           alert('찾을 수 없는 지도학생입니다.');
