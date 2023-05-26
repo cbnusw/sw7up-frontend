@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
+import { ChartColorService } from '../../../../services/chart-color.service';
 import { SemesterBase } from '../../../../services/stat.service';
 import { StudentDto } from '../../services/student.service';
 
@@ -18,7 +19,7 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
   private _data: { [key in SemesterBase]: number; };
   private _averages: { [key in SemesterBase]: number; };
 
-  constructor() {
+  constructor(private _chartColorService: ChartColorService) {
   }
 
   @HostListener('window:resize') handleResize(): void {
@@ -62,11 +63,12 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
           type: 'line',
           label: `${this.student.name}`,
           data: this.myData,
-          // backgroundColor: this._chartColorService.getColors(data.length),
+          backgroundColor: this._chartColorService.getColors(this.myData.length)[0],
         }, {
           type: 'bar',
           label: '전체 평균',
           data: this.averageData,
+          backgroundColor: this._chartColorService.getColors(this.averageData.length)
         }]
       },
       options: {
@@ -90,11 +92,11 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
           },
           datalabels: {
             font: {
-              size: 15,
+              size: 12,
               weight: 'bold'
             },
-            color: '#fff',
-            formatter: (value) => Number(value).toLocaleString('ko-KR'),
+            color: '#424242',
+            formatter: (value) => Number(value.toFixed(1)).toLocaleString('ko-KR'),
           },
           tooltip: {
             titleFont: { size: 14 },

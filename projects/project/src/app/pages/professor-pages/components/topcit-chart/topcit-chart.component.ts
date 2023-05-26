@@ -78,11 +78,11 @@ export class TopcitChartComponent implements AfterViewInit, OnInit {
           },
           datalabels: {
             font: {
-              size: 15,
+              size: 12,
               weight: 'bold'
             },
-            color: '#fff',
-            formatter: (value) => Number(value).toLocaleString('ko-KR'),
+            color: '#424242',
+            formatter: (value) => Number(value.toFixed(1)).toLocaleString('ko-KR'),
           },
           tooltip: {
             titleFont: { size: 14 },
