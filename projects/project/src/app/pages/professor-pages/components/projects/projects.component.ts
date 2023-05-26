@@ -59,9 +59,7 @@ export class ProjectsComponent implements OnInit {
       })
     ).subscribe(projects => {
       this.averages = this._convertAverage(projects);
-      setTimeout(() => {
-        this.chartComponents.forEach(component => component.updateChart());
-      }, 0);
+      this.chartComponents.forEach(component => component.updateChart());
     });
   }
 
