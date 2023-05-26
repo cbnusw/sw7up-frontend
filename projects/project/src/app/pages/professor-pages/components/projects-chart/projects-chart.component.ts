@@ -18,6 +18,7 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
 
   chart: Chart;
   chartConfig: ChartConfiguration;
+  labels: string[] = [];
 
   private readonly _GRADE_SEMESTERS = [
     '1-0', '1-1', '1-2', '1-3',
@@ -42,20 +43,25 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
     return this.labels.map(v => this.averages[v] || 0);
   }
 
-  get labels(): string[] {
-    const lbs: string[] = Object.keys(this.data).sort();
-    let start = this._GRADE_SEMESTERS.indexOf(lbs[0]);
-    let end = this._GRADE_SEMESTERS.indexOf(lbs[lbs.length - 1]);
-    start = ['1', '3'].includes(this._GRADE_SEMESTERS[start].split('-')[1]) ? start - 1 : start;
-    end = ['0', '2'].includes(this._GRADE_SEMESTERS[end].split('-')[1]) ? end + +2 : end + 1;
-    return this._GRADE_SEMESTERS.slice(start, end);
-  }
-
   get myData(): number[] {
     return this.labels.map(v => this.data[v] || 0);
   }
 
+  updateChart(): void {
+    if (!this.chart) {
+      return;
+    }
+    setTimeout(() => {
+      this._updateLabels();
+      this.chart.data.labels = this.labels.map(v => this._convertLabels(v));
+      this.chart.data.datasets[0].data = this.myData;
+      this.chart.data.datasets[1].data = this.averageData;
+      this.chart.update();
+    }, 0);
+  }
+
   ngOnInit(): void {
+    this._updateLabels();
     this.chartConfig = {
       type: 'bar',
       data: {
@@ -126,15 +132,12 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
     }
   }
 
-  updateChart(): void {
-    if (!this.chart) {
-      return;
-    }
-    setTimeout(() => {
-      this.chart.data.labels = this.labels.map(v => this._convertLabels(v));
-      this.chart.data.datasets[0].data = this.myData;
-      this.chart.data.datasets[1].data = this.averageData;
-      this.chart.update();
-    }, 0);
+  private _updateLabels(): void {
+    const lbs: string[] = Object.keys(this.data).sort();
+    let start = this._GRADE_SEMESTERS.indexOf(lbs[0]);
+    let end = this._GRADE_SEMESTERS.indexOf(lbs[lbs.length - 1]);
+    start = ['1', '3'].includes(this._GRADE_SEMESTERS[start].split('-')[1]) ? start - 1 : start;
+    end = ['0', '2'].includes(this._GRADE_SEMESTERS[end].split('-')[1]) ? end + +2 : end + 1;
+    this.labels = this._GRADE_SEMESTERS.slice(start, end);
   }
 }
