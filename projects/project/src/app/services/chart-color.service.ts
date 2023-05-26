@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ChartColorService {
   getColors(length: number, opacity = 0.55): string[] {
-    const random = () => Math.floor(Math.random() * 200);
+    const random = () => Math.floor(Math.random() * 225 + 30);
     return Array.from({ length }).map(_ => {
       const rgb = [random(), random(), random()];
       return `rgba(${rgb.join(', ')}, ${opacity}`;

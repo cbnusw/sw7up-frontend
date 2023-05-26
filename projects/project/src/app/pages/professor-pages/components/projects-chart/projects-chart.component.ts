@@ -13,11 +13,14 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
   @ViewChild('canvasRef') canvasRef: ElementRef<HTMLCanvasElement>;
   @Input() student: StudentDto;
   @Input() title: string;
+  @Input() data: { [key in SemesterBase]: number; };
+  @Input() averages: { [key in SemesterBase]: number; };
+
   chart: Chart;
   chartConfig: ChartConfiguration;
 
-  private _data: { [key in SemesterBase]: number; };
-  private _averages: { [key in SemesterBase]: number; };
+  // private _data: { [key in SemesterBase]: number; };
+  // private _averages: { [key in SemesterBase]: number; };
 
   constructor(private _chartColorService: ChartColorService) {
   }
@@ -26,32 +29,33 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
     this.chart?.resize();
   }
 
-  @Input() set data(data: { [key in SemesterBase]: number; }) {
-    this._data = data;
-    this._updateChart();
-  }
+  // @Input() set data(data: { [key in SemesterBase]: number; }) {
+  //   this._data = data;
+    // this._updateChart();
+  // }
 
   // get data(): { [key in SemesterBase]: number; } {
   //   return this._data;
   // }
 
-  @Input() set averages(data: { [key in SemesterBase]: number; }) {
-    this._averages = data;
-    this._updateChart();
-  }
+  // @Input() set averages(data: { [key in SemesterBase]: number; }) {
+  //   this._averages = data;
+  //   // this._updateChart();
+  // }
 
   get averageData(): number[] {
-    return Object.keys(this._averages).sort().map(key => this._averages[key]);
+    // return Object.keys(this._averages).sort().map(key => this._averages[key]);
+    return Object.keys(this.averages).sort().map(key => this.averages[key]);
   }
 
   get labels(): string[] {
-    return Object.keys(this._averages).sort().map(key => this._convertLabels(key));
+    // return Object.keys(this._averages).sort().map(key => this._convertLabels(key));
+    return Object.keys(this.averages).sort().map(key => this._convertLabels(key));
   }
 
   get myData(): number[] {
-    return Object.keys(this._averages).map(key => {
-      return this._data[key] || 0;
-    });
+    // return Object.keys(this._averages).map(key => this._data[key] || 0);
+    return Object.keys(this.averages).map(key => this.data[key] || 0);
   }
 
   ngOnInit(): void {
@@ -125,7 +129,7 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private _updateChart(): void {
+  updateChart(): void {
     if (!this.chart) {
       return;
     }

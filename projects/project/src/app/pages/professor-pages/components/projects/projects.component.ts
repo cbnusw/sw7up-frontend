@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { ITabOption } from '../../../../common/controls/components';
 import { ProjectsDto, StatService, StudentProjectsDto } from '../../../../services/stat.service';
 import { StudentDto } from '../../services/student.service';
+import { ProjectsChartComponent } from '../projects-chart/projects-chart.component';
 
 @Component({
   selector: 'sw-projects',
@@ -11,6 +12,7 @@ import { StudentDto } from '../../services/student.service';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit {
+  @ViewChildren(ProjectsChartComponent) chartComponents: QueryList<ProjectsChartComponent>;
   @Input() student: StudentDto;
   studentProjects: StudentProjectsDto = null;
   averages: ProjectsDto = null;
@@ -57,6 +59,9 @@ export class ProjectsComponent implements OnInit {
       })
     ).subscribe(projects => {
       this.averages = this._convertAverage(projects);
+      setTimeout(() => {
+        this.chartComponents.forEach(component => component.updateChart());
+      }, 0);
     });
   }
 
