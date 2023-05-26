@@ -19,6 +19,15 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
   chart: Chart;
   chartConfig: ChartConfiguration;
 
+  private readonly _GRADE_SEMESTERS = [
+    '1-0', '1-1', '1-2', '1-3',
+    '2-0', '2-1', '2-2', '2-3',
+    '3-0', '3-1', '3-2', '3-3',
+    '4-0', '4-1', '4-2', '4-3',
+    '5-0', '5-1', '5-2', '5-3',
+    '6-0', '6-1', '6-2', '6-3',
+  ];
+
   // private _data: { [key in SemesterBase]: number; };
   // private _averages: { [key in SemesterBase]: number; };
 
@@ -29,40 +38,28 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
     this.chart?.resize();
   }
 
-  // @Input() set data(data: { [key in SemesterBase]: number; }) {
-  //   this._data = data;
-    // this._updateChart();
-  // }
-
-  // get data(): { [key in SemesterBase]: number; } {
-  //   return this._data;
-  // }
-
-  // @Input() set averages(data: { [key in SemesterBase]: number; }) {
-  //   this._averages = data;
-  //   // this._updateChart();
-  // }
-
   get averageData(): number[] {
-    // return Object.keys(this._averages).sort().map(key => this._averages[key]);
-    return Object.keys(this.averages).sort().map(key => this.averages[key]);
+    return this.labels.map(v => this.averages[v] || 0);
   }
 
   get labels(): string[] {
-    // return Object.keys(this._averages).sort().map(key => this._convertLabels(key));
-    return Object.keys(this.averages).sort().map(key => this._convertLabels(key));
+    const lbs: string[] = Object.keys(this.data).sort();
+    let start = this._GRADE_SEMESTERS.indexOf(lbs[0]);
+    let end = this._GRADE_SEMESTERS.indexOf(lbs[lbs.length - 1]);
+    start = ['1', '3'].includes(this._GRADE_SEMESTERS[start].split('-')[1]) ? start + 1 : start;
+    end = ['0', '2'].includes(this._GRADE_SEMESTERS[end].split('-')[1]) ? end + +2 : end + 1;
+    return this._GRADE_SEMESTERS.slice(start, end);
   }
 
   get myData(): number[] {
-    // return Object.keys(this._averages).map(key => this._data[key] || 0);
-    return Object.keys(this.averages).map(key => this.data[key] || 0);
+    return this.labels.map(v => this.data[v] || 0);
   }
 
   ngOnInit(): void {
     this.chartConfig = {
       type: 'bar',
       data: {
-        labels: this.labels,
+        labels: this.labels.map(v => this._convertLabels(v)),
         datasets: [{
           type: 'line',
           label: `${this.student.name}`,
@@ -116,8 +113,8 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
     this.chart = new Chart(this.canvasRef.nativeElement, this.chartConfig);
   }
 
-  private _convertLabels(key): string {
-    const [grade, semester] = key.split('-');
+  private _convertLabels(value): string {
+    const [grade, semester] = value.split('-');
     if (+semester === 0) {
       return `${grade}학년 1학기`;
     } else if (+semester === 1) {
@@ -134,7 +131,7 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.chart.data.labels = this.labels;
+    this.chart.data.labels = this.labels.map(v => this._convertLabels(v));
     this.chart.data.datasets[0].data = this.myData;
     this.chart.data.datasets[1].data = this.averageData;
     this.chart.update();
