@@ -5,6 +5,7 @@ import { ProjectsChartComponent } from './projects-chart/projects-chart.componen
 import { ProjectsComponent } from './projects/projects.component';
 import { StepUpComponent } from './step-up/step-up.component';
 import { TopcitChartComponent } from './topcit-chart/topcit-chart.component';
+import { TopcitSubjectsChartComponent } from './topcit-subjects-chart/topcit-subjects-chart.component';
 import { TopcitComponent } from './topcit/topcit.component';
 
 export const Components = [
@@ -16,4 +17,5 @@ export const Components = [
   StepUpComponent,
   TopcitComponent,
   TopcitChartComponent,
+  TopcitSubjectsChartComponent,
 ];

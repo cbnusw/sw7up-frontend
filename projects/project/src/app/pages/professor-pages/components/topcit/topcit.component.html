@@ -10,13 +10,19 @@
     </div>
     <ng-container *ngIf="topcit && topcitStats">
 
-    <sw-topcit-chart class="flex-shrink flex-grow"
-                     [student]="student"
-                     [topcit]="topcit"
-                     [topcitStats]="topcitStats"></sw-topcit-chart>
+      <sw-topcit-chart class="flex-shrink flex-grow"
+                       [student]="student"
+                       [topcit]="topcit"
+                       [topcitStats]="topcitStats"></sw-topcit-chart>
     </ng-container>
   </div>
   <ng-template #noTopcitRef>
     <div class="py-2 text-gray-500">등록된 데이터가 없습니다.</div>
   </ng-template>
+
+  <div *ngIf="topcit && topcitStats" class="flex justify-center px-6 py-4">
+    <sw-topcit-subjects-chart [student]="student"
+                              [topcit]="topcit"
+                              [topcitStats]="topcitStats"></sw-topcit-subjects-chart>
+  </div>
 </div>
