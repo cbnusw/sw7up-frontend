@@ -51,7 +51,7 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
 
     this._updateLabels();
     setTimeout(() => {
-      this._log('프로젝트 수');
+      // this._log('프로젝트 수');
       this.chart.data.labels = this.labels.map(v => this._convertLabels(v));
       this.chart.data.datasets[0].data = this.myData;
       this.chart.data.datasets[1].data = this.averageData;
@@ -61,7 +61,7 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this._updateLabels();
-    this._log('프로젝트 수');
+    // this._log('프로젝트 수');
     this.chartConfig = {
       type: 'bar',
       data: {
@@ -115,19 +115,19 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
     };
   }
 
-  private _log(title: string): void {
-    if (this.title === title) {
-      console.log(this.labels);
-      console.log(this.data);
-      console.log(this.averages);
-      console.log(this.myData);
-      console.log(this.averageData);
-    }
-  }
-
   ngAfterViewInit(): void {
     this.chart = new Chart(this.canvasRef.nativeElement, this.chartConfig);
   }
+
+  // private _log(title: string): void {
+  //   if (this.title === title) {
+  //     console.log(this.labels);
+  //     console.log(this.data);
+  //     console.log(this.averages);
+  //     console.log(this.myData);
+  //     console.log(this.averageData);
+  //   }
+  // }
 
   private _convertLabels(value): string {
     const [grade, semester] = value.split('-');
