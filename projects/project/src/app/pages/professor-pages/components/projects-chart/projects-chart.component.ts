@@ -64,6 +64,7 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this._updateLabels();
     // this._log('프로젝트 수');
+    const color = this._chartColorService.getColors(this.myData.length)[0];
     this.chartConfig = {
       type: 'bar',
       data: {
@@ -72,8 +73,8 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
           type: 'line',
           label: `${this.student.name}`,
           data: this.myData,
-          backgroundColor: this._chartColorService.getColors(this.myData.length)[0],
-          borderColor: this._chartColorService.getColors(this.myData.length)[0],
+          backgroundColor: color,
+          borderColor: color,
         }, {
           type: 'bar',
           label: '전체 평균',
