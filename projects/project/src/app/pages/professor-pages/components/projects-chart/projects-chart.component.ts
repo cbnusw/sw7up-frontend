@@ -53,10 +53,12 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
     }
 
     this._updateLabels();
-    this.chart.data.labels = this.labels.map(v => this._convertLabels(v));
-    this.chart.data.datasets[0].data = this.myData;
-    this.chart.data.datasets[1].data = this.averageData;
-    this.chart.update();
+    setTimeout(() => {
+      this.chart.data.labels = this.labels.map(v => this._convertLabels(v));
+      this.chart.data.datasets[0].data = this.myData;
+      this.chart.data.datasets[1].data = this.averageData;
+      this.chart.update();
+    }, 0);
   }
 
   ngOnInit(): void {
