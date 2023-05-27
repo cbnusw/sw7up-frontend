@@ -29,9 +29,6 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
     '6-0', '6-1', '6-2', '6-3',
   ];
 
-  // private _data: { [key in SemesterBase]: number; };
-  // private _averages: { [key in SemesterBase]: number; };
-
   constructor(private _chartColorService: ChartColorService) {
   }
 
@@ -54,6 +51,7 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
 
     this._updateLabels();
     setTimeout(() => {
+      this._log('프로젝트 수');
       this.chart.data.labels = this.labels.map(v => this._convertLabels(v));
       this.chart.data.datasets[0].data = this.myData;
       this.chart.data.datasets[1].data = this.averageData;
@@ -63,11 +61,7 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this._updateLabels();
-    console.log(this.labels);
-    console.log(this.data);
-    console.log(this.averages);
-    console.log(this.myData);
-    console.log(this.averageData);
+    this._log('프로젝트 수');
     this.chartConfig = {
       type: 'bar',
       data: {
@@ -119,6 +113,16 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
         }
       }
     };
+  }
+
+  private _log(title: string): void {
+    if (this.title === title) {
+      console.log(this.labels);
+      console.log(this.data);
+      console.log(this.averages);
+      console.log(this.myData);
+      console.log(this.averageData);
+    }
   }
 
   ngAfterViewInit(): void {
