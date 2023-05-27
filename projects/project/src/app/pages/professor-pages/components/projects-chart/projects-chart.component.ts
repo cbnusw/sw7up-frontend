@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
+import * as dayjs from 'dayjs';
 import { ChartColorService } from '../../../../services/chart-color.service';
 import { SemesterBase } from '../../../../services/stat.service';
 import { StudentDto } from '../../services/student.service';
@@ -11,6 +12,7 @@ import { StudentDto } from '../../services/student.service';
 })
 export class ProjectsChartComponent implements OnInit, AfterViewInit {
   @ViewChild('canvasRef') canvasRef: ElementRef<HTMLCanvasElement>;
+  @Input() year: number;
   @Input() student: StudentDto;
   @Input() title: string;
   @Input() data: { [key in SemesterBase]: number; };
@@ -119,16 +121,6 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
     this.chart = new Chart(this.canvasRef.nativeElement, this.chartConfig);
   }
 
-  // private _log(title: string): void {
-  //   if (this.title === title) {
-  //     console.log(this.labels);
-  //     console.log(this.data);
-  //     console.log(this.averages);
-  //     console.log(this.myData);
-  //     console.log(this.averageData);
-  //   }
-  // }
-
   private _convertLabels(value): string {
     const [grade, semester] = value.split('-');
     if (+semester === 0) {
@@ -143,11 +135,29 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
   }
 
   private _updateLabels(): void {
+    // this._log('프로젝트 수');
+    const now = dayjs();
+    const [year, month] = [now.year(), now.month() + 1];
+    const endOffset = this.year !== year ? 4 : [1, 2, 3, 4][[6, 9, 12, 9999].findIndex(m => m > month)];
     const lbs: string[] = Object.keys(this.data).sort();
     let start = this._GRADE_SEMESTERS.indexOf(lbs[0]);
     let end = this._GRADE_SEMESTERS.indexOf(lbs[lbs.length - 1]);
-    start = ['1', '3'].includes(this._GRADE_SEMESTERS[start].split('-')[1]) ? start - 1 : start;
-    end = ['0', '2'].includes(this._GRADE_SEMESTERS[end].split('-')[1]) ? end + +2 : end + 1;
+    start -= +(this._GRADE_SEMESTERS[start].split('-')[1]);
+    end += Math.max(endOffset - +(this._GRADE_SEMESTERS[end].split('-')[1]), 1);
     this.labels = this._GRADE_SEMESTERS.slice(start, end);
+  }
+
+  private _log(title: string): void {
+    if (this.title === title) {
+      const now = dayjs();
+      console.log(now.year(), now.month() + 1);
+      console.log(this.year);
+      console.log(this.labels);
+      console.log(this.data);
+      console.log(this.averages);
+      console.log(this.myData);
+      console.log(this.averageData);
+      console.log('-----------------------');
+    }
   }
 }

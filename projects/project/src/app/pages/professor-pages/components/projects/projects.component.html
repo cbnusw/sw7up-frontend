@@ -19,18 +19,22 @@
       <sw-tab [options]="yearOptions" [selected]="yearOption" (optionChange)="changeYearOption($event)"></sw-tab>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <sw-projects-chart title="프로젝트 수"
+                           [year]="yearOption.value"
                            [student]="student"
                            [data]="studentProjects.grades.projects"
                            [averages]="averages.grades.projects"></sw-projects-chart>
         <sw-projects-chart title="파일 수"
+                           [year]="yearOption.value"
                            [student]="student"
                            [data]="studentProjects.grades.files"
                            [averages]="averages.grades.files"></sw-projects-chart>
         <sw-projects-chart title="코드라인 수"
+                           [year]="yearOption.value"
                            [student]="student"
                            [data]="studentProjects.grades.codes"
                            [averages]="averages.grades.codes"></sw-projects-chart>
         <sw-projects-chart title="주석 수"
+                           [year]="yearOption.value"
                            [student]="student"
                            [data]="studentProjects.grades.comments"
                            [averages]="averages.grades.comments"></sw-projects-chart>
