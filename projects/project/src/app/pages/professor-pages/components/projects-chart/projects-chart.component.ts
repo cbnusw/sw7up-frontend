@@ -142,7 +142,6 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
     const lbs: string[] = Object.keys(this.data).sort();
     let start = this._GRADE_SEMESTERS.indexOf(lbs[0]);
     let end = this._GRADE_SEMESTERS.indexOf(lbs[lbs.length - 1]);
-    console.log(end);
     start -= +(this._GRADE_SEMESTERS[start].split('-')[1]);
     end += Math.max(endOffset - +(this._GRADE_SEMESTERS[end].split('-')[1]), 1);
     this.labels = this._GRADE_SEMESTERS.slice(start, end);
