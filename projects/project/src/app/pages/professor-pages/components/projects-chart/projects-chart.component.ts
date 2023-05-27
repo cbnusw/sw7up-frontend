@@ -73,11 +73,12 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
           label: `${this.student.name}`,
           data: this.myData,
           backgroundColor: this._chartColorService.getColors(this.myData.length)[0],
+          borderColor: this._chartColorService.getColors(this.myData.length)[0],
         }, {
           type: 'bar',
           label: '전체 평균',
           data: this.averageData,
-          backgroundColor: this._chartColorService.getColors(this.averageData.length)
+          backgroundColor: this._chartColorService.getColors(this.averageData.length)[0]
         }]
       },
       options: {
