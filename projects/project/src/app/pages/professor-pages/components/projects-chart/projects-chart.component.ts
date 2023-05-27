@@ -63,6 +63,11 @@ export class ProjectsChartComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this._updateLabels();
+    console.log(this.labels);
+    console.log(this.data);
+    console.log(this.averages);
+    console.log(this.myData);
+    console.log(this.averageData);
     this.chartConfig = {
       type: 'bar',
       data: {
