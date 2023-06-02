@@ -1,0 +1,73 @@
+<div #filterHeader class="flex justify-between items-center px-4 py-2 w-full">
+  <div class="flex gap-4 items-center">
+    <button type="button" (click)="collapsed = !collapsed">
+      <svg *ngIf="collapsed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+           stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+      </svg>
+      <svg *ngIf="!collapsed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+           stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15"/>
+      </svg>
+    </button>
+    <span [class.opacity-0]="!collapsed"
+          class="text-gray-500 text-xs hidden lg:block duration-300">
+      원하시는 결과가 아닐 경우 + 버튼을 눌러 설정을 다시 해보세요.
+    </span>
+  </div>
+  <div class="flex gap-2 items-center">
+    <sw-button type="button" [color]="2" (click)="initQuery()">전체기간</sw-button>
+    <sw-button type="button" (click)="getReport()">설정적용</sw-button>
+  </div>
+</div>
+
+<div #filterBody class="flex flex-col gap-8 px-6 py-6">
+  <div class="flex flex-col gap-4">
+    <label class="text-lg font-bold">프로젝트 등록일</label>
+    <div class="flex gap-2 items-center">
+      <sw-select [options]="createdAtOptions"
+                 [ngModel]="createdAtOption"
+                 (ngModelChange)="changeCreatedAtOption($event)" class="flex-shrink-0 basis-[120px]"></sw-select>
+      <div *ngIf="createdAtOption" class="flex gap-4">
+        <sw-input type="date" [(ngModel)]="startCreatedAt"></sw-input>
+        ~
+        <sw-input type="date" [(ngModel)]="endCreatedAt"></sw-input>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-4 pt-6">
+    <label class="text-lg font-bold">프로젝트 수행 기간</label>
+    <div class="flex gap-2 items-center">
+      <sw-select [options]="yearOptions"
+                 placeholder="수행 연도"
+                 class="flex-shrink-0 basis-[140px]"
+                 [(ngModel)]="startYear"></sw-select>
+      <sw-select *ngIf="startYear"
+                 [options]="gradeOptions"
+                 placeholder="수행 학년"
+                 class="flex-shrink-0 basis-[140px]"
+                 [(ngModel)]="startGrade"></sw-select>
+      <sw-select *ngIf="startGrade"
+                 [options]="semesterOptions"
+                 class="flex-shrink-0 basis-[120px]"
+                 placeholder="학기선택"
+                 [(ngModel)]="startSemester"></sw-select>
+      ~
+      <sw-select [options]="yearOptions"
+                 placeholder="수행 연도"
+                 class="flex-shrink-0 basis-[140px]"
+                 [(ngModel)]="endYear"></sw-select>
+      <sw-select *ngIf="endYear"
+                 [options]="gradeOptions"
+                 placeholder="수행 학년"
+                 class="flex-shrink-0 basis-[140px]"
+                 [(ngModel)]="endGrade"></sw-select>
+      <sw-select *ngIf="endGrade"
+                 [options]="semesterOptions"
+                 class="flex-shrink-0 basis-[120px]"
+                 placeholder="학기선택"
+                 [(ngModel)]="endSemester"></sw-select>
+    </div>
+  </div>
+</div>

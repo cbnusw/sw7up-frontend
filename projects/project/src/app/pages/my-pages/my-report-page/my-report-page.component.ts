@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { AuthService } from 'shared';
 import { ICount, StatisticsService } from '../../../services';
 import { IProject } from '../../../types';
+import { MyReportService } from './services/my-report.service';
 
 @Component({
   selector: 'sw-my-report-page',
@@ -18,6 +19,7 @@ export class MyReportPageComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
+    public service: MyReportService,
     private _statService: StatisticsService,
   ) {
   }

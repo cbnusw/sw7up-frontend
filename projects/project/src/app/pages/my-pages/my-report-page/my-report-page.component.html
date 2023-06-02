@@ -1,4 +1,5 @@
-<sw-responsive-container class="block print:hidden">
+<sw-responsive-container class="flex flex-col gap-4 print:hidden">
+  <sw-my-report-filter></sw-my-report-filter>
   <sw-section title="프로젝트 보고서">
     <svg icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
          stroke="currentColor" class="w-6 h-6 mr-4">
@@ -17,6 +18,34 @@
 <sw-responsive-container class="block overflow-scroll">
   <div class="report-container space-y-8 mx-auto card">
     <h1 class="text-3xl font-bold text-center">프로젝트 보고서</h1>
+    <div class="flex flex-col gap-2 text-sm text-gray-500">
+      <div class="flex gap-4">
+        <span>프로젝트 등록기간: </span>
+        <ng-container *ngIf="service.params.startCreatedAt || service.params.endCreatedAt; else all">
+          <span *ngIf="service.params.startCreatedAt">{{service.params.startCreatedAt | date:'yyyy.MM.dd'}}</span>
+          <span>~</span>
+          <span *ngIf="service.params.endCreatedAt; else all">{{service.params.endCreatedAt | endDate | date:'yyyy.MM.dd'}}</span>
+        </ng-container>
+      </div>
+      <div class="flex gap-4">
+        <span>프로젝트 수행기간: </span>
+<!--        <pre>{{service.params | json}}</pre>-->
+        <ng-container *ngIf="service.params.startPerformedAt || service.params.endPerformedAt; else all">
+          <ng-container *ngIf="service.params.startPerformedAt">
+            <span>{{service.params.startPerformedAt | performedToYear}}년</span>
+            <span *ngIf="service.params.startGrade">{{service.params.startGrade}}학년</span>
+            <span>{{service.params.startPerformedAt | performedToSemester:0}}</span>
+          </ng-container>
+          <span>~</span>
+          <ng-container *ngIf="service.params.endPerformedAt; else all">
+            <span>{{service.params.endPerformedAt | performedToYear}}년</span>
+            <span *ngIf="service.params.endGrade">{{service.params.startGrade}}학년</span>
+            <span>{{service.params.endPerformedAt | performedToSemester:0}}</span>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+    <ng-template #all>전체</ng-template>
     <hr/>
 
     <div class="space-y-4">
@@ -41,7 +70,7 @@
     </div>
 
     <div class="space-y-4">
-      <h2 class="font-bold text-lg">전체 프로젝트 통계</h2>
+      <h2 class="font-bold text-lg">프로젝트 통계</h2>
       <table class="border-collapse border-y border-secondary-200 w-full text-sm">
         <thead class="bg-secondary-100 text-left">
         <tr>
@@ -53,10 +82,10 @@
         </thead>
         <tbody>
         <tr>
-          <td class="py-0.5 px-4 border-r border-secondary-200 text-right">{{projectsCount?.projects | number}}</td>
-          <td class="py-0.5 px-4 border-r border-secondary-200 text-right">{{projectsCount?.files | number}}</td>
-          <td class="py-0.5 px-4 border-r border-secondary-200 text-right">{{projectsCount?.codes | number}}</td>
-          <td class="py-0.5 px-4 text-right">{{projectsCount?.comments | number}}</td>
+          <td class="py-0.5 px-4 border-r border-secondary-200 text-right">{{service.totalStat.projects | number}}</td>
+          <td class="py-0.5 px-4 border-r border-secondary-200 text-right">{{service.totalStat.files | number}}</td>
+          <td class="py-0.5 px-4 border-r border-secondary-200 text-right">{{service.totalStat.codes | number}}</td>
+          <td class="py-0.5 px-4 text-right">{{service.totalStat.comments | number}}</td>
         </tr>
         </tbody>
       </table>
@@ -68,17 +97,19 @@
         <thead class="bg-secondary-100 text-left">
         <tr>
           <th class="py-0.5 px-4 border-r border-secondary-200">프로그래밍언어</th>
+          <th class="py-0.5 px-4 border-r border-secondary-200">프로젝트수</th>
           <th class="py-0.5 px-4 border-r border-secondary-200">파일수</th>
           <th class="py-0.5 px-4 border-r border-secondary-200">코드라인수</th>
           <th class="py-0.5 px-4">주석수</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let lang of languages" class="border-b border-secondary-200">
-          <td class="py-0.5 px-4 border-r border-secondary-200">{{lang[0]}}</td>
-          <td class="py-0.5 px-4 border-r border-secondary-200 text-right">{{lang[1] | number}}</td>
-          <td class="py-0.5 px-4 border-r border-secondary-200 text-right">{{lang[2] | number}}</td>
-          <td class="py-0.5 px-4 text-right">{{lang[3] | number}}</td>
+        <tr *ngFor="let lang of service.languages | sortedLanguageKeys" class="border-b border-secondary-200">
+          <td class="py-0.5 px-4 border-r border-secondary-200">{{lang}}</td>
+          <td class="py-0.5 px-4 border-r border-secondary-200 text-right">{{service.languages[lang].projects | number}}</td>
+          <td class="py-0.5 px-4 border-r border-secondary-200 text-right">{{service.languages[lang].files | number}}</td>
+          <td class="py-0.5 px-4 border-r border-secondary-200 text-right">{{service.languages[lang].codes | number}}</td>
+          <td class="py-0.5 px-4 text-right">{{service.languages[lang].comments | number}}</td>
         </tr>
         </tbody>
       </table>
@@ -86,26 +117,31 @@
 
     <div class="space-y-4">
       <h2 class="font-bold text-lg">학년별 수행 프로젝트</h2>
-      <ng-container *ngFor="let projects of projectsByGrades; let i = index">
-        <table *ngIf="projects.length > 0" class="border-collapse border-y border-secondary-200 w-full text-sm">
+      <ng-container *ngFor="let grade of [1, 2, 3, 4, 5, 6]">
+        <table *ngIf="(service.projects | groupProjectsByGrade:grade).length > 0"
+               class="border-collapse border-y border-secondary-200 w-full text-sm">
           <thead class="bg-secondary-100 text-left">
           <tr class="border-b border-secondary-200">
-            <th class="py-0.5 px-4" colspan="4">{{i + 1}}학년</th>
+            <th class="py-0.5 px-4" colspan="5">{{grade}}학년</th>
           </tr>
           <tr class="border-b border-secondary-200">
             <th class="py-0.5 px-4 border-r border-secondary-200">프로젝트명</th>
             <th class="py-0.5 px-4 border-r border-secondary-200">수행연도</th>
             <th class="py-0.5 px-4 border-r border-secondary-200">수행학기</th>
-            <th class="py-0.5 px-4">프로젝트유형</th>
+            <th class="py-0.5 px-4 border-r border-secondary-200">프로젝트유형</th>
+            <th class="py-0.5 px-4">등록일</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let project of projects" class="border-b border-secondary-200 last:border-b-0">
+          <tr *ngFor="let project of service.projects | groupProjectsByGrade:grade"
+              class="border-b border-secondary-200 last:border-b-0">
             <td class="py-0.5 px-4 border-r border-secondary-200">{{project.name}}</td>
             <td class="py-0.5 px-4 border-r border-secondary-200">{{project.year}}년</td>
             <td class="py-0.5 px-4 border-r border-secondary-200">{{project.semester}}</td>
-            <td *ngIf="project.subject" class="py-0.5 px-4">교과목프로젝트</td>
-            <td *ngIf="project.ownProject" class="py-0.5 px-4">{{project.ownProject.type}}</td>
+            <td *ngIf="project.subject" class="py-0.5 px-4 border-r border-secondary-200">교과목프로젝트</td>
+            <td *ngIf="project.ownProject"
+                class="py-0.5 px-4 border-r border-secondary-200">{{project.ownProject.type}}</td>
+            <td class="py-0.5 px-4">{{project.createdAt | date:'yyyy.MM.dd'}}</td>
           </tr>
           </tbody>
         </table>

@@ -94,6 +94,8 @@ export interface IProject {
   grade: number;                      // 프로젝트 수행 당시 학년
   year: number;                       // 프로젝트 수행 연도
   semester: TSemester;                // 프로젝트 수행 학기
+  semesterIndex: number;              // 1학기: 0, 여름학기: 1, 2학기: 2, 겨울학기: 3
+  performedAt: string;                // 수행연도-수행학기(인덱스)
   description: string;                // 프로젝트 설명
   projectType: TProjectType;          // 프로젝트 유형
   subject: IProjectSubject | null;    // 교과목 프로젝트 정보
