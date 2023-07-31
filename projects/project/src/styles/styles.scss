@@ -56,4 +56,16 @@ body, html {
       @apply border-0 shadow-none;
     }
   }
+
+  .stat-section {
+    @apply flex flex-col gap-4;
+  }
+
+  .section-title {
+    @apply text-xl font-bold;
+  }
+
+  .content-title {
+    @apply text-lg font-semibold text-gray-600;
+  }
 }

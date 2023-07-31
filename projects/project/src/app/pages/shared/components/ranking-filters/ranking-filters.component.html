@@ -1,0 +1,16 @@
+<sw-filter-container>
+  <ng-container tools>
+    <sw-button type="button" [color]="2" (click)="initQuery()">초기화</sw-button>
+    <sw-button type="button" (click)="search()">검색</sw-button>
+  </ng-container>
+  <ng-container body>
+    <sw-performed-filter [ngModel]="filters.performedPeriodFilter"
+                         (ngModelChange)="changePerformedPeriod($event)"></sw-performed-filter>
+    <sw-departments-filter [(ngModel)]="query.department"></sw-departments-filter>
+    <sw-period-filter [ngModel]="filters.createdPeriodFilter"
+                      (ngModelChange)="changeCreatedPeriod($event)"></sw-period-filter>
+    <sw-select-filter label="순위 범위"
+                      [options]="filters.limitOptions"
+                      [(ngModel)]="query.limit"></sw-select-filter>
+  </ng-container>
+</sw-filter-container>

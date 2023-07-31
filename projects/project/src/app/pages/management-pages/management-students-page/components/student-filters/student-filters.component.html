@@ -1,0 +1,17 @@
+<sw-filter-container>
+  <ng-container tools>
+    <sw-button type="button" [color]="2" (click)="initQuery()">초기화</sw-button>
+    <sw-button type="button" (click)="search()">검색</sw-button>
+  </ng-container>
+  <ng-container body>
+    <sw-select-filter label="학과(부)"
+                      [options]="departmentOptions"
+                      [(ngModel)]="params.department"></sw-select-filter>
+    <sw-member-filter label="교수 정보"
+                      [staff]="true"
+                      [ngModel]="professorFilter"
+                      (ngModelChange)="changeProfessorFilter($event)"></sw-member-filter>
+    <sw-member-filter [ngModel]="studentFilter"
+                      (ngModelChange)="changeStudentFilter($event)"></sw-member-filter>
+  </ng-container>
+</sw-filter-container>

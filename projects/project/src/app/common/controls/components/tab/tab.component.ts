@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-export interface ITabOption {
+export interface ITabOption<T = any> {
   viewValue: string;
-  value: any;
+  value: T;
 }
 
 @Component({

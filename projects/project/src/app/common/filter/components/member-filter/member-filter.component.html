@@ -1,0 +1,16 @@
+<sw-filter-label>{{label}}</sw-filter-label>
+<sw-select class="flex-shrink-0 basis-[100px]"
+           [options]="options"
+           [ngModel]="option"
+           (ngModelChange)="changeOption($event)"></sw-select>
+<sw-input *ngIf="option === '이름'; else noRef"
+          placeholder="예) 홍길동"
+          class="flex-shrink-0 basis-[160px]"
+          [ngModel]="value.name"
+          (ngModelChange)="changeName($event)"></sw-input>
+<ng-template #noRef>
+  <sw-input [placeholder]="staff ? '교번 6자리' : '학번 10자리'"
+            class="flex-shrink-0 basis-[160px]"
+            [ngModel]="value.no"
+            (ngModelChange)="changeNo($event)"></sw-input>
+</ng-template>

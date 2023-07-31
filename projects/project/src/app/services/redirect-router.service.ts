@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService } from 'shared';
 
 @Injectable({
@@ -9,7 +9,8 @@ export class RedirectRouterService {
 
   constructor(
     private _storage: StorageService,
-    private _router: Router
+    private _router: Router,
+    private readonly _route: ActivatedRoute,
   ) {
   }
 
@@ -19,8 +20,9 @@ export class RedirectRouterService {
   }
 
   async exitProjectPage(): Promise<void> {
-    const redirectUrl: string = this._storage.redirectUrl;
-    await this._router.navigateByUrl(redirectUrl || '/');
+    // const redirectUrl: string = this._storage.redirectUrl;
+    const redirectUrl = this._route.snapshot.queryParams.redirectUrl || '/';
+    await this._router.navigateByUrl(redirectUrl);
   }
 
   async navigateByUrl(url: string): Promise<boolean> {

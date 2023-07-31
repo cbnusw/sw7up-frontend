@@ -1,0 +1,7 @@
+:host {
+  @apply border-y border-gray-300 overflow-auto mx-auto;
+}
+
+.grid {
+  grid-template-columns: 80px 300px 120px 80px 80px 80px;
+}

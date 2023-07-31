@@ -5,8 +5,7 @@ import { environment as env } from '../../../../global/environments/environment.
 
 export const environment = {
   ...env,
-  host: 'http://sw7up.local/project',
-  loginPageUrl: 'http://sw7up.local/account/login'
+  host: 'http://sw7up.local',
 };
 
 /*

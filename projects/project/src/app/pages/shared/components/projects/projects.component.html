@@ -1,0 +1,47 @@
+<div class="flex flex-col gap-2">
+  <h3 class="content-title">전체 통계</h3>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <sw-count-card title="프로젝트" [value]="studentTotal?.projects"
+                   [average]="total?.projects / total?.students"></sw-count-card>
+    <sw-count-card title="파일" [value]="studentTotal?.files"
+                   [average]="total?.files / total?.students"></sw-count-card>
+    <sw-count-card title="코드라인" [value]="studentTotal?.codes"
+                   [average]="total?.codes / total?.students"></sw-count-card>
+    <sw-count-card title="주석" [value]="studentTotal?.comments"
+                   [average]="total?.comments / total?.students"></sw-count-card>
+  </div>
+</div>
+<div class="flex flex-col gap-2">
+  <h3 class="content-title">연도별 수행 프로젝트</h3>
+  <ng-container *ngIf="(studentProjects && averages); else noProjectsRef">
+    <sw-tab [options]="yearOptions" [selected]="yearOption" (optionChange)="changeYearOption($event)"></sw-tab>
+    <sw-student-project-list
+        class="mb-8"
+        [projects]="studentProjectService.year$(yearOption.value) | async"></sw-student-project-list>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <sw-student-project-chart title="프로젝트 수"
+                                [year]="yearOption.value"
+                                [student]="student"
+                                [data]="studentProjects.grades.projects"
+                                [averages]="averages.grades.projects"></sw-student-project-chart>
+      <sw-student-project-chart title="파일 수"
+                                [year]="yearOption.value"
+                                [student]="student"
+                                [data]="studentProjects.grades.files"
+                                [averages]="averages.grades.files"></sw-student-project-chart>
+      <sw-student-project-chart title="코드라인 수"
+                                [year]="yearOption.value"
+                                [student]="student"
+                                [data]="studentProjects.grades.codes"
+                                [averages]="averages.grades.codes"></sw-student-project-chart>
+      <sw-student-project-chart title="주석 수"
+                                [year]="yearOption.value"
+                                [student]="student"
+                                [data]="studentProjects.grades.comments"
+                                [averages]="averages.grades.comments"></sw-student-project-chart>
+    </div>
+  </ng-container>
+  <ng-template #noProjectsRef>
+    <div class="py-2 text-gray-500">등록된 프로젝트가 없습니다.</div>
+  </ng-template>
+</div>

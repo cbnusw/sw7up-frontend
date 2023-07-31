@@ -1,0 +1,17 @@
+<sw-filter-container>
+  <ng-container tools>
+    <sw-button type="button" [color]="2" (click)="initQuery()">초기화</sw-button>
+    <sw-button type="button" (click)="search()">검색</sw-button>
+  </ng-container>
+  <ng-container body>
+    <sw-select-filter label="구분"
+                      [options]="categoryOptions"
+                      [(ngModel)]="category"></sw-select-filter>
+    <sw-select-filter label="연도"
+                      [options]="yearOptions"
+                      [(ngModel)]="year"></sw-select-filter>
+    <sw-select-filter label="회차"
+                      [options]="noOptions"
+                      [(ngModel)]="no"></sw-select-filter>
+  </ng-container>
+</sw-filter-container>

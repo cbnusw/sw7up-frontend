@@ -4,17 +4,18 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { IResponse, RequestBase } from 'shared';
 import { environment } from '../../environments/environment';
-
-type Params = {
-  [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
-};
+import { convertQueryToParams } from '../tools';
+import { TPerformedSemester } from '../types';
 
 export interface ProjectsQuery {
-  startYear?: number;
-  endYear?: number;
+  startPerformedAt?: TPerformedSemester | null;
+  endPerformedAt?: TPerformedSemester | null;
+  startYear?: number | null;
+  endYear?: number | null;
+  department?: string[];
 }
 
-export type SemesterBase = `${number}-${number}`;
+export type SemesterBase = TPerformedSemester;
 export type SemesterBaseData = {
   projects: { [key in SemesterBase]: number; };
   files: { [key in SemesterBase]: number; };
@@ -33,14 +34,16 @@ export type StringBaseData = {
 
 export type DepartmentData = StringBaseData;
 
+export type ProjectTotal = {
+  projects: number;
+  files: number;
+  codes: number;
+  comments: number;
+  students: number;
+};
+
 export type ProjectsDto = {
-  total: {
-    projects: number;
-    files: number;
-    codes: number;
-    comments: number;
-    students: number;
-  };
+  total: ProjectTotal;
   years: SemesterBaseData;
   grades: SemesterBaseData;
   departments: DepartmentData;
@@ -76,11 +79,14 @@ export interface StudentTopcitDto {
 
 export interface StudentStepUpDto {
   _id: string;
+  performedAt: TPerformedSemester;
+  level: number;
+  pass: boolean;
   department: string;
   no: string;
   name: string;
-  level: number;
-  registeredAt: Date;
+  subjects: { name: string; score: number }[];
+  createdAt: Date;
 }
 
 @Injectable({
@@ -92,14 +98,14 @@ export class StatService extends RequestBase {
   }
 
   getProjects(query?: ProjectsQuery): Observable<ProjectsDto> {
-    const params = this._convertProjectQuery(query);
-    return this._http.get<IResponse<any>>(this.url`/projects`, { params }).pipe(
+    const params = convertQueryToParams(query);
+    return this._http.get<IResponse<ProjectsDto>>(this.url`/projects`, { params }).pipe(
       map(res => res.data)
     );
   }
 
   getLanguages(query?: ProjectsQuery): Observable<LanguagesDto> {
-    const params = this._convertProjectQuery(query);
+    const params = convertQueryToParams(query);
     return this._http.get<IResponse<LanguagesDto>>(this.url`/languages`, { params }).pipe(
       map(res => res.data)
     );
@@ -112,7 +118,7 @@ export class StatService extends RequestBase {
   }
 
   getStudentProjects(no: string, query?: ProjectsQuery): Observable<StudentProjectsDto | null> {
-    const params = this._convertProjectQuery(query);
+    const params =  convertQueryToParams(query);
     return this._http.get<IResponse<StudentProjectsDto>>(this.url`/${no}/projects`, { params }).pipe(
       map(res => res.data),
       catchError(() => of(null))
@@ -127,7 +133,7 @@ export class StatService extends RequestBase {
   }
 
   getStudentLanguages(no: string, query?: ProjectsQuery): Observable<LanguagesDto | null> {
-    const params = this._convertProjectQuery(query);
+    const params = convertQueryToParams(query);
     return this._http.get<IResponse<LanguagesDto>>(this.url`/${no}/languages`, { params }).pipe(
       map(res => res.data),
       catchError(() => of(null))
@@ -144,16 +150,5 @@ export class StatService extends RequestBase {
     return this._http.get<IResponse<StudentStepUpDto[]>>(this.url`/${no}/step-ups`).pipe(
       map(res => res.data)
     );
-  }
-
-  private _convertProjectQuery(query?: ProjectsQuery): Params {
-    const params: Params = {};
-    if (query?.startYear) {
-      params.startYear = query.startYear;
-    }
-    if (query?.endYear) {
-      params.endYear = query.endYear;
-    }
-    return params;
   }
 }

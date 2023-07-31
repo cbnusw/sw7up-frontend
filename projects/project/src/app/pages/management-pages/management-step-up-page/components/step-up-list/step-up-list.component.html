@@ -2,11 +2,15 @@
      (bottom)="service.more()">
   <div class="grid border-b border-gray-300 bg-gray-200 text-center font-bold w-fit sticky top-0 z-30">
     <h4 class="py-1 px-2 border-r border-gray-300">#</h4>
-    <h4 class="py-1 px-2 border-r border-gray-300">학과</h4>
-    <h4 class="py-1 px-2 border-r border-gray-300">학번</h4>
-    <h4 class="py-1 px-2 border-r border-gray-300">이름</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">년도</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">학기</h4>
     <h4 class="py-1 px-2 border-r border-gray-300">수준</h4>
-    <h4 class="py-1 px-2 border-r border-gray-300">등록일</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">합격여부</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">학과(부)</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">학번</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">학년</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">이름</h4>
+    <h4 class="py-1 px-2 border-r border-gray-300">정답수</h4>
     <h4 class="py-1 px-2">삭제</h4>
   </div>
   <div class="list-wrapper">
@@ -15,15 +19,19 @@
     </div>
     <div *ngFor="let document of service.documents$ | async; index as i"
          class="grid border-b last:border-0 border-gray-300 w-fit hover:bg-gray-100 even:bg-gray-50 odd:bg-white">
-      <div class="py-1 px-2 text-right border-r border-gray-300 truncate">{{i + 1 | number}}</div>
+      <div class="py-1 px-2 text-right border-r border-gray-300 truncate row-span-2 flex items-center justify-end">{{i + 1 | number}}</div>
+      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{year(document.performedAt)}}</div>
+      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{semester(document.performedAt)}}</div>
+      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.level}}</div>
+      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.pass ? '합격' : '불합격'}}</div>
       <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.department}}</div>
       <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.no}}</div>
+      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.grade}}학년</div>
       <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.name}}</div>
-      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.level}}</div>
-      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{document.registeredAt | date: 'yyyy.MM.dd'}}</div>
-      <div class="py-1 px-2 text-center">
+      <div class="py-1 px-2 text-center border-r border-gray-300 truncate">{{score(document.subjects)}} / {{document.subjects.length}}</div>
+      <div class="py-1 px-2 text-center row-span-2 flex justify-center items-center">
         <button type="button"
-                class="py-1 px-2 text-rose-500 hover:bg-rose-500 hover:text-white"
+                class="p-2 text-rose-500 hover:bg-rose-500 hover:text-white"
                 [disabled]="pending"
                 (click)="removeStepUp(document)">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -32,6 +40,7 @@
           </svg>
         </button>
       </div>
+      <div class="py-1 px-2 text-center border-t border-r border-gray-300 truncate col-span-9">{{subjects(document.subjects)}}</div>
     </div>
   </div>
 </div>

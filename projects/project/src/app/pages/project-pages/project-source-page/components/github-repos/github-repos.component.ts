@@ -21,11 +21,13 @@ export class GithubReposComponent implements OnInit, OnDestroy {
 
   private _subscription: Subscription = new Subscription();
 
-  @HostListener('wheel') handleScroll(): void {
+  @HostListener('wheel', ['$event']) handleScroll(event: Event): void {
+    event.preventDefault();
     this._getMore();
   }
 
-  @HostListener('touchmove') handleTouchmove(): void {
+  @HostListener('touchmove', ['$event']) handleTouchmove(event: Event): void {
+    event.preventDefault();
     this._getMore();
   }
 

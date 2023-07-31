@@ -4,6 +4,7 @@ export interface IStepUpContent {
   _id?: string;
   subject: string;
   title: string;
+  tags: string[];
   problem: string;
   solution: string;
   hits?: number;

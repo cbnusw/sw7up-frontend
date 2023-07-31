@@ -1,0 +1,19 @@
+<div class="grid bg-gray-200 text-center border-b border-gray-300 w-fit">
+  <h5 class="bg-inherit px-2 py-1 text-sm text-right">#</h5>
+  <h5 class="bg-inherit px-2 py-1 text-sm">프로젝트명</h5>
+  <h5 class="bg-inherit px-2 py-1 text-sm">프로젝트 유형</h5>
+  <h5 class="bg-inherit px-2 py-1 text-sm">수행학년</h5>
+  <h5 class="bg-inherit px-2 py-1 text-sm">수행학기</h5>
+  <h5 class="bg-inherit px-2 py-1 text-sm">등록일</h5>
+</div>
+<a *ngFor="let project of projects;let i = index"
+   [routerLink]="['/projects', project._id]"
+   [queryParams]="{ redirectUrl: router.url }"
+   class="grid even:bg-white odd:bg-gray-50 hover:bg-gray-100 text-center cursor-pointer border-b border-gray-100 last:border-b-0 w-fit">
+  <div class="bg-inherit px-2 py-1 text-sm text-right">{{i + 1}}</div>
+  <div class="bg-inherit px-2 py-1 text-sm truncate">{{project.name}}</div>
+  <div class="bg-inherit px-2 py-1 text-sm">{{project.projectType}}</div>
+  <div class="bg-inherit px-2 py-1 text-sm">{{project.grade}}학년</div>
+  <div class="bg-inherit px-2 py-1 text-sm">{{project.semester}}</div>
+  <div class="bg-inherit px-2 py-1 text-sm">{{project.createdAt | date:'yyyy.MM.dd'}}</div>
+</a>

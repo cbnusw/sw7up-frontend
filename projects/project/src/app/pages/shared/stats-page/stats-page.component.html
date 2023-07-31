@@ -1,0 +1,155 @@
+<sw-responsive-container class="flex flex-col gap-8">
+  <section class="stat-section">
+    <h2 class="section-title">학생 순위</h2>
+    <sw-ranking-filters #rankingFilters class="block sticky top-0"></sw-ranking-filters>
+    <div class="card p-4 flex flex-col gap-4 items-stretch aspect-[5/3]">
+      <sw-tab [options]="rankingTypeOptions"
+              [selected]="rankingTypeOption"
+              (optionChange)="changeRankingType($event, rankingFilters)"></sw-tab>
+      <sw-ranking-chart *ngIf="!(rankingService.pending$ | async)"
+                        class="block flex-grow"
+                        [rankingData]="rankingService.rankings$ | async"></sw-ranking-chart>
+    </div>
+  </section>
+
+  <section class="stat-section">
+    <h2 class="section-title">프로젝트 통계</h2>
+    <sw-project-filters class="block sticky top-0"></sw-project-filters>
+    <div class="card p-4 flex flex-col gap-4">
+      <h3 class="content-title">프로젝트 등록 현황</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <sw-count-card title="프로젝트 수"
+                               [value]="projectTotal.projects"></sw-count-card>
+        <sw-count-card title="파일 수"
+                               [value]="projectTotal.files"></sw-count-card>
+        <sw-count-card title="코드라인 수"
+                               [value]="projectTotal.codes"></sw-count-card>
+        <sw-count-card title="주석 수"
+                               [value]="projectTotal.comments"></sw-count-card>
+      </div>
+    </div>
+
+    <div class="card p-4 flex flex-col gap-4">
+      <h3 class="content-title">학과(부)별 참여 학생 수</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <sw-count-card *ngFor="let department of studentDepartments"
+                               [title]="department"
+                               [value]="projectDepartments.students[department]"></sw-count-card>
+      </div>
+    </div>
+
+    <div class="card p-4 flex flex-col gap-4">
+      <h3 class="content-title">학과(부)별 통계</h3>
+      <label>
+        <input type="checkbox"
+               [checked]="checkedDepartmentAverage"
+               (change)="checkedDepartmentAverage = !checkedDepartmentAverage">
+        평균으로 보기
+      </label>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <sw-project-chart-by-department title="프로젝트 수"
+                                        [viewAverage]="checkedDepartmentAverage"
+                                        [studentData]="projectDepartments.students"
+                                        [data]="projectDepartments.projects"></sw-project-chart-by-department>
+        <sw-project-chart-by-department title="파일 수"
+                                        [viewAverage]="checkedDepartmentAverage"
+                                        [studentData]="projectDepartments.students"
+                                        [data]="projectDepartments.files"></sw-project-chart-by-department>
+        <sw-project-chart-by-department title="코드라인 수"
+                                        [viewAverage]="checkedDepartmentAverage"
+                                        [studentData]="projectDepartments.students"
+                                        [data]="projectDepartments.codes"></sw-project-chart-by-department>
+        <sw-project-chart-by-department title="주석 수"
+                                        [viewAverage]="checkedDepartmentAverage"
+                                        [studentData]="projectDepartments.students"
+                                        [data]="projectDepartments.comments"></sw-project-chart-by-department>
+      </div>
+    </div>
+
+    <div class="card p-4 flex flex-col gap-4">
+      <h3 class="content-title">수행 연도별 통계</h3>
+      <div class="flex gap-4">
+        <label>
+          <input type="checkbox"
+                 [checked]="checkedPerformedAverage"
+                 (change)="checkedPerformedAverage = !checkedPerformedAverage">
+          평균으로 보기
+        </label>
+        <label>
+          <input type="checkbox"
+                 [checked]="checkedPerformedSeparateSemester"
+                 (change)="checkedPerformedSeparateSemester = !checkedPerformedSeparateSemester">
+          학기 단위 보기
+        </label>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <sw-project-chart-by-performed title="프로젝트 수"
+                                       [viewAverage]="checkedPerformedAverage"
+                                       [separateSemester]="checkedPerformedSeparateSemester"
+                                       [studentData]="projectPerformed.students"
+                                       [data]="projectPerformed.projects"></sw-project-chart-by-performed>
+        <sw-project-chart-by-performed title="파일 수"
+                                       [viewAverage]="checkedPerformedAverage"
+                                       [separateSemester]="checkedPerformedSeparateSemester"
+                                       [studentData]="projectPerformed.students"
+                                       [data]="projectPerformed.files"></sw-project-chart-by-performed>
+        <sw-project-chart-by-performed title="코드라인 수"
+                                       [viewAverage]="checkedPerformedAverage"
+                                       [separateSemester]="checkedPerformedSeparateSemester"
+                                       [studentData]="projectPerformed.students"
+                                       [data]="projectPerformed.codes"></sw-project-chart-by-performed>
+        <sw-project-chart-by-performed title="주석 수"
+                                       [viewAverage]="checkedPerformedAverage"
+                                       [separateSemester]="checkedPerformedSeparateSemester"
+                                       [studentData]="projectPerformed.students"
+                                       [data]="projectPerformed.comments"></sw-project-chart-by-performed>
+      </div>
+    </div>
+
+    <div class="card p-4 flex flex-col gap-4">
+      <h3 class="content-title">수행 학년별 통계</h3>
+      <div class="flex gap-4">
+        <label>
+          <input type="checkbox"
+                 [checked]="checkedGradeAverage"
+                 (change)="checkedGradeAverage = !checkedGradeAverage">
+          평균으로 보기
+        </label>
+        <label>
+          <input type="checkbox"
+                 [checked]="checkedGradeSeparateSemester"
+                 (change)="checkedGradeSeparateSemester = !checkedGradeSeparateSemester">
+          학기 단위 보기
+        </label>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <sw-project-chart-by-grade title="프로젝트 수"
+                                   [viewAverage]="checkedGradeAverage"
+                                   [separateSemester]="checkedGradeSeparateSemester"
+                                   [studentData]="projectGrades.students"
+                                   [data]="projectGrades.projects"></sw-project-chart-by-grade>
+        <sw-project-chart-by-grade title="파일 수"
+                                   [viewAverage]="checkedGradeAverage"
+                                   [separateSemester]="checkedGradeSeparateSemester"
+                                   [studentData]="projectGrades.students"
+                                   [data]="projectGrades.files"></sw-project-chart-by-grade>
+        <sw-project-chart-by-grade title="코드라인 수"
+                                   [viewAverage]="checkedGradeAverage"
+                                   [separateSemester]="checkedGradeSeparateSemester"
+                                   [studentData]="projectGrades.students"
+                                   [data]="projectGrades.codes"></sw-project-chart-by-grade>
+        <sw-project-chart-by-grade title="주석 수"
+                                   [viewAverage]="checkedGradeAverage"
+                                   [separateSemester]="checkedGradeSeparateSemester"
+                                   [studentData]="projectGrades.students"
+                                   [data]="projectGrades.comments"></sw-project-chart-by-grade>
+      </div>
+    </div>
+
+    <div class="card p-4 flex flex-col gap-4">
+      <h3 class="content-title">프로그래밍 언어</h3>
+      <sw-languages-chart *ngIf="!(projectStatService.pending$ | async)"
+                          [data]="projectStatService.languages"></sw-languages-chart>
+    </div>
+  </section>
+</sw-responsive-container>

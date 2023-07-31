@@ -1,0 +1,24 @@
+<sw-filter-label [basis]="labelBasis">수행 기간</sw-filter-label>
+<sw-input type="number"
+          placeholder="수행 연도"
+          class="flex-shrink-0 basis-[140px]"
+          [ngModel]="start.year"
+          (ngModelChange)="changeStartYear($event)"></sw-input>
+<sw-select *ngIf="start?.year"
+           [options]="semesterOptions"
+           class="flex-shrink-0 basis-[120px]"
+           placeholder="학기선택"
+           [ngModel]="start.semester"
+           (ngModelChange)="changeStartSemester($event)"></sw-select>
+~
+<sw-input type="number"
+          placeholder="수행 연도"
+          class="flex-shrink-0 basis-[140px]"
+          [ngModel]="end.year"
+          (ngModelChange)="changeEndYear($event)"></sw-input>
+<sw-select *ngIf="end.year"
+           [options]="semesterOptions"
+           class="flex-shrink-0 basis-[120px]"
+           placeholder="학기선택"
+           [ngModel]="end.semester"
+           (ngModelChange)="changeEndSemester($event)"></sw-select>

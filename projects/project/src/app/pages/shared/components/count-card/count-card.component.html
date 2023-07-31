@@ -1,0 +1,11 @@
+<h4 class="flex items-center justify-center px-4 bg-secondary-500 text-white text-lg font-bold">{{title}}</h4>
+<div class="flex flex-col gap-2">
+  <div [class.py-2]="showAverage"
+       [class.py-4]="!showAverage"
+       [class.text-right]="align === 'right'"
+       [class.text-center]="align === 'center'"
+       class="px-4 text-xl font-bold text-gray-800">
+    {{value !== null && value !== undefined ? ((value || 0) | number) : '-'}}
+  </div>
+  <div *ngIf="showAverage" class="text-right py-2 px-4 text-sm text-gray-600">전체 평균: {{average | number:'0.0-0'}}</div>
+</div>

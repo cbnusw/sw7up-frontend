@@ -102,7 +102,6 @@ export class NavigationMobileComponent implements OnInit {
   @HostListener('touchstart', ['$event'])
   handleTouched(e: TouchEvent): void {
     this.prevY = e.targetTouches[0].clientY;
-
   }
 
   @HostListener('touchmove', ['$event'])

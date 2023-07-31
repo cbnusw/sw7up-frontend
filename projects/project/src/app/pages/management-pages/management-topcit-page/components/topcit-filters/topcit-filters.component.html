@@ -1,0 +1,26 @@
+<sw-filter-container>
+  <ng-container tools>
+    <sw-button type="button" [color]="2" (click)="initQuery()">초기화</sw-button>
+    <sw-button type="button" (click)="search()">검색</sw-button>
+  </ng-container>
+  <ng-container body>
+    <sw-select-filter label="연도"
+                      [options]="yearOptions"
+                      [(ngModel)]="query.year"></sw-select-filter>
+    <sw-select-filter label="회차"
+                      [options]="noOptions"
+                      [(ngModel)]="query.no"></sw-select-filter>
+    <sw-select-filter label="수준"
+                      [options]="levelOptions"
+                      [(ngModel)]="query.level"></sw-select-filter>
+    <sw-select-filter label="학과(부)"
+                      basis="330px"
+                      [options]="departmentOptions"
+                      [(ngModel)]="query.department"></sw-select-filter>
+    <sw-select-filter label="학년"
+                      [options]="gradeOptions"
+                      [(ngModel)]="query.grade"></sw-select-filter>
+    <sw-member-filter [ngModel]="creator"
+                       (ngModelChange)="changeCreator($event)"></sw-member-filter>
+  </ng-container>
+</sw-filter-container>

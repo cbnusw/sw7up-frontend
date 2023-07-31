@@ -14,6 +14,23 @@
     <mat-error *ngIf="hasError('required', 'title')">제목은 필수 입력 항목입니다.</mat-error>
   </mat-form-field>
 
+  <mat-form-field class="w-100">
+    <mat-label>태그</mat-label>
+    <mat-chip-list #chipList>
+      <mat-chip *ngFor="let tag of tags; let i = index" (removed)="removeTag(i)">
+        {{tag}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input placeholder="태그 입력"
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="true"
+             (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+  </mat-form-field>
+
   <div class="editor-wrapper">
     <label>문제</label>
     <ckeditor *ngIf="editor"

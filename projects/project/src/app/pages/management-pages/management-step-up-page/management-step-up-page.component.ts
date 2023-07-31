@@ -3,10 +3,9 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } fr
 import { Subject, Subscription } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import * as XLSX from 'xlsx';
-import { WorkSheet } from 'xlsx';
-import { ISelectOption } from '../../../types';
+import { sheetToJSON, toNumber } from '../../../tools';
+import { ISelectOption, SEMESTERS, TSemesterIndex } from '../../../types';
 import { RegisterStepUpDto, StepUpManagementService } from './services/step-up-management.service';
-import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'sw-management-step-up-page',
@@ -18,16 +17,15 @@ export class ManagementStepUpPageComponent implements AfterViewInit, OnInit, OnD
 
   pending = false;
   clear = false;
-
-  private _subject: Subject<RegisterStepUpDto[]> = new Subject<RegisterStepUpDto[]>();
-  private _subscription = new Subscription();
-  private readonly _EXCEL_FIELDS = ['학과', '학번', '이름', '수준', '등록일'];
-  private readonly _INVALID_EXCEL_MESSAGE = `잘못된 형식의 엑셀 파일입니다.\n엑셀 파일의 각 시트에는 다음의 필드가 포함되어야 합니다.\n${this._EXCEL_FIELDS.join(', ')}`;
-
   options: ISelectOption[] = [
     { viewValue: '업데이트', value: false },
     { viewValue: '초기화', value: true },
   ];
+
+  private readonly _subject: Subject<RegisterStepUpDto[]> = new Subject<RegisterStepUpDto[]>();
+  private readonly _subscription = new Subscription();
+  private readonly _EXCEL_FIELDS = ['년도', '학기', 'LEVEL', '결과', '학과', '학번', '학년', '이름'];
+  private readonly _INVALID_EXCEL_MESSAGE = `잘못된 형식의 엑셀 파일입니다.\n엑셀 파일의 각 시트에는 다음의 필드가 포함되어야 합니다.\n${this._EXCEL_FIELDS.join(', ')}`;
 
   constructor(public readonly service: StepUpManagementService) {
   }
@@ -67,14 +65,14 @@ export class ManagementStepUpPageComponent implements AfterViewInit, OnInit, OnD
         try {
           workBook.SheetNames.forEach(sheetName => {
             const sheet = workBook.Sheets[sheetName];
-            rows = [...rows, ...this._sheetToJSON(sheet)];
+            rows = [...rows, ...sheetToJSON(sheet)];
           });
 
           if (!this._validate(rows)) {
             alert(this._INVALID_EXCEL_MESSAGE);
             return;
           }
-          this._subject.next(this._map(rows));
+          this._subject.next(this._mapToStepUpData(rows));
         } catch (e) {
           alert(this._INVALID_EXCEL_MESSAGE);
           return;
@@ -90,35 +88,31 @@ export class ManagementStepUpPageComponent implements AfterViewInit, OnInit, OnD
     this._subscription.unsubscribe();
   }
 
-  private _sheetToJSON(sheet: WorkSheet): any[] {
-    return XLSX.utils.sheet_to_json(sheet, { raw: false }).map((row: any) => {
-      Object.keys(row).forEach(key => {
-        const k = key.trim().replace(/\s+/g, ' ');
-        row[k] = row[key];
-        if (k !== key) {
-          delete row[key];
-        }
-      });
-      return row;
-    });
-  }
-
   private _validate(rows: any[]): boolean {
     return rows.map(row => Object.keys(row)).every(_keys => this._EXCEL_FIELDS.every(k => _keys.includes(k)));
   }
 
-  private _map(rows: any[]): RegisterStepUpDto[] {
-    const pattern = /(\d{4}).+(\d{1,2}).+(\d{1,2})/;
-    return rows.map((row: any) => {
-      const [, year, month, date] = row['등록일'].match(pattern);
-
-      return {
-        department: row['학과'],
-        no: row['학번'],
-        name: row['이름'],
-        level: row['수준'],
-        registeredAt: dayjs(`${year}-${month.padStart(2, '0')}-${date.padStart(2, '0')}`).toDate()
-      };
+  private _mapToStepUpData(rows: any[]): RegisterStepUpDto[] {
+    const result: RegisterStepUpDto[] = [];
+    rows.map<RegisterStepUpDto>(row => ({
+      performedAt: `${row['년도'] as number}-${SEMESTERS.map(s => s.replace('학기', '').trim()).indexOf(`${row['학기']}`.replace('학기', '').trim()) as TSemesterIndex}`,
+      level: toNumber(row['LEVEL']),
+      pass: ['P', 'PASS'].includes(row['결과']),
+      department: row['학과'],
+      no: row['학번'],
+      grade: toNumber(row['학년'].replace('학년', '')),
+      name: row['이름'],
+      subjects: Object.keys(row)
+        .filter(key => key !== '순번' && key !== '정답수' && !this._EXCEL_FIELDS.includes(key))
+        .map(name => ({
+          name,
+          score: toNumber(row[name])
+        }))
+    })).forEach((row: RegisterStepUpDto) => {
+      const idx = result.findIndex(dto => dto.performedAt === row.performedAt && dto.no === row.no);
+      idx !== -1 ? result[idx] = row : result.push(row);
     });
+
+    return result;
   }
 }

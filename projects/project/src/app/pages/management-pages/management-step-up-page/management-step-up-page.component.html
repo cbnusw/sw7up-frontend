@@ -10,7 +10,9 @@
                  (click)="register()">
         {{pending ? '등록 중...' : '등록'}}
       </sw-button>
-      <input type="file" class="hidden" #fileInput
+      <input type="file"
+             class="hidden"
+             #fileInput
              accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
     </div>
     <sw-step-up-list></sw-step-up-list>

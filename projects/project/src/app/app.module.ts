@@ -36,7 +36,7 @@ Chart.register(ChartDataLabels, ...registerables);
       apiVersion: environment.apiVersion,
       uploadHost: environment.uploadHost,
       codeHost: environment.codeHost,
-      loginPageUrl: environment.loginPageUrl,
+      loginPageUrl: environment.host + '/account/login',
     }),
     ProjectModule,
     StatisticsModule,

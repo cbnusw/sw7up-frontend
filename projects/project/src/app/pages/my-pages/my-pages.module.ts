@@ -54,6 +54,9 @@ import { MyProjectCounterService } from './services';
     ProjectModule,
     FormsModule
   ],
+  exports: [
+    LanguageChartsComponent
+  ],
   providers: [
     { provide: CounterService, useClass: MyProjectCounterService },
     { provide: MyReportService }

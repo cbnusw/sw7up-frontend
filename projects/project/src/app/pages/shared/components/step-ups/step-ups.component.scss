@@ -1,0 +1,7 @@
+:host {
+  @apply flex flex-col gap-4;
+}
+
+.grid {
+  grid-template-columns: repeat(6, minmax(150px, 1fr));
+}

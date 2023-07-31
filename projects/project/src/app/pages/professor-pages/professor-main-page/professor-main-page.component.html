@@ -1,5 +1,5 @@
-<sw-responsive-container class="block space-y-8 print:hidden">
-  <h2 class="font-bold text-2xl">지도학생 관리</h2>
+<sw-responsive-container *ngIf="menuService.show" class="block space-y-8 print:hidden">
+  <sw-tab [options]="tabOptions" [selected]="option" (optionChange)="movePage($event)"></sw-tab>
 </sw-responsive-container>
 <div class="mt-6">
   <router-outlet></router-outlet>

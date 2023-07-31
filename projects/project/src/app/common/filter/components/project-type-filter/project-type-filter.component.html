@@ -1,0 +1,16 @@
+<sw-filter-label [basis]="labelBasis">프로젝트 유형</sw-filter-label>
+<sw-select [options]="typeOptions"
+           class="w-[160px]"
+           [ngModel]="value.projectType"
+           (ngModelChange)="changeType($event)"></sw-select>
+<sw-input *ngIf="value.projectType === '교과목프로젝트'"
+          type="text"
+          placeholder="예) 교과목명"
+          class="flex-shrink-0 basis-[160px]"
+          [ngModel]="value.subjectName"
+          (ngModelChange)="changeSubjectName($event)"></sw-input>
+<sw-select *ngIf="value.projectType === '자체프로젝트'"
+           class="flex-shrink-0 basis-[160px]"
+           [options]="ownProjectOptions"
+           [ngModel]="value.ownProjectType"
+           (ngModelChange)="changeOwnProjectType($event)"></sw-select>

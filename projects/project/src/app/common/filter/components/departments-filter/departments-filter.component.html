@@ -1,0 +1,17 @@
+<sw-filter-label [basis]="labelBasis">소속 학과</sw-filter-label>
+<div class="flex gap-4 flex-wrap">
+  <label class="select-none cursor-pointer">
+    <input type="checkbox"
+           (click)="toggleAll()"
+           [checked]="allCheck"
+           [indeterminate]="indeterminate"/>
+    전체
+  </label>
+  <label *ngFor="let option of options" class="select-none cursor-pointer">
+    <input type="checkbox"
+           [value]="option.value"
+           (change)="toggleOption($event)"
+           [checked]="value.includes(option.value)">
+    {{option.value}}
+  </label>
+</div>

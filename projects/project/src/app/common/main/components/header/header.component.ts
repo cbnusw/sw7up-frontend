@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
       action: () => this.router.navigateByUrl('/projects/register'),
     },
     {
-      viewValue: () => '지도학생 관리',
+      viewValue: () => '교수 페이지',
       styleClass: () => 'lg:hidden',
       filter: () => this.auth.isStaff || this.auth.isOperator,
       action: () => this.router.navigateByUrl('/professor'),
@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit {
     },
     {
       viewValue: () => '마이페이지',
+      styleClass: () => 'lg:hidden',
       filter: () => this.auth.isStudent,
       action: () => this.router.navigateByUrl('/my-page'),
     },
@@ -53,8 +54,8 @@ export class HeaderComponent implements OnInit {
   }
 
   get loginUrl(): string {
-    this.storage.redirectUrl = `${environment.host}${this.router.url}`;
-    return environment.loginPageUrl;
+    this.storage.redirectUrl = `${environment.host}/project${this.router.url}`;
+    return environment.host + '/account/login';
   }
 
   blur(event: FocusEvent): void {

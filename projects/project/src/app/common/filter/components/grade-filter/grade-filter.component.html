@@ -1,0 +1,5 @@
+<sw-filter-label [basis]="labelBasis">수행 학년</sw-filter-label>
+<sw-select class="flex-shrink-0 basis-[120px]"
+           [options]="options"
+           [ngModel]="value"
+           (ngModelChange)="change($event)"></sw-select>

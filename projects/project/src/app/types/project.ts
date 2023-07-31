@@ -1,6 +1,7 @@
 import { IUserInfo } from 'shared';
 import { IGithubAccount } from './github-account';
 import { IGithubRepo } from './github-repo';
+import { TPerformedSemester, TSemesterIndex, TYear } from './performed';
 import { IProjectFile, TSourceTree } from './project-file';
 
 export const OWN_PROJECT_TYPES = ['공모전', '경진대회', '동아리', '기타'] as const;
@@ -9,6 +10,9 @@ export const SEMESTERS = ['1학기', '여름학기', '2학기', '겨울학기'] 
 export declare type TSemester = typeof SEMESTERS[number];
 export const PROJECT_TYPES = ['교과목프로젝트', '자체프로젝트'] as const;
 export declare type TProjectType = typeof PROJECT_TYPES[number];
+export declare type TProjectSemesterIndex = TSemesterIndex;
+export declare type TProjectYear = TYear;
+export declare type TProjectPerformedAt = TPerformedSemester;
 
 export interface IProjectBanner {
   link?: string;

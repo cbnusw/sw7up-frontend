@@ -1,0 +1,6 @@
+<sw-filter-label [basis]="labelBasis">{{label}}</sw-filter-label>
+<sw-input type="text"
+          placeholder="예) 홍길동"
+          class="flex-shrink-0 basis-[160px]"
+          [ngModel]="value"
+          (ngModelChange)="change($event)"></sw-input>

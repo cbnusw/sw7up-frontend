@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { StepUpContentFormComponent } from './components/step-up-content-form/step-up-content-form.component';
@@ -31,6 +33,8 @@ import { StepUpPagesRoutingModule } from './step-up-pages-routing.module';
     MatFormFieldModule,
     MatInputModule,
     CKEditorModule,
+    MatChipsModule,
+    MatIconModule,
   ],
   exports: [
     StepUpSubjectComponent

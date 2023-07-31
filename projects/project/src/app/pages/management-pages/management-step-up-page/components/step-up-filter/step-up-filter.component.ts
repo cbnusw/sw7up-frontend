@@ -1,88 +1,90 @@
-import { AfterViewInit, Component, ElementRef, HostBinding, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { MAJORS } from 'shared';
+import { FilterContainerComponent } from '../../../../../common/filter/components/filter-container/filter-container.component';
+import { MemberFilter } from '../../../../../common/filter/components/member-filter/member-filter.component';
+import { PerformedPeriodFilter } from '../../../../../common/filter/components/performed-filter/performed-filter.component';
 import { ISelectOption } from '../../../../../types';
-import { StepUpManagementService } from '../../services/step-up-management.service';
+import { SearchStepUpQueryDto, StepUpManagementService } from '../../services/step-up-management.service';
 
 @Component({
   selector: 'sw-step-up-filter',
   templateUrl: './step-up-filter.component.html',
   styleUrls: ['./step-up-filter.component.scss']
 })
-export class StepUpFilterComponent implements AfterViewInit, OnInit, OnDestroy {
-  @ViewChild('filterHeader') filterHeader?: ElementRef;
-  @ViewChild('filterBody') filterBody?: ElementRef;
-  @HostBinding('style.height') height = 'auto';
+export class StepUpFilterComponent implements OnInit, OnDestroy {
+  @ViewChild(FilterContainerComponent) container: FilterContainerComponent;
 
-  level: number = null;
+  query: SearchStepUpQueryDto = {
+    startPerformedAt: null,
+    endPerformedAt: null,
+    pass: null,
+    level: null,
+    departments: [...MAJORS, '기타'],
+    name: null,
+    no: null,
+  };
+
+  performedPeriodFilter: PerformedPeriodFilter = { start: null, end: null };
+  passOptions: ISelectOption[] = [
+    { viewValue: '전체', value: null },
+    { viewValue: '합격', value: true },
+    { viewValue: '불합격', value: false }
+  ];
   levelOptions: ISelectOption[] = [{ viewValue: '전체', value: null }];
-  department: string = null;
-  departmentOptions: ISelectOption[] = [{ viewValue: '전체', value: null }];
-  studentNo: string = null;
-  studentName: string = null;
-  studentOptions: ISelectOption[] = [{ value: '이름' }, { value: '학번' }];
-  studentOption = this.studentOptions[0].value;
+  studentFilter: MemberFilter = { name: null, no: null };
 
-  private _collapsed = true;
   private readonly _subscription = new Subscription();
 
   constructor(private readonly _service: StepUpManagementService) {
   }
 
-  get collapsed(): boolean {
-    return this._collapsed;
+  changeStudentFilter(filter: MemberFilter): void {
+    this.studentFilter = filter;
+    const { name, no } = filter;
+    this.query.name = name;
+    this.query.no = no;
   }
 
-  set collapsed(collased: boolean) {
-    this._collapsed = collased;
-    this._calculateHeight();
-  }
-
-  changeStudentOption(option: string): void {
-    this.studentNo = this.studentName = null;
-    this.studentOption = option;
+  changePerformedPeriodFilter(filter: PerformedPeriodFilter): void {
+    this.performedPeriodFilter = filter;
+    const { start, end } = filter;
+    this.query.startPerformedAt = start;
+    this.query.endPerformedAt = end;
   }
 
   initQuery(): void {
-    this.level = null;
-    this.department = null;
-    this.studentNo = null;
-    this.studentName = null;
-
+    this.query.startPerformedAt = null;
+    this.query.endPerformedAt = null;
+    this.query.pass = null;
+    this.query.level = null;
+    this.query.departments = [...MAJORS, '기타'];
+    this.query.name = null;
+    this.query.no = null;
     this.search();
   }
 
   search(): void {
-    this._service.search({
-      level: this.level,
-      department: this.department,
-      studentNo: this.studentNo,
-      studentName: this.studentName
-    });
-    this.collapsed = true;
+    this._service.search(this.query);
+    this.container?.collapse();
   }
 
   ngOnInit(): void {
+    this._convertParamsToQuery();
     this.search();
     this._subscribe();
-  }
-
-  ngAfterViewInit(): void {
-    this._calculateHeight();
   }
 
   ngOnDestroy(): void {
     this._subscription.unsubscribe();
   }
 
-  private _calculateHeight(): void {
-    setTimeout(() => {
-      if (this.filterHeader && this.filterBody) {
-        const height = this.filterHeader.nativeElement.clientHeight + (this.collapsed ? 0 : this.filterBody.nativeElement.clientHeight);
-        this.height = height + 'px';
-      } else {
-        this.height = 'auto';
-      }
-    }, 0);
+  private _convertParamsToQuery(): void {
+    this.query = { ...this.query, ...this._service.convertParamsToQuery() };
+    this.studentFilter.name = this.query.name;
+    this.studentFilter.no = this.query.no;
+    this.performedPeriodFilter.start = this.query.startPerformedAt;
+    this.performedPeriodFilter.end = this.query.endPerformedAt;
   }
 
   private _subscribe(): void {
@@ -92,13 +94,6 @@ export class StepUpFilterComponent implements AfterViewInit, OnInit, OnDestroy {
   private _subscribeOptions(): void {
     this._subscription.add(
       this._service.levels$.subscribe(list => this.levelOptions = [
-        { viewValue: '전체', value: null },
-        ...list.map(value => ({ value }))
-      ])
-    );
-
-    this._subscription.add(
-      this._service.departments$.subscribe(list => this.departmentOptions = [
         { viewValue: '전체', value: null },
         ...list.map(value => ({ value }))
       ])

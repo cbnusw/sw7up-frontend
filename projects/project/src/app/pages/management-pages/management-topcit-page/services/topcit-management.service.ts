@@ -4,19 +4,18 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { finalize, map, switchMap, tap } from 'rxjs/operators';
 import { IListResponse, IResponse, RequestBase } from 'shared';
 import { environment } from '../../../../../environments/environment';
+import { convertQueryToParams } from '../../../../tools';
+import { Params, QueryConvertor } from '../../../../types';
 
-type Params = {
-  [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
-};
 
 export interface SearchTopcitsQueryDto {
-  no?: number | null;
-  year?: number | null;
-  level?: number | null;
-  department?: string | null;
-  grade?: string | null;
-  studentNo?: string | null;
-  studentName?: string | null;
+  no: number | null;
+  year: number | null;
+  level: number | null;
+  department: string | null;
+  grade: string | null;
+  studentNo: string | null;
+  studentName: string | null;
 }
 
 export interface TopcitSubjectDto {
@@ -57,7 +56,7 @@ export interface RegisterTopcitDataDto {
 @Injectable({
   providedIn: 'root'
 })
-export class TopcitManagementService extends RequestBase {
+export class TopcitManagementService extends RequestBase implements QueryConvertor<SearchTopcitsQueryDto> {
   total = 0;
   params: Params = {};
 
@@ -106,7 +105,7 @@ export class TopcitManagementService extends RequestBase {
   }
 
   search(query: SearchTopcitsQueryDto): void {
-    this.params = this._convertQueryToParams(query);
+    this.params = convertQueryToParams(query);
     this._search(this.params).subscribe({
       next: documents => this._documentsSubject.next(documents),
     });
@@ -135,6 +134,28 @@ export class TopcitManagementService extends RequestBase {
       tap(() => this._getOptions()),
       tap(documents => this._documentsSubject.next(documents))
     );
+  }
+
+  convertParamsToQuery(): SearchTopcitsQueryDto {
+    const {
+      no = null,
+      year = null,
+      level = null,
+      department = null,
+      grade = null,
+      studentNo = null,
+      studentName = null,
+    } = this.params;
+
+    return {
+      no,
+      year,
+      level,
+      department,
+      grade,
+      studentNo,
+      studentName,
+    } as SearchTopcitsQueryDto;
   }
 
   private _search(params: Params): Observable<ConvertedTopcitDto[]> {
@@ -202,16 +223,5 @@ export class TopcitManagementService extends RequestBase {
     this._http.get<IResponse<string[]>>(this.url`/grades`).pipe(
       map(res => res.data)
     ).subscribe(list => this._gradesSubject.next(list));
-  }
-
-  private _convertQueryToParams(query: SearchTopcitsQueryDto): Params {
-    const params: Params = { limit: 100 };
-    Object.keys(query).forEach(key => {
-      const value = query[key];
-      if (!!value) {
-        params[key] = value;
-      }
-    });
-    return params;
   }
 }

@@ -1,0 +1,11 @@
+<sw-filter-container>
+  <ng-container tools>
+    <sw-button type="button" [color]="2" (click)="initQuery()">초기화</sw-button>
+    <sw-button type="button" (click)="search()">검색</sw-button>
+  </ng-container>
+  <ng-container body>
+    <sw-performed-filter [ngModel]="performedPeriodFilter"
+                         (ngModelChange)="changePerformedPeriod($event)"></sw-performed-filter>
+    <sw-departments-filter [(ngModel)]="query.department"></sw-departments-filter>
+  </ng-container>
+</sw-filter-container>

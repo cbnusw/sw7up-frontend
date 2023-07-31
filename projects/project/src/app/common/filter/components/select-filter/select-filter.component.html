@@ -1,0 +1,6 @@
+<sw-filter-label [basis]="labelBasis">{{label}}</sw-filter-label>
+<sw-select [options]="options"
+           [ngModel]="value"
+           class="flex-shrink-0"
+           [style.flex-basis]="basis"
+           (ngModelChange)="change($event)"></sw-select>

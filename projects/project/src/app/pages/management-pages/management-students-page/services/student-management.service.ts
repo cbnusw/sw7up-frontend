@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { finalize, map, switchMap, tap } from 'rxjs/operators';
 import { IListResponse, IResponse, RequestBase } from 'shared';
 import { environment } from '../../../../../environments/environment';
+import { Params } from '../../../../types';
 
 export interface ProfessorDto {
   no: string;
@@ -48,10 +49,6 @@ export interface SearchStudentsQueryDto {
   studentNo?: string | null;
   studentName?: string | null;
 }
-
-type Params = {
-  [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
-};
 
 @Injectable({
   providedIn: 'root'

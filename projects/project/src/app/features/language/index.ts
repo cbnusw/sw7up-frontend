@@ -1,4 +1,4 @@
-import { AvailableLanguagesComponent, LanguagesComponent } from './components';
+import { AvailableLanguagesComponent, ProjectLanguagesComponent } from './components';
 import { RegexFilterPipe } from './pipes';
 
 export * from './language.module';
@@ -6,7 +6,7 @@ export * from './components';
 
 export const Components = [
   AvailableLanguagesComponent,
-  LanguagesComponent,
+  ProjectLanguagesComponent,
 ];
 
 export const Pipes = [

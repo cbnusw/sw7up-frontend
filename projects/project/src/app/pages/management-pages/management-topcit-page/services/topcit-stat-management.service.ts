@@ -4,11 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { finalize, map, switchMap, tap } from 'rxjs/operators';
 import { IListResponse, IResponse, RequestBase } from 'shared';
 import { environment } from '../../../../../environments/environment';
-import { SearchTopcitsQueryDto } from './topcit-management.service';
-
-type Params = {
-  [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
-};
+import { convertQueryToParams } from '../../../../tools';
+import { Params } from '../../../../types';
 
 export interface SearchTopcitStatsQueryDto {
   category?: string | null;
@@ -89,7 +86,7 @@ export class TopcitStatManagementService extends RequestBase {
   }
 
   search(query: SearchTopcitStatsQueryDto): void {
-    this.params = this._convertQueryToParams(query);
+    this.params = convertQueryToParams(query, { limit: 100 });
     this._search(this.params).subscribe({
       next: documents => this._documentsSubject.next(documents),
     });
@@ -148,17 +145,6 @@ export class TopcitStatManagementService extends RequestBase {
       return acc;
     }, []);
     this._subjectNamesSubject.next([...new Set(names)].sort());
-  }
-
-  private _convertQueryToParams(query: SearchTopcitsQueryDto): Params {
-    const params: Params = { limit: 100 };
-    Object.keys(query).forEach(key => {
-      const value = query[key];
-      if (!!value) {
-        params[key] = value;
-      }
-    });
-    return params;
   }
 
   private _getOptins(): void {

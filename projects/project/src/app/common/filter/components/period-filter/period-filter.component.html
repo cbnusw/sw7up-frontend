@@ -1,0 +1,10 @@
+<sw-filter-label [basis]="labelBasis">{{label}}</sw-filter-label>
+<sw-select [options]="options"
+           [ngModel]="option"
+           (ngModelChange)="changeOption($event)"
+           class="flex-shrink-0 basis-[120px]"></sw-select>
+<div *ngIf="option === '기간설정'" class="flex gap-4 items-center">
+  <sw-input type="date" [ngModel]="value.start" (ngModelChange)="changeStart($event)"></sw-input>
+  ~
+  <sw-input type="date" [(ngModel)]="value.end" (ngModelChange)="changeEnd($event)"></sw-input>
+</div>

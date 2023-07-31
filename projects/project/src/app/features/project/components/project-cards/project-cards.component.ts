@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IProject } from 'projects/project/src/app/types';
-import { RedirectRouterService } from '../../../../services';
 import { ProjectListService } from '../../services';
 
 @Component({
@@ -11,8 +11,8 @@ import { ProjectListService } from '../../services';
 export class ProjectCardsComponent implements OnInit {
 
   constructor(
-    public projectListService: ProjectListService,
-    private _redirectRouter: RedirectRouterService
+    public readonly projectListService: ProjectListService,
+    private readonly _router: Router,
   ) {
   }
 
@@ -24,6 +24,6 @@ export class ProjectCardsComponent implements OnInit {
   }
 
   async moveProjectPage(id: string): Promise<void> {
-    await this._redirectRouter.navigateProjectPage(id);
+    await this._router.navigate(['/projects', id], { queryParams: { redirectUrl: this._router.url } });
   }
 }

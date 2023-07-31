@@ -2,16 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { IListResponse, IProject } from 'shared';
+import { IListResponse, IProject, MAJORS } from 'shared';
 import { environment } from '../../../../../environments/environment';
-import { TOwnProjectType, TProjectType } from '../../../../types';
+import { convertQueryToParams } from '../../../../tools';
+import { Params, QueryConvertor, TOwnProjectType, TProjectPerformedAt, TProjectType } from '../../../../types';
 
 export interface ProjectManagementQuery {
-  createdStart: Date | null;
-  createdEnd: Date | null;
+  startCreatedAt: Date | string | null;
+  endCreatedAt: Date | string | null;
   grade: number | null;
-  performedStart: `${number}-${number}` | null;
-  performedEnd: `${number}-${number}` | null;
+  startPerformedAt: TProjectPerformedAt | null;
+  endPerformedAt: TProjectPerformedAt | null;
   creatorName: string | null;
   creatorNo: string | null;
   school: '충북대학교' | '기타' | null;
@@ -22,21 +23,16 @@ export interface ProjectManagementQuery {
   professor: string | null;
 }
 
-type Params = {
-  [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>;
-};
-
 @Injectable({
   providedIn: 'root'
 })
-export class ProjectManagementService {
+export class ProjectManagementService implements QueryConvertor<ProjectManagementQuery> {
   total = 0;
   params: Params = {};
   readonly documents$: Observable<IProject[]>;
   readonly pending$: Observable<boolean>;
 
   private readonly _BASE_URL = environment.codeHost + '/managements/projects';
-  // private readonly _BASE_URL = 'https://swcode.cbnu.ac.kr' + '/managements/projects';
   private readonly _documentsSubject = new BehaviorSubject<IProject[]>([]);
   private readonly _pendingSubject = new BehaviorSubject<boolean>(false);
 
@@ -54,7 +50,7 @@ export class ProjectManagementService {
   }
 
   search(query: ProjectManagementQuery): void {
-    this.params = this._convertQuery(query);
+    this.params = convertQueryToParams(query, { limit: 100 });
     this.params.skip = 0;
     this._pendingSubject.next(true);
     this.total = 0;
@@ -83,7 +79,7 @@ export class ProjectManagementService {
     return this._http.get(this._BASE_URL + '/download', { params, responseType: 'blob' });
   }
 
-  convertParamToQuery(): ProjectManagementQuery {
+  convertParamsToQuery(): ProjectManagementQuery {
     const {
       createdStart = null,
       createdEnd = null,
@@ -100,35 +96,19 @@ export class ProjectManagementService {
       professor = null,
     } = this.params as any;
     return {
-      createdStart,
-      createdEnd,
+      startCreatedAt: createdStart,
+      endCreatedAt: createdEnd,
       grade,
-      performedStart,
-      performedEnd,
+      startPerformedAt: performedStart,
+      endPerformedAt: performedEnd,
       creatorName,
       creatorNo,
       school,
-      departments: departments ? departments.split(',') : null,
+      departments: departments ? departments.split(',') : [...MAJORS, '기타'],
       projectType,
       subjectName,
       ownProjectType,
       professor,
     };
-  }
-
-  private _convertQuery(query: ProjectManagementQuery): Params {
-    const params: { [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean>; } = {
-      limit: 100,
-    };
-
-    Object.keys(query).forEach(key => {
-      const value = query[key];
-      if (Array.isArray(value) && value.length > 0) {
-        params[key] = value.join(',');
-      } else if (value !== null) {
-        params[key] = value;
-      }
-    });
-    return params;
   }
 }

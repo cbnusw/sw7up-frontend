@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { StudentStatService } from '../services/student-stat.service';
+import { ProfessorMenuService } from '../services/professor-menu-service';
 import { StudentDto, StudentService } from '../services/student.service';
 
 @Component({
@@ -17,15 +17,17 @@ export class StudentPageComponent implements OnInit, OnDestroy {
   constructor(private readonly _service: StudentService,
               private readonly _router: Router,
               private readonly _route: ActivatedRoute,
-              private readonly _statService: StudentStatService) {
+              private readonly _menuService: ProfessorMenuService) {
   }
 
   ngOnInit(): void {
     this._subscribe();
+    setTimeout(() => this._menuService.show = false, 0);
   }
 
   ngOnDestroy(): void {
     this._subscription.unsubscribe();
+    this._menuService.show = true;
   }
 
   private _subscribe(): void {

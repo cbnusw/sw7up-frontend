@@ -14,10 +14,15 @@
             class="hidden lg:block text-sm font-bold border rounded-full py-2 px-4 text-white bg-primary-500 hover:bg-primary-400">
       프로젝트 등록
     </button>
+    <a *ngIf="auth.isStudent"
+       routerLink="/my-page"
+       class="hidden lg:block text-sm font-bold border rounded-full py-2 px-4 text-white bg-primary-500 hover:bg-primary-400">
+      마이페이지
+    </a>
     <a *ngIf="auth.isStaff || auth.isOperator"
        routerLink="/professor"
        class="hidden lg:block text-sm font-bold border rounded-full py-2 px-4 text-white bg-primary-500 hover:bg-primary-400">
-      지도학생 관리</a>
+      교수 페이지</a>
     <a *ngIf="auth.isOperator"
        routerLink="/management"
        class="hidden lg:block text-sm font-bold border rounded-full py-2 px-4 text-white bg-primary-500 hover:bg-primary-400">

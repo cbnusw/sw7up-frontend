@@ -28,7 +28,7 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
   }
 
   get enableSourceViewer(): boolean {
-    return OPERATOR_ROLES.indexOf(this._auth.me?.role) !== -1 || this._auth.me?.info?._id === this.project?.creator?._id;
+    return [...OPERATOR_ROLES, 'staff'].indexOf(this._auth.me?.role) !== -1 || this._auth.me?.info?._id === this.project?.creator?._id;
   }
 
   get editable(): boolean {
@@ -61,6 +61,7 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._headerService.hidden = true;
+    scrollTo(0, 0);
 
     this._subscription.add(
       this._route.params.pipe(

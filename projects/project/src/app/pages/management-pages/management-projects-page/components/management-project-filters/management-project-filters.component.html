@@ -1,0 +1,20 @@
+<sw-filter-container>
+  <ng-container tools>
+    <sw-button type="button" [color]="2" (click)="initQuery()">초기화</sw-button>
+    <sw-button type="button" (click)="search()">검색</sw-button>
+  </ng-container>
+  <ng-container body>
+    <sw-period-filter [ngModel]="createdPeriod"
+                      (ngModelChange)="changeCreatedPeriod($event)"></sw-period-filter>
+    <sw-grade-filter [(ngModel)]="query.grade"></sw-grade-filter>
+    <sw-performed-filter [ngModel]="performedPeriod"
+                         (ngModelChange)="changePerformedPeriod($event)"></sw-performed-filter>
+    <sw-member-filter [ngModel]="student"
+                       (ngModelChange)="changeStudent($event)"></sw-member-filter>
+    <sw-school-filter [(ngModel)]="query.school"></sw-school-filter>
+    <sw-departments-filter [(ngModel)]="query.departments"></sw-departments-filter>
+    <sw-project-type-filter [ngModel]="projectType"
+                            (ngModelChange)="changeProjectType($event)"></sw-project-type-filter>
+    <sw-text-filter label="담당 교수" [(ngModel)]="query.professor"></sw-text-filter>
+  </ng-container>
+</sw-filter-container>
