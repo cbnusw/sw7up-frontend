@@ -3,33 +3,26 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ControlsModule } from '../controls';
-import { HeaderComponent, PendingComponent, ResponsiveContainerComponent, SectionComponent } from './components';
-import { RedirectRouterLinkDirective } from './directives/redirect-router-link.directive';
-import { ScrollBottomDirective } from './directives/scroll-bottom.directive';
+import { IconsModule } from '../icons/icons.module';
+import { Components } from './components';
+import { Directives } from './directives';
 
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    ResponsiveContainerComponent,
-    SectionComponent,
-    PendingComponent,
-    RedirectRouterLinkDirective,
-    ScrollBottomDirective,
+    ...Components,
+    ...Directives
   ],
   imports: [
     CommonModule,
     RouterModule,
     OverlayModule,
-    ControlsModule
+    ControlsModule,
+    IconsModule
   ],
   exports: [
-    HeaderComponent,
-    ResponsiveContainerComponent,
-    SectionComponent,
-    PendingComponent,
-    RedirectRouterLinkDirective,
-    ScrollBottomDirective,
+    ...Components,
+    ...Directives
   ]
 })
 export class MainModule {

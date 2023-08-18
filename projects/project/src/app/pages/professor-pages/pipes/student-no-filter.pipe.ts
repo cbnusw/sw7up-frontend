@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { toRegex } from '../../../common/utils/to-regex';
-import { StudentDto } from '../services/student.service';
+import { toRegex } from '../../../common/utils';
+import { StudentDto } from '../../../types';
 
 @Pipe({
   name: 'studentNoFilter'

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { StudentDto } from '../services/student.service';
+import { StudentDto } from '../../../types';
 
 @Pipe({
   name: 'studentsFilter'

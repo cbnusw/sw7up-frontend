@@ -4,15 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, finalize, map, switchMap, tap } from 'rxjs/operators';
 import { IResponse, RequestBase } from 'shared';
 import { environment } from '../../../../environments/environment';
-
-export interface StudentDto {
-  _id: string;
-  department: string;
-  grade: string | null;
-  no: string;
-  name: string;
-  note: string | null;
-}
+import { StudentDto } from '../../../types';
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { StudentDto } from '../../../professor-pages/services/student.service';
+import { StudentDto } from '../../../../types';
 
 @Component({
   selector: 'sw-student-stats',

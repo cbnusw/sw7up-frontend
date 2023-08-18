@@ -1,3 +1,4 @@
+export * from './coding-level';
 export * from './color';
 export * from './github-account';
 export * from './github-repo';
@@ -8,3 +9,4 @@ export * from './project';
 export * from './project-file';
 export * from './query-convertor';
 export * from './select-option';
+export * from './student';

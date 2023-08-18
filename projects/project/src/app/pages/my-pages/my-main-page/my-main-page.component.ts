@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'shared';
 import { ITabOption } from '../../../common/controls/components';
+import { MyCodingLevelService } from '../../../services';
 
 
 @Component({
@@ -19,8 +20,9 @@ export class MyMainPageComponent implements OnInit {
   ];
 
   constructor(
-    public auth: AuthService,
-    private _router: Router,
+    public readonly auth: AuthService,
+    public readonly codingLevelService: MyCodingLevelService,
+    private readonly _router: Router,
   ) {
   }
 

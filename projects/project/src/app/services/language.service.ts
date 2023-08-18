@@ -17,7 +17,7 @@ export class LanguageService extends RequestBase {
   private _availableLanguagesSubject: BehaviorSubject<ILanguageFilter[]> = new BehaviorSubject<ILanguageFilter[]>([]);
 
   constructor(
-    private _http: HttpClient,
+    private readonly _http: HttpClient,
     config: SharedConfig
   ) {
     super(config.codeHost + '/languages');

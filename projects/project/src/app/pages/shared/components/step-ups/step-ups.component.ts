@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { StatService, StudentStepUpDto } from '../../../../services/stat.service';
-import { TPerformedSemester } from '../../../../types';
-import { StudentDto } from '../../../professor-pages/services/student.service';
+import { StudentDto, TPerformedSemester } from '../../../../types';
 import { StepUpContentsDialogComponent } from '../step-up-content-dialog/step-up-contents-dialog.component';
 
 @Component({

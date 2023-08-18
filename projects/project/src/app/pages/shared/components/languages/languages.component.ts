@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { LanguagesDto, StatService } from '../../../../services/stat.service';
-import { StudentDto } from '../../../professor-pages/services/student.service';
+import { StudentDto } from '../../../../types';
 
 @Component({
   selector: 'sw-languages',

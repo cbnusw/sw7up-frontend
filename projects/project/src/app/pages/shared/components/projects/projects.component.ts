@@ -3,7 +3,7 @@ import { of } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { ITabOption } from '../../../../common/controls/components';
 import { ProjectsDto, StatService, StudentProjectsDto } from '../../../../services/stat.service';
-import { StudentDto } from '../../../professor-pages/services/student.service';
+import { StudentDto } from '../../../../types';
 import { StudentProjectService } from '../../services/student-project.service';
 import { StudentProjectChartComponent } from '../student-project-chart/student-project-chart.component';
 

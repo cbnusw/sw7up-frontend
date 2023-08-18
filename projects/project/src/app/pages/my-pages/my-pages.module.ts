@@ -6,6 +6,7 @@ import { MainModule } from '../../common/main/main.module';
 import { ProjectModule } from '../../features/project';
 import { CounterService } from '../../features/statistics/services';
 import { StatisticsModule } from '../../features/statistics/statistics.module';
+import { PageSharedModule } from '../shared/page-shared.module';
 import { GithubAccountsComponent, IntroGithubAccountComponent, MyGithubAccountsPageComponent } from './my-github-accounts-page';
 import { MyMainPageComponent } from './my-main-page';
 import { MyPagesRoutingModule } from './my-pages-routing.module';
@@ -52,7 +53,8 @@ import { MyProjectCounterService } from './services';
     StatisticsModule,
     ReactiveFormsModule,
     ProjectModule,
-    FormsModule
+    FormsModule,
+    PageSharedModule
   ],
   exports: [
     LanguageChartsComponent

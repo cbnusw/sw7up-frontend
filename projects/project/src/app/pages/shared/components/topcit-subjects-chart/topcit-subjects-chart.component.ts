@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, View
 import { Chart, ChartConfiguration } from 'chart.js';
 import { ChartColorService } from '../../../../services/chart-color.service';
 import { StudentTopcitDto, TopcitStatDto } from '../../../../services/stat.service';
-import { StudentDto } from '../../../professor-pages/services/student.service';
+import { StudentDto } from '../../../../types';
 
 @Component({
   selector: 'sw-topcit-subjects-chart',

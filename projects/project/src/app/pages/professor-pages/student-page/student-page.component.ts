@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
+import { StudentDto } from '../../../types';
 import { ProfessorMenuService } from '../services/professor-menu-service';
-import { StudentDto, StudentService } from '../services/student.service';
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'sw-student-page',

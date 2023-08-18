@@ -6,6 +6,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        bronze: '#CD7F32',
+        silver: '#D3D3D3',
+        gold: '#FFD700',
+        platinum: '#E5E4E2',
+        diamond: '#B9F2FF',
         primary: {
           50: '#E6FCFF',
           100: '#C9F4FB',

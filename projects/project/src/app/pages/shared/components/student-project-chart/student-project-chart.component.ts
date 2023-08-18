@@ -3,7 +3,7 @@ import { Chart, ChartConfiguration } from 'chart.js';
 import * as dayjs from 'dayjs';
 import { ChartColorService } from '../../../../services/chart-color.service';
 import { SemesterBase } from '../../../../services/stat.service';
-import { StudentDto } from '../../../professor-pages/services/student.service';
+import { StudentDto } from '../../../../types';
 
 @Component({
   selector: 'sw-student-project-chart',

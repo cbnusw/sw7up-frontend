@@ -3,7 +3,7 @@ import { of } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { ITabOption } from '../../../../common/controls/components';
 import { StatService, StudentTopcitDto, TopcitStatDto } from '../../../../services/stat.service';
-import { StudentDto } from '../../../professor-pages/services/student.service';
+import { StudentDto } from '../../../../types';
 
 @Component({
   selector: 'sw-topcits',

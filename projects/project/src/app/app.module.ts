@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Chart, registerables } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { SharedModule } from 'shared';
 import { environment } from '../environments/environment';
 
@@ -13,8 +15,6 @@ import { MainModule } from './common/main/main.module';
 import { ProjectModule } from './features/project';
 import { StatisticsModule } from './features/statistics/statistics.module';
 import { DashboardChartComponent, DashboardPageComponent } from './pages/dashboard-page';
-import { Chart, registerables } from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 Chart.register(ChartDataLabels, ...registerables);
 
