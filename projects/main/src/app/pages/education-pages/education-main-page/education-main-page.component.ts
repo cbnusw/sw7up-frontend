@@ -18,6 +18,7 @@ export class EducationMainPageComponent implements OnInit {
     { name: '오픈소스SW', link: URLS.EDUCATION.OSS },
     { name: 'EASY 코스', link: URLS.EDUCATION.EASY },
     { name: '마일리지 장학금', link: URLS.EDUCATION.MILEAGE },
+    { name: '마이크로디그리', link: URLS.EDUCATION.MICRODEGREE },
   ];
 
   breadcrumbs: Array<string[]>;

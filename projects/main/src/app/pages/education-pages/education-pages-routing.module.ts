@@ -7,6 +7,7 @@ import { EasyDetailPageComponent } from './easy-detail-page/easy-detail-page.com
 import { EasyPageComponent } from './easy-page/easy-page.component';
 import { EducationMainPageComponent } from './education-main-page/education-main-page.component';
 import { MajorPageComponent } from './major-page/major-page.component';
+import { MicrodegreePageComponent } from './microdegree-page/microdegree-page.component';
 import { MileagePageComponent } from './mileage-page/mileage-page.component';
 import { OnlinePageComponent } from './online-page/online-page.component';
 import { OssPageComponent } from './oss-page/oss-page.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: PAGE_NAMES.EDUCATION.EASY, component: EasyPageComponent },
       { path: `${PAGE_NAMES.EDUCATION.EASY}/:index`, component: EasyDetailPageComponent },
       { path: PAGE_NAMES.EDUCATION.MILEAGE, component: MileagePageComponent },
+      { path: PAGE_NAMES.EDUCATION.MICRODEGREE, component: MicrodegreePageComponent },
     ]
   }
 ];

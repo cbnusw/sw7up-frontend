@@ -9,6 +9,7 @@ import { EducationMainPageComponent } from './education-main-page/education-main
 
 import { EducationPagesRoutingModule } from './education-pages-routing.module';
 import { MajorPageComponent } from './major-page/major-page.component';
+import { MicrodegreePageComponent } from './microdegree-page/microdegree-page.component';
 import { MileagePageComponent } from './mileage-page/mileage-page.component';
 import { OnlinePageComponent } from './online-page/online-page.component';
 import { OssPageComponent } from './oss-page/oss-page.component';
@@ -30,6 +31,7 @@ import { StepUpPageComponent } from './step-up-page/step-up-page.component';
     OnlinePageComponent,
     OssPageComponent,
     EasyPageComponent,
+    MicrodegreePageComponent,
     MileagePageComponent,
     EasyDetailPageComponent
   ],

@@ -1,7 +1,10 @@
 <h3 class="course-list-title mb-2">강의목록 - 1학기</h3>
 <div class="courses-wrapper mb-4">
-  <a class="course-cover shadow"
-     [routerLink]="course?.link"
+  <a class="course-cover shadow cursor"
+     [class.pointer]="!!course.link"
+     [class.not-allowed]="!course.link"
+     [class.link]="!!course.link"
+     (click)="movePage(course.link)"
      [swBackgroundImage]="course.background"
      swBackgroundSize="contain"
      swBackgroundPosition="center center"
@@ -11,7 +14,7 @@
       <div class="course-type small mb-2">{{course?.type}}</div>
       <h5 class="course-title text-white">{{course?.title}}</h5>
     </div>
-    <div class="course-footer">
+    <div *ngIf="!!course.link" class="course-footer">
       <span class="text-white">상세보기<i class="las la-chevron-right ms-2"></i></span>
     </div>
   </a>
@@ -22,20 +25,20 @@
 <h3 class="course-list-title mt-2 mb-2">강의목록 - 2학기</h3>
 <div class="courses-wrapper">
   <a class="course-cover shadow cursor"
-     [class.pointer]="!!course?.link"
-     [class.not-allowed]="!course?.link"
-     [class.link]="!!course?.link"
-     (click)="movePage(course?.link)"
+     [class.pointer]="!!course.link"
+     [class.not-allowed]="!course.link"
+     [class.link]="!!course.link"
+     (click)="movePage(course.link)"
      [swBackgroundImage]="course.background"
      swBackgroundSize="contain"
      swBackgroundPosition="center center"
      swBackgroundRepeat="no-repeat"
      *ngFor="let course of courses2">
     <div class="course-header">
-      <div class="course-type small mb-2">{{course?.type}}</div>
-      <h5 class="course-title text-white">{{course?.title}}</h5>
+      <div class="course-type small mb-2">{{course.type}}</div>
+      <h5 class="course-title text-white">{{course.title}}</h5>
     </div>
-    <div class="course-footer">
+    <div *ngIf="!!course.link" class="course-footer">
       <span class="text-white">상세보기<i class="las la-chevron-right ms-2"></i></span>
     </div>
   </a>

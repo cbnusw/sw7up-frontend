@@ -42,6 +42,14 @@ export class OnlinePageComponent implements OnInit {
       name: '빅데이터분석 시각화',
       link: 'https://www.edwith.org/bigdata1',
     },
+    {
+      name: 'Atmega328을 활용한 RC Car 만들기',
+      link: 'https://www.edwith.org/makercar',
+    },
+    {
+      name: 'ESP 계열 프로세서를 활용한 피지컬 컴퓨팅',
+      link: 'https://www.edwith.org/espphysicalcom',
+    }
   ];
 
   kocwLectures: Array<IOnlineLecture> = [
@@ -99,11 +107,6 @@ export class OnlinePageComponent implements OnInit {
       name: '자바네트워크프로그래밍',
       target: '일반인',
       link: 'http://www.kocw.net/home/cview.do?cid=f126689618b77cf1'
-    },
-    {
-      name: '컴퓨터그래픽스',
-      target: '대학생',
-      link: 'http://www.kocw.net/home/search/kemView.do?kemId=335239'
     },
   ];
 

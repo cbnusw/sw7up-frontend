@@ -25,6 +25,7 @@ export interface ISw7UpPages {
     OSS?: string;
     EASY?: string;
     MILEAGE?: string;
+    MICRODEGREE?: string;
   };
   COOPERATE?: {
     ROOT?: string;
@@ -106,6 +107,7 @@ export const PAGE_NAMES: ISw7UpPages = {
     OSS: 'oss',
     EASY: 'easy',
     MILEAGE: 'mileage',
+    MICRODEGREE: 'microdegree',
   },
   COOPERATE: {
     PROJECT: 'project',
