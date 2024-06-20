@@ -113,6 +113,10 @@ export abstract class AbstractFormDirective<M, S> implements OnInit, OnDestroy {
       return false;
     }
 
+    if (path === 'password') {
+      console.log(errorCodes);
+    }
+
     if (Array.isArray(errorCodes)) {
       return errorCodes.some(code => this.submitted && this.formGroup.hasError(code, path));
     } else {

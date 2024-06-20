@@ -24,7 +24,7 @@ export class ManagementStudentsPageComponent implements OnInit, OnDestroy, After
 
   private _subject: Subject<RegisterStudentDto[]> = new Subject<RegisterStudentDto[]>();
   private _subscription = new Subscription();
-  private readonly _EXCEL_FIELDS = ['교번', '교수명', '학과', '학번', '학생명'];
+  private readonly _EXCEL_FIELDS = ['교번', '교수명', '학과', '학번', '학생명', '학년'];
   private readonly _INVALID_EXCEL_MESSAGE = `잘못된 형식의 엑셀파일입니다.\n엑셀 파일의 각 시트에는 다음의 필드가 포함되어야 합니다.\n${this._EXCEL_FIELDS.join(', ')}`;
 
   constructor(readonly service: StudentManagementService) {
@@ -69,7 +69,6 @@ export class ManagementStudentsPageComponent implements OnInit, OnDestroy, After
           });
 
           if (!this._validate(rows)) {
-            alert(this._INVALID_EXCEL_MESSAGE);
             return;
           }
           this._subject.next(this._map(rows));
@@ -102,7 +101,16 @@ export class ManagementStudentsPageComponent implements OnInit, OnDestroy, After
   }
 
   private _validate(rows: any[]): boolean {
-    return rows.map(row => Object.keys(row)).every(_keys => this._EXCEL_FIELDS.every(k => _keys.includes(k)));
+    for (const row of rows) {
+      const keys = Object.keys(row);
+      const valid = this._EXCEL_FIELDS.every(k => keys.includes(k));
+      if (!valid) {
+        const invaliedDataMsg = this._EXCEL_FIELDS.map(k => ` - ${k}: ${row[k] ? row[k] : '미입력'}`).join('\n');
+        alert(`${this._INVALID_EXCEL_MESSAGE}\n\n잘못 입력된 정보:\n${invaliedDataMsg}`);
+        return false;
+      }
+    }
+    return true;
   }
 
   private _map(rows: any[]): RegisterStudentDto[] {

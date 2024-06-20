@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -153,7 +153,21 @@ export class JoinPageComponent extends AbstractFormDirective<IUser, boolean> {
   protected initFormGroup(fb: FormBuilder): FormGroup {
     const formGroup = fb.group({
       no: [null, [Validators.required]],
-      password: [null, [PasswordValidator.validate, Validators.min(8)]],
+      password: [null, [
+        (control: AbstractControl) => {
+          const value = control.value;
+          if (!value) {
+            return { required: true };
+          }
+          if (value.length < 8) {
+            return { min: true };
+          }
+          if (/\s+/.test(value)) {
+            return { space: true };
+          }
+          return null;
+        }
+      ]],
       confirmPassword: [null],
       role: ['student', [Validators.required]],
       info: fb.group({

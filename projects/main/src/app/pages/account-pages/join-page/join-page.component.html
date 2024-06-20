@@ -40,13 +40,13 @@
            class="form-control no-outline"
            placeholder="비밀번호 입력"
            [class.is-invalid]="invalid('password')"
-           formControlName="password"/>
+           formControlName="password"
+           autocomplete="off"
+    />
     <div class="invalid-feedback">
       <span *ngIf="hasError('required', 'password')">비밀번호는 필수 입력 항목입니다.</span>
       <span *ngIf="hasError('min', 'password')">비밀번호는 8자 이상이어야 합니다.</span>
-      <span *ngIf="hasError('pattern', 'password')">
-        비밀번호는 영문/숫자/공백문자를 제외한 특수문자 조합이어야 합니다.
-      </span>
+      <span *ngIf="hasError('space', 'password')">비밀번호에 공백문자는 포함될 수 없습니다.</span>
     </div>
   </div>
   <div class="form-group mb-4">
@@ -56,7 +56,9 @@
            class="form-control no-outline"
            placeholder="비밀번호 한 번 더 입력"
            [class.is-invalid]="hasError('confirmPassword')"
-           formControlName="confirmPassword"/>
+           formControlName="confirmPassword"
+           autocomplete="off"
+    />
     <div class="invalid-feedback">
       <span *ngIf="hasError('requiredConfirmPassword')">비밀번호를 한 번 더 입력해 주세요.</span>
       <span *ngIf="hasError('confirmPassword')">비밀번호가 일치하지 않습니다.</span>
