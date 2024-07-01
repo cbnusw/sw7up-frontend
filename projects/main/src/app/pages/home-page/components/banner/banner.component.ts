@@ -57,7 +57,7 @@ export class BannerComponent implements OnInit {
       name: 'CBNU MOOC',
       baseImage: 'assets/images/home/banner-mooc.base.svg',
       activeImage: 'assets/images/home/banner-mooc.active.svg',
-      url: 'https://www.edwith.org/ptnr/cbnu'
+      url: 'https://www.youtube.com/@SW-bu5ts/playlists'
     },
 
   ];
