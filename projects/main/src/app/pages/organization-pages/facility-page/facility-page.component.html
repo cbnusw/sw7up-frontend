@@ -1,14 +1,17 @@
 <div class="row mx-n2">
-  <div class="col-sm-6 col-md-6 px-2 mb-3" *ngFor="let doc of documents;">
+  <div class="col-sm-6 col-md-6 px-2 mb-3" *ngFor="let doc of documents">
     <!-- Card -->
     <div class="card h-100">
-      <div class="facility-img"
-           [swBackgroundImage]="doc?.images"
-           swBackgroundSize="cover"
-           swBackgroundPosition="center center">
+      <div
+        class="facility-img"
+        [swBackgroundImage]="doc?.images"
+        swBackgroundSize="cover"
+        swBackgroundPosition="center center"
+        loading="lazy"
+      >
         <div class="info-container">
-          <div class="name">{{doc?.name}}</div>
-          <div class="location">{{doc?.location}}</div>
+          <div class="name">{{ doc?.name }}</div>
+          <div class="location">{{ doc?.location }}</div>
         </div>
       </div>
     </div>
