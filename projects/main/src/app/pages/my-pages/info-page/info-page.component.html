@@ -5,6 +5,22 @@
 
 <ng-template #formTamplte>
   <form class="mb-5" [formGroup]="formGroup" (ngSubmit)="submit()" *ngIf="formGroup">
+    <!--대학-->
+    <div *ngIf="roleValue === 'student' || auth.isStaff || auth.isOperator" class="mb-4">
+      <label class="w-100 mb-2 required">소속 대학</label>
+      <select
+        id="university"
+        class="form-select no-outline me-2"
+        formControlName="university"
+      >
+        <option value="">선택하세요</option>
+        <option *ngFor="let option of UNIVERSITIES" [value]="option">{{ option }}</option>
+      </select>
+      <div class="error">
+        <span *ngIf="hasError('required', 'university')">소속 대학은 필수 입력 항목입니다.</span>
+      </div>
+    </div>
+
     <!--학번/교번/아이디-->
     <div class="form-group mb-4">
       <label for="no" class="w-100 mb-2 required">{{idLabel}}</label>
@@ -74,20 +90,56 @@
     </div>
 
     <!--소속 학과(부)/부서-->
-    <div class="form-group mb-4" *ngIf="auth.isStaff || auth.isOperator">
-      <label for="department" class="w-100 mb-2 required">소속 학과(부)/부서</label>
-      <input type="text"
-             id="department"
-             class="form-control no-outline"
-             placeholder="소속 학과(부)/부서 입력"
-             autocomplete="off"
-             [class.is-invalid]="invalid('department')"
-             formControlName="department"/>
-      <div class="invalid-feedback">
-        <span *ngIf="hasError('required', 'department')">
-          소속 학과(부)/부서는 필수 입력 항목입니다.
-        </span>
+    <div *ngIf="roleValue === 'student' && universityValue === '충북대학교'" class="mb-4">
+      <label for="department" class="w-100 mb-2 required">소속</label>
+      <select
+        id="department"
+        class="form-select no-outline me-2"
+        formControlName="department"
+        (change)="checkManualDepartment()"
+      >
+        <option value="">선택하세요</option>
+        <option *ngFor="let option of MAJORS" [value]="option">{{ option }}</option>
+      </select>
+      <div *ngIf="isManual()">
+        <label for="manualDepartment" class="w-100 mb-2 mt-4 required">SW사업단 미참여학과</label>
+        <input
+          type="text"
+          id="manualDepartment"
+          class="form-control no-outline"
+          placeholder="SW중심사업단 미참여학과 기입"
+          formControlName="manualDepartment"
+        />
       </div>
+      <div class="error">
+        <span *ngIf="hasError('required', 'department')">소속은 필수 입력 항목입니다.</span>
+      </div>
+    </div>
+    
+    <div *ngIf="roleValue === 'staff' || (roleValue === 'student' && universityValue !== '충북대학교')" class="mb-4">
+      <label for="department" class="w-100 mb-2 required">소속</label>
+      <input
+        type="text"
+        id="department"
+        class="form-control no-outline"
+        placeholder="소속(학과 및 학부 또는 부서)"
+        autocomplete="off"
+        [class.is-invalid]="hasError('required', 'department')"
+        formControlName="department"
+      />
+      <div class="invalid-feedback">
+        <span *ngIf="hasError('required', 'department')">소속은 필수 입력 항목입니다.</span>
+      </div>
+    </div>
+    
+    <div class="form-group mb-4" formGroupName="info" *ngIf="roleValue === 'staff'">
+      <label for="position" class="w-100 mb-2">직책</label>
+      <input type="text"
+             id="position"
+             class="form-control no-outline"
+             placeholder="직책 입력"
+             autocomplete="off"
+             formControlName="position"/>
     </div>
 
     <!--소속센터-->
@@ -126,3 +178,4 @@
     <button class="btn btn-sw w-100">수정</button>
   </form>
 </ng-template>
+
